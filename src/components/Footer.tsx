@@ -14,7 +14,7 @@ export function Footer() {
   const { navigation, footer } = content;
 
   return (
-    <footer role="contentinfo" aria-labelledby="footer-heading" className="relative bg-gradient-to-b from-background to-muted/30">
+    <footer role="contentinfo" aria-labelledby="footer-heading" className="relative bg-background/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60 border-t border-border/30">
       <h2 id="footer-heading" className="sr-only">Site footer</h2>
       <SectionDivider variant="curved" className="text-background" />
       <div className="relative bg-gradient-to-b from-background to-muted/30 border-t border-border/30">
