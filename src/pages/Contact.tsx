@@ -101,7 +101,7 @@ const Contact = () => {
               <h1 className="fluid-h1 text-white mb-6">
                 <span>Get</span> in <span>Touch</span>
               </h1>
-              <p className="text-hero-body mb-8 max-w-3xl mx-auto">
+              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
                 Have questions about our educational programs? Need support? We're here to help you on your trading education journey.
               </p>
               <div className="flex flex-wrap justify-center gap-3 mt-4">
