@@ -42,21 +42,18 @@ export function HeroSection() {
           <div className="hero-orb hero-orb-3"></div>
         </div>
 
-        {/* Hero Background Slider */}
+        {/* Hero Background Slider - render only the current image to avoid loading all images at once */}
         <div className="absolute inset-0">
-          {heroImages.map((src, index) => (
-            <img
-              key={index}
-              src={src}
-              alt="Hero background image"
-              className={`absolute inset-0 w-full h-full object-cover object-[center_30%] sm:object-center hero-image transition-opacity duration-1000 ${index === current ? 'opacity-100' : 'opacity-0'}`}
-              loading={index === 0 ? 'eager' : 'lazy'}
-              width={1920}
-              height={1080}
-              aria-hidden={index !== current}
-              decoding="async"
-            />
-          ))}
+          <img
+            src={heroImages[current]}
+            alt="Hero background image"
+            className="absolute inset-0 w-full h-full object-cover object-[center_30%] sm:object-center hero-image transition-opacity duration-1000 opacity-100"
+            loading={current === 0 ? 'eager' : 'lazy'}
+            width={1920}
+            height={1080}
+            aria-hidden={false}
+            decoding="async"
+          />
         </div>
 
         {/* Refined Gradient Overlay */}
