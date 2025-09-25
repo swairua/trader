@@ -51,6 +51,7 @@ export function SEOHead({
       <meta name="twitter:description" content={finalDescription} />
       <meta name="twitter:image" content={twitterImage || finalOgImage} />
       {canonical && <link rel="canonical" href={canonical} />}
+      {lcpImage && <link rel="preload" as="image" href={lcpImage} />}
       {schema && (
         <script type="application/ld+json">
           {JSON.stringify(schema)}
