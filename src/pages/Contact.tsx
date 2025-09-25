@@ -98,7 +98,7 @@ const Contact = () => {
           <div className="absolute inset-0 bg-gradient-hero-premium grain-texture" />
           <div className="container px-4 relative z-20 on-hero">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="fluid-h1 mb-6">
+              <h1 className="fluid-h1 text-white mb-6">
                 <span>Get</span> in <span>Touch</span>
               </h1>
               <p className="text-hero-body mb-8 max-w-3xl mx-auto">
