@@ -1,6 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { useSiteSettingsFixed } from '@/hooks/useSiteSettingsFixed';
 
+interface LcpPreload {
+  href: string;
+  media?: string;
+  imagesrcset?: string;
+  sizes?: string;
+}
+
 interface SEOHeadProps {
   title?: string;
   description?: string;
@@ -12,6 +19,7 @@ interface SEOHeadProps {
   twitterImage?: string;
   schema?: object;
   lcpImage?: string; // optional LCP image to preload
+  lcpPreloads?: LcpPreload[];
 }
 
 export function SEOHead({ 
