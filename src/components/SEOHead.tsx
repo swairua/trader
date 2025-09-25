@@ -11,6 +11,7 @@ interface SEOHeadProps {
   ogImageHeight?: number;
   twitterImage?: string;
   schema?: object;
+  lcpImage?: string; // optional LCP image to preload
 }
 
 export function SEOHead({ 
