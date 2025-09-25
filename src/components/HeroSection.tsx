@@ -134,12 +134,6 @@ export function HeroSection() {
             </div>
           </div>
           
-          {/* Risk Disclaimer */}
-          <div className="hero-disclaimer-enter pt-6">
-            <p className="text-base sm:text-lg max-w-2xl mx-auto font-medium">
-              {hero.disclaimer}
-            </p>
-          </div>
         </div>
       </div>
     </section>
