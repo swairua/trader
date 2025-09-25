@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Send } from "lucide-react";
+import { Menu, Send, ChevronDown } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LINKS, getExternalLinkProps, getInternalLinkProps } from "@/constants/links";
 import { BrandLogo } from "@/components/BrandLogo";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 
 export function Navigation() {
@@ -15,6 +17,10 @@ export function Navigation() {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const links = content.navigation.links || [];
+  const primaryLinks = links.slice(0, 3);
+  const overflowLinks = links.slice(3);
 
   return (
     <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
@@ -95,7 +101,7 @@ export function Navigation() {
             </SheetTrigger>
           <SheetContent side="right" className="w-80 glass-card border-l border-border/50">
             <div className="flex flex-col space-y-8 mt-8">
-              <BrandLogo size="md" />
+              <BrandLogo size="lg" />
 
               <div className="space-y-6">
                 {content.navigation.links.map((item) => (
