@@ -292,7 +292,7 @@ export const defaultContent: SiteContent = {
   hero: {
     badge: "EDUCATION-FIRST FOREX TRADING",
     headline: "Learn Institutional Trading Concepts with Structured DRIVE Strategy",
-    subheadline: "Master systematic market analysis and risk management through proven institutional trading concepts. Access educational resources and mentorship when you register with our recommended broker partner.",
+    subheadline: "Access educational trading resources, market analysis training, and our institutional-based strategies when you sign up with our recommended broker through our partner <a href=\"https://one.exnesstrack.org/a/17eqnrbs54\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"underline text-primary font-semibold\">exness</a>.",
     cta1: "Start Learning",
     cta2: "See How DRIVE Works",
     disclaimer: "",
