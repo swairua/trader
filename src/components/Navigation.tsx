@@ -49,22 +49,56 @@ export function Navigation() {
             </Link>
           ))}
 
-          {overflowLinks.length > 0 && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="px-3 py-2 min-h-[44px] font-medium">
-                  More <ChevronDown className="ml-1 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start">
-                {overflowLinks.map((item) => (
-                  <DropdownMenuItem key={item.name} asChild>
-                    <Link to={item.href}>{item.name}</Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+          {overflowLinks.length > 0 && (() => {
+            const [moreOpen, setMoreOpen] = useState(false);
+            const hoverTimeoutRef = useRef<number | null>(null);
+
+            return (
+              <DropdownMenu open={moreOpen} onOpenChange={(open) => setMoreOpen(open)}>
+                <div
+                  onMouseEnter={() => {
+                    if (hoverTimeoutRef.current) {
+                      window.clearTimeout(hoverTimeoutRef.current);
+                      hoverTimeoutRef.current = null;
+                    }
+                    setMoreOpen(true);
+                  }}
+                  onMouseLeave={() => {
+                    hoverTimeoutRef.current = window.setTimeout(() => setMoreOpen(false), 150);
+                  }}
+                >
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" className="px-3 py-2 min-h-[44px] font-medium">
+                      More <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${moreOpen ? 'rotate-180' : 'rotate-0'}`} />
+                    </Button>
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent
+                    align="start"
+                    onMouseEnter={() => {
+                      if (hoverTimeoutRef.current) {
+                        window.clearTimeout(hoverTimeoutRef.current);
+                        hoverTimeoutRef.current = null;
+                      }
+                      setMoreOpen(true);
+                    }}
+                    onMouseLeave={() => {
+                      hoverTimeoutRef.current = window.setTimeout(() => setMoreOpen(false), 150);
+                    }}
+                  >
+                    {overflowLinks.map((item) => (
+                      <DropdownMenuItem key={item.name} asChild>
+                        <Link to={item.href} className="flex items-center">
+                          <ChevronRight className="mr-2 h-4 w-4 opacity-70" />
+                          {item.name}
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </div>
+              </DropdownMenu>
+            );
+          })()}
         </div>
 
         {/* Desktop CTAs */}
