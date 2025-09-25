@@ -205,6 +205,7 @@ const Strategy = () => {
               }}
             />
           </div>
+          <div className="absolute inset-0 bg-gradient-hero-premium grain-texture"></div>
           <div className="container px-4 relative z-20 on-hero">
             <div className="max-w-4xl mx-auto text-center">
               <Badge variant="secondary" className="mb-6 bg-white/10 border border-white/20 text-white">
