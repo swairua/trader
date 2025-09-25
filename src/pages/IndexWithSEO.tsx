@@ -14,6 +14,7 @@ const IndexWithSEO = () => {
         description="Master institutional trading concepts with our structured education program and proven DRIVE framework. Professional forex mentorship, risk management, and systematic trading education."
         keywords="institutional trading education, forex mentorship, DRIVE strategy, trading psychology, risk management, smart money concepts, forex education Kenya"
         canonical={canonical}
+        lcpImage={tradingWorkspace}
       />
       <Index />
     </>
