@@ -62,6 +62,17 @@ export function SEOHead({
       <meta name="twitter:image" content={twitterImage || finalOgImage} />
       {canonical && <link rel="canonical" href={canonical} />}
       {lcpImage && <link rel="preload" as="image" href={lcpImage} />}
+      {lcpPreloads && lcpPreloads.map((p, i) => (
+        <link
+          key={i}
+          rel="preload"
+          as="image"
+          href={p.href}
+          {...(p.media ? { media: p.media } : {})}
+          {...(p.imagesrcset ? { imagesrcset: p.imagesrcset } : {})}
+          {...(p.sizes ? { sizes: p.sizes } : {})}
+        />
+      ))}
       {schema && (
         <script type="application/ld+json">
           {JSON.stringify(schema)}
