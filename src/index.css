@@ -273,7 +273,7 @@ All colors MUST be HSL for maximum design flexibility
 
   /* Hero section text utilities - Deep black text on hero overlays */
   .on-hero {
-    color: #0a0a0a !important;
+    color: #ffffff !important;
   }
 
   /* Text shadow for hero legibility */
