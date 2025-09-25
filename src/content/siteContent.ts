@@ -291,7 +291,7 @@ export const defaultContent: SiteContent = {
   },
   hero: {
     badge: "EDUCATION-FIRST FOREX TRADING",
-    headline: "Learn Professional Trading with Structured Education",
+    headline: "Learn Institutional Trading Concepts with Structured DRIVE Strategy",
     subheadline: "Master systematic market analysis and risk management through proven institutional trading concepts. Access educational resources and mentorship when you register with our recommended broker partner.",
     cta1: "Start Learning",
     cta2: "See How DRIVE Works",
