@@ -197,7 +197,7 @@ export default function Learn() {
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  The <span className="text-blue-400">DRIVE</span> Methodology
+                  The <span className="text-primary">DRIVE</span> Methodology
                 </h2>
                 <p className="text-xl text-muted-foreground">
                   Direction, Range, Interest Point, Value of Risk, Entry
