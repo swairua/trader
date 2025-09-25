@@ -148,7 +148,7 @@ const FAQs = () => {
       <div className="min-h-screen bg-background">
         <Navigation />
         <main className="pt-20">
-          <section className="relative py-20 overflow-hidden bg-gradient-subtle grain-texture">
+          <section className="relative py-20 overflow-hidden">
             <div className="absolute inset-0 hero-image opacity-20">
               <img 
                 src={forexFaqHero} 
@@ -160,11 +160,11 @@ const FAQs = () => {
                 
               />
             </div>
-            <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
-            <div className="container px-4 relative z-20">
+            <div className="absolute inset-0 bg-gradient-hero-premium grain-texture" />
+            <div className="container px-4 relative z-20 on-hero">
               <div className="max-w-4xl mx-auto text-center">
                 <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
-                <h1 className="fluid-h1 font-bold font-display tracking-tighter text-foreground mb-6 text-shadow-hero">
+                <h1 className="fluid-h1 font-bold font-display tracking-tighter text-white mb-6 text-shadow-hero">
                   Loading FAQs...
                 </h1>
               </div>
@@ -191,7 +191,7 @@ const FAQs = () => {
       <div className="min-h-screen bg-background">
         <Navigation />
         <main className="pt-20">
-          <section className="relative py-20 overflow-hidden bg-gradient-subtle grain-texture">
+          <section className="relative py-20 overflow-hidden">
             <div className="absolute inset-0 hero-image opacity-20">
               <img 
                 src={forexFaqHero} 
@@ -203,14 +203,14 @@ const FAQs = () => {
                 
               />
             </div>
-            <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
-            <div className="container px-4 relative z-20">
+            <div className="absolute inset-0 bg-gradient-hero-premium grain-texture" />
+            <div className="container px-4 relative z-20 on-hero">
               <div className="max-w-4xl mx-auto text-center">
                 <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
-                <h1 className="fluid-h1 font-bold font-display tracking-tighter text-foreground mb-6 text-shadow-hero">
+                <h1 className="fluid-h1 font-bold font-display tracking-tighter text-white mb-6 text-shadow-hero">
                   Error Loading FAQs
                 </h1>
-                <p className="text-hero-body text-muted-foreground mb-8 max-w-3xl mx-auto">
+                <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
                   {error}
                 </p>
               </div>
@@ -248,10 +248,10 @@ const FAQs = () => {
           <div className="container px-4 relative z-20">
             <div className="max-w-4xl mx-auto text-center">
               <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
-              <h1 className="fluid-h1 font-bold font-display tracking-tighter text-foreground mb-6 text-shadow-hero">
+              <h1 className="fluid-h1 font-bold font-display tracking-tighter text-white mb-6 text-shadow-hero">
                 Frequently Asked Questions
               </h1>
-              <p className="text-hero-body text-muted-foreground mb-8 max-w-3xl mx-auto">
+              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
                 Get clear answers about our educational approach, trading methodology, and support services.
               </p>
             </div>

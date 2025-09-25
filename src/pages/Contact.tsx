@@ -126,7 +126,7 @@ const Contact = () => {
                 }}>
                   <Mail className="h-4 w-4 mr-2" /> Email Us
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button asChild variant="glass" size="lg" className="border-white/30 text-white hover:bg-white/10">
                   <a {...getExternalLinkProps(whatsappUrl)}>
                     <MessageCircle className="h-4 w-4 mr-2" /> WhatsApp
                   </a>
