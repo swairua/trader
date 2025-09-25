@@ -84,9 +84,7 @@ export function HeroSection() {
           </h1>
 
           {/* Subheadline */}
-          <p className="hero-subheader-enter text-hero-body max-w-3xl mx-auto leading-relaxed text-shadow-hero">
-            {hero.subheadline}
-          </p>
+          <p className="hero-subheader-enter text-hero-body max-w-3xl mx-auto leading-relaxed text-shadow-hero" dangerouslySetInnerHTML={{ __html: hero.subheadline }} />
 
           {/* Premium CTAs */}
           <div className="hero-ctas-enter flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
