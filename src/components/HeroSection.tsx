@@ -80,57 +80,53 @@ export function HeroSection() {
           
           {/* Main Headline */}
           <h1 className="hero-headline-enter fluid-h1 leading-[1.1] sm:leading-[1.1] text-balance on-hero text-shadow-hero">
-            <span>Master Institutional Trading</span>{' '}
-            <span>with DRIVE</span>
+            {hero.headline}
           </h1>
-          
+
           {/* Subheadline */}
           <p className="hero-subheader-enter text-hero-body max-w-3xl mx-auto leading-relaxed text-shadow-hero">
-            Learn systematic trading concepts, risk management, and our proven DRIVE framework to make informed trading decisions.
+            {hero.subheadline}
           </p>
-          
+
           {/* Premium CTAs */}
           <div className="hero-ctas-enter flex flex-col sm:flex-row items-center justify-center gap-6 pt-4">
-            <Button 
-              size="lg" 
-              variant="hero" 
+            <Button
+              size="lg"
+              variant="hero"
               className="min-w-[220px] group"
               onClick={() => trackEvent('hero_cta_start_learning')}
               asChild
             >
               <a {...getInternalLinkProps(LINKS.internal.learn)} className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4" />
-                Start Learning
+                {hero.cta1}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
-            
-            <Button 
-              size="lg" 
-              variant="glass" 
+
+            <Button
+              size="lg"
+              variant="glass"
               className="min-w-[220px] group"
               onClick={() => trackEvent('hero_cta_explore_drive')}
               asChild
             >
               <a {...getInternalLinkProps(LINKS.internal.strategy)} className="flex items-center gap-2">
-                See DRIVE Framework
+                {hero.cta2}
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </a>
             </Button>
           </div>
-          
-          {/* Trust Indicators */}
+
+          {/* Trust Indicators styled as cards matching provided image */}
           <div className="hero-trust-enter pt-8">
             <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-              <div className="rounded-xl bg-white/30 border border-white/40 backdrop-blur-md px-4 py-2 md:px-5 md:py-3 shadow-glass">
-                <span className="text-sm md:text-base font-medium">5+ Years Experience</span>
-              </div>
-              <div className="rounded-xl bg-white/30 border border-white/40 backdrop-blur-md px-4 py-2 md:px-5 md:py-3 shadow-glass">
-                <span className="text-sm md:text-base font-medium">Premium Content</span>
-              </div>
-              <div className="rounded-xl bg-white/30 border border-white/40 backdrop-blur-md px-4 py-2 md:px-5 md:py-3 shadow-glass">
-                <span className="text-sm md:text-base font-medium">10K+ Students</span>
-              </div>
+              {hero.trustIndicators.map((t, i) => (
+                <div key={i} className="rounded-xl bg-white/8 border border-white/20 backdrop-blur-md px-6 py-6 md:px-8 md:py-6 shadow-glass min-w-[160px] text-center">
+                  <div className="text-3xl md:text-4xl font-extrabold text-blue-500 leading-none">{t.value}</div>
+                  <div className="text-sm md:text-base text-white/90 mt-1">{t.label}</div>
+                </div>
+              ))}
             </div>
           </div>
           
