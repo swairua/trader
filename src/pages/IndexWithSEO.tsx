@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { SEOHead } from "@/components/SEOHead";
 import Index from "./Index";
+import tradingWorkspace from "@/assets/trading-workspace.jpg";
 
 const IndexWithSEO = () => {
   const location = useLocation();
