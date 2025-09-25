@@ -20,7 +20,7 @@ export function Navigation() {
     <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
-          <BrandLogo size="md" />
+          <BrandLogo size="lg" />
         </Link>
 
         {/* Desktop Navigation */}
