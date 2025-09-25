@@ -1,9 +1,8 @@
 import { useState, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Send, ChevronDown } from "lucide-react";
+import { Menu, Send, ChevronDown, ChevronRight, Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LINKS, getExternalLinkProps, getInternalLinkProps } from "@/constants/links";
@@ -22,9 +21,15 @@ export function Navigation() {
   const primaryLinks = links.slice(0, 3);
   const overflowLinks = links.slice(3);
 
+  // Hover-controlled More menu state
+  const [moreOpen, setMoreOpen] = useState(false);
+  const hoverTimeoutRef = useRef<number | null>(null);
+
+  const nestedIcons = [Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText];
+
   return (
     <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
+      <div className="container flex h-20 lg:h-28 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
           <BrandLogo size="lg" />
         </Link>
@@ -49,11 +54,7 @@ export function Navigation() {
             </Link>
           ))}
 
-          {overflowLinks.length > 0 && (() => {
-            const [moreOpen, setMoreOpen] = useState(false);
-            const hoverTimeoutRef = useRef<number | null>(null);
-
-            return (
+          {overflowLinks.length > 0 && (
               <DropdownMenu open={moreOpen} onOpenChange={(open) => setMoreOpen(open)}>
                 <div
                   onMouseEnter={() => {
@@ -68,7 +69,7 @@ export function Navigation() {
                   }}
                 >
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="px-3 py-2 min-h-[44px] font-medium">
+                    <Button variant="ghost" size="sm" className="px-3 py-2 min-h-[44px] font-medium hover:text-purple-600">
                       More <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${moreOpen ? 'rotate-180' : 'rotate-0'}`} />
                     </Button>
                   </DropdownMenuTrigger>
@@ -86,19 +87,21 @@ export function Navigation() {
                       hoverTimeoutRef.current = window.setTimeout(() => setMoreOpen(false), 150);
                     }}
                   >
-                    {overflowLinks.map((item) => (
-                      <DropdownMenuItem key={item.name} asChild>
-                        <Link to={item.href} className="flex items-center">
-                          <ChevronRight className="mr-2 h-4 w-4 opacity-70" />
-                          {item.name}
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
+                    {overflowLinks.map((item, idx) => {
+                      const Icon = nestedIcons[idx % nestedIcons.length];
+                      return (
+                        <DropdownMenuItem key={item.name} asChild>
+                          <Link to={item.href} className="flex items-center hover:text-purple-600">
+                            <Icon className="mr-2 h-4 w-4 opacity-80" />
+                            {item.name}
+                          </Link>
+                        </DropdownMenuItem>
+                      );
+                    })}
                   </DropdownMenuContent>
                 </div>
               </DropdownMenu>
-            );
-          })()}
+          )}
         </div>
 
         {/* Desktop CTAs */}
