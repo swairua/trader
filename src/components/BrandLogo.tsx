@@ -11,8 +11,8 @@ const LOGO_URL =
 export function BrandLogo({ className, size = "md" }: BrandLogoProps) {
   const sizeClasses = {
     sm: "h-10",
-    md: "h-14",
-    lg: "h-16",
+    md: "h-16",
+    lg: "h-20",
   }[size];
 
   return (
