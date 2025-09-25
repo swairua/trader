@@ -79,9 +79,7 @@ export function HeroSection() {
           </div>
           
           {/* Main Headline */}
-          <h1 className="hero-headline-enter fluid-h1 leading-[1.1] sm:leading-[1.1] text-balance on-hero text-shadow-hero">
-            {hero.headline}
-          </h1>
+          <h1 className="hero-headline-enter fluid-h1 leading-[1.1] sm:leading-[1.1] text-balance on-hero text-shadow-hero" dangerouslySetInnerHTML={{ __html: hero.headline }} />
 
           {/* Subheadline */}
           <p className="hero-subheader-enter text-hero-body max-w-3xl mx-auto leading-relaxed text-shadow-hero" dangerouslySetInnerHTML={{ __html: hero.subheadline }} />
