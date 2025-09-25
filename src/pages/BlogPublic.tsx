@@ -256,9 +256,8 @@ export default function BlogPublic() {
           <div className="absolute inset-0 bg-gradient-hero-premium grain-texture"></div>
           <div className="container px-4 relative z-20 on-hero">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="fluid-h1 mb-6">
-                <span>Trading</span> Education
-                <span> Blog</span>
+              <h1 className="fluid-h1 text-white mb-6">
+                <span>Trading</span> <span>Education</span> <span>Blog</span>
               </h1>
               <p className="text-hero-body mb-8 max-w-3xl mx-auto">
                 Educational insights, market analysis, and practical trading knowledge to help you develop disciplined trading habits.
