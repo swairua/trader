@@ -295,7 +295,7 @@ export const defaultContent: SiteContent = {
     subheadline: "Master systematic market analysis and risk management through proven institutional trading concepts. Access educational resources and mentorship when you register with our recommended broker partner.",
     cta1: "Start Learning",
     cta2: "See How DRIVE Works",
-    disclaimer: "Trading involves substantial risk. Most traders lose money. Education comes first.",
+    disclaimer: "",
     trustStrip: "Proven methodology | Real education | No false promises",
     trustIndicators: [
       { value: "500+", label: "Students Educated" },
