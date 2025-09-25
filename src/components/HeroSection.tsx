@@ -49,7 +49,6 @@ export function HeroSection() {
             alt="Hero background image"
             className="absolute inset-0 w-full h-full object-cover object-[center_30%] sm:object-center hero-image transition-opacity duration-1000 opacity-100"
             loading={current === 0 ? 'eager' : 'lazy'}
-            fetchPriority={current === 0 ? 'high' : 'auto'}
             width={1920}
             height={1080}
             aria-hidden={false}
