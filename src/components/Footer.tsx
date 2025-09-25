@@ -25,7 +25,7 @@ export function Footer() {
             <div className="space-y-4 lg:col-span-2">
               <div className="block">
                 <Link to="/" aria-label="Home" className="block">
-                  <BrandLogo className="w-full h-auto" />
+                  <BrandLogo className="w-full h-auto max-h-20 md:max-h-24" />
                 </Link>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
