@@ -25,7 +25,7 @@ export function Navigation() {
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-12">
-          {content.navigation.links.map((item) => (
+          {primaryLinks.map((item) => (
             <Link
               key={item.name}
               to={item.href}
@@ -42,6 +42,23 @@ export function Navigation() {
               )}
             </Link>
           ))}
+
+          {overflowLinks.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="px-3 py-2 min-h-[44px] font-medium">
+                  More <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start">
+                {overflowLinks.map((item) => (
+                  <DropdownMenuItem key={item.name} asChild>
+                    <Link to={item.href}>{item.name}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
 
         {/* Desktop CTAs */}
