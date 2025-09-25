@@ -22,7 +22,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-16 relative z-10">
           {/* Full-width brand banner */}
           <Link to="/" aria-label="Home" className="block mb-10">
-            <BrandLogo className="w-full h-auto max-h-28 sm:max-h-32 md:max-h-36" />
+            <BrandLogo className="w-full h-auto" />
           </Link>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-8">
             {/* Brand + Socials */}
