@@ -15,6 +15,10 @@ const IndexWithSEO = () => {
         keywords="institutional trading education, forex mentorship, DRIVE strategy, trading psychology, risk management, smart money concepts, forex education Kenya"
         canonical={canonical}
         lcpImage={tradingWorkspace}
+        lcpPreloads={[
+          { href: tradingWorkspace, media: "(min-width: 1024px)" },
+          { href: tradingWorkspace, media: "(max-width: 1023px)" }
+        ]}
       />
       <Index />
     </>
