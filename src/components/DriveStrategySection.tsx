@@ -1,0 +1,93 @@
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
+import { driveStepsSimple } from "@/content/drive";
+import { Link } from "react-router-dom";
+import { LINKS, getExternalLinkProps } from "@/constants/links";
+
+export function DriveStrategySection() {
+  return (
+    <section className="py-12 lg:py-20 bg-background relative overflow-hidden section-optimize">
+      <div className="absolute inset-0 bg-gradient-hero opacity-20"></div>
+      <div className="container px-4 relative">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 lg:mb-16">
+            <h2 className="fluid-h2 text-foreground mb-3">
+              The <span className="text-primary">D.R.I.V.E</span> Strategy Framework
+            </h2>
+            <p className="text-sm text-muted-foreground/80 mb-4 font-medium tracking-wide">
+              Direction. Range. Interest Point. Value of Risk. Entry.
+            </p>
+            <p className="fluid-body text-muted-foreground max-w-3xl mx-auto">
+              A systematic 5-step methodology that transforms retail traders into institutional professionals.
+            </p>
+          </div>
+
+          <div className="relative">
+            <div className="mx-auto max-w-3xl mb-6">
+              <video
+                controls
+                preload="metadata"
+                className="w-full rounded-lg shadow-lg"
+                src="https://cdn.builder.io/o/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2F09296fea41b446e9b7766d04a5882ffb?alt=media&token=fbe80ad2-fe5e-44ae-a7ea-61d49edbd50a&apiKey=929a94a73a3e4246bd07aab61b8a8dc4"
+                poster="https://cdn.builder.io/api/v1/image/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2F0bebcc7fcc8e46e686b4faa7ede09650?format=webp&width=1200"
+                aria-label="DRIVE strategy overview video"
+              />
+            </div>
+            <ol className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-4 mb-12">
+              {driveStepsSimple.map((step, index) => (
+                <li key={index} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
+                  <Link 
+                    to="/strategy" 
+                    className="group relative block p-4 lg:p-6 text-center glass-card hover:shadow-card transition-all duration-300 hover:scale-[1.02] h-full focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background rounded-lg"
+                    aria-label={`Explore ${step.title}: ${step.description}`}
+                  >
+                    {/* Connector line for large screens */}
+                    {index < driveStepsSimple.length - 1 && (
+                      <div className="hidden lg:block absolute -right-2 top-1/2 w-4 h-px bg-gradient-to-r from-primary/30 to-transparent transform -translate-y-1/2 z-10" />
+                    )}
+                    
+                    {/* Enhanced letter badge */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground text-sm font-bold shadow-lg ring-2 ring-primary/20 ring-offset-2 ring-offset-background group-hover:ring-primary/40 group-hover:shadow-xl transition-all duration-300">
+                      <span className="relative z-10">{step.letter}</span>
+                      <div className="absolute inset-0 rounded-full bg-primary/20 blur-sm group-hover:bg-primary/30 transition-colors duration-300" />
+                    </div>
+                    
+                    <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3 mt-4 lg:mt-2 group-hover:bg-primary/15 transition-colors duration-300">
+                      <step.icon className="h-6 w-6 text-primary" aria-hidden="true" />
+                    </div>
+                    
+                    <h3 className="text-base lg:text-lg font-display font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                      {step.title}
+                    </h3>
+                    
+                    <p className="text-xs lg:text-sm leading-relaxed text-muted-foreground">
+                      {step.description}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="text-center space-y-4">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <Button variant="default" size="lg" className="hover:scale-105 transition-transform duration-300" asChild>
+                <Link to="/strategy" aria-label="Explore the detailed DRIVE strategy">
+                  Explore the DRIVE Playbook
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-300" asChild>
+                <a {...getExternalLinkProps(LINKS.telegram.community)} aria-label="Join our Telegram community">
+                  Join on Telegram
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,394 @@
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { SectionDivider } from "@/components/SectionDivider";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MessageCircle, HelpCircle, Search, Link as LinkIcon, Copy, Check, Target, BookOpen, Shield, TrendingUp, User, Settings } from "lucide-react";
+import { usePublicFaqs } from "@/hooks/usePublicFaqs";
+import { toast } from "sonner";
+import forexFaqHero from "@/assets/forex-faq-hero.jpg";
+
+const FAQs = () => {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [copiedFaqId, setCopiedFaqId] = useState<string | null>(null);
+  const { faqs, categories, loading, error } = usePublicFaqs();
+
+  // Get icon component by name
+  const getIconComponent = (iconName: string) => {
+    const iconMap: Record<string, React.ComponentType<any>> = {
+      HelpCircle, Target, BookOpen, Shield, MessageCircle, TrendingUp, User, Settings
+    };
+    return iconMap[iconName] || HelpCircle;
+  };
+
+  // Handle URL hash navigation
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && categories.some(cat => cat.id === hash)) {
+      setSelectedCategory(hash);
+    }
+  }, [categories]);
+
+  // Update URL when category changes
+  useEffect(() => {
+    if (selectedCategory !== "all") {
+      window.history.replaceState(null, '', `#${selectedCategory}`);
+    } else {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  }, [selectedCategory]);
+
+  const filteredFAQs = faqs.filter(faq => {
+    const matchesCategory = selectedCategory === "all" || 
+      categories.find(cat => cat.id === selectedCategory)?.label === faq.category;
+    const matchesSearch = searchQuery === "" || 
+      faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const copyFaqLink = async (faqId: string) => {
+    const url = `${window.location.origin}${window.location.pathname}#${selectedCategory !== "all" ? selectedCategory : ""}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedFaqId(faqId);
+      setTimeout(() => setCopiedFaqId(null), 2000);
+      toast.success("Link copied to clipboard!");
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      toast.error("Failed to copy link");
+    }
+  };
+
+  const renderFAQContent = () => (
+    filteredFAQs.length === 0 ? (
+      <Card className="border border-border/50 bg-card/30 backdrop-blur-sm">
+        <CardContent className="p-12 text-center">
+          <HelpCircle className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
+          <h3 className="text-lg font-semibold mb-2">No FAQs found</h3>
+          <p className="text-muted-foreground">
+            {searchQuery ? 
+              `No FAQs match "${searchQuery}". Try a different search term.` :
+              "No FAQs available for this category."
+            }
+          </p>
+          {searchQuery && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setSearchQuery("")}
+              className="mt-4"
+            >
+              Clear search
+            </Button>
+          )}
+        </CardContent>
+      </Card>
+    ) : (
+      <Card className="border border-border/50 bg-card/30 backdrop-blur-sm">
+        <CardContent className="p-0">
+          <Accordion type="single" collapsible className="w-full">
+            {filteredFAQs.map((faq, index) => (
+              <AccordionItem 
+                key={faq.id} 
+                value={faq.id} 
+                className={`group border-b border-border/30 ${index === filteredFAQs.length - 1 ? 'border-b-0' : ''}`}
+              >
+                <AccordionTrigger
+                  className="text-left font-semibold text-foreground hover:text-primary transition-all duration-200 px-6 py-5 hover:bg-muted/30 group-data-[state=open]:bg-muted/20 group-data-[state=open]:text-primary [&[data-state=open]>svg]:rotate-180"
+                  action={
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        copyFaqLink(faq.id);
+                      }}
+                      className="opacity-0 group-hover:opacity-100 transition-opacity p-2 h-8 w-8 hover:bg-primary/10"
+                      title="Copy link to this FAQ"
+                    >
+                      {copiedFaqId === faq.id ? (
+                        <Check className="h-3 w-3 text-green-500" />
+                      ) : (
+                        <LinkIcon className="h-3 w-3" />
+                      )}
+                    </Button>
+                  }
+                >
+                  <span className="pr-4">{faq.question}</span>
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed px-6 pb-6 pt-2 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
+                  <div className="prose prose-sm max-w-none dark:prose-invert border-l-2 border-primary/20 pl-4 ml-2">
+                    {faq.answer}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </CardContent>
+      </Card>
+    )
+  );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <main className="pt-20">
+          <section className="relative py-20 overflow-hidden bg-gradient-subtle grain-texture">
+            <div className="absolute inset-0 hero-image opacity-20">
+              <img 
+                src={forexFaqHero} 
+                alt="Professional forex trading education support center with trading charts in background" 
+                className="w-full h-full object-cover"
+                loading="eager"
+                width={1920}
+                height={1080}
+                
+              />
+            </div>
+            <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
+            <div className="container px-4 relative z-20">
+              <div className="max-w-4xl mx-auto text-center">
+                <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
+                <h1 className="fluid-h1 font-bold font-display tracking-tighter text-foreground mb-6 text-shadow-hero">
+                  Loading FAQs...
+                </h1>
+              </div>
+            </div>
+          </section>
+          <section className="py-20">
+            <div className="container px-4">
+              <div className="animate-pulse space-y-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="h-16 bg-muted rounded" />
+                ))}
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+        <WhatsAppButton />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navigation />
+        <main className="pt-20">
+          <section className="relative py-20 overflow-hidden bg-gradient-subtle grain-texture">
+            <div className="absolute inset-0 hero-image opacity-20">
+              <img 
+                src={forexFaqHero} 
+                alt="Professional forex trading education support center with trading charts in background" 
+                className="w-full h-full object-cover"
+                loading="eager"
+                width={1920}
+                height={1080}
+                
+              />
+            </div>
+            <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
+            <div className="container px-4 relative z-20">
+              <div className="max-w-4xl mx-auto text-center">
+                <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
+                <h1 className="fluid-h1 font-bold font-display tracking-tighter text-foreground mb-6 text-shadow-hero">
+                  Error Loading FAQs
+                </h1>
+                <p className="text-hero-body text-muted-foreground mb-8 max-w-3xl mx-auto">
+                  {error}
+                </p>
+              </div>
+            </div>
+          </section>
+        </main>
+        <Footer />
+        <WhatsAppButton />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <main className="pt-20">
+        {/* Hero Section */}
+        <section className="relative py-20 overflow-hidden bg-gradient-subtle grain-texture">
+          <div className="absolute inset-0 hero-image opacity-20">
+            <img 
+              src={forexFaqHero} 
+              alt="Professional forex trading education support center with trading charts in background" 
+              className="w-full h-full object-cover"
+              loading="eager"
+              width={1920}
+              height={1080}
+              
+              onError={(e) => {
+                console.warn('Hero image failed to load');
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          </div>
+          <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
+          <div className="container px-4 relative z-20">
+            <div className="max-w-4xl mx-auto text-center">
+              <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
+              <h1 className="fluid-h1 font-bold font-display tracking-tighter text-foreground mb-6 text-shadow-hero">
+                Frequently Asked Questions
+              </h1>
+              <p className="text-hero-body text-muted-foreground mb-8 max-w-3xl mx-auto">
+                Get clear answers about our educational approach, trading methodology, and support services.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQs Content */}
+        <section className="py-20">
+          <div className="container px-4">
+            <div className="max-w-5xl mx-auto">
+              <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
+                {/* Category Tabs - Sticky */}
+                <div className="sticky top-20 z-30 bg-background/95 backdrop-blur-sm border-b border-border/50 -mx-4 px-4 py-4 mb-8">
+                  <div className="overflow-x-auto pb-2">
+                    <TabsList className="inline-flex w-max min-w-full bg-muted/50 border border-border/50 p-1.5 gap-1 shadow-sm">
+                      <TabsTrigger 
+                        value="all" 
+                        className="text-sm font-medium px-4 py-2.5 rounded-md whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all hover:bg-background/50"
+                      >
+                        📋 All FAQs
+                      </TabsTrigger>
+                      {categories.map((category) => {
+                        const IconComponent = getIconComponent(category.icon);
+                        return (
+                          <TabsTrigger 
+                            key={category.id} 
+                            value={category.id}
+                            className="text-sm font-medium px-4 py-2.5 rounded-md whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all hover:bg-background/50"
+                          >
+                            <IconComponent className="h-4 w-4 mr-2" />
+                            {category.label}
+                          </TabsTrigger>
+                        );
+                      })}
+                    </TabsList>
+                  </div>
+                </div>
+
+                {/* Search Bar */}
+                <div className="mb-8">
+                  <div className="relative max-w-md">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Input
+                      type="text"
+                      placeholder="Search FAQs..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10 pr-4 py-2 w-full bg-background/50 border-border/50 focus:border-primary/50 transition-colors"
+                    />
+                    {searchQuery && (
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-muted-foreground">
+                        {filteredFAQs.length} result{filteredFAQs.length !== 1 ? 's' : ''}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* FAQ Content - All Categories */}
+                <TabsContent value="all" className="mt-0">
+                  {renderFAQContent()}
+                </TabsContent>
+                
+                {/* FAQ Content - Individual Categories */}
+                {categories.map((category) => (
+                  <TabsContent key={category.id} value={category.id} className="mt-0">
+                    {renderFAQContent()}
+                  </TabsContent>
+                ))}
+              </Tabs>
+            </div>
+          </div>
+        </section>
+
+        {/* Risk Warning */}
+        <section className="py-20 bg-gradient-subtle">
+          <div className="container px-4">
+            <div className="max-w-4xl mx-auto">
+              <Card className="border-2 border-destructive/30 bg-gradient-to-r from-destructive/5 to-destructive/10 backdrop-blur-sm shadow-lg">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-foreground flex items-center gap-3">
+                    ⚠️ Important Risk Warning
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4 text-foreground/80">
+                  <p>
+                    <strong>Trading involves significant risk:</strong> You can lose some or all of your invested capital. Never trade with money you cannot afford to lose completely.
+                  </p>
+                  <p>
+                    <strong>No guarantees:</strong> Past performance is not indicative of future results. No trading strategy or educational program guarantees profits.
+                  </p>
+                  <p>
+                    <strong>Educational purposes only:</strong> All content is for educational purposes and should not be considered personalized investment advice.
+                  </p>
+                  <p>
+                    <strong>Seek professional advice:</strong> Consider consulting with a qualified financial advisor before making any investment decisions.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <SectionDivider variant="wave" className="text-muted" />
+
+        {/* Contact CTA */}
+        <section className="py-20 near-footer-contrast grain-texture">
+          <div className="container px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex p-3 rounded-full bg-primary/10 mb-6">
+                <MessageCircle className="h-8 w-8 text-primary" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Still Have Questions?
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Our educational support team is here to help you on your trading journey.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button variant="default" size="lg" asChild>
+                  <Link to="/contact">
+                    Contact Us
+                    <MessageCircle className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg">
+                  WhatsApp Support
+                  <MessageCircle className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
+  );
+};
+
+export default FAQs;

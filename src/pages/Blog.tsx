@@ -1,0 +1,238 @@
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { SectionDivider } from "@/components/SectionDivider";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar, User, ArrowRight } from "lucide-react";
+import forexBlogHero from "@/assets/forex-blog-hero.jpg";
+
+const blogPosts = [
+  {
+    title: "Understanding Market Structure: A Beginner's Guide",
+    excerpt: "Learn the fundamentals of market structure and how institutional traders view price movements. This comprehensive guide covers the basics of support and resistance, trend analysis, and key levels that drive market behavior.",
+    category: "Education",
+    date: "March 15, 2024",
+    author: "KenneDyne spot Team",
+    readTime: "5 min read",
+    featured: true
+  },
+  {
+    title: "Risk Management: The Foundation of Successful Trading",
+    excerpt: "Why proper risk management is more important than finding the perfect setup. Discover how to calculate position sizes, set stop losses, and manage your trading capital effectively.",
+    category: "Risk Management", 
+    date: "March 10, 2024",
+    author: "KenneDyne spot Team",
+    readTime: "7 min read",
+    featured: true
+  },
+  {
+    title: "The Psychology of Trading: Overcoming Common Mental Traps",
+    excerpt: "How to develop the discipline and mindset needed for consistent trading performance. Learn about FOMO, overconfidence, and other psychological barriers that affect traders.",
+    category: "Psychology",
+    date: "March 5, 2024", 
+    author: "KenneDyne spot Team",
+    readTime: "6 min read",
+    featured: false
+  },
+  {
+    title: "Smart Money Concepts: Following Institutional Flow",
+    excerpt: "Understanding how banks and institutions move the market and how retail traders can align with these movements through proper analysis.",
+    category: "Education",
+    date: "February 28, 2024",
+    author: "KenneDyne spot Team", 
+    readTime: "8 min read",
+    featured: false
+  },
+  {
+    title: "Building Your Trading Journal: Track Progress Not Just Profits",
+    excerpt: "Why keeping a detailed trading journal is crucial for improvement and how to structure it effectively for maximum learning benefit.",
+    category: "Education",
+    date: "February 20, 2024",
+    author: "KenneDyne spot Team",
+    readTime: "4 min read", 
+    featured: false
+  },
+  {
+    title: "Common Trading Mistakes and How to Avoid Them",
+    excerpt: "Learn from the most frequent errors that derail trading accounts and develop habits that promote long-term success.",
+    category: "Education",
+    date: "February 15, 2024",
+    author: "KenneDyne spot Team",
+    readTime: "6 min read",
+    featured: false
+  }
+];
+
+const categories = ["All", "Education", "Risk Management", "Psychology"];
+
+const Blog = () => {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      <main className="pt-20">
+        {/* Hero Section */}
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 hero-image">
+            <img 
+              src={forexBlogHero} 
+              alt="Professional forex trading analysis workspace with multiple monitors displaying trading charts" 
+              className="w-full h-full object-cover"
+              loading="eager"
+              width={1920}
+              height={1080}
+              
+              onError={(e) => {
+                console.warn('Hero image failed to load');
+                (e.target as HTMLImageElement).style.display = 'none';
+              }}
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-hero-premium grain-texture"></div>
+          <div className="container px-4 relative z-20 on-hero">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="fluid-h1 text-white mb-6">
+                <span className="text-primary-glow">Trading</span> Education
+                <span className="text-white"> Blog</span>
+              </h1>
+              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
+                Educational insights, market analysis, and practical trading knowledge to help you develop disciplined trading habits.
+              </p>
+              <div className="p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 max-w-2xl mx-auto">
+                <p className="text-sm text-white/90">
+                  <strong>Educational Content Only:</strong> All articles are for educational purposes. Not financial advice. Trading involves risk of loss.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Blog Posts */}
+        <section className="py-20">
+          <div className="container px-4">
+            <div className="max-w-6xl mx-auto">
+              {/* Category Filter */}
+              <div className="flex flex-wrap gap-4 justify-center mb-12">
+                {categories.map((category) => (
+                  <Badge 
+                    key={category} 
+                    variant={category === "All" ? "default" : "secondary"}
+                    className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-all duration-200 px-4 py-2 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                  >
+                    {category}
+                  </Badge>
+                ))}
+              </div>
+
+              {/* Featured Posts */}
+              <div className="mb-16">
+                <h2 className="text-2xl font-bold text-foreground mb-8">Featured Articles</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {blogPosts.filter(post => post.featured).map((post, index) => (
+                    <Card key={index} className="p-8 border border-border hover:shadow-elevation hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                      <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary border-primary/20">
+                        {post.category}
+                      </Badge>
+                      <h3 className="text-2xl font-bold text-foreground mb-4">
+                        {post.title}
+                      </h3>
+                      <p className="text-muted-foreground mb-6">
+                        {post.excerpt}
+                      </p>
+                      
+                      <div className="flex items-center justify-between text-sm text-muted-foreground mb-6">
+                        <div className="flex items-center space-x-4">
+                          <div className="flex items-center">
+                            <Calendar className="h-4 w-4 mr-2" />
+                            {post.date}
+                          </div>
+                          <div className="flex items-center">
+                            <User className="h-4 w-4 mr-2" />
+                            {post.author}
+                          </div>
+                        </div>
+                        <span>{post.readTime}</span>
+                      </div>
+
+                      <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer">
+                        <span className="font-medium">Read Full Article</span>
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* All Posts */}
+              <div>
+                <h2 className="text-2xl font-bold text-foreground mb-8">All Articles</h2>
+                <div className="grid md:grid-cols-3 gap-8">
+                  {blogPosts.map((post, index) => (
+                    <Card key={index} className="p-6 border border-border hover:shadow-elevation hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                      <Badge variant="secondary" className="mb-3 bg-primary/10 text-primary border-primary/20">
+                        {post.category}
+                      </Badge>
+                      <h3 className="text-lg font-bold text-foreground mb-3 line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                      
+                      <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                        <div className="flex items-center">
+                          <Calendar className="h-4 w-4 mr-1" />
+                          {post.date}
+                        </div>
+                        <span>{post.readTime}</span>
+                      </div>
+
+                      <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer text-sm">
+                        <span className="font-medium">Read More</span>
+                        <ArrowRight className="h-3 w-3 ml-1" />
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <SectionDivider variant="wave" className="text-muted" />
+        
+        {/* Newsletter CTA */}
+        <section className="py-20 near-footer-contrast grain-texture">
+          <div className="container px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Stay Updated with Our Newsletter
+              </h2>
+              <p className="text-xl text-muted-foreground mb-8">
+                Get weekly market insights, educational content, and trading tips delivered to your inbox.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="flex-1 px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-background/80 backdrop-blur-sm"
+                />
+                <Button variant="hero" className="px-6 py-2">
+                  Subscribe
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                No spam. Educational content only. Unsubscribe anytime.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+      <WhatsAppButton />
+    </div>
+  );
+};
+
+export default Blog;

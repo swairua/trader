@@ -1,0 +1,229 @@
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { 
+  BookOpen, 
+  TrendingUp, 
+  Brain, 
+  Target, 
+  Clock, 
+  Users,
+  ArrowRight,
+  CheckCircle 
+} from "lucide-react";
+import { driveStepsSimple } from "@/content/drive";
+import forexEducationHero from "@/assets/forex-education-hero.jpg";
+import { LINKS, getExternalLinkProps } from "@/constants/links";
+import { createWhatsAppLink, WHATSAPP_MESSAGES } from "@/utils/whatsapp";
+
+const learningPaths = [
+  {
+    level: "Beginner",
+    title: "Trading Foundations",
+    description: "Master the basics of market structure, risk management, and trading psychology.",
+    duration: "4-6 weeks",
+    modules: 8,
+    price: "Free",
+    features: [
+      "Market structure basics",
+      "Risk management principles", 
+      "Trading psychology fundamentals",
+      "Platform navigation",
+      "Economic calendar usage"
+    ],
+    badge: "Most Popular",
+    color: "bg-green-500"
+  },
+  {
+    level: "Intermediate", 
+    title: "DRIVE Methodology",
+    description: "Learn our proprietary DRIVE system for systematic trading approach.",
+    duration: "6-8 weeks",
+    modules: 12,
+    price: "KES 15,000",
+    features: [
+      "DRIVE system deep dive",
+      "Advanced chart analysis",
+      "Multi-timeframe analysis",
+      "Trade management strategies",
+      "Live trading sessions"
+    ],
+    badge: "Professional",
+    color: "bg-blue-500"
+  },
+  {
+    level: "Advanced",
+    title: "Institutional Strategies", 
+    description: "Advanced concepts used by institutional traders and fund managers.",
+    duration: "8-10 weeks",
+    modules: 16,
+    price: "KES 25,000",
+    features: [
+      "Market maker behavior",
+      "Liquidity analysis",
+      "Advanced risk models",
+      "Portfolio management",
+      "Algorithmic concepts"
+    ],
+    badge: "Expert Level",
+    color: "bg-purple-500"
+  }
+];
+
+export default function Learn() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      
+      <main>
+        {/* Hero Section */}
+        <section className="relative py-20 bg-gradient-subtle overflow-hidden">
+          <div className="absolute inset-0 hero-image">
+            <img 
+              src={forexEducationHero} 
+              alt="Professional forex education classroom with trading charts and learning environment" 
+              className="w-full h-full object-cover"
+              loading="eager"
+              width={1920}
+              height={1080}
+              
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
+          <div className="container px-4 relative z-20">
+            <div className="max-w-4xl mx-auto">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white">
+                    <span className="text-blue-300">Structured Learning</span> for{" "}
+                    <span className="text-blue-400">Serious Traders</span>
+                  </h1>
+                  <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                    Our progressive curriculum takes you from complete beginner to institutional-level understanding. 
+                    No shortcuts, just proven education.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                    <Button variant="hero" size="lg" asChild>
+                      <a {...getExternalLinkProps(LINKS.telegram.channel)}>
+                        Start Learning Today
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </a>
+                    </Button>
+                  </div>
+                  <div className="flex items-center space-x-8 text-sm text-white/80">
+                    <div className="flex items-center">
+                      <Users className="h-4 w-4 mr-2" />
+                      2,000+ Students
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 mr-2" />
+                      500+ Hours Content
+                    </div>
+                    <div className="flex items-center">
+                      <Target className="h-4 w-4 mr-2" />
+                      Verified Results
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Learning Paths */}
+        <section className="py-20">
+          <div className="container px-4">
+            <div className="grid md:grid-cols-3 gap-8">
+              {learningPaths.map((path, index) => (
+                <Card key={index} className="relative shadow-card hover:shadow-elevation transition-all duration-300">
+                  {path.badge && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <Badge className={`${path.color} text-white`}>
+                        {path.badge}
+                      </Badge>
+                    </div>
+                  )}
+                  
+                  <CardHeader className="text-center pt-8">
+                    <div className="text-sm text-muted-foreground uppercase tracking-wide font-medium">
+                      {path.level}
+                    </div>
+                    <CardTitle className="text-2xl">{path.title}</CardTitle>
+                    <CardDescription className="text-base">
+                      {path.description}
+                    </CardDescription>
+                    <div className="text-3xl font-bold text-primary mt-4">
+                      {path.price}
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="space-y-6">
+                    <div className="flex justify-between text-sm text-muted-foreground">
+                      <span>{path.duration}</span>
+                      <span>{path.modules} modules</span>
+                    </div>
+
+                    <ul className="space-y-3">
+                      {path.features.map((feature, featureIndex) => (
+                        <li key={featureIndex} className="flex items-start">
+                          <CheckCircle className="h-4 w-4 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Button 
+                      variant={index === 1 ? "hero" : "outline"} 
+                      className="w-full"
+                      asChild
+                    >
+                      <a {...getExternalLinkProps(createWhatsAppLink("254101316169", WHATSAPP_MESSAGES.contact))}>
+                        {path.price === "Free" ? "Start Free" : "Enroll Now"}
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* DRIVE Methodology Preview */}
+        <section className="py-20 bg-accent/30">
+          <div className="container px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  The <span className="text-blue-400">DRIVE</span> Methodology
+                </h2>
+                <p className="text-xl text-muted-foreground">
+                  Direction, Range, Interest Point, Value of Risk, Entry
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-5 gap-6">
+                {driveStepsSimple.map((step, index) => {
+                  const IconComponent = step.icon;
+                  return (
+                    <div key={index} className="text-center">
+                      <div className="h-16 w-16 mx-auto mb-4 rounded-full bg-gradient-professional flex items-center justify-center">
+                        <IconComponent className="h-8 w-8 text-primary-foreground" />
+                      </div>
+                      <h3 className="font-semibold mb-2">{step.title}</h3>
+                      <p className="text-sm text-muted-foreground">{step.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}

@@ -1,0 +1,484 @@
+import { useState, useMemo, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { SectionDivider } from '@/components/SectionDivider';
+import { FinalCTASection } from '@/components/FinalCTASection';
+import { useSiteContent } from '@/hooks/useSiteContent';
+import { useCourses, useEbooks, useMaterials } from '@/hooks/useResources';
+import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import { Search, BookOpen, GraduationCap, FileText, Download, ExternalLink, Filter, Loader2, AlertCircle } from 'lucide-react';
+
+export default function Resources() {
+  const { content } = useSiteContent();
+  const { toast } = useToast();
+  
+  // Fetch from Supabase
+  const { data: dbCourses = [] } = useCourses(true);
+  const { data: dbEbooks = [] } = useEbooks(true);
+  const { data: dbMaterials = [] } = useMaterials(true);
+  
+  const [searchTerm, setSearchTerm] = useState('');
+  const [levelFilter, setLevelFilter] = useState<string>('all');
+  const [typeFilter, setTypeFilter] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState('all');
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
+
+  // Handle URL hash for auto-selecting tabs
+  useEffect(() => {
+    const hash = window.location.hash.slice(1); // Remove the #
+    if (hash === 'courses' || hash === 'ebooks' || hash === 'materials') {
+      setActiveTab(hash);
+    }
+  }, []);
+
+  const handleDownload = async (url: string, filename?: string) => {
+    try {
+      setDownloadingId(url);
+      
+      // Only sign actual Supabase Storage URLs; open site-relative or external URLs directly
+      const isSupabaseStorageUrl = url.includes('/storage/v1/object/');
+
+      if (isSupabaseStorageUrl) {
+        const { data, error } = await supabase.functions.invoke('sign-resource-url', {
+          body: { url, filename }
+        });
+        
+        if (error || data?.error) {
+          const errorMessage = data?.message || error?.message || "Could not generate download link";
+          throw new Error(errorMessage);
+        }
+        
+        if (data?.url) {
+          // Create temporary anchor for download
+          const link = document.createElement('a');
+          link.href = data.url;
+          link.download = data.filename || filename || 'download';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          toast({
+            title: "Download Started",
+            description: `${data.filename || filename || 'File'} download has started.`,
+          });
+        }
+      } else {
+        // External URL - open directly
+        window.open(url, '_blank');
+      }
+    } catch (error: any) {
+      console.error('Download error:', error);
+      toast({
+        title: "Download Failed",
+        description: error.message || "Could not generate download link. Please try again or contact support.",
+        variant: "destructive",
+      });
+    } finally {
+      setDownloadingId(null);
+    }
+  };
+
+  const filteredResources = useMemo(() => {
+    // Use Supabase data first, fallback to local content
+    const courses = dbCourses.length > 0 ? dbCourses : (content?.resources?.courses || []);
+    const ebooks = dbEbooks.length > 0 ? dbEbooks : (content?.resources?.ebooks || []);
+    const materials = dbMaterials.length > 0 ? dbMaterials : (content?.resources?.materials || []);
+
+    const allResources = [
+      ...courses.map(item => ({ 
+        ...item, 
+        resourceType: 'course' as const,
+        url: item.course_url || item.url,
+        coverImageUrl: item.cover_image_url || item.coverImageUrl
+      })),
+      ...ebooks.map(item => ({ 
+        ...item, 
+        resourceType: 'ebook' as const,
+        downloadUrl: item.download_url || item.downloadUrl,
+        coverImageUrl: item.cover_image_url || item.coverImageUrl
+      })),
+      ...materials.map(item => ({ 
+        ...item, 
+        resourceType: 'material' as const,
+        url: item.material_url || item.url,
+        coverImageUrl: item.cover_image_url || item.coverImageUrl
+      })),
+    ];
+
+    return allResources.filter(item => {
+      const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+
+      const matchesLevel = levelFilter === 'all' || 
+                          ('level' in item && (item as any).level === levelFilter);
+
+      const matchesType = typeFilter === 'all' || 
+                         item.resourceType === typeFilter ||
+                         ('type' in item && (item as any).type === typeFilter);
+
+      const matchesTab = activeTab === 'all' || 
+                        (activeTab === 'courses' && item.resourceType === 'course') ||
+                        (activeTab === 'ebooks' && item.resourceType === 'ebook') ||
+                        (activeTab === 'materials' && item.resourceType === 'material');
+
+      return matchesSearch && matchesLevel && matchesType && matchesTab;
+    });
+  }, [content.resources, searchTerm, levelFilter, typeFilter, activeTab, dbCourses, dbEbooks, dbMaterials]);
+
+  const getResourceIcon = (resourceType: string, materialType?: string) => {
+    if (resourceType === 'course') return <GraduationCap className="h-5 w-5" />;
+    if (resourceType === 'ebook') return <BookOpen className="h-5 w-5" />;
+    if (resourceType === 'material') {
+      switch (materialType) {
+        case 'video': return <ExternalLink className="h-5 w-5" />;
+        case 'pdf': return <FileText className="h-5 w-5" />;
+        default: return <FileText className="h-5 w-5" />;
+      }
+    }
+    return <FileText className="h-5 w-5" />;
+  };
+
+  const getResourceAction = (item: any) => {
+    if (item.resourceType === 'course') {
+      const hasUrl = item.url || item.course_url;
+      return (
+        <Button asChild variant="hero" size="sm">
+          {hasUrl ? (
+            // Check if it's an external URL or internal course
+            hasUrl.startsWith('http') ? (
+              <a href={hasUrl} target="_blank" rel="noopener noreferrer">
+                View Course
+                <ExternalLink className="h-4 w-4 ml-2" />
+              </a>
+            ) : (
+              <Link to={`/courses/${item.slug}`}>
+                View Course
+                <ExternalLink className="h-4 w-4 ml-2" />
+              </Link>
+            )
+          ) : (
+            <Link to={`/courses/${item.slug || 'coming-soon'}`}>
+              Preview Course
+              <ExternalLink className="h-4 w-4 ml-2" />
+            </Link>
+          )}
+        </Button>
+      );
+    }
+
+    if (item.resourceType === 'ebook') {
+      const downloadUrl = item.downloadUrl || item.download_url;
+      const isDownloading = downloadingId === downloadUrl;
+      const hasFile = downloadUrl && downloadUrl.trim() !== '';
+      
+      return (
+        <Button 
+          variant="hero" 
+          size="sm"
+          onClick={() => {
+            if (hasFile) {
+              handleDownload(downloadUrl, `${item.title}.pdf`);
+            } else {
+              // Fallback: show preview or coming soon page
+              toast({
+                title: "E-book Preview",
+                description: `${item.title} will be available for download soon. You can read the description for now.`,
+              });
+            }
+          }}
+          disabled={isDownloading}
+        >
+          {isDownloading ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Downloading...
+            </>
+          ) : hasFile ? (
+            <>
+              <Download className="h-4 w-4 mr-2" />
+              Download PDF
+            </>
+          ) : (
+            <>
+              <BookOpen className="h-4 w-4 mr-2" />
+              Preview E-book
+            </>
+          )}
+        </Button>
+      );
+    }
+
+    if (item.resourceType === 'material') {
+      const materialUrl = item.url || item.material_url;
+      const isDownloading = downloadingId === materialUrl;
+      const hasFile = materialUrl && materialUrl.trim() !== '';
+      
+      return (
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => {
+            if (hasFile) {
+              handleDownload(materialUrl, `${item.title}.${item.type === 'sheet' ? 'pdf' : 'file'}`);
+            } else {
+              // Fallback: show material info or coming soon message
+              toast({
+                title: "Material Preview",
+                description: `${item.title} will be available for download soon. Check back later!`,
+              });
+            }
+          }}
+          disabled={isDownloading}
+        >
+          {isDownloading ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Preparing...
+            </>
+          ) : hasFile ? (
+            <>
+              {item.type === 'sheet' || item.type === 'pdf' ? (
+                <Download className="h-4 w-4 mr-2" />
+              ) : (
+                <ExternalLink className="h-4 w-4 mr-2" />
+              )}
+              {item.type === 'sheet' || item.type === 'pdf' ? 'Download' : 'Open'}
+            </>
+          ) : (
+            <>
+              <FileText className="h-4 w-4 mr-2" />
+              Preview Material
+            </>
+          )}
+        </Button>
+      );
+    }
+  };
+
+  const totalCounts = {
+    all: (dbCourses.length > 0 ? dbCourses : content.resources.courses).length + 
+         (dbEbooks.length > 0 ? dbEbooks : content.resources.ebooks).length + 
+         (dbMaterials.length > 0 ? dbMaterials : content.resources.materials).length,
+    courses: (dbCourses.length > 0 ? dbCourses : content.resources.courses).length,
+    ebooks: (dbEbooks.length > 0 ? dbEbooks : content.resources.ebooks).length,
+    materials: (dbMaterials.length > 0 ? dbMaterials : content.resources.materials).length,
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 hero-image">
+          <img 
+            src="/src/assets/education-hero.jpg" 
+            alt="Learning resources and education materials"
+            className="w-full h-full object-cover"
+            
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-hero-premium grain-texture pointer-events-none" />
+        
+        <div className="container px-4 relative z-20 on-hero">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="fluid-h1 text-white mb-6">
+              <span className="text-primary-glow">Learning</span> Resources
+            </h1>
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              Access our comprehensive library of courses, e-books, and materials to accelerate your trading education
+            </p>
+            
+            {/* Quick Filters */}
+            <div className="flex flex-wrap justify-center gap-3 mb-8">
+              <Select value={levelFilter} onValueChange={setLevelFilter}>
+                <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                  <SelectValue placeholder="All Levels" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Levels</SelectItem>
+                  <SelectItem value="Beginner">Beginner</SelectItem>
+                  <SelectItem value="Intermediate">Intermediate</SelectItem>
+                  <SelectItem value="Advanced">Advanced</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <Select value={typeFilter} onValueChange={setTypeFilter}>
+                <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
+                  <SelectValue placeholder="All Types" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Types</SelectItem>
+                  <SelectItem value="course">Courses</SelectItem>
+                  <SelectItem value="ebook">E-books</SelectItem>
+                  <SelectItem value="pdf">PDFs</SelectItem>
+                  <SelectItem value="video">Videos</SelectItem>
+                  <SelectItem value="sheet">Cheat Sheets</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="relative max-w-md mx-auto">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/60" />
+              <Input
+                placeholder="Search resources..."
+                className="pl-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Content Section */}
+      <section className="py-20">
+        <div className="container px-4">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
+            <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto">
+              <TabsTrigger value="all" className="flex items-center gap-2">
+                <Filter className="h-4 w-4" />
+                All ({totalCounts.all})
+              </TabsTrigger>
+              <TabsTrigger value="courses" className="flex items-center gap-2">
+                <GraduationCap className="h-4 w-4" />
+                Courses ({totalCounts.courses})
+              </TabsTrigger>
+              <TabsTrigger value="ebooks" className="flex items-center gap-2">
+                <BookOpen className="h-4 w-4" />
+                E-books ({totalCounts.ebooks})
+              </TabsTrigger>
+              <TabsTrigger value="materials" className="flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Materials ({totalCounts.materials})
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value={activeTab} className="space-y-8">
+              {filteredResources.length === 0 ? (
+                <div className="text-center py-12">
+                  <p className="text-lg text-muted-foreground mb-4">
+                    No resources found matching your criteria.
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      setSearchTerm('');
+                      setLevelFilter('all');
+                      setTypeFilter('all');
+                    }}
+                  >
+                    Clear Filters
+                  </Button>
+                </div>
+              ) : (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredResources.map((item) => (
+                    <Card key={`${item.resourceType}-${String((item as any).id ?? (item as any).slug ?? (item as any).title)}`} className="group hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        {(item.coverImageUrl || item.cover_image_url || item.coverImage) && (
+                          <div className="aspect-video rounded-lg overflow-hidden mb-4">
+                            <img 
+                              src={item.coverImageUrl || item.cover_image_url || item.coverImage} 
+                              alt={item.title}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                              onError={(e) => {
+                                e.currentTarget.style.display = 'none';
+                              }}
+                            />
+                          </div>
+                        )}
+                        
+                        <div className="flex items-start justify-between gap-2">
+                          <CardTitle className="flex items-center gap-2 text-lg">
+                            {getResourceIcon(item.resourceType, 'type' in item ? (item as any).type : undefined)}
+                            {item.title}
+                          </CardTitle>
+                          <Badge variant="outline" className="shrink-0 capitalize">
+                            {item.resourceType}
+                          </Badge>
+                        </div>
+                        
+                        <CardDescription className="line-clamp-2">
+                          {item.description}
+                        </CardDescription>
+                      </CardHeader>
+                      
+                      <CardContent className="space-y-4">
+                        {/* Metadata */}
+                        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+                          {'level' in item && (
+                            <Badge variant="secondary">{(item as any).level}</Badge>
+                          )}
+                          {'author' in item && (
+                            <span>By {(item as any).author}</span>
+                          )}
+                          {'pages' in item && (item as any).pages && (
+                            <span>{(item as any).pages} pages</span>
+                          )}
+                          {'topic' in item && (
+                            <Badge variant="secondary">{(item as any).topic}</Badge>
+                          )}
+                        </div>
+                        
+                        {/* Tags */}
+                        {item.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-1">
+                             {item.tags.slice(0, 3).map((tag) => (
+                               <Badge key={tag} variant="outline" className="text-xs">
+                                 {tag}
+                               </Badge>
+                             ))}
+                             {item.tags.length > 3 && (
+                               <span className="text-xs text-muted-foreground">
+                                 +{item.tags.length - 3} more
+                               </span>
+                             )}
+                             
+                             {/* Status indicators */}
+                             {(() => {
+                               const itemUrl = item.url || item.course_url || item.download_url || item.downloadUrl || item.material_url;
+                               if (!itemUrl && item.resourceType !== 'course') {
+                                 return (
+                                   <Badge variant="secondary" className="text-xs">
+                                     Preview Available
+                                   </Badge>
+                                 );
+                               }
+                               return null;
+                             })()}
+                          </div>
+                        )}
+                        
+                        {/* Action */}
+                        <div className="pt-2">
+                          {getResourceAction(item)}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
+        </div>
+      </section>
+
+      <SectionDivider variant="angled" className="text-background" />
+      <FinalCTASection />
+      <Footer />
+    </div>
+  );
+}
