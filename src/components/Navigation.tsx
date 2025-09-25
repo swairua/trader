@@ -67,7 +67,7 @@ export function Navigation() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="flex items-center space-x-2 md:hidden">
+        <div className="flex items-center space-x-2 lg:hidden">
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
