@@ -124,7 +124,7 @@ const LP_DriveEducation = () => {
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  The <span className="text-blue-400">DRIVE</span> Framework
+                  The <span className="text-primary">DRIVE</span> Framework
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                   A systematic 5-step approach that removes emotion and builds consistency in your trading decisions.
