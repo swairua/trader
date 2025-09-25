@@ -20,10 +20,14 @@ export function Footer() {
       <div className="relative bg-gradient-to-b from-background to-muted/30 border-t border-border/30">
         <div className="absolute inset-0 bg-gradient-hero-premium grain-texture pointer-events-none" />
         <div className="container mx-auto px-4 py-16 relative z-10">
+          {/* Full-width brand banner */}
+          <Link to="/" aria-label="Home" className="block mb-10">
+            <BrandLogo className="w-full h-auto max-h-28 sm:max-h-32 md:max-h-36" />
+          </Link>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 gap-8">
             {/* Brand + Socials */}
             <div className="space-y-4 lg:col-span-2">
-              <div className="flex items-center space-x-3">
+              <div className="hidden items-center space-x-3">
                 <Link to="/" aria-label="Home">
                   <BrandLogo size="sm" />
                 </Link>
