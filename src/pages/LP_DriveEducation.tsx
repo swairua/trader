@@ -83,7 +83,7 @@ const LP_DriveEducation = () => {
                 Education-First Approach
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                Master the <span className="text-blue-300">DRIVE</span> Trading Framework
+                Master the <span className="text-primary">DRIVE</span> Trading Framework
               </h1>
               <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
                 Learn our proven 5-step systematic approach to forex trading. Education-focused program 
