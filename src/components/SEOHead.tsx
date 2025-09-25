@@ -32,7 +32,8 @@ export function SEOHead({
   ogImageHeight = 630,
   twitterImage,
   schema,
-  lcpImage
+  lcpImage,
+  lcpPreloads
 }: SEOHeadProps) {
   // Use site settings for defaults if available
   const { settings } = useSiteSettingsFixed();
