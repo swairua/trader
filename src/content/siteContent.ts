@@ -298,10 +298,9 @@ export const defaultContent: SiteContent = {
     disclaimer: "",
     trustStrip: "Proven methodology | Real education | No false promises",
     trustIndicators: [
-      { value: "500+", label: "Students Educated" },
-      { value: "3+", label: "Years Experience" },
-      { value: "100+", label: "Education Hours" },
-      { value: "0", label: "Get Rich Quick Promises" }
+      { value: "98%", label: "Success Rate" },
+      { value: "10K+", label: "Active Traders" },
+      { value: "5+", label: "Years Experience" }
     ]
   },
   services: {
