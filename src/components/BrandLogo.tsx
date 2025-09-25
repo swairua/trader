@@ -5,29 +5,25 @@ interface BrandLogoProps {
   size?: "sm" | "md" | "lg";
 }
 
+const LOGO_URL =
+  "https://cdn.builder.io/api/v1/image/assets%2F851ef20a44bf452c9745cb39ca720956%2Fd72842c5e54a40f1a3d828c496c0d47f?format=webp&width=800";
+
 export function BrandLogo({ className, size = "md" }: BrandLogoProps) {
   const sizeClasses = {
-    sm: "text-lg",
-    md: "text-xl",
-    lg: "text-2xl",
+    sm: "h-8",
+    md: "h-10",
+    lg: "h-12",
   }[size];
 
   return (
-    <span
-      className={cn(
-        "inline-flex items-baseline font-extrabold tracking-tight select-none leading-none",
-        sizeClasses,
-        className
-      )}
+    <img
+      src={LOGO_URL}
+      alt="KenneDyne spot logo"
+      className={cn("block w-auto object-contain", sizeClasses, className)}
       aria-label="KenneDyne spot"
-    >
-      <span className="text-[#0a0a0a]">Kenne</span>
-      <span className="text-primary">Dyne</span>
-      <span className="ml-1 lowercase text-xs text-[#0a0a0a] align-baseline">
-        spot
-        <sup className="ml-0.5 text-[#0a0a0a] leading-none">•</sup>
-      </span>
-    </span>
+      loading="lazy"
+      decoding="async"
+    />
   );
 }
 
