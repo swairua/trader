@@ -6,7 +6,7 @@ interface BrandLogoProps {
 }
 
 const LOGO_URL =
-  "https://cdn.builder.io/api/v1/image/assets%2F851ef20a44bf452c9745cb39ca720956%2Fd72842c5e54a40f1a3d828c496c0d47f?format=webp&width=800";
+  "https://cdn.builder.io/api/v1/image/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2F94f709052d8549bf805dfd59e4d106df?format=webp&width=1200";
 
 export function BrandLogo({ className, size = "md" }: BrandLogoProps) {
   const sizeClasses = {
