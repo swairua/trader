@@ -70,11 +70,12 @@ export function Navigation() {
                 >
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="px-3 py-2 min-h-[44px] font-medium hover:text-purple-600">
-                      More <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${moreOpen ? 'rotate-180' : 'rotate-0'}`} />
+                      More <ChevronDown className={`ml-1 h-5 w-5 transition-transform ${moreOpen ? 'rotate-180 scale-x-125' : 'rotate-0 scale-x-110'}`} />
                     </Button>
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent
+                    className="min-w-[14rem]"
                     align="start"
                     onMouseEnter={() => {
                       if (hoverTimeoutRef.current) {
