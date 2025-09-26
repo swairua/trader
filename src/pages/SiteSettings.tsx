@@ -281,6 +281,23 @@ const SiteSettings = () => {
         });
       }
 
+      if (section === 'payments') {
+        // Save mpesa credentials to site_settings
+        const { error } = await supabase
+          .from('site_settings')
+          .upsert({
+            id: '00000000-0000-0000-0000-000000000000',
+            mpesa_consumer_key: data.mpesaConsumerKey,
+            mpesa_consumer_secret: data.mpesaConsumerSecret,
+            mpesa_short_code: data.mpesaShortCode,
+            mpesa_passkey: data.mpesaPasskey,
+            mpesa_callback_url: data.mpesaCallbackUrl,
+            updated_at: new Date().toISOString()
+          });
+
+        if (error) throw error;
+      }
+
       // Also save to localStorage as backup
       localStorage.setItem(`siteSettings_${section}`, JSON.stringify(data));
       
