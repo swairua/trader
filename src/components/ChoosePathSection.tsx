@@ -65,7 +65,7 @@ export function ChoosePathSection() {
                       </li>
                     ))}
                   </ul>
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" size="lg" className="w-full min-h-[44px]" aria-label={`${path.cta} - ${path.title}`}>
                     {path.cta}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
