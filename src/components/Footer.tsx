@@ -131,7 +131,7 @@ export function Footer() {
             {(footer.sections || []).slice(0, 2).map((section, index) => (
               <nav key={index} aria-label={section?.title || `section-${index}`} className={`space-y-4 ${index === 1 ? 'hidden xl:block' : ''}`}>
                 <h3 className="text-base font-semibold text-foreground">{section?.title}</h3>
-                <ul className="space-y-3">
+                <ul className="space-y-3 list-none pl-0">
                   {(section?.links || []).map((link, linkIndex) => (
                     <li key={linkIndex}>
                       <Link
