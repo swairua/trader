@@ -26,9 +26,10 @@ const learningPaths = [
     duration: "4-6 weeks",
     modules: 8,
     price: "Free",
+    priceValue: 0,
     features: [
       "Market structure basics",
-      "Risk management principles", 
+      "Risk management principles",
       "Trading psychology fundamentals",
       "Platform navigation",
       "Economic calendar usage"
@@ -37,12 +38,13 @@ const learningPaths = [
     color: "bg-green-500"
   },
   {
-    level: "Intermediate", 
+    level: "Intermediate",
     title: "DRIVE Methodology",
     description: "Learn our proprietary DRIVE system for systematic trading approach.",
     duration: "6-8 weeks",
     modules: 12,
-    price: "KES 15,000",
+    price: "KES 199",
+    priceValue: 199,
     features: [
       "DRIVE system deep dive",
       "Advanced chart analysis",
@@ -55,11 +57,12 @@ const learningPaths = [
   },
   {
     level: "Advanced",
-    title: "Institutional Strategies", 
+    title: "Institutional Strategies",
     description: "Advanced concepts used by institutional traders and fund managers.",
     duration: "8-10 weeks",
     modules: 16,
-    price: "KES 25,000",
+    price: "KES 299",
+    priceValue: 299,
     features: [
       "Market maker behavior",
       "Liquidity analysis",
