@@ -308,6 +308,7 @@ const SiteSettings = () => {
           <TabsTrigger value="seo">SEO</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="features">Features</TabsTrigger>
+        <TabsTrigger value="payments">Payments</TabsTrigger>
         </TabsList>
 
         <TabsContent value="general">
