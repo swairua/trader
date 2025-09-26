@@ -117,6 +117,15 @@ const SiteSettings = () => {
             address: siteContent.pages.contact.address,
             whatsapp: siteSettings.whatsapp_number || siteContent.pages.contact.whatsapp,
           });
+
+          // Load payments/mpesa credentials if present
+          setPayments({
+            mpesaConsumerKey: siteSettings.mpesa_consumer_key || '',
+            mpesaConsumerSecret: siteSettings.mpesa_consumer_secret || '',
+            mpesaShortCode: siteSettings.mpesa_short_code || '',
+            mpesaPasskey: siteSettings.mpesa_passkey || '',
+            mpesaCallbackUrl: siteSettings.mpesa_callback_url || ''
+          });
         }
 
         // Set site info from siteContent
