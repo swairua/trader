@@ -270,6 +270,26 @@ export default function Learn() {
             </div>
           </div>
         </section>
+        {/* Payment Modal */}
+        {showPaymentModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+            <div className="bg-card p-6 rounded-lg w-full max-w-md">
+              <h3 className="text-lg font-semibold mb-4">Pay for {paymentCourse}</h3>
+              <div className="space-y-3">
+                <label className="block text-sm font-medium">Phone number</label>
+                <input type="tel" value={paymentPhone} onChange={(e) => setPaymentPhone(e.target.value)} placeholder="07XXXXXXXX or +2547XXXXXXX" className="w-full p-3 rounded-md bg-background border border-border" />
+                <div className="flex items-center justify-between">
+                  <div className="text-sm">Amount</div>
+                  <div className="font-semibold">KES {paymentAmount}</div>
+                </div>
+                <div className="flex gap-3">
+                  <Button variant="outline" className="flex-1" onClick={() => setShowPaymentModal(false)}>Cancel</Button>
+                  <Button variant="hero" className="flex-1" onClick={initiatePayment} disabled={isPaying}>{isPaying ? 'Processing...' : 'Pay via M-Pesa'}</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
 
       <Footer />
