@@ -86,7 +86,7 @@ export function HeroSection() {
             <Button
               size="lg"
               variant="hero"
-              className="min-w-[220px] group"
+              className="min-w-[140px] sm:min-w-[200px] md:min-w-[220px] px-4 sm:px-6 md:px-8 group"
               onClick={() => trackEvent('hero_cta_start_learning')}
               asChild
             >
