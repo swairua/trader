@@ -71,20 +71,24 @@ export function Footer() {
             <address className="not-italic space-y-4">
               <h3 className="text-base font-semibold text-foreground">Contact</h3>
               <div className="space-y-3 text-sm">
-                <a 
-                  href={`mailto:${footer.email}`}
-                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200"
-                >
-                  <Mail className="h-4 w-4" />
-                  {footer.email}
-                </a>
-                <a 
-                  href={`tel:${footer.phone.replace(/[^0-9+]/g, '')}`}
-                  className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200"
-                >
-                  <Phone className="h-4 w-4" />
-                  {footer.phone}
-                </a>
+                {footer.email && (
+                  <a
+                    href={`mailto:${footer.email}`}
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200"
+                  >
+                    <Mail className="h-4 w-4" />
+                    {footer.email}
+                  </a>
+                )}
+                {footer.phone && (
+                  <a
+                    href={`tel:${footer.phone.replace(/[^0-9+]/g, '')}`}
+                    className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200"
+                  >
+                    <Phone className="h-4 w-4" />
+                    {footer.phone}
+                  </a>
+                )}
                 <a 
                   {...getExternalLinkProps(createWhatsAppLink(DEFAULT_WHATSAPP_PHONE, WHATSAPP_MESSAGES.support))}
                   className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200"
