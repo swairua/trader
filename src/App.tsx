@@ -123,13 +123,13 @@ function App() {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <GTMProvider gtmId={settings?.gtm_id || undefined}>
-          <ThemeProvider 
-            attribute="class" 
-            defaultTheme="light" 
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
             enableSystem={false}
             disableTransitionOnChange
             storageKey="vite-ui-theme"
-            themes={["light", "dark"]}
+            themes={["dark", "light"]}
           >
             <TooltipProvider>
               <AuthProvider>
