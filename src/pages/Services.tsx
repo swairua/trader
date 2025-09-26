@@ -164,7 +164,7 @@ export function Services() {
                         <p className="text-sm font-medium text-primary mb-3 flex items-center">
                           ✨ What You'll Get:
                         </p>
-                        <ul className="space-y-3">
+                        <ul className="space-y-3 list-none pl-0">
                           {service.features.map((feature, featureIndex) => (
                             <li key={featureIndex} className="flex items-start gap-2 text-sm text-muted-foreground">
                               <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
