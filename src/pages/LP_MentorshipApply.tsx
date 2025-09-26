@@ -158,7 +158,7 @@ const LP_MentorshipApply = () => {
       />
       
       {/* Minimal Navigation */}
-      <header className="fixed top-0 w-full bg-background/95 dark:bg-white/5 backdrop-blur-sm border-b z-40">
+      <header className="fixed top-0 w-full bg-background/95 dark:bg-white/20 backdrop-blur-sm border-b z-40">
         <div className="container px-4">
           <div className="flex items-center justify-between h-16">
             <div className="font-bold text-xl text-primary">KenneDyne spot</div>
