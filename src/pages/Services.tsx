@@ -336,14 +336,14 @@ export function Services() {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 font-semibold px-8">
-                <Link to="/mentorship" className="flex items-center gap-2">
+              <Button asChild variant="hero" size="lg" className="min-w-[220px] px-8" aria-label="Start your trading journey">
+                <Link to="/mentorship" className="flex items-center gap-2" aria-label="Start your trading journey link">
                   <MessageCircle className="h-4 w-4" />
                   Start Your Trading Journey
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8">
-                <Link to="/services/learn">
+              <Button asChild variant="outline" size="lg" className="min-w-[220px] px-8" aria-label="Explore learning resources">
+                <Link to="/services/learn" aria-label="Explore learning resources link">
                   Explore Learning Resources
                 </Link>
               </Button>
