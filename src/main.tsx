@@ -16,13 +16,10 @@ if (typeof window !== 'undefined') {
     try {
       const message = (evt && (evt as any).message) || '';
       if (typeof message === 'string' && message.includes('Failed to fetch')) {
-        // Prevent the error from being treated as uncaught to avoid noisy logs
         evt.preventDefault();
         return;
       }
-    } catch (e) {
-      // swallow
-    }
+    } catch (e) {}
   });
 
   window.addEventListener('unhandledrejection', (evt: PromiseRejectionEvent) => {
@@ -33,10 +30,30 @@ if (typeof window !== 'undefined') {
         evt.preventDefault();
         return;
       }
-    } catch (e) {
-      // swallow
-    }
+    } catch (e) {}
   });
+
+  // Intercept noisy third-party fetch failures and stabilize Vite HMR ping in dev
+  const originalFetch = window.fetch.bind(window);
+  window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+    const urlStr = typeof input === 'string' ? input : (input as URL).toString();
+    // Short-circuit Vite ping in dev to avoid cross-origin failures
+    if (import.meta.env.DEV && urlStr.includes('/__vite_ping')) {
+      return new Response('pong', { status: 200, headers: { 'Content-Type': 'text/plain' } });
+    }
+    try {
+      return await originalFetch(input as any, init);
+    } catch (err: any) {
+      const msg = err?.message || '';
+      // Silence fetch noise from analytics SDKs (e.g., FullStory) without breaking app flow
+      if (typeof msg === 'string' && msg.includes('Failed to fetch')) {
+        if (/edge\.fullstory\.com|\/s\/fs\.js/.test(urlStr)) {
+          return new Response('', { status: 204 });
+        }
+      }
+      throw err;
+    }
+  };
 }
 
 // Initialize performance optimizations
