@@ -135,6 +135,9 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         <div className="flex items-center space-x-2 lg:hidden">
+          <Button variant="outline" size="icon" onClick={toggleLanguage} aria-label="Switch language" className="text-sm font-medium">
+            {language.toUpperCase()}
+          </Button>
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
