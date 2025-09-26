@@ -173,9 +173,9 @@ export function Footer() {
               
               <div className="flex flex-wrap gap-6 justify-center md:justify-end items-center">
                 <nav aria-label="Legal" className="flex flex-wrap gap-6">
-                  {footer.legalLinks.map((link, index) => (
-                    link.href.startsWith("http") ? (
-                      <a 
+                  {(footer.legalLinks || []).map((link, index) => (
+                    link.href && link.href.startsWith("http") ? (
+                      <a
                         key={index}
                         href={link.href}
                         target="_blank"
@@ -185,9 +185,9 @@ export function Footer() {
                         {link.name}
                       </a>
                     ) : (
-                      <Link 
+                      <Link
                         key={index}
-                        to={link.href}
+                        to={link.href || '#'}
                         className="text-sm text-muted-foreground hover:text-primary transition-colors"
                       >
                         {link.name}
