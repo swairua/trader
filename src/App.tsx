@@ -50,6 +50,7 @@ const AffiliateDisclosure = lazy(() => import("./pages/AffiliateDisclosure"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const AdminImport = lazy(() => import("./pages/AdminImport"));
 const AdminLeadsEnhanced = lazy(() => import("./pages/AdminLeadsEnhanced"));
+const AdminPayments = lazy(() => import("./pages/AdminPayments"));
 const Resources = lazy(() => import("./pages/ResourcesWithSEO"));
 const CourseDetail = lazy(() => import("./pages/CourseDetail"));
 const LibraryAdminEnhanced = lazy(() => import("./pages/LibraryAdminEnhanced"));
@@ -190,6 +191,7 @@ function App() {
                               <AdminImport />
                             </RequireRoles>
                           } />
+                          <Route path="payments" element={<AdminPayments />} />
                         </Route>
                         <Route path="/auth" element={<Auth />} />
                         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
