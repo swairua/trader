@@ -76,12 +76,52 @@ const learningPaths = [
 ];
 
 export default function Learn() {
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentPhone, setPaymentPhone] = useState('');
+  const [paymentAmount, setPaymentAmount] = useState(0);
+  const [paymentCourse, setPaymentCourse] = useState('');
+  const [isPaying, setIsPaying] = useState(false);
+  const { toast } = useToast();
+
+  const openPayment = (amount: number, course: string) => {
+    setPaymentAmount(amount);
+    setPaymentCourse(course);
+    setShowPaymentModal(true);
+  };
+
+  const initiatePayment = async () => {
+    if (!paymentPhone || !paymentAmount) {
+      toast({ title: 'Invalid input', description: 'Please enter phone and confirm amount', variant: 'destructive' });
+      return;
+    }
+    setIsPaying(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('initiate_mpesa_stk_push', {
+        body: JSON.stringify({ amount: paymentAmount, phone: paymentPhone, accountReference: paymentCourse, description: `Payment for ${paymentCourse}` })
+      });
+
+      if (error) throw error;
+      const resp = data as any;
+      if (resp?.success) {
+        toast({ title: 'STK Push Sent', description: 'Please complete the payment on your phone.' });
+        setShowPaymentModal(false);
+        setPaymentPhone('');
+      } else {
+        toast({ title: 'Payment failed', description: JSON.stringify(resp?.error || resp), variant: 'destructive' });
+      }
+    } catch (err: any) {
+      console.error('Payment error', err);
+      toast({ title: 'Payment error', description: err?.message || String(err), variant: 'destructive' });
+    } finally {
+      setIsPaying(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      
+
       <main>
-        {/* Hero Section */}
         <section className="relative py-20 bg-gradient-subtle overflow-hidden">
           <div className="absolute inset-0 hero-image">
             <img 
