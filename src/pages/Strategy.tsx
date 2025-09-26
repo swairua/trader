@@ -303,7 +303,7 @@ const Strategy = () => {
                         <p className="text-sm text-muted-foreground text-center mb-4">
                           {step.description}
                         </p>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 list-none pl-0">
                           {step.details.map((detail, detailIndex) => (
                             <li key={detailIndex} className="flex items-start text-xs text-muted-foreground">
                               <CheckCircle className="h-3 w-3 text-primary mr-2 mt-0.5 flex-shrink-0" />
@@ -338,7 +338,7 @@ const Strategy = () => {
                     <p className="text-sm text-muted-foreground mb-4">
                       {step.description}
                     </p>
-                    <ul className="space-y-2">
+                    <ul className="space-y-2 list-none pl-0">
                       {step.details.map((detail, detailIndex) => (
                         <li key={detailIndex} className="flex items-start text-sm text-muted-foreground">
                           <CheckCircle className="h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
