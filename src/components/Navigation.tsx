@@ -34,7 +34,7 @@ export function Navigation() {
     <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/90 dark:bg-black/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 lg:h-28 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
-          <BrandLogo size="lg" />
+          <BrandLogo size="md" className="h-12 lg:h-28" />
         </Link>
 
         {/* Desktop Navigation */}
