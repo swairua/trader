@@ -15,6 +15,8 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const { content } = useSiteContent();
   const location = useLocation();
+  const { language, setLanguage } = useI18n();
+  const toggleLanguage = () => setLanguage(language === 'en' ? 'fr' : 'en');
 
   const isActive = (path: string) => location.pathname === path;
 
