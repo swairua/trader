@@ -174,18 +174,20 @@ export function Services() {
                         </ul>
                       </div>
                       
-                      <Button 
-                        asChild 
-                        className="w-full hover-scale transition-transform duration-300"
-                        variant="default"
+                      <Button
+                      asChild
+                      variant={index === 1 ? 'hero' : 'outline'}
+                      size="lg"
+                      className="w-full transition-transform duration-300"
+                    >
+                      <Link
+                        to={service.ctaLink}
+                        aria-label={`${service.ctaText} - ${service.title}`}
+                        className="flex items-center justify-center gap-2"
                       >
-                        <Link 
-                          to={service.ctaLink}
-                          aria-label={`${service.ctaText} - ${service.title}`}
-                        >
-                          {service.ctaText}
-                        </Link>
-                      </Button>
+                        {service.ctaText}
+                      </Link>
+                    </Button>
                     </CardContent>
                   </Card>
                 );
