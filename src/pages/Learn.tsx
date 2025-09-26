@@ -99,7 +99,7 @@ export default function Learn() {
     setIsPaying(true);
     try {
       const { data, error } = await supabase.functions.invoke('initiate_mpesa_stk_push', {
-        body: JSON.stringify({ amount: paymentAmount, phone: paymentPhone, accountReference: paymentCourse, description: `Payment for ${paymentCourse}` })
+        body: { amount: paymentAmount, phone: paymentPhone, accountReference: paymentCourse, description: `Payment for ${paymentCourse}` }
       });
 
       if (error) throw error;
