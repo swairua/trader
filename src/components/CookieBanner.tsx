@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useI18n } from '@/i18n';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
@@ -8,6 +9,7 @@ import { useConsent, type ConsentState } from '@/hooks/useConsent';
 
 export function CookieBanner() {
   const { showBanner, consent, acceptAll, rejectAll, saveConsent, hideBanner } = useConsent();
+  const { t } = useI18n();
   const [showSettings, setShowSettings] = useState(false);
   const [tempConsent, setTempConsent] = useState<ConsentState>({
     analytics: false,
@@ -38,10 +40,9 @@ export function CookieBanner() {
           <Card className="p-6 border border-border">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div className="flex-1">
-                <h3 className="font-semibold text-foreground mb-2">Cookie Preferences</h3>
+                <h3 className="font-semibold text-foreground mb-2">{t('cookie_preferences')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  We use cookies to enhance your experience, analyze site traffic, and for marketing purposes. 
-                  You can customize your preferences or accept all cookies.
+                  {t('cookie_message')}
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 min-w-fit">
@@ -52,21 +53,21 @@ export function CookieBanner() {
                   className="gap-2"
                 >
                   <Settings className="h-4 w-4" />
-                  Customize
+                  {t('customize')}
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={rejectAll}
                 >
-                  Reject All
+                  {t('reject_all')}
                 </Button>
                 <Button
                   variant="default"
                   size="sm"
                   onClick={acceptAll}
                 >
-                  Accept All
+                  {t('accept_all')}
                 </Button>
               </div>
             </div>
@@ -74,7 +75,7 @@ export function CookieBanner() {
         ) : (
           <Card className="p-6 border border-border">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-foreground">Cookie Settings</h3>
+              <h3 className="text-lg font-semibold text-foreground">{t('cookie_settings')}</h3>
               <Button
                 variant="ghost"
                 size="sm"
@@ -87,9 +88,9 @@ export function CookieBanner() {
             <div className="space-y-6 mb-6">
               <div className="flex items-center justify-between">
                 <div className="flex-1">
-                  <Label className="font-medium">Necessary Cookies</Label>
+                  <Label className="font-medium">{t('necessary_cookies')}</Label>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Required for basic site functionality. Cannot be disabled.
+                    {t('necessary_cookies_desc')}
                   </p>
                 </div>
                 <Switch checked={true} disabled />
@@ -97,9 +98,9 @@ export function CookieBanner() {
               
               <div className="flex items-center justify-between">
                 <div className="flex-1">
-                  <Label className="font-medium">Analytics Cookies</Label>
+                  <Label className="font-medium">{t('analytics_cookies')}</Label>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Help us understand how visitors interact with our website.
+                    {t('analytics_cookies_desc')}
                   </p>
                 </div>
                 <Switch
@@ -110,9 +111,9 @@ export function CookieBanner() {
               
               <div className="flex items-center justify-between">
                 <div className="flex-1">
-                  <Label className="font-medium">Marketing Cookies</Label>
+                  <Label className="font-medium">{t('marketing_cookies')}</Label>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Used to track visitors across websites for advertising purposes.
+                    {t('marketing_cookies_desc')}
                   </p>
                 </div>
                 <Switch
@@ -123,9 +124,9 @@ export function CookieBanner() {
               
               <div className="flex items-center justify-between">
                 <div className="flex-1">
-                  <Label className="font-medium">Functional Cookies</Label>
+                  <Label className="font-medium">{t('functional_cookies')}</Label>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Enable enhanced functionality like live chat and personalization.
+                    {t('functional_cookies_desc')}
                   </p>
                 </div>
                 <Switch
@@ -150,7 +151,7 @@ export function CookieBanner() {
                 }}
                 className="flex-1"
               >
-                Reject All
+                {t('reject_all')}
               </Button>
               <Button
                 variant="default"
@@ -158,7 +159,7 @@ export function CookieBanner() {
                 onClick={handleSaveSettings}
                 className="flex-1"
               >
-                Save Preferences
+                {t('save_preferences')}
               </Button>
             </div>
           </Card>
