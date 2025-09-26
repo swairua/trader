@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Save, Globe, Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
