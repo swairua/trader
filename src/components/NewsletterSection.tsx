@@ -53,7 +53,7 @@ export function NewsletterSection() {
                   Setups, mistakes we're learning from, and checklists delivered to your inbox every Sunday
                 </p>
                 
-                <ul className="space-y-4">
+                <ul className="space-y-4 list-none pl-0">
                   {benefits.map((benefit, index) => (
                     <li key={index} className="flex items-start">
                       <CheckCircle className="h-5 w-5 text-primary mr-3 mt-1 flex-shrink-0" />
