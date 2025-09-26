@@ -116,7 +116,7 @@ export function Footer() {
             {/* Services */}
             <nav aria-label="Services" className="space-y-4">
               <h3 className="text-base font-semibold text-foreground">Services</h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3 list-none pl-0">
                 {(footer.services?.items || []).map((service, index) => (
                   <li key={index}>
                     <span className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer hover:translate-x-px transform duration-200">
