@@ -58,7 +58,7 @@ export function ChoosePathSection() {
                   <p className="text-muted-foreground mb-6">
                     {path.description}
                   </p>
-                  <ul className="space-y-2 mb-8">
+                  <ul className="space-y-2 mb-8 list-none pl-0">
                     {path.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="text-sm text-muted-foreground">
                         • {feature}
