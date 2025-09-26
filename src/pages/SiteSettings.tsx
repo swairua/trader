@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Save, Globe, Mail, Phone, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -620,6 +619,27 @@ const SiteSettings = () => {
                 <div>
                   <Label htmlFor="mpesaCallbackUrl">Callback URL</Label>
                   <Input id="mpesaCallbackUrl" value={payments.mpesaCallbackUrl} onChange={(e) => setPayments(prev => ({ ...prev, mpesaCallbackUrl: e.target.value }))} placeholder="https://your-domain.com/mpesa/callback" />
+                  <div className="mt-2 flex items-center gap-3 text-sm text-muted-foreground">
+                    <span>
+                      Recommended (Supabase): https://{project-ref}.functions.supabase.co/mpesa_callback
+                    </span>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => {
+                        try {
+                          const restUrl = (supabase as any)?.rest?.url as string | undefined;
+                          if (!restUrl) return;
+                          const host = new URL(restUrl).hostname; // e.g. dbtyzloscmhaskjlbyvl.supabase.co
+                          const projectRef = host.split('.')[0];
+                          const url = `https://${projectRef}.functions.supabase.co/mpesa_callback`;
+                          setPayments(prev => ({ ...prev, mpesaCallbackUrl: url }));
+                        } catch {}
+                      }}
+                    >
+                      Use Supabase Callback URL
+                    </Button>
+                  </div>
                 </div>
               </div>
 
