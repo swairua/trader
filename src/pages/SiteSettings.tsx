@@ -72,6 +72,15 @@ const SiteSettings = () => {
     cookieConsent: true,
   });
 
+  // Payments (M-Pesa) settings
+  const [payments, setPayments] = useState({
+    mpesaConsumerKey: '',
+    mpesaConsumerSecret: '',
+    mpesaShortCode: '',
+    mpesaPasskey: '',
+    mpesaCallbackUrl: ''
+  });
+
   // Load settings from database and siteContent
   useEffect(() => {
     const loadSettings = async () => {
