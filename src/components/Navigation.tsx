@@ -31,7 +31,7 @@ export function Navigation() {
   const nestedIcons = [Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText];
 
   return (
-    <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
+    <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/90 dark:bg-black/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 lg:h-28 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
           <BrandLogo size="lg" />
@@ -46,7 +46,7 @@ export function Navigation() {
               className={`text-sm font-medium transition-all duration-300 hover:text-primary relative tracking-wide px-3 py-2 min-h-[44px] flex items-center ${
                 isActive(item.href)
                   ? "text-primary"
-                  : "text-[#0a0a0a]"
+                  : "text-foreground"
               }`}
               aria-current={isActive(item.href) ? "page" : undefined}
             >
@@ -110,14 +110,16 @@ export function Navigation() {
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center space-x-4">
-          <Button variant="outline" size="sm" onClick={toggleLanguage} aria-label="Switch language">
-            {language.toUpperCase()}
-          </Button>
-          <ThemeToggle />
+          <div className="flex items-center space-x-2">
+            <Button variant="outline" size="sm" onClick={toggleLanguage} aria-label="Switch language" className="min-w-[58px]">
+              {language.toUpperCase()}
+            </Button>
+            <ThemeToggle />
+          </div>
           <a
             {...getExternalLinkProps(LINKS.telegram.kenneDynespot)}
             aria-label="Open KenneDyne spot Telegram"
-            className="text-[#0a0a0a] hover:text-primary transition-colors p-2 rounded-md"
+            className="text-foreground hover:text-primary transition-colors p-2 rounded-md"
           >
             <Send className="h-5 w-5" />
           </a>
@@ -159,7 +161,7 @@ export function Navigation() {
                     className={`block text-base font-medium transition-colors hover:text-primary ${
                       isActive(item.href)
                         ? "text-primary"
-                        : "text-[#0a0a0a]"
+                        : "text-foreground"
               }`}
                   >
                     {item.name}
