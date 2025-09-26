@@ -165,7 +165,7 @@ export default function Learn() {
                       <span>{path.modules} modules</span>
                     </div>
 
-                    <ul className="space-y-3">
+                    <ul className="space-y-3 list-none pl-0">
                       {path.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-start">
                           <CheckCircle className="h-4 w-4 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
