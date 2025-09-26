@@ -110,6 +110,9 @@ export function Navigation() {
 
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center space-x-4">
+          <Button variant="outline" size="sm" onClick={toggleLanguage} aria-label="Switch language">
+            {language.toUpperCase()}
+          </Button>
           <ThemeToggle />
           <a
             {...getExternalLinkProps(LINKS.telegram.kenneDynespot)}
