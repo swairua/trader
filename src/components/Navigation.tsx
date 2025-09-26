@@ -143,22 +143,30 @@ export function Navigation() {
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="hover:bg-accent/50">
+              <Button variant="ghost" size="icon" className="hover:bg-accent/50" aria-expanded={isOpen} aria-controls="mobile-menu">
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-          <SheetContent side="right" className="w-80 glass-card border-l border-border/50">
-            <div className="flex flex-col space-y-8 mt-8">
-              <BrandLogo size="lg" />
+          <SheetContent side="right" id="mobile-menu" className="w-80 glass-card border-l border-border/50">
+            <div className="flex flex-col space-y-6 mt-6 px-4">
+              <div className="flex items-center justify-between">
+                <BrandLogo size="md" className="h-16" />
+                <div className="flex items-center space-x-2">
+                  <Button variant="outline" size="sm" onClick={toggleLanguage} aria-label="Switch language">
+                    {language.toUpperCase()}
+                  </Button>
+                  <ThemeToggle />
+                </div>
+              </div>
 
-              <div className="space-y-6">
+              <div className="space-y-4 mt-2">
                 {content.navigation.links.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
                     onClick={() => setIsOpen(false)}
-                    className={`block text-base font-medium transition-colors hover:text-primary ${
+                    className={`block text-base font-medium py-2 transition-colors hover:text-primary ${
                       isActive(item.href)
                         ? "text-primary"
                         : "text-foreground"
@@ -169,27 +177,34 @@ export function Navigation() {
                 ))}
               </div>
               
-              <div className="pt-6 space-y-4">
-                <Button 
-                  variant="outline" 
+              <div className="pt-4 space-y-4">
+                <Button
+                  variant="outline"
                   className="w-full"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => { setIsOpen(false); }}
                   asChild
                 >
                   <Link to={LINKS.internal.strategy}>
                     Learn DRIVE Strategy
                   </Link>
                 </Button>
-                <Button 
-                  variant="hero" 
+                <Button
+                  variant="hero"
                   className="w-full"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => { setIsOpen(false); }}
                   asChild
                 >
                    <a {...getExternalLinkProps(LINKS.exness.signup)}>
                      Start Trading
                    </a>
                 </Button>
+                <div className="pt-4 border-t border-border/40" />
+                <div className="flex items-center justify-between">
+                  <a {...getExternalLinkProps(LINKS.telegram.kenneDynespot)} className="text-foreground hover:text-primary">
+                    <Send className="h-5 w-5 inline-block mr-2" /> Telegram
+                  </a>
+                  <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>Close</Button>
+                </div>
               </div>
             </div>
           </SheetContent>
