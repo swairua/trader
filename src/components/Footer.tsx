@@ -124,13 +124,13 @@ export function Footer() {
             </nav>
 
             {/* Section Groups (Education, Support) */}
-            {footer.sections.slice(0, 2).map((section, index) => (
-              <nav key={index} aria-label={section.title} className={`space-y-4 ${index === 1 ? 'hidden xl:block' : ''}`}>
-                <h3 className="text-base font-semibold text-foreground">{section.title}</h3>
+            {(footer.sections || []).slice(0, 2).map((section, index) => (
+              <nav key={index} aria-label={section?.title || `section-${index}`} className={`space-y-4 ${index === 1 ? 'hidden xl:block' : ''}`}>
+                <h3 className="text-base font-semibold text-foreground">{section?.title}</h3>
                 <ul className="space-y-3">
-                  {section.links.map((link, linkIndex) => (
+                  {(section?.links || []).map((link, linkIndex) => (
                     <li key={linkIndex}>
-                      <Link 
+                      <Link
                         to={link.href}
                         className="text-sm text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200"
                       >
