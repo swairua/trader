@@ -589,6 +589,47 @@ const SiteSettings = () => {
           </Card>
         </TabsContent>
 
+        {/* Payments tab */}
+        <TabsContent value="payments">
+          <Card>
+            <CardHeader>
+              <CardTitle>Payments (M-Pesa)</CardTitle>
+              <CardDescription>
+                Configure M-Pesa STK Push credentials (Business Short Code, Consumer Key/Secret, Passkey)
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-1 gap-4">
+                <div>
+                  <Label htmlFor="mpesaConsumerKey">M-Pesa Consumer Key</Label>
+                  <Input id="mpesaConsumerKey" value={payments.mpesaConsumerKey} onChange={(e) => setPayments(prev => ({ ...prev, mpesaConsumerKey: e.target.value }))} />
+                </div>
+                <div>
+                  <Label htmlFor="mpesaConsumerSecret">M-Pesa Consumer Secret</Label>
+                  <Input id="mpesaConsumerSecret" value={payments.mpesaConsumerSecret} onChange={(e) => setPayments(prev => ({ ...prev, mpesaConsumerSecret: e.target.value }))} />
+                </div>
+                <div>
+                  <Label htmlFor="mpesaShortCode">Business Short Code</Label>
+                  <Input id="mpesaShortCode" value={payments.mpesaShortCode} onChange={(e) => setPayments(prev => ({ ...prev, mpesaShortCode: e.target.value }))} />
+                </div>
+                <div>
+                  <Label htmlFor="mpesaPasskey">M-Pesa Passkey</Label>
+                  <Input id="mpesaPasskey" value={payments.mpesaPasskey} onChange={(e) => setPayments(prev => ({ ...prev, mpesaPasskey: e.target.value }))} />
+                </div>
+                <div>
+                  <Label htmlFor="mpesaCallbackUrl">Callback URL</Label>
+                  <Input id="mpesaCallbackUrl" value={payments.mpesaCallbackUrl} onChange={(e) => setPayments(prev => ({ ...prev, mpesaCallbackUrl: e.target.value }))} placeholder="https://your-domain.com/mpesa/callback" />
+                </div>
+              </div>
+
+              <Button onClick={() => handleSave('payments', payments)} disabled={loading}>
+                <Save className="h-4 w-4 mr-2" />
+                Save Payments Settings
+              </Button>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
         <TabsContent value="analytics">
           <Card>
             <CardHeader>
