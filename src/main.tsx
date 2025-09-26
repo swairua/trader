@@ -1,6 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import { I18nProvider } from '@/i18n';
 import { QueryProvider } from './providers/QueryProvider';
 import './index.css';
 import { preloadCriticalResources, enableServiceWorker } from './utils/performanceOptimization';
@@ -45,7 +46,9 @@ initializeConversionTracking({
 createRoot(rootElement).render(
   <StrictMode>
     <QueryProvider>
-      <App />
+      <I18nProvider>
+        <App />
+      </I18nProvider>
     </QueryProvider>
   </StrictMode>
 );
