@@ -31,10 +31,15 @@ export function Navigation() {
   const nestedIcons = [Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText];
 
   return (
-    <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/90 dark:bg-white/40 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/90 dark:bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 lg:h-28 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
-          <BrandLogo size="md" className="h-12 lg:h-28" />
+          <BrandLogo
+            size="md"
+            className="h-12 lg:h-28"
+            useDarkVariantInDarkMode
+            darkSrc="https://cdn.builder.io/api/v1/image/assets%2Fd70b5c32436e40df8a1857905f23cae8%2F97e09281a0ad46bda113d0fd0850162f?format=webp&width=800"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -151,7 +156,12 @@ export function Navigation() {
           <SheetContent side="right" id="mobile-menu" className="w-80 glass-card border-l border-border/50">
             <div className="flex flex-col space-y-6 mt-6 px-4">
               <div className="flex items-center justify-between">
-                <BrandLogo size="md" className="h-16" />
+                <BrandLogo
+                  size="md"
+                  className="h-16"
+                  useDarkVariantInDarkMode
+                  darkSrc="https://cdn.builder.io/api/v1/image/assets%2Fd70b5c32436e40df8a1857905f23cae8%2F97e09281a0ad46bda113d0fd0850162f?format=webp&width=800"
+                />
                 <div className="flex items-center space-x-2">
                   <Button variant="outline" size="sm" onClick={toggleLanguage} aria-label="Switch language">
                     {language.toUpperCase()}
