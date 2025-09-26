@@ -37,10 +37,24 @@ if (typeof window !== 'undefined') {
   const originalFetch = window.fetch.bind(window);
   window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
     const urlStr = typeof input === 'string' ? input : (input as URL).toString();
-    // Short-circuit Vite ping in dev to avoid cross-origin failures
-    if (import.meta.env.DEV && urlStr.includes('/__vite_ping')) {
-      return new Response('pong', { status: 200, headers: { 'Content-Type': 'text/plain' } });
+
+    // Short-circuit Vite DEV pings/HMR fetches to avoid noisy errors in constrained envs
+    if (import.meta.env.DEV) {
+      const isVitePing = urlStr.includes('/__vite_ping');
+      const isViteClient = urlStr.includes('/@vite/') || urlStr.includes('/@react-refresh') || urlStr.includes('@vite/client');
+      const isHmrAsset = urlStr.includes('hot-update') || urlStr.includes('__open-in-editor');
+      if (isVitePing) {
+        return new Response('pong', { status: 200, headers: { 'Content-Type': 'text/plain' } });
+      }
+      if (isViteClient || isHmrAsset) {
+        try {
+          return await originalFetch(input as any, init);
+        } catch {
+          return new Response('', { status: 204 });
+        }
+      }
     }
+
     try {
       return await originalFetch(input as any, init);
     } catch (err: any) {
