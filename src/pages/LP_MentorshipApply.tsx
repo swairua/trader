@@ -500,12 +500,12 @@ const LP_MentorshipApply = () => {
                   </div>
 
                   <div className="text-center">
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       disabled={isSubmitting || (!isEligible && !ackNotEligible)}
-                      variant="hero" 
+                      variant="hero"
                       size="lg"
-                      className="min-w-[200px]"
+                      className="min-w-[140px] sm:min-w-[200px] md:min-w-[220px] px-4 sm:px-6 md:px-8"
                     >
                       {isSubmitting ? "Submitting..." : "Submit Application"}
                       {!isSubmitting && <ArrowRight className="h-4 w-4 ml-2" />}
