@@ -217,17 +217,20 @@ export default function Learn() {
                       ))}
                     </ul>
 
-                    <Button
-                      variant={index === 1 ? "hero" : "outline"}
-                      className="w-full"
-                      size="lg"
-                      asChild
-                    >
-                      <a {...getExternalLinkProps(createWhatsAppLink("254101316169", WHATSAPP_MESSAGES.contact))} aria-label={`${path.cta || (path.price === 'Free' ? 'Start Free' : 'Enroll Now')}`}>
-                        {path.price === "Free" ? "Start Free" : "Enroll Now"}
-                        <ArrowRight className="h-4 w-4 ml-2" />
-                      </a>
-                    </Button>
+                    <div className="grid grid-cols-1 gap-3">
+                      <Button variant={index === 1 ? "hero" : "outline"} className="w-full" size="lg" asChild>
+                        <a {...getInternalLinkProps(LINKS.internal.resources)} aria-label={`${path.price === 'Free' ? 'Start Free' : 'Enroll Now'} - ${path.title}`}>
+                          {path.price === "Free" ? "Start Free" : "Enroll Now"}
+                          <ArrowRight className="h-4 w-4 ml-2" />
+                        </a>
+                      </Button>
+
+                      {path.priceValue && path.priceValue > 0 && (
+                        <Button variant="white" className="w-full" size="lg" onClick={() => openPayment(path.priceValue, path.title)}>
+                          Pay {path.price}
+                        </Button>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))}
