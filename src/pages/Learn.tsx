@@ -3,20 +3,22 @@ import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  BookOpen, 
-  TrendingUp, 
-  Brain, 
-  Target, 
-  Clock, 
+import {
+  BookOpen,
+  TrendingUp,
+  Brain,
+  Target,
+  Clock,
   Users,
   ArrowRight,
-  CheckCircle 
+  CheckCircle
 } from "lucide-react";
 import { driveStepsSimple } from "@/content/drive";
 import forexEducationHero from "@/assets/forex-education-hero.jpg";
-import { LINKS, getExternalLinkProps } from "@/constants/links";
-import { createWhatsAppLink, WHATSAPP_MESSAGES } from "@/utils/whatsapp";
+import { LINKS } from "@/constants/links";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const learningPaths = [
   {
