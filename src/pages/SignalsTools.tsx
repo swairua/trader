@@ -176,7 +176,7 @@ const SignalsTools = () => {
               </div>
 
               <Card className="p-8 border border-border">
-                <ul className="space-y-4">
+                <ul className="space-y-4 list-none pl-0">
                   {whatNotIncluded.map((item, index) => (
                     <li key={index} className="flex items-center">
                       <XCircle className="h-5 w-5 text-red-500 mr-3 flex-shrink-0" />
