@@ -69,6 +69,34 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
         "Support de mentorat continu"
       ]
     },
+    testimonials: {
+      title: "Ce que disent les apprenants",
+      subtitle: "Retours de notre communauté d'apprenants dévoués",
+      items: [
+        {
+          name: "James M.",
+          role: "Nairobi, Kenya",
+          content: "Les leçons structurées m'ont aidé à mieux comprendre les concepts de trading. Les séances de mentorat ont expliqué le raisonnement derrière différents setups de marché.",
+          rating: 5,
+          initials: "JM"
+        },
+        {
+          name: "Lerato P.",
+          role: "Johannesburg, Afrique du Sud",
+          content: "Faire partie de la communauté Traders in the Zone me motive. Les discussions favorisent la collaboration et l'apprentissage partagé.",
+          rating: 5,
+          initials: "LP"
+        },
+        {
+          name: "Emeka O.",
+          role: "Lagos, Nigéria",
+          content: "J'apprécie l'équilibre entre accompagnement et éducation. Cela m'aide à gagner en confiance pour développer ma propre approche de trading.",
+          rating: 5,
+          initials: "EO"
+        }
+      ],
+      disclaimer: "Ces témoignages reflètent des expériences d’apprentissage individuelles. Les résultats de trading varient et les performances passées ne garantissent pas les résultats futurs."
+    },
     newsletter: {
       title: "Notes hebdomadaires du marché",
       subtitle: "Configurations, erreurs que nous apprenons et listes de contrôle livrées dans votre boîte mail chaque dimanche",
