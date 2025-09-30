@@ -22,11 +22,11 @@ import { toast } from "sonner";
 import forexFaqHero from "@/assets/forex-faq-hero.jpg";
 
 const FAQs = () => {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [copiedFaqId, setCopiedFaqId] = useState<string | null>(null);
-  const { faqs, categories, loading, error } = usePublicFaqs();
+  const { faqs, categories, loading, error } = usePublicFaqs(language);
 
   // Get icon component by name
   const getIconComponent = (iconName: string) => {
