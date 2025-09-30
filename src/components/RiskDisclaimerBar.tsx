@@ -91,7 +91,7 @@ export function RiskDisclaimerBar() {
                 className="flex-1 text-xs"
               >
                 <Link to="/risk-disclaimer" className="flex items-center">
-                  Learn more
+                  {t('learn_more')}
                   <ExternalLink className="w-3 h-3 ml-1" />
                 </Link>
               </Button>
