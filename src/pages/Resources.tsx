@@ -68,8 +68,8 @@ export default function Resources() {
           document.body.removeChild(link);
           
           toast({
-            title: "Download Started",
-            description: `${data.filename || filename || 'File'} download has started.`,
+            title: t('resources_download_started'),
+            description: t('resources_download_started_desc').replace('{{name}}', data.filename || filename || 'File'),
           });
         }
       } else {
