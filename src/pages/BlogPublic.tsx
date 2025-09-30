@@ -384,7 +384,7 @@ export default function BlogPublic() {
                         )}
                         <Badge className="absolute top-3 left-3 bg-yellow-500 text-yellow-900">
                           <Star className="h-3 w-3 mr-1" />
-                          Featured
+                          {t('blog_featured_title')}
                         </Badge>
                       </div>
                       <CardContent className="p-6">
