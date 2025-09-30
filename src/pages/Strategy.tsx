@@ -281,10 +281,10 @@ const Strategy = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="fluid-h2 text-foreground mb-6">
-                  The <span className="text-primary">D.R.I.V.E</span> Strategy Framework
+                  {t('drive_framework_title')}
                 </h2>
                 <p className="fluid-body text-muted-foreground max-w-3xl mx-auto">
-                  A systematic 5-step methodology that transforms retail traders into institutional professionals.
+                  {t('drive_framework_description')}
                 </p>
               </div>
 
@@ -335,7 +335,7 @@ const Strategy = () => {
                           {step.title}
                         </h3>
                         <p className="text-sm text-muted-foreground">
-                          Step {index + 1} of 5
+                          {t('step')} {index + 1} {t('of')} 5
                         </p>
                       </div>
                       <step.icon className="h-6 w-6 text-primary" />
@@ -364,10 +364,10 @@ const Strategy = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="fluid-h2 text-foreground mb-6">
-                  DRIVE vs Other Strategies
+                  {t('strategy_vs_title')}
                 </h2>
                 <p className="fluid-body text-muted-foreground max-w-3xl mx-auto">
-                  See how our structured framework compares to traditional trading approaches.
+                  {t('strategy_vs_subtitle')}
                 </p>
               </div>
 
@@ -447,10 +447,10 @@ const Strategy = () => {
             <div className="max-w-7xl mx-auto">
               <div className="text-center mb-16">
                 <h2 className="fluid-h2 text-foreground mb-6">
-                  Why Choose <span className="text-primary">D.R.I.V.E</span>?
+                  {t('strategy_why_title')}
                 </h2>
                 <p className="fluid-body text-muted-foreground max-w-3xl mx-auto">
-                  Discover the key advantages that make DRIVE the preferred choice for serious traders.
+                  {t('strategy_why_subtitle')}
                 </p>
               </div>
 
@@ -482,13 +482,10 @@ const Strategy = () => {
                   <AlertTriangle className="h-6 w-6 text-yellow-600 dark:text-yellow-400 flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="text-lg font-semibold text-foreground mb-2">
-                      Educational Framework Disclaimer
+                      {t('strategy_disclaimer_title')}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      The DRIVE Strategy is designed for educational purposes to help you develop 
-                      a structured approach to market analysis. It is not personalized investment 
-                      advice. Always conduct your own research and consider your risk tolerance 
-                      before making any trading decisions.
+                      {t('strategy_disclaimer_text')}
                     </p>
                   </div>
                 </div>
