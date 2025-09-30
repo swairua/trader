@@ -2,6 +2,7 @@ import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbP
 import { useLocation, Link } from "react-router-dom";
 import { Fragment } from "react";
 import { createBreadcrumbSchema } from "@/utils/seoHelpers";
+import { useSiteContent } from '@/hooks/useSiteContent';
 import { Helmet } from "react-helmet-async";
 
 interface BreadcrumbItem {
