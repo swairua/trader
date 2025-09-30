@@ -4,6 +4,7 @@ import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { trackEvent } from "@/components/GTMProvider";
+import { useI18n } from '@/i18n';
 
 export function RiskDisclaimerBar() {
   const [isExpanded, setIsExpanded] = useState(false);
