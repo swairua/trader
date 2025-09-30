@@ -492,6 +492,9 @@ const Strategy = () => {
           </DialogHeader>
           <div className="relative w-full aspect-video">
             <video
+              autoPlay
+              muted
+              playsInline
               controls
               preload="metadata"
               className="w-full h-full rounded-lg"
