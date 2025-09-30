@@ -1,4 +1,3 @@
-import { useSiteContent } from "@/hooks/useSiteContent";
 import { Link } from "react-router-dom";
 import { BrandLogo } from "@/components/BrandLogo";
 import { SectionDivider } from "./SectionDivider";
