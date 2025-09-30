@@ -79,8 +79,8 @@ export default function Resources() {
     } catch (error: any) {
       console.error('Download error:', error);
       toast({
-        title: "Download Failed",
-        description: error.message || "Could not generate download link. Please try again or contact support.",
+        title: t('resources_download_failed'),
+        description: error.message || t('resources_download_failed_desc'),
         variant: "destructive",
       });
     } finally {
