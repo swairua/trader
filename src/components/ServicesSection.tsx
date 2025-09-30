@@ -74,7 +74,7 @@ export function ServicesSection() {
                       {service.description}
                     </p>
                     <div className="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 group-hover:gap-2 transition-all">
-                      View Details
+                      {t('view_details')}
                       <ArrowRight className="w-4 h-4" />
                     </div>
                   </div>
