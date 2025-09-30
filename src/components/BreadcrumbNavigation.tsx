@@ -9,25 +9,50 @@ interface BreadcrumbItem {
   href?: string;
 }
 
-const routeLabels: Record<string, string> = {
-  '/': 'Home',
-  '/about': 'About',
-  '/strategy': 'Strategy',
-  '/services': 'Services', 
-  '/services/learn': 'Learn',
-  '/mentorship': 'Mentorship',
-  '/placement-quiz': 'Placement Quiz',
-  '/blog': 'Blog',
-  '/faqs': 'FAQs',
-  '/contact': 'Contact',
-  '/resources': 'Resources',
-  '/lp/drive-education': 'Drive Education',
-  
-  '/privacy-policy': 'Privacy Policy',
-  '/terms-of-use': 'Terms of Use',
-  '/risk-disclaimer': 'Risk Disclaimer',
-  '/affiliate-disclosure': 'Affiliate Disclosure'
-};
+function getRouteLabel(path: string, content: any) {
+  // Prefer navigation entries
+  const navLink = content?.navigation?.links?.find((l: any) => l.href === path);
+  if (navLink?.name) return navLink.name;
+
+  // Check pages content
+  const pages = content?.pages || {};
+  switch (path) {
+    case '/':
+      return 'Home';
+    case '/about':
+      return pages.about?.title ?? 'About';
+    case '/strategy':
+      return pages.driveStrategy?.title ?? 'Strategy';
+    case '/services':
+      return content?.services?.title ?? 'Services';
+    case '/services/learn':
+      return 'Learn';
+    case '/mentorship':
+      return pages.contact?.title ?? 'Mentorship';
+    case '/placement-quiz':
+      return 'Placement Quiz';
+    case '/blog':
+      return pages.blog?.title ?? 'Blog';
+    case '/faqs':
+      return pages.faqs?.title ?? 'FAQs';
+    case '/contact':
+      return pages.contact?.title ?? 'Contact';
+    case '/resources':
+      return 'Resources';
+    case '/lp/drive-education':
+      return 'Drive Education';
+    case '/privacy-policy':
+      return 'Privacy Policy';
+    case '/terms-of-use':
+      return 'Terms of Use';
+    case '/risk-disclaimer':
+      return 'Risk Disclaimer';
+    case '/affiliate-disclosure':
+      return 'Affiliate Disclosure';
+    default:
+      return path.split('/').pop()?.replace(/-/g, ' ')?.replace(/(^|\s)\S/g, (l: string) => l.toUpperCase()) || path;
+  }
+}
 
 export function BreadcrumbNavigation() {
   const location = useLocation();
