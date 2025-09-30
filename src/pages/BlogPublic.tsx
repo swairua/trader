@@ -279,7 +279,7 @@ export default function BlogPublic() {
               <div className="relative">
                 <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search posts..."
+                  placeholder={t('resources_search_placeholder')}
                   value={searchTerm}
                   onChange={(e) => updateSearchParams({ search: e.target.value })}
                   className="pl-10"
