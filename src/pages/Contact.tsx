@@ -271,7 +271,7 @@ const Contact = () => {
                       <div className="flex items-start space-x-3">
                         <MapPin className="h-5 w-5 text-primary mt-0.5" />
                         <div>
-                          <p className="font-medium text-foreground">Location</p>
+                          <p className="font-medium text-foreground">{t('contact_info_location')}</p>
                           <p className="text-muted-foreground">Nairobi, Kenya</p>
                         </div>
                       </div>
