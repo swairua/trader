@@ -16,7 +16,15 @@ export function Navigation() {
   const { content } = useSiteContent();
   const location = useLocation();
   const { language, setLanguage } = useI18n();
-  const toggleLanguage = () => setLanguage(language === 'en' ? 'fr' : 'en');
+  const toggleLanguage = () => {
+    const next = language === 'en' ? 'fr' : 'en';
+    try {
+      switchLanguage(next);
+    } catch (e) {
+      // fallback to context setLanguage
+      setLanguage(next);
+    }
+  };
 
   const isActive = (path: string) => location.pathname === path;
 
