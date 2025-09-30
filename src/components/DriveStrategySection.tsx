@@ -43,7 +43,7 @@ export function DriveStrategySection() {
                 controls
                 preload="metadata"
                 className="w-full rounded-lg shadow-lg"
-                src="https://cdn.builder.io/o/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2F09296fea41b446e9b7766d04a5882ffb?alt=media&token=fbe80ad2-fe5e-44ae-a7ea-61d49edbd50a&apiKey=929a94a73a3e4246bd07aab61b8a8dc4"
+                src="https://cdn.builder.io/o/assets%2Ff677abe3095d4432a56cc618b51eadf0%2Feb78258f0c05499db2e428b277404842?alt=media&token=28d911b4-3bf9-4435-9a57-b9f0b7c5abb4&apiKey=f677abe3095d4432a56cc618b51eadf0"
                 poster="https://cdn.builder.io/api/v1/image/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2F0bebcc7fcc8e46e686b4faa7ede09650?format=webp&width=1200"
                 aria-label="DRIVE strategy overview video"
               />
