@@ -12,50 +12,52 @@ import educationHero from "@/assets/education-hero.jpg";
 import signalsService from "@/assets/signals-service.jpg";
 import forexMentorshipService from "@/assets/forex-mentorship-service.jpg";
 import educationService from "@/assets/education-service.jpg";
+import { useI18n } from '@/i18n';
 
 export function Services() {
+  const { t } = useI18n();
   const services = [
     {
-      title: "Market Insights & Trade Ideas",
-      subtitle: "Learn Institutional Trading Approaches",
+      title: t('services_card1_title'),
+      subtitle: t('services_card1_subtitle'),
       icon: LineChart,
       image: signalsService,
       features: [
-        "Educational examples of Forex, Gold & Crypto market setups",
-        "Step-by-step illustrations with entries, stop loss & take profit examples (for learning purposes)",
-        "Risk management concepts explained with each example"
+        t('services_card1_f1'),
+        t('services_card1_f2'),
+        t('services_card1_f3')
       ],
-      ctaText: "Access Free Market Insights",
+      ctaText: t('services_card1_cta'),
       ctaLink: "/signals-tools",
-      imageAlt: "Educational market insights for Forex, Gold and Crypto trading"
+      imageAlt: t('services_card1_alt')
     },
     {
-      title: "101 Mentorship",
-      subtitle: "Build Your Knowledge Step-by-Step",
+      title: t('services_card2_title'),
+      subtitle: t('services_card2_subtitle'),
       icon: BookOpen,
       image: forexMentorshipService,
       features: [
-        "Coaching tailored to your knowledge level",
-        "Institutional-inspired strategies (DRIVE & more)",
-        "Psychology and mindset training"
+        t('services_card2_f1'),
+        t('services_card2_f2'),
+        t('services_card2_f3')
       ],
-      ctaText: "Book Your Mentorship Session",
+      ctaText: t('services_card2_cta'),
       ctaLink: "/mentorship",
-      imageAlt: "One-on-one mentorship for personalized trading education"
+      imageAlt: t('services_card2_alt')
     },
     {
-      title: "Traders in the Zone",
-      subtitle: "A Global Community for Traders",
+      title: t('services_card3_title'),
+      subtitle: t('services_card3_subtitle'),
       icon: Users,
       image: educationService,
       features: [
-        "Weekly Q&A sessions with mentors",
-        "Training videos & guides on DRIVE framework",
-        "Resources and assignments for practice"
+        t('services_card3_f1'),
+        t('services_card3_f2'),
+        t('services_card3_f3')
       ],
-      ctaText: "Learn With Us",
+      ctaText: t('services_card3_cta'),
       ctaLink: "/services/learn",
-      imageAlt: "Community-driven trading education and learning resources"
+      imageAlt: t('services_card3_alt')
     }
   ];
 
@@ -76,20 +78,10 @@ export function Services() {
         
         <div className="on-hero">
           <div className="relative container px-4 text-center animate-fade-in">
-            <Badge variant="outline" className="mb-6 bg-white/10 border-white/30 backdrop-blur-sm">
-              Education Services
-            </Badge>
-            <h1 className="fluid-h1 leading-[1.1] sm:leading-[1.1] text-balance on-hero text-shadow-hero mb-6">
-              <span>Our </span><span>Services</span>
-            </h1>
-            <p className="text-hero-body max-w-3xl mx-auto leading-relaxed text-shadow-hero mb-8">
-              Your Gateway to Professional Trading Education
-            </p>
-            <p className="text-lg max-w-4xl mx-auto mb-8">
-              Trading goes beyond luck — it requires discipline, knowledge, and continuous learning. 
-              At KenneDynespot, we provide the tools, resources, and community support you need 
-              to develop as a trader. Whether you're just starting out or refining your approach, we're here to guide you.
-            </p>
+            <Badge variant="outline" className="mb-6 bg-white/10 border-white/30 backdrop-blur-sm">{t('services_badge')}</Badge>
+            <h1 className="fluid-h1 leading-[1.1] sm:leading-[1.1] text-balance on-hero text-shadow-hero mb-6">{t('services_hero_title')}</h1>
+            <p className="text-hero-body max-w-3xl mx-auto leading-relaxed text-shadow-hero mb-8">{t('services_hero_subtitle')}</p>
+            <p className="text-lg max-w-4xl mx-auto mb-8">{t('services_hero_paragraph')}</p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
@@ -97,10 +89,7 @@ export function Services() {
                 size="lg"
                 className="bg-white text-primary hover:bg-white/90 font-semibold px-8"
               >
-                <Link to="#services" className="flex items-center gap-2">
-                  Explore Services
-                  <ArrowDown className="h-4 w-4" />
-                </Link>
+                <Link to="#services" className="flex items-center gap-2">{t('services_cta_explore')}<ArrowDown className="h-4 w-4" /></Link>
               </Button>
               <Button 
                 asChild
@@ -108,10 +97,7 @@ export function Services() {
                 size="lg"
                 className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8"
               >
-                <Link to="/mentorship" className="flex items-center gap-2">
-                  <MessageCircle className="h-4 w-4" />
-                  Talk to a Mentor
-                </Link>
+                <Link to="/mentorship" className="flex items-center gap-2"><MessageCircle className="h-4 w-4" />{t('services_cta_talk_mentor')}</Link>
               </Button>
             </div>
           </div>
@@ -161,9 +147,7 @@ export function Services() {
                     
                     <CardContent className="pt-0">
                       <div className="mb-6">
-                        <p className="text-sm font-medium text-primary mb-3 flex items-center">
-                          ✨ What You'll Get:
-                        </p>
+                        <p className="text-sm font-medium text-primary mb-3 flex items-center">✨ {t('services_card_features_heading')}</p>
                         <ul className="space-y-3 list-none pl-0">
                           {service.features.map((feature, featureIndex) => (
                             <li key={featureIndex} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -202,15 +186,9 @@ export function Services() {
           <div className="container px-4 relative">
             <div className="max-w-4xl mx-auto text-center">
               <div className="mb-8">
-                <h2 className="fluid-h2 text-foreground mb-4">
-                  The <span className="text-primary">D.R.I.V.E</span> Strategy
-                </h2>
-                <p className="text-lg text-muted-foreground mb-2">
-                  <strong>Direction. Range. Interest Point. Value of Risk. Entry.</strong>
-                </p>
-                <p className="fluid-body text-muted-foreground">
-                  Our systematic 5-step methodology for institutional-level market analysis
-                </p>
+                <h2 className="fluid-h2 text-foreground mb-4">{t('services_drive_title')}</h2>
+                <p className="text-lg text-muted-foreground mb-2"><strong>{t('services_drive_acronym')}</strong></p>
+                <p className="fluid-body text-muted-foreground">{t('services_drive_desc')}</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -242,12 +220,8 @@ export function Services() {
         <section className="py-20 bg-accent/10">
           <div className="container px-4">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Why Choose KenneDynespot?
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                Educational strategies inspired by institutional practices
-              </p>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">{t('services_why_title')}</h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">{t('services_why_subtitle')}</p>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -255,40 +229,32 @@ export function Services() {
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Target className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Educational Strategies</h3>
-                <p className="text-sm text-muted-foreground">
-                  Institutional practices adapted for educational purposes
-                </p>
+                <h3 className="font-semibold text-foreground mb-2">{t('services_why_card1_title')}</h3>
+                <p className="text-sm text-muted-foreground">{t('services_why_card1_desc')}</p>
               </Card>
               
               <Card className="text-center p-6 floating-card">
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Users className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Community Support</h3>
-                <p className="text-sm text-muted-foreground">
-                  Engaged community to keep you motivated and learning
-                </p>
+                <h3 className="font-semibold text-foreground mb-2">{t('services_why_card2_title')}</h3>
+                <p className="text-sm text-muted-foreground">{t('services_why_card2_desc')}</p>
               </Card>
               
               <Card className="text-center p-6 floating-card">
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <BookOpen className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Personal Mentorship</h3>
-                <p className="text-sm text-muted-foreground">
-                  Step-by-step guidance tailored to your learning pace
-                </p>
+                <h3 className="font-semibold text-foreground mb-2">{t('services_why_card3_title')}</h3>
+                <p className="text-sm text-muted-foreground">{t('services_why_card3_desc')}</p>
               </Card>
               
               <Card className="text-center p-6 floating-card">
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Brain className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Education Focus</h3>
-                <p className="text-sm text-muted-foreground">
-                  Focused on education and practice, not quick profits
-                </p>
+                <h3 className="font-semibold text-foreground mb-2">{t('services_why_card4_title')}</h3>
+                <p className="text-sm text-muted-foreground">{t('services_why_card4_desc')}</p>
               </Card>
             </div>
           </div>
@@ -300,12 +266,8 @@ export function Services() {
           <div className="absolute inset-0 forex-grid-pattern opacity-30"></div>
 
           <div className="relative container px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white text-shadow-hero">
-              Your Next Step is Simple
-            </h2>
-            <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8 text-shadow-hero">
-              Join today and start exploring institutional-level trading techniques with the right tools & guidance.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white text-shadow-hero">{t('services_next_step_title')}</h2>
+            <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8 text-shadow-hero">{t('services_next_step_desc')}</p>
             
             {/* Numbered Steps */}
             <div className="max-w-4xl mx-auto mb-8">
@@ -314,25 +276,19 @@ export function Services() {
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-primary font-bold text-sm flex-shrink-0 mt-1">
                     1
                   </div>
-                  <p className="text-white/90">
-                    <strong className="text-white">Choose your learning path</strong> (Trade ideas, Mentorship, Community, or Strategy).
-                  </p>
+                  <p className="text-white/90"><strong className="text-white">{t('services_step1')}</strong></p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-primary font-bold text-sm flex-shrink-0 mt-1">
                     2
                   </div>
-                  <p className="text-white/90">
-                    <strong className="text-white">Join today</strong> and start exploring institutional-level trading techniques.
-                  </p>
+                  <p className="text-white/90"><strong className="text-white">{t('services_step2')}</strong></p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center text-primary font-bold text-sm flex-shrink-0 mt-1">
                     3
                   </div>
-                  <p className="text-white/90">
-                    <strong className="text-white">Grow your trading knowledge</strong> with the right tools & guidance.
-                  </p>
+                  <p className="text-white/90"><strong className="text-white">{t('services_step3')}</strong></p>
                 </div>
               </div>
             </div>
@@ -340,13 +296,12 @@ export function Services() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild variant="hero" size="lg" className="min-w-[140px] sm:min-w-[200px] md:min-w-[220px] px-4 sm:px-6 md:px-8" aria-label="Start your trading journey">
                 <Link to="/mentorship" className="flex items-center gap-2" aria-label="Start your trading journey link">
-                  <MessageCircle className="h-4 w-4" />
-                  Start Your Trading Journey
+                  <MessageCircle className="h-4 w-4" />{t('services_cta_start_journey') }
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="min-w-[140px] sm:min-w-[200px] md:min-w-[220px] px-4 sm:px-6 md:px-8" aria-label="Explore learning resources">
                 <Link to="/services/learn" aria-label="Explore learning resources link">
-                  Explore Learning Resources
+                  {t('services_cta_explore_learning') }
                 </Link>
               </Button>
             </div>
