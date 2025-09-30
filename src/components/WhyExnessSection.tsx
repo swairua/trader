@@ -14,29 +14,31 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useI18n } from '@/i18n';
 
 const WhyExnessSection = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { content } = useSiteContent();
+  const { t } = useI18n();
 
   const benefits = [
     {
       icon: Shield,
-      title: "Globally Regulated",
-      description: "Multi-jurisdiction authorization by recognized financial authorities including FCA (UK), CySEC (Cyprus), FSCA (South Africa), and FSC (Mauritius).",
-      highlight: "FCA & CySEC Regulated"
+      title: t('why_exness_benefit1_title'),
+      description: t('why_exness_benefit1_desc'),
+      highlight: t('why_exness_benefit1_highlight')
     },
     {
       icon: CreditCard,
-      title: "Lightning-Fast Transfers",
-      description: "Experience instant deposits and withdrawals with multiple payment methods and zero withdrawal fees.",
-      highlight: "Instant Withdrawals"
+      title: t('why_exness_benefit2_title'),
+      description: t('why_exness_benefit2_desc'),
+      highlight: t('why_exness_benefit2_highlight')
     },
     {
       icon: TrendingUp,
-      title: "Market-Leading Conditions",
-      description: "Ultra-tight spreads from 0.0 pips, transparent pricing, and access to 200+ trading instruments across Forex, Metals, Indices, and Crypto.",
-      highlight: "From 0.0 Pip Spreads"
+      title: t('why_exness_benefit3_title'),
+      description: t('why_exness_benefit3_desc'),
+      highlight: t('why_exness_benefit3_highlight')
     }
   ];
 
@@ -64,17 +66,16 @@ const WhyExnessSection = () => {
           {/* Enhanced Header */}
           <div className="text-center mb-16 lg:mb-20 animate-fade-in-up">
             <Badge className="mb-6 px-6 py-3 text-sm font-semibold bg-primary/10 border-primary/20 text-primary shadow-sm">
-              ✨ Why Choose Exness?
+              ✨ {t('why_exness_badge')}
             </Badge>
             <h2 className="fluid-h2 mb-8 text-balance font-display">
-              Your Trading Success Starts with the{" "}
+              {t('why_exness_heading_prefix')}{" "}
               <span className="text-primary font-bold text-shadow-hero">
-                Right Broker
+                {t('why_exness_heading_accent')}
               </span>
             </h2>
             <p className="fluid-body max-w-3xl mx-auto text-muted-foreground/90 leading-relaxed">
-              Join millions of traders worldwide who trust Exness for superior trading conditions, 
-              rock-solid regulation, and unmatched execution speed. Experience the premium difference.
+              {t('why_exness_intro')}
             </p>
           </div>
 
@@ -121,7 +122,7 @@ const WhyExnessSection = () => {
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                       <span className="text-lg font-semibold text-foreground">
-                        {isOpen ? "Hide" : "See"} Detailed Comparison
+                        {isOpen ? t('why_exness_hide_comparison') : t('why_exness_see_comparison')}
                       </span>
                       <ChevronDown className={`w-5 h-5 transition-all duration-300 text-primary ${isOpen ? "rotate-180" : ""}`} />
                     </div>
@@ -135,9 +136,9 @@ const WhyExnessSection = () => {
                     <table className="w-full">
                       <thead>
                         <tr className="border-b border-border/40 bg-muted/40">
-                          <th className="text-left p-6 font-bold text-foreground text-base">Feature</th>
+                          <th className="text-left p-6 font-bold text-foreground text-base">{t('why_exness_table_feature')}</th>
                           <th className="text-left p-6 font-bold text-primary text-base">✨ Exness</th>
-                          <th className="text-left p-6 font-semibold text-muted-foreground text-base">Other Brokers</th>
+                          <th className="text-left p-6 font-semibold text-muted-foreground text-base">{t('why_exness_table_others')}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -174,8 +175,7 @@ const WhyExnessSection = () => {
                     <div className="flex items-start gap-2">
                       <div className="w-1 h-1 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                       <p className="text-xs text-muted-foreground/80 leading-relaxed">
-                        <strong>Risk Disclaimer:</strong> Leverage varies by jurisdiction and regulation. High leverage increases both potential profits and risks. 
-                        Trading involves substantial risk of loss and may not be suitable for all investors.
+                        <strong>{t('risk_disclaimer_label')}</strong> {t('why_exness_risk_disclaimer')}
                       </p>
                     </div>
                   </div>
@@ -187,9 +187,9 @@ const WhyExnessSection = () => {
           {/* Enhanced Call to Action */}
           <div className="text-center mt-16 lg:mt-20 animate-fade-in-up" style={{ "--stagger": 4 } as React.CSSProperties}>
             <div className="max-w-2xl mx-auto">
-              <h3 className="fluid-h3 mb-4 font-display text-foreground">Ready to Experience the Difference?</h3>
+              <h3 className="fluid-h3 mb-4 font-display text-foreground">{t('why_exness_cta_title')}</h3>
               <p className="text-muted-foreground/80 mb-8 leading-relaxed">
-                Join the millions who've already discovered why Exness stands apart from the competition.
+                {t('why_exness_cta_subtitle')}
               </p>
               
               <Button 
@@ -201,15 +201,15 @@ const WhyExnessSection = () => {
                 <a 
                   {...getExternalLinkProps(LINKS.exness.signup)}
                 >
-                  <span className="mr-3">Start Your Trading Journey</span>
+                  <span className="mr-3">{t('why_exness_cta_button')}</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
               
               <div className="mt-6 flex items-center justify-center gap-4 text-xs text-muted-foreground">
-                <span>• No Hidden Fees</span>
-                <span>• Instant Setup</span>
-                <span>• Premium Support</span>
+                <span>• {t('why_exness_bullet_no_fees')}</span>
+                <span>• {t('why_exness_bullet_instant_setup')}</span>
+                <span>• {t('why_exness_bullet_premium_support')}</span>
               </div>
             </div>
           </div>
