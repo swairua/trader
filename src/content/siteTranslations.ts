@@ -148,9 +148,14 @@ export function getLocalizedContent(baseContent: SiteContent, lang: 'en'|'fr'): 
     navigation: overrides.navigation || baseContent.navigation,
     hero: overrides.hero || baseContent.hero,
     services: overrides.services || baseContent.services,
+    howItWorks: overrides.howItWorks || baseContent.howItWorks,
+    testimonials: overrides.testimonials || baseContent.testimonials,
+    blogPreview: overrides.blogPreview || baseContent.blogPreview,
+    resources: overrides.resources || baseContent.resources,
     transformCTA: overrides.transformCTA || baseContent.transformCTA,
     finalCTA: overrides.finalCTA || baseContent.finalCTA,
     newsletter: overrides.newsletter || baseContent.newsletter,
+    seo: overrides.seo || baseContent.seo,
     footer: {
       ...baseContent.footer,
       ...(overrides.footer || {})
