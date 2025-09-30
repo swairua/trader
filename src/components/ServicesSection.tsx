@@ -5,43 +5,52 @@ import { Star, Users, Settings, ArrowRight } from "lucide-react";
 import forexStrategyService from "@/assets/forex-strategy-service.jpg";
 import forexMentorshipService from "@/assets/forex-mentorship-service.jpg";
 import tradingWorkspace from "@/assets/trading-workspace.jpg";
+import { Link } from "react-router-dom";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
-const services = [
+const servicesStatic = [
   {
     icon: Settings,
-    title: "DRIVE Strategy",
-    description: "Learn our systematic 5-step approach to market analysis and trade execution with proper risk management principles.",
+    fallbackTitle: "DRIVE Strategy",
+    fallbackDescription: "Learn our systematic 5-step approach to market analysis and trade execution with proper risk management principles.",
     image: forexStrategyService,
     link: "/services/learn"
   },
   {
     icon: Users,
-    title: "Mentorship",
-    description: "Personal guidance to develop your trading psychology, discipline, and understanding of market structure.",
+    fallbackTitle: "Mentorship",
+    fallbackDescription: "Personal guidance to develop your trading psychology, discipline, and understanding of market structure.",
     image: forexMentorshipService,
     link: "/mentorship"
   },
   {
     icon: Star,
-    title: "Risk Management",
-    description: "Master position sizing, stop losses, and capital preservation—the foundation of sustainable trading.",
+    fallbackTitle: "Risk Management",
+    fallbackDescription: "Master position sizing, stop losses, and capital preservation—the foundation of sustainable trading.",
     image: tradingWorkspace,
     link: "/signals-tools"
   }
 ];
 
 export function ServicesSection() {
+  const { content } = useSiteContent();
+  const { title, subtitle, items } = content.services;
+  const services = servicesStatic.map((s, idx) => ({
+    ...s,
+    title: items[idx]?.title ?? s.fallbackTitle,
+    description: items[idx]?.description ?? s.fallbackDescription,
+  }));
+
   return (
     <section id="services" className="py-16 lg:py-20 bg-muted/10 relative section-optimize">
       <div className="container px-4 relative">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="fluid-h2 text-foreground mb-4">
-              Our Educational{" "}
-              <span className="text-primary">Services</span>
+              {title}
             </h2>
             <p className="fluid-body text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive trading education focused on building real skills, not false promises
+              {subtitle}
             </p>
           </div>
 
