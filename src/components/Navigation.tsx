@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LINKS, getExternalLinkProps, getInternalLinkProps } from "@/constants/links";
 import { BrandLogo } from "@/components/BrandLogo";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useI18n } from '@/i18n';
+import { useI18n, switchLanguage } from '@/i18n';
 
 
 export function Navigation() {
