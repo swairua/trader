@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useI18n } from '@/i18n';
 
 interface FAQ {
   id: string;
@@ -24,6 +25,7 @@ interface UsePublicFaqsReturn {
 }
 
 export const usePublicFaqs = (): UsePublicFaqsReturn => {
+  const { language } = useI18n();
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [categories, setCategories] = useState<FAQCategory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,16 +37,64 @@ export const usePublicFaqs = (): UsePublicFaqsReturn => {
         setLoading(true);
         setError(null);
 
-        const { data, error: fetchError } = await supabase
-          .from('faqs')
-          .select('*')
-          .eq('published', true)
-          .order('order_index', { ascending: true })
-          .order('created_at', { ascending: true });
+        // Try to filter by possible language columns; gracefully fallback if column doesn't exist
+        const tryFetch = async (col?: string, val?: string) => {
+          let query = supabase
+            .from('faqs')
+            .select('*')
+            .eq('published', true)
+            .order('order_index', { ascending: true })
+            .order('created_at', { ascending: true });
+          if (col && val) query = query.eq(col as any, val);
+          const { data, error } = await query;
+          return { data: (data as FAQ[] | null) ?? null, error };
+        };
 
-        if (fetchError) throw fetchError;
+        // Primary attempt: requested language
+        const attemptsPrimary = [
+          { col: 'locale', val: language },
+          { col: 'language', val: language },
+          { col: 'lang', val: language },
+          { col: undefined, val: undefined },
+        ];
 
-        const faqsData = data || [];
+        let result: FAQ[] | null = null;
+        for (const a of attemptsPrimary) {
+          const { data, error } = await tryFetch(a.col as any, a.val as any);
+          if (error && typeof error.message === 'string' && error.message.includes('column') && error.message.includes('does not exist')) {
+            continue;
+          }
+          if (data && data.length > 0) {
+            result = data;
+            break;
+          }
+          if (!error && data && data.length === 0) {
+            // try next
+            continue;
+          }
+        }
+
+        // Fallback: English if none found for current language
+        if ((!result || result.length === 0) && language !== 'en') {
+          const attemptsFallback = [
+            { col: 'locale', val: 'en' },
+            { col: 'language', val: 'en' },
+            { col: 'lang', val: 'en' },
+            { col: undefined, val: undefined },
+          ];
+          for (const a of attemptsFallback) {
+            const { data, error } = await tryFetch(a.col as any, a.val as any);
+            if (error && typeof error.message === 'string' && error.message.includes('column') && error.message.includes('does not exist')) {
+              continue;
+            }
+            if (data && data.length > 0) {
+              result = data;
+              break;
+            }
+          }
+        }
+
+        const faqsData = result ?? [];
         setFaqs(faqsData);
 
         // Extract unique categories and create category objects with URL-safe slugs
@@ -65,7 +115,7 @@ export const usePublicFaqs = (): UsePublicFaqsReturn => {
     };
 
     fetchFaqs();
-  }, []);
+  }, [language]);
 
   return { faqs, categories, loading, error };
 };
