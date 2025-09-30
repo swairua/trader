@@ -34,6 +34,7 @@ const servicesStatic = [
 
 export function ServicesSection() {
   const { content } = useSiteContent();
+  const { t } = useI18n();
   const { title, subtitle, items } = content.services;
   const services = servicesStatic.map((s, idx) => ({
     ...s,
