@@ -158,17 +158,7 @@ const LP_MentorshipApply = () => {
         canonical="https://institutional-trader.com/mentorship"
       />
       
-      {/* Minimal Navigation */}
-      <header className="fixed top-0 w-full bg-background/95 dark:bg-white/20 backdrop-blur-sm border-b z-40">
-        <div className="container px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="font-bold text-xl text-primary">KenneDyne spot</div>
-            <Button variant="outline" size="sm" asChild>
-              <Link to="/contact">Contact</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Navigation />
 
       <main className="pt-20">
         {/* Hero Section */}
@@ -532,7 +522,6 @@ const LP_MentorshipApply = () => {
         </section>
       </main>
 
-      {/* Minimal Footer */}
       <footer className="py-8 border-t">
         <div className="container px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
