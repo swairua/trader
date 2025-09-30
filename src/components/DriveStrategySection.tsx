@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { driveStepsSimple } from "@/content/drive";
 import { Link } from "react-router-dom";
 import { LINKS, getExternalLinkProps } from "@/constants/links";
+import { useI18n } from '@/i18n';
+import React from 'react';
 
 export function DriveStrategySection() {
   return (
