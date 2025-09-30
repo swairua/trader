@@ -363,7 +363,7 @@ export default function BlogPublic() {
               <div className="mb-12">
                 <div className="flex items-center gap-2 mb-6">
                   <Star className="h-5 w-5 text-yellow-500" />
-                  <h2 className="text-2xl font-bold">Featured Posts</h2>
+                  <h2 className="text-2xl font-bold">{t('blog_featured_title')}</h2>
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {featuredPosts.map((post) => (
