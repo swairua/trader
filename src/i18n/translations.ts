@@ -255,6 +255,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     faqs_loading: 'Loading FAQs...',
     faqs_error: 'Error Loading FAQs',
     faqs_title: 'Frequently Asked Questions',
+    faqs_hero_subtitle: 'Get clear answers about our educational approach, trading methodology, and support services.',
     faqs_search_placeholder: 'Search FAQs...',
     faqs_no_results_title: 'No FAQs found',
     faqs_no_results_desc_empty: 'No FAQs available for this category.',
