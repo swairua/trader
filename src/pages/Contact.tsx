@@ -198,7 +198,7 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <Label htmlFor="message">Message</Label>
+                      <Label htmlFor="message">{t('contact_message')}</Label>
                       <Textarea 
                         id="message" 
                         name="message" 
