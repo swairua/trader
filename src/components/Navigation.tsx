@@ -84,7 +84,7 @@ export function Navigation() {
                     hoverTimeoutRef.current = window.setTimeout(() => setMoreOpen(false), 150);
                   }}
                 >
-                  <DropdownMenuTrigger>
+                  <DropdownMenuTrigger asChild>
                     <button aria-haspopup="menu" className="px-3 py-2 min-h-[44px] font-medium text-foreground bg-transparent border-0 cursor-pointer">
                       {t('nav_more')} <ChevronDown className="ml-1 h-5 w-5" />
                     </button>
