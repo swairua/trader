@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import React, { useEffect, useState } from 'react';
 import { getSiteContent, resetSiteContent, updateNavigationContent, type SiteContent, defaultContent } from '@/content/siteContent';
 import { useI18n } from '@/i18n';
