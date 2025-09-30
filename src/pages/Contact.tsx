@@ -246,7 +246,7 @@ const Contact = () => {
                 {/* Contact Information */}
                 <div className="space-y-8">
                   <Card className="p-6 border border-border">
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Contact Information</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">{t('contact_info_title')}</h3>
                     <div className="space-y-4">
                       <div className="flex items-start space-x-3">
                         <Mail className="h-5 w-5 text-primary mt-0.5" />
