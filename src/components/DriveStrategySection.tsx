@@ -8,6 +8,18 @@ import { useI18n } from '@/i18n';
 import React from 'react';
 
 export function DriveStrategySection() {
+  const { t } = useI18n();
+  const localizedSteps = React.useMemo(() => {
+    const map: Record<string, string> = { D: 'direction', R: 'range', I: 'poi', V: 'value_of_risk', E: 'entry' };
+    return driveStepsSimple.map((step) => {
+      const key = map[step.letter] || '';
+      return {
+        ...step,
+        title: key ? t(`drive_${key}_title`) : step.title,
+        description: key ? t(`drive_${key}_desc`) : step.description,
+      };
+    });
+  }, [t]);
   return (
     <section className="py-12 lg:py-20 bg-background relative overflow-hidden section-optimize">
       <div className="absolute inset-0 bg-gradient-hero opacity-20"></div>
