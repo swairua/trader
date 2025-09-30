@@ -62,7 +62,7 @@ export function ServicesSection() {
                 key={index} 
                 to={service.link}
                 className="group block p-6 bg-card/50 backdrop-blur-sm border border-border/50 rounded-lg hover:bg-card/80 transition-all duration-300"
-                aria-label={`View details: ${service.title} - ${service.description}`}
+                aria-label={`${t('view_details')}: ${service.title} - ${service.description}`}
               >
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
