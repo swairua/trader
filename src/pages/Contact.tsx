@@ -191,7 +191,7 @@ const Contact = () => {
                           value={formData.subject}
                           onChange={handleChange}
                           required 
-                          placeholder="What's this about?"
+                          placeholder={t('contact_subject_placeholder') }
                           className="mt-1"
                         />
                       </div>
