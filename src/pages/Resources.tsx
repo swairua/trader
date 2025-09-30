@@ -348,19 +348,19 @@ export default function Resources() {
             <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto">
               <TabsTrigger value="all" className="flex items-center gap-2">
                 <Filter className="h-4 w-4" />
-                All ({totalCounts.all})
+                {t('resources_tab_all')} ({totalCounts.all})
               </TabsTrigger>
               <TabsTrigger value="courses" className="flex items-center gap-2">
                 <GraduationCap className="h-4 w-4" />
-                Courses ({totalCounts.courses})
+                {t('resources_tab_courses')} ({totalCounts.courses})
               </TabsTrigger>
               <TabsTrigger value="ebooks" className="flex items-center gap-2">
                 <BookOpen className="h-4 w-4" />
-                E-books ({totalCounts.ebooks})
+                {t('resources_tab_ebooks')} ({totalCounts.ebooks})
               </TabsTrigger>
               <TabsTrigger value="materials" className="flex items-center gap-2">
                 <FileText className="h-4 w-4" />
-                Materials ({totalCounts.materials})
+                {t('resources_tab_materials')} ({totalCounts.materials})
               </TabsTrigger>
             </TabsList>
 
