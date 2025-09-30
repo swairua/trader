@@ -374,7 +374,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_value_of_risk_title: 'Valeur du risque',
     drive_value_of_risk_desc: 'Apprenez à appliquer des ratios risque/rendement structurés.',
     drive_entry_title: 'Entrée',
-    drive_entry_desc: 'Apprenez �� suivre des règles d’entrée structurées.',
+    drive_entry_desc: 'Apprenez à suivre des règles d’entrée structurées.',
 
     // How it Works extras
     create_exness_account: 'Créez votre compte Exness',
@@ -477,6 +477,24 @@ export const translations: Record<Locale, Record<string, string>> = {
     strategy_success_video_sent: 'Lien d’accès à la vidéo envoyé. Vérifiez votre e‑mail.',
     strategy_error_unexpected_response: 'Réponse inattendue. Veuillez réessayer.',
     strategy_error_failed_send: "Échec de l’envoi. Veuillez réessayer.",
+
+    // FAQs page
+    faqs_loading: 'Chargement des FAQ…',
+    faqs_error: 'Erreur de chargement des FAQ',
+    faqs_title: 'Foire aux questions',
+    faqs_search_placeholder: 'Rechercher dans les FAQ…',
+    faqs_no_results_title: 'Aucune FAQ trouvée',
+    faqs_no_results_desc_empty: 'Aucune FAQ disponible pour cette catégorie.',
+    faqs_no_results_desc_query: 'Aucune FAQ ne correspond à « {{query}} ». Essayez un autre terme de recherche.',
+    faqs_copy_link: 'Copier le lien vers cette FAQ',
+    faqs_contact_us: 'Nous contacter',
+    faqs_results_count: 'résultat',
+
+    // Services page (extras)
+    services_drive_benefit1: 'Concepts Smart Money simplifiés',
+    services_drive_benefit2: 'Application multi‑marchés',
+    services_drive_benefit3: 'Accent sur le ratio risque/rendement',
+    services_explore_framework: 'Découvrir le cadre complet',
 
     // Misc
     step: 'Étape',
