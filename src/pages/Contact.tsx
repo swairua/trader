@@ -287,7 +287,7 @@ const Contact = () => {
                   </Card>
 
                   <Card className="p-6 border border-border">
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">{t('contact_quick_actions')}</h3>
                     <div className="space-y-3">
                       <Button variant="outline" className="w-full justify-between" asChild>
                         <Link to="/strategy">
