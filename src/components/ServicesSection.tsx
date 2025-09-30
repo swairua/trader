@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Star, Users, Settings, ArrowRight } from "lucide-react";
 import forexStrategyService from "@/assets/forex-strategy-service.jpg";
 import forexMentorshipService from "@/assets/forex-mentorship-service.jpg";
 import tradingWorkspace from "@/assets/trading-workspace.jpg";
-import { Link } from "react-router-dom";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
 const servicesStatic = [
