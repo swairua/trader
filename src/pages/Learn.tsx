@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { driveStepsSimple } from "@/content/drive";
 import forexEducationHero from "@/assets/forex-education-hero.jpg";
-import { LINKS, getInternalLinkProps } from "@/constants/links";
+import { LINKS, getInternalLinkProps, getExternalLinkProps } from "@/constants/links";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
