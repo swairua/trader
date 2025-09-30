@@ -76,6 +76,42 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
       placeholder: "votre.email@exemple.com",
       button: "Recevoir les notes"
     },
+    howItWorks: {
+      title: "Comment ça marche",
+      subtitle: "Commencez en quelques minutes et profitez d'avantages de niveau institutionnel entièrement gratuits.",
+      steps: [
+        {
+          number: "1",
+          title: "Inscrivez-vous chez Exness",
+          description: "Cliquez sur notre bouton ci-dessous pour créer votre compte Exness gratuit via notre lien d'affiliation. Cela ne prend que 2 minutes. Complétez également la vérification d'identité et de résidence.",
+          features: [
+            "5 comptes investisseurs de détail (Std, Std cent, Zero & Pro)",
+            "Dépôt minimum 10 USD",
+            "200 Lots max",
+            "1000 positions max",
+            "Compte islamique",
+            "1 : Levier illimité",
+            "Frais de retrait ZERO",
+            "Retrait instantané et divers moyens de paiement"
+          ]
+        },
+        {
+          number: "2",
+          title: "Alimentez votre compte",
+          description: "Effectuez votre premier dépôt pour activer votre compte. Choisissez le montant adapté à vos objectifs de capital de trading."
+        },
+        {
+          number: "3",
+          title: "Envoyez votre ID de compte",
+          description: "Une fois inscrit, envoyez-nous votre identifiant Exness pour vérifier votre inscription et activer vos avantages."
+        },
+        {
+          number: "4",
+          title: "Débloquez tout gratuitement",
+          description: "Recevez instantanément l'accès aux signaux premium, au mentorat 1-à-1 et à la formation complète sur la stratégie DRIVE."
+        }
+      ]
+    },
     footer: {
       brand: "Éducation professionnelle en trading Smart Money",
       description: "Transformer les traders de détail en professionnels de niveau institutionnel grâce à des méthodologies éprouvées et du mentorat",
