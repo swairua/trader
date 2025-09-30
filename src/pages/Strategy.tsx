@@ -33,6 +33,7 @@ import { driveSteps } from "@/content/drive";
 import { useState } from "react";
 import { useI18n } from '@/i18n';
 import { useSiteContent } from '@/hooks/useSiteContent';
+import { LINKS, getExternalLinkProps } from '@/constants/links';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -225,9 +226,11 @@ const Strategy = () => {
                 {page.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-                <Button variant="hero" size="lg" onClick={handleDownload}>
-                  <Download className="h-4 w-4 mr-2" />
-                  {t('strategy_download_btn')}
+                <Button variant="hero" size="lg" asChild>
+                  <a {...getExternalLinkProps(LINKS.telegram.community)} aria-label="Join on Telegram">
+                    <Download className="h-4 w-4 mr-2" />
+                    {">> Get started"}
+                  </a>
                 </Button>
                 <Button
                   variant="glass"
