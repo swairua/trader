@@ -253,9 +253,7 @@ const FAQs = () => {
               <h1 className="fluid-h1 font-bold font-display tracking-tighter text-white mb-6 text-shadow-hero">
                 {t('faqs_title')}
               </h1>
-              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
-                Get clear answers about our educational approach, trading methodology, and support services.
-              </p>
+              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">{t('faqs_hero_subtitle')}</p>
             </div>
           </div>
         </section>
