@@ -456,7 +456,7 @@ const Strategy = () => {
               </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {whyChooseData.map((item, index) => (
+                {whyChooseData(t).map((item, index) => (
                   <Card key={index} className="p-6 glass-card hover:shadow-card transition-all duration-300 hover:scale-[1.02] group animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors duration-300">
                       <item.icon className="h-6 w-6 text-primary" />
