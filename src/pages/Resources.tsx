@@ -15,6 +15,7 @@ import { useCourses, useEbooks, useMaterials } from '@/hooks/useResources';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Search, BookOpen, GraduationCap, FileText, Download, ExternalLink, Filter, Loader2, AlertCircle } from 'lucide-react';
+import { useI18n } from '@/i18n';
 
 export default function Resources() {
   const { content } = useSiteContent();
