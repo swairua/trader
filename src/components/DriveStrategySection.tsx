@@ -94,7 +94,7 @@ export function DriveStrategySection() {
               </Button>
               <Button variant="outline" size="lg" className="hover:scale-105 transition-transform duration-300" asChild>
                 <a {...getExternalLinkProps(LINKS.telegram.community)} aria-label="Join our Telegram community">
-                  Join on Telegram
+                  {t('join_on_telegram')}
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </Button>
