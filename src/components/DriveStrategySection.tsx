@@ -49,7 +49,7 @@ export function DriveStrategySection() {
               />
             </div>
             <ol className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-4 mb-12">
-              {driveStepsSimple.map((step, index) => (
+              {localizedSteps.map((step, index) => (
                 <li key={index} className="animate-fade-in" style={{ animationDelay: `${index * 100}ms` }}>
                   <Link 
                     to="/strategy" 
