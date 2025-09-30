@@ -165,7 +165,7 @@ const Contact = () => {
                           value={formData.email}
                           onChange={handleChange}
                           required 
-                          placeholder="your.email@example.com"
+                          placeholder={t('contact_email_placeholder') }
                           className="mt-1"
                         />
                       </div>
