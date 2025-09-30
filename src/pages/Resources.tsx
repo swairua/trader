@@ -303,10 +303,10 @@ export default function Resources() {
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               <Select value={levelFilter} onValueChange={setLevelFilter}>
                 <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
-                  <SelectValue placeholder="All Levels" />
+                  <SelectValue placeholder={t('resources_filter_all_levels')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Levels</SelectItem>
+                  <SelectItem value="all">{t('resources_filter_all_levels')}</SelectItem>
                   <SelectItem value="Beginner">Beginner</SelectItem>
                   <SelectItem value="Intermediate">Intermediate</SelectItem>
                   <SelectItem value="Advanced">Advanced</SelectItem>
