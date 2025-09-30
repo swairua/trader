@@ -88,28 +88,29 @@ const comparisonData = [
   }
 ];
 
-const whyChooseData = [
+// Localized at render time
+const whyChooseData = (t: (k: string) => string) => ([
   {
     icon: Target,
-    title: "Clear Trading Guidelines",
-    description: "Learn structured approaches to improve decision-making"
+    title: t('strategy_why_item1_title'),
+    description: t('strategy_why_item1_desc')
   },
   {
     icon: Shield,
-    title: "Risk Management Education",
-    description: "Discover methods to manage exposure"
+    title: t('strategy_why_item2_title'),
+    description: t('strategy_why_item2_desc')
   },
   {
     icon: Brain,
-    title: "Mindset Development",
-    description: "Access resources that support emotional discipline"
+    title: t('strategy_why_item3_title'),
+    description: t('strategy_why_item3_desc')
   },
   {
     icon: Users,
-    title: "Community Learning",
-    description: "Join a global trader community for shared insights"
+    title: t('strategy_why_item4_title'),
+    description: t('strategy_why_item4_desc')
   }
-];
+]);
 
 const Strategy = () => {
   const { t } = useI18n();
