@@ -1,4 +1,3 @@
-import { useSiteContent } from "@/hooks/useSiteContent";
 import { CheckCircle, ArrowDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import happyForexTrader from "@/assets/happy-forex-trader.jpg";
