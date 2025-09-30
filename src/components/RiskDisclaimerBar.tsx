@@ -80,7 +80,7 @@ export function RiskDisclaimerBar() {
             </div>
             
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              Trading Forex and CFDs involves high risk. Past performance does not guarantee future results.
+              {t('risk_notice_message')}
             </p>
             
             <div className="flex gap-2">
