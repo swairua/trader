@@ -13,10 +13,7 @@ export function FinalCTASection() {
       <div className="container px-4 relative">
         <div className="max-w-5xl mx-auto text-center space-y-10 animate-fade-in-up">
           <h2 className="fluid-h1 leading-tight text-shadow-hero">
-            Ready to Start Trading Like{" "}
-            <span className="text-primary font-bold">
-              the Institutions?
-            </span>
+            {title}
           </h2>
 
           <p className="fluid-body text-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">
