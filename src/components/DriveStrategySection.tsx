@@ -88,7 +88,7 @@ export function DriveStrategySection() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <Button variant="default" size="lg" className="hover:scale-105 transition-transform duration-300" asChild>
                 <Link to="/strategy" aria-label="Explore the detailed DRIVE strategy">
-                  Explore the DRIVE Playbook
+                  {t('explore_drive_playbook')}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
