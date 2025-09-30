@@ -119,6 +119,43 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_cta_benefit_consistent_title: 'Consistent Framework',
     drive_cta_benefit_consistent_desc: 'Build sustainable trading habits with our proven methodology',
     drive_cta_button: 'Start Learning',
+
+    // Strategy page
+    strategy_badge: 'Education Framework',
+    strategy_download_btn: 'Download DRIVE Checklist',
+    strategy_watch_video_btn: 'Watch Strategy Video',
+    strategy_nav_steps: '5 Steps',
+    strategy_nav_comparison: 'Comparison',
+    strategy_nav_why_choose: 'Why Choose DRIVE',
+    strategy_vs_title: 'DRIVE vs Other Strategies',
+    strategy_vs_subtitle: 'See how our structured framework compares to traditional trading approaches.',
+    strategy_why_title: 'Why Choose D.R.I.V.E?',
+    strategy_why_subtitle: 'Discover the key advantages that make DRIVE the preferred choice for serious traders.',
+    strategy_disclaimer_title: 'Educational Framework Disclaimer',
+    strategy_disclaimer_text: 'The DRIVE Strategy is designed for educational purposes to help you develop a structured approach to market analysis. It is not personalized investment advice. Always conduct your own research and consider your risk tolerance before making any trading decisions.',
+
+    // Dialogs & forms
+    strategy_dialog_video_title: 'Request Strategy Video',
+    strategy_dialog_video_desc: 'Enter your email to receive access to the strategy video.',
+    strategy_dialog_checklist_title: 'Get DRIVE Strategy Checklist',
+    strategy_dialog_checklist_desc: "Enter your email and we'll send you a download link.",
+    email_address: 'Email address',
+    strategy_email_placeholder: 'you@example.com',
+    cancel: 'Cancel',
+    sending: 'Sending…',
+    strategy_send_video: 'Send video link',
+    strategy_send_download: 'Send download link',
+
+    // Messages
+    strategy_error_invalid_email: 'Please enter a valid email address.',
+    strategy_success_download_sent: 'Download link sent. Please check your email.',
+    strategy_success_video_sent: 'Video access link sent. Please check your email.',
+    strategy_error_unexpected_response: 'Unexpected response. Please try again.',
+    strategy_error_failed_send: 'Failed to send. Please try again.',
+
+    // Misc
+    step: 'Step',
+    of: 'of',
   },
   fr: {
     // Accessibility / generic
@@ -238,5 +275,42 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_cta_benefit_consistent_title: 'Cadre cohérent',
     drive_cta_benefit_consistent_desc: 'Développez des habitudes de trading durables grâce à notre méthodologie éprouvée',
     drive_cta_button: 'Commencer l’apprentissage',
+
+    // Strategy page
+    strategy_badge: 'Cadre pédagogique',
+    strategy_download_btn: 'Télécharger la checklist DRIVE',
+    strategy_watch_video_btn: 'Regarder la vidéo de la stratégie',
+    strategy_nav_steps: '5 étapes',
+    strategy_nav_comparison: 'Comparaison',
+    strategy_nav_why_choose: 'Pourquoi choisir DRIVE',
+    strategy_vs_title: 'DRIVE vs autres approches',
+    strategy_vs_subtitle: 'Voyez comment notre cadre structuré se compare aux approches de trading traditionnelles.',
+    strategy_why_title: 'Pourquoi choisir D.R.I.V.E ?',
+    strategy_why_subtitle: 'Découvrez les principaux avantages qui font de DRIVE le choix des traders sérieux.',
+    strategy_disclaimer_title: "Avertissement — Cadre pédagogique",
+    strategy_disclaimer_text: "La stratégie DRIVE est destinée à des fins éducatives pour vous aider à développer une approche structurée de l'analyse du marché. Ce n'est pas un conseil en investissement personnalisé. Faites toujours vos propres recherches et tenez compte de votre tolérance au risque avant toute décision.",
+
+    // Dialogs & forms
+    strategy_dialog_video_title: 'Demander la vidéo de stratégie',
+    strategy_dialog_video_desc: 'Entrez votre e‑mail pour recevoir l’accès à la vidéo.',
+    strategy_dialog_checklist_title: 'Obtenir la checklist de la stratégie DRIVE',
+    strategy_dialog_checklist_desc: "Entrez votre e‑mail et nous vous enverrons un lien de téléchargement.",
+    email_address: 'Adresse e‑mail',
+    strategy_email_placeholder: 'vous@exemple.com',
+    cancel: 'Annuler',
+    sending: 'Envoi…',
+    strategy_send_video: 'Envoyer le lien vidéo',
+    strategy_send_download: 'Envoyer le lien de téléchargement',
+
+    // Messages
+    strategy_error_invalid_email: 'Veuillez saisir une adresse e‑mail valide.',
+    strategy_success_download_sent: 'Lien de téléchargement envoyé. Vérifiez votre e‑mail.',
+    strategy_success_video_sent: 'Lien d’accès à la vidéo envoyé. Vérifiez votre e‑mail.',
+    strategy_error_unexpected_response: 'Réponse inattendue. Veuillez réessayer.',
+    strategy_error_failed_send: "Échec de l’envoi. Veuillez réessayer.",
+
+    // Misc
+    step: 'Étape',
+    of: 'sur',
   },
 };
