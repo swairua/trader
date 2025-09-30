@@ -251,7 +251,7 @@ const Contact = () => {
                       <div className="flex items-start space-x-3">
                         <Mail className="h-5 w-5 text-primary mt-0.5" />
                         <div>
-                          <p className="font-medium text-foreground">Email</p>
+                          <p className="font-medium text-foreground">{t('contact_info_email')}</p>
                           <a href="mailto:hello@institutionaltrader.ke" className="text-primary hover:underline">
                             hello@institutionaltrader.ke
                           </a>
