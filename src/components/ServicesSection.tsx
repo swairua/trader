@@ -111,7 +111,7 @@ export function ServicesSection() {
                   <div className="flex-1 flex flex-col p-6">
                     <p className="text-muted-foreground leading-relaxed mb-4 flex-1 line-clamp-2">{service.description}</p>
                     <div className="inline-flex items-center gap-2 text-primary font-medium group-hover:text-primary-hover transition-colors">
-                      View Details
+                      {t('view_details')}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
