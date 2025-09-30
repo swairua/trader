@@ -179,7 +179,7 @@ const Contact = () => {
                           name="phone" 
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="+254 7XX XXX XXX"
+                          placeholder={t('contact_phone_placeholder')}
                           className="mt-1"
                         />
                       </div>
