@@ -131,7 +131,7 @@ export function Navigation() {
           </div>
           <a
             {...getExternalLinkProps(LINKS.telegram.kenneDynespot)}
-            aria-label="Open KenneDyne spot Telegram"
+            aria-label={t('nav_open_telegram')}
             className="text-foreground hover:text-primary transition-colors p-2 rounded-md"
           >
             <Send className="h-5 w-5" />
