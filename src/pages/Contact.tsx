@@ -157,7 +157,7 @@ const Contact = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email">{t('contact_email')}</Label>
                         <Input 
                           id="email" 
                           name="email" 
