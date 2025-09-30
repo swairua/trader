@@ -86,7 +86,7 @@ export function Navigation() {
                 >
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm" className="group px-3 py-2 min-h-[44px] font-medium hover:text-purple-600">
-                      More <ChevronDown className={`ml-1 h-5 w-5 transition-transform duration-150 ${moreOpen ? 'rotate-180 scale-x-125' : 'rotate-0 scale-x-110'} group-hover:rotate-180`} />
+                      {t('nav_more')} <ChevronDown className={`ml-1 h-5 w-5 transition-transform duration-150 ${moreOpen ? 'rotate-180 scale-x-125' : 'rotate-0 scale-x-110'} group-hover:rotate-180`} />
                     </Button>
                   </DropdownMenuTrigger>
 
