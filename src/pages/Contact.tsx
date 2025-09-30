@@ -39,6 +39,7 @@ const Contact = () => {
   
   const { submitContactForm, isSubmitting } = useContactForm();
   const whatsappUrl = createWhatsAppLink(DEFAULT_WHATSAPP_PHONE, WHATSAPP_MESSAGES.support);
+  const { t } = useI18n();
 
   const [showWhatsAppSuccess, setShowWhatsAppSuccess] = useState(false);
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
