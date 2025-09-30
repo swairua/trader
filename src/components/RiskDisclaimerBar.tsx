@@ -58,7 +58,7 @@ export function RiskDisclaimerBar() {
           className="bg-background/80 backdrop-blur-sm border-border shadow-md hover:bg-background/90 text-muted-foreground hover:text-foreground transition-all duration-200"
         >
           <AlertTriangle className="w-3 h-3 mr-1.5 opacity-60" />
-          Risk notice
+          {t('risk_notice_chip')}
         </Button>
       ) : (
         // Expanded state - card with full message
