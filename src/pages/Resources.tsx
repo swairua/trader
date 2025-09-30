@@ -20,6 +20,7 @@ import { useI18n } from '@/i18n';
 export default function Resources() {
   const { content } = useSiteContent();
   const { toast } = useToast();
+  const { t } = useI18n();
   
   // Fetch from Supabase
   const { data: dbCourses = [] } = useCourses(true);
