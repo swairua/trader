@@ -231,8 +231,8 @@ export default function BlogPublic() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Blog | Professional Trading Insights"
-        description="Expert insights on forex trading, market analysis, and trading strategies from seasoned professionals."
+        title={t('blog_hero_title')}
+        description={t('blog_hero_subtitle')}
         canonical="/blog"
         ogImage="/og/og-default.jpg"
       />
