@@ -218,15 +218,13 @@ const Contact = () => {
 
                     {showWhatsAppSuccess && (
                       <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-                        <p className="text-green-700 dark:text-green-300 text-sm mb-3">
-                          Message sent successfully! For faster response, you can also contact us directly via WhatsApp:
-                        </p>
-                        <Button 
-                          variant="outline" 
+                        <p className="text-green-700 dark:text-green-300 text-sm mb-3">{t('contact_success_text')}</p>
+                        <Button
+                          variant="outline"
                           size="sm"
                           onClick={() => {
                             const whatsappUrl = createWhatsAppLink(
-                              DEFAULT_WHATSAPP_PHONE, 
+                              DEFAULT_WHATSAPP_PHONE,
                               `Hi! I just submitted a contact form about "${formData.subject || 'general inquiry'}". Looking forward to your response!`
                             );
                             window.open(whatsappUrl, '_blank');
@@ -234,7 +232,7 @@ const Contact = () => {
                           className="w-full border-green-500/30 text-green-700 dark:text-green-300 hover:bg-green-500/20"
                         >
                           <MessageCircle className="h-4 w-4 mr-2" />
-                          WhatsApp us now
+                          {t('contact_success_whatsapp_cta')}
                         </Button>
                       </div>
                     )}
