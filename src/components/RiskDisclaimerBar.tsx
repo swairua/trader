@@ -7,6 +7,7 @@ import { trackEvent } from "@/components/GTMProvider";
 
 export function RiskDisclaimerBar() {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { t } = useI18n();
   const [isDismissed, setIsDismissed] = useState(false);
   const location = useLocation();
 
