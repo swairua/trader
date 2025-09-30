@@ -221,7 +221,7 @@ export function Navigation() {
                   <a {...getExternalLinkProps(LINKS.telegram.kenneDynespot)} className="text-foreground hover:text-primary">
                     <Send className="h-5 w-5 inline-block mr-2" /> {t('nav_telegram')}
                   </a>
-                  <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>Close</Button>
+                  <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>{t('nav_close')}</Button>
                 </div>
               </div>
             </div>
