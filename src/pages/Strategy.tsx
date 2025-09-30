@@ -215,7 +215,7 @@ const Strategy = () => {
             <div className="max-w-4xl mx-auto text-center">
               <Badge variant="secondary" className="mb-6 bg-white/10 border border-white/20 text-white">
                 <TrendingUp className="h-4 w-4 mr-2" />
-                Education Framework
+                {t('strategy_badge')}
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tighter text-white mb-6 leading-tight">
                 The <span className="text-primary">D.R.I.V.E</span> Strategy
