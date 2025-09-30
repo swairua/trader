@@ -27,13 +27,13 @@ export function DriveStrategySection() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="fluid-h2 text-foreground mb-3">
-              The <span className="text-primary">D.R.I.V.E</span> Strategy Framework
+              {t('drive_framework_title')}
             </h2>
             <p className="text-sm text-muted-foreground/80 mb-4 font-medium tracking-wide">
-              Direction. Range. Interest Point. Value of Risk. Entry.
+              {t('drive_acronym_full')}
             </p>
             <p className="fluid-body text-muted-foreground max-w-3xl mx-auto">
-              A systematic 5-step methodology that transforms retail traders into institutional professionals.
+              {t('drive_framework_description')}
             </p>
           </div>
 
