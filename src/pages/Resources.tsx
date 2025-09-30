@@ -331,7 +331,7 @@ export default function Resources() {
             <div className="relative max-w-md mx-auto">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/60" />
               <Input
-                placeholder="Search resources..."
+                placeholder={t('resources_search_placeholder')}
                 className="pl-12 bg-white/10 border-white/20 text-white placeholder:text-white/60"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
