@@ -74,6 +74,39 @@ export const translations: Record<Locale, Record<string, string>> = {
       "Trading Forex and CFDs involves high risk. Past performance does not guarantee future results.",
     learn_more: 'Learn more',
     dismiss: 'Dismiss',
+
+    // WhyExnessSection
+    why_exness_badge: 'Why Choose Exness?',
+    why_exness_heading_prefix: 'Your Trading Success Starts with the',
+    why_exness_heading_accent: 'Right Broker',
+    why_exness_intro:
+      'Join millions of traders worldwide who trust Exness for superior trading conditions, rock-solid regulation, and unmatched execution speed. Experience the premium difference.',
+    why_exness_benefit1_title: 'Globally Regulated',
+    why_exness_benefit1_desc:
+      'Multi-jurisdiction authorization by recognized financial authorities including FCA (UK), CySEC (Cyprus), FSCA (South Africa), and FSC (Mauritius).',
+    why_exness_benefit1_highlight: 'FCA & CySEC Regulated',
+    why_exness_benefit2_title: 'Lightning-Fast Transfers',
+    why_exness_benefit2_desc:
+      'Experience instant deposits and withdrawals with multiple payment methods and zero withdrawal fees.',
+    why_exness_benefit2_highlight: 'Instant Withdrawals',
+    why_exness_benefit3_title: 'Market-Leading Conditions',
+    why_exness_benefit3_desc:
+      'Ultra-tight spreads from 0.0 pips, transparent pricing, and access to 200+ trading instruments across Forex, Metals, Indices, and Crypto.',
+    why_exness_benefit3_highlight: 'From 0.0 Pip Spreads',
+    why_exness_see_comparison: 'See Detailed Comparison',
+    why_exness_hide_comparison: 'Hide Detailed Comparison',
+    why_exness_table_feature: 'Feature',
+    why_exness_table_others: 'Other Brokers',
+    risk_disclaimer_label: 'Risk Disclaimer:',
+    why_exness_risk_disclaimer:
+      'Leverage varies by jurisdiction and regulation. High leverage increases both potential profits and risks. Trading involves substantial risk of loss and may not be suitable for all investors.',
+    why_exness_cta_title: 'Ready to Experience the Difference?',
+    why_exness_cta_subtitle:
+      "Join the millions who've already discovered why Exness stands apart from the competition.",
+    why_exness_cta_button: 'Start Your Trading Journey',
+    why_exness_bullet_no_fees: 'No Hidden Fees',
+    why_exness_bullet_instant_setup: 'Instant Setup',
+    why_exness_bullet_premium_support: 'Premium Support',
   },
   fr: {
     // Accessibility / generic
@@ -148,5 +181,38 @@ export const translations: Record<Locale, Record<string, string>> = {
       "Le trading du Forex et des CFD comporte un risque élevé. Les performances passées ne garantissent pas les résultats futurs.",
     learn_more: 'En savoir plus',
     dismiss: 'Fermer',
+
+    // WhyExnessSection
+    why_exness_badge: 'Pourquoi choisir Exness ? ',
+    why_exness_heading_prefix: 'Votre réussite en trading commence avec le',
+    why_exness_heading_accent: 'bon courtier',
+    why_exness_intro:
+      "Rejoignez des millions de traders qui font confiance à Exness pour des conditions de trading supérieures, une réglementation solide et une exécution inégalée. Découvrez la différence premium.",
+    why_exness_benefit1_title: 'Réglementation mondiale',
+    why_exness_benefit1_desc:
+      "Autorisation multi-juridiction par des autorités financières reconnues, notamment la FCA (Royaume-Uni), la CySEC (Chypre), la FSCA (Afrique du Sud) et la FSC (Maurice).",
+    why_exness_benefit1_highlight: 'Réglementé par FCA & CySEC',
+    why_exness_benefit2_title: 'Transferts ultra-rapides',
+    why_exness_benefit2_desc:
+      "Dépôts et retraits instantanés, multiples méthodes de paiement et aucuns frais de retrait.",
+    why_exness_benefit2_highlight: 'Retraits instantanés',
+    why_exness_benefit3_title: 'Conditions de marché leader',
+    why_exness_benefit3_desc:
+      "Spreads ultra-serrés à partir de 0,0 pip, tarification transparente et accès à plus de 200 instruments (Forex, Métaux, Indices, Crypto).",
+    why_exness_benefit3_highlight: 'À partir de 0,0 pip',
+    why_exness_see_comparison: 'Voir la comparaison détaillée',
+    why_exness_hide_comparison: 'Masquer la comparaison détaillée',
+    why_exness_table_feature: 'Caractéristique',
+    why_exness_table_others: 'Autres courtiers',
+    risk_disclaimer_label: 'Avertissement de risque :',
+    why_exness_risk_disclaimer:
+      "L'effet de levier varie selon la juridiction et la réglementation. Un levier élevé augmente à la fois les profits potentiels et les risques. Le trading comporte un risque important de perte et peut ne pas convenir à tous les investisseurs.",
+    why_exness_cta_title: "Prêt à découvrir la différence ?",
+    why_exness_cta_subtitle:
+      "Rejoignez les millions de personnes qui ont déjà découvert pourquoi Exness se démarque de la concurrence.",
+    why_exness_cta_button: 'Commencez votre parcours de trading',
+    why_exness_bullet_no_fees: 'Aucun frais caché',
+    why_exness_bullet_instant_setup: 'Configuration instantanée',
+    why_exness_bullet_premium_support: 'Support premium',
   },
 };
