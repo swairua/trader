@@ -7,6 +7,7 @@ import { AuthButton } from "@/components/AuthButton";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { LINKS, getExternalLinkProps } from "@/constants/links";
 import { createWhatsAppLink, WHATSAPP_MESSAGES, DEFAULT_WHATSAPP_PHONE } from "@/utils/whatsapp";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 export function Footer() {
   const { content } = useSiteContent();
