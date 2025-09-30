@@ -6,6 +6,7 @@ import forexStrategyService from "@/assets/forex-strategy-service.jpg";
 import forexMentorshipService from "@/assets/forex-mentorship-service.jpg";
 import tradingWorkspace from "@/assets/trading-workspace.jpg";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useI18n } from '@/i18n';
 
 const servicesStatic = [
   {
