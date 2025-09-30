@@ -17,8 +17,8 @@ export const LINKS = {
 
   // WhatsApp (use whatsapp.ts utility for dynamic links)
   whatsapp: {
-    contact: "https://wa.me/254101316169",
-    support: "https://wa.me/254101316169?text=Hi%21%20I%20am%20interested%20in%20learning%20more%20about%20your%20trading%20education%20programs.",
+    contact: "https://wa.me/254726529166",
+    support: "https://wa.me/254726529166?text=Hi%21%20I%20am%20interested%20in%20learning%20more%20about%20your%20trading%20education%20programs.",
     channel: "https://whatsapp.com/channel/0029Va5oaai3WHTR1PyrOI1n"
   },
   instagram: "https://www.instagram.com/kennedyne_spot?igsh=NnVoeXJoZ2dmemF5",
