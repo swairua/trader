@@ -67,7 +67,7 @@ export function RiskDisclaimerBar() {
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-center">
                 <AlertTriangle className="w-4 h-4 mr-2 text-muted-foreground opacity-60" />
-                <span className="text-sm font-medium text-foreground">Risk Notice</span>
+                <span className="text-sm font-medium text-foreground">{t('risk_notice_title')}</span>
               </div>
               <Button
                 variant="ghost"
