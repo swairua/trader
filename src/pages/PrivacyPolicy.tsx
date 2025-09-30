@@ -53,7 +53,7 @@ const PrivacyPolicy = () => {
           <section>
             <h2 className="fluid-h2 mb-4">Contact Us</h2>
             <p className="fluid-body">
-              If you have any questions about this Privacy Policy, please contact us via WhatsApp at +254101316169 
+              If you have any questions about this Privacy Policy, please contact us via WhatsApp at +254726529166 
               or through our website contact form.
             </p>
           </section>
