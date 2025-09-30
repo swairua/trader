@@ -194,21 +194,21 @@ export function Services() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                 <div className="flex items-center justify-center p-4 bg-background/50 rounded-lg border">
                   <CheckCircle className="h-5 w-5 text-primary mr-3" />
-                  <span className="text-sm font-medium text-foreground">Simplified Smart Money Concepts</span>
+                  <span className="text-sm font-medium text-foreground">{t('services_drive_benefit1')}</span>
                 </div>
                 <div className="flex items-center justify-center p-4 bg-background/50 rounded-lg border">
                   <TrendingUp className="h-5 w-5 text-primary mr-3" />
-                  <span className="text-sm font-medium text-foreground">Multi-Market Application</span>
+                  <span className="text-sm font-medium text-foreground">{t('services_drive_benefit2')}</span>
                 </div>
                 <div className="flex items-center justify-center p-4 bg-background/50 rounded-lg border">
                   <Shield className="h-5 w-5 text-primary mr-3" />
-                  <span className="text-sm font-medium text-foreground">Risk-to-Reward Focus</span>
+                  <span className="text-sm font-medium text-foreground">{t('services_drive_benefit3')}</span>
                 </div>
               </div>
 
               <Button variant="default" size="lg" className="hover:scale-105 transition-transform duration-300" asChild>
                 <Link to="/strategy" aria-label="Explore the complete DRIVE strategy framework">
-                  Explore the Complete Framework
+                  {t('services_explore_framework')}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
