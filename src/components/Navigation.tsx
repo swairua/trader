@@ -138,7 +138,7 @@ export function Navigation() {
           </a>
           <Button variant="outline" size="sm" className="font-semibold" asChild>
             <Link to={LINKS.internal.strategy}>
-              Learn DRIVE Strategy
+              {t('nav_learn_drive')}
             </Link>
           </Button>
           <Button variant="hero" size="sm" className="font-semibold" asChild>
@@ -203,7 +203,7 @@ export function Navigation() {
                   asChild
                 >
                   <Link to={LINKS.internal.strategy}>
-                    Learn DRIVE Strategy
+                    {t('nav_learn_drive')}
                   </Link>
                 </Button>
                 <Button
