@@ -133,7 +133,7 @@ const Strategy = () => {
   const handleSubmitEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !email.includes("@")) {
-      setResult({ type: 'error', message: 'Please enter a valid email address.' });
+      setResult({ type: 'error', message: t('strategy_error_invalid_email') });
       return;
     }
     setIsSubmitting(true);
@@ -148,13 +148,13 @@ const Strategy = () => {
       });
       if (error) throw error;
       if (data?.success) {
-        setResult({ type: 'success', message: 'Download link sent. Please check your email.' });
+        setResult({ type: 'success', message: t('strategy_success_download_sent') });
       } else {
-        setResult({ type: 'error', message: 'Unexpected response. Please try again.' });
+        setResult({ type: 'error', message: t('strategy_error_unexpected_response') });
       }
     } catch (err) {
       console.error('Error requesting checklist:', err);
-      setResult({ type: 'error', message: 'Failed to send download link. Please try again.' });
+      setResult({ type: 'error', message: t('strategy_error_failed_send') });
     } finally {
       setIsSubmitting(false);
     }
@@ -163,7 +163,7 @@ const Strategy = () => {
   const handleSubmitVideo = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!videoEmail || !videoEmail.includes("@")) {
-      setResultVideo({ type: 'error', message: 'Please enter a valid email address.' });
+      setResultVideo({ type: 'error', message: t('strategy_error_invalid_email') });
       return;
     }
     setIsSubmittingVideo(true);
@@ -178,13 +178,13 @@ const Strategy = () => {
       });
       if (error) throw error;
       if (data?.success) {
-        setResultVideo({ type: 'success', message: 'Video access link sent. Please check your email.' });
+        setResultVideo({ type: 'success', message: t('strategy_success_video_sent') });
       } else {
-        setResultVideo({ type: 'error', message: 'Unexpected response. Please try again.' });
+        setResultVideo({ type: 'error', message: t('strategy_error_unexpected_response') });
       }
     } catch (err) {
       console.error('Error requesting video:', err);
-      setResultVideo({ type: 'error', message: 'Failed to send video link. Please try again.' });
+      setResultVideo({ type: 'error', message: t('strategy_error_failed_send') });
     } finally {
       setIsSubmittingVideo(false);
     }
@@ -501,9 +501,9 @@ const Strategy = () => {
       <Dialog open={openVideoDialog} onOpenChange={(open) => { setOpenVideoDialog(open); if (!open) { setResultVideo({ type: null, message: "" }); setVideoEmail(""); } }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Request Strategy Video</DialogTitle>
+            <DialogTitle>{t('strategy_dialog_video_title')}</DialogTitle>
             <DialogDescription>
-              Enter your email to receive access to the strategy video.
+              {t('strategy_dialog_video_desc')}
             </DialogDescription>
           </DialogHeader>
 
@@ -511,7 +511,7 @@ const Strategy = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-green-700 dark:text-green-300">
                 <CheckCircle className="h-5 w-5" />
-                <span>Video link sent to {videoEmail}.</span>
+                <span>{t('strategy_success_video_sent')}</span>
               </div>
             </div>
           ) : (
@@ -523,22 +523,22 @@ const Strategy = () => {
                 </div>
               )}
               <div className="space-y-2">
-                <Label htmlFor="videoEmail">Email address</Label>
+                <Label htmlFor="videoEmail">{t('email_address')}</Label>
                 <Input
                   id="videoEmail"
                   type="email"
                   value={videoEmail}
                   onChange={(e) => setVideoEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder={t('strategy_email_placeholder')}
                   required
                 />
               </div>
               <DialogFooter>
                 <Button type="button" variant="outline" onClick={() => setOpenVideoDialog(false)}>
-                  Cancel
+                  {t('cancel')}
                 </Button>
                 <Button type="submit" disabled={isSubmittingVideo}>
-                  {isSubmittingVideo ? 'Sending…' : 'Send video link'}
+                  {isSubmittingVideo ? t('sending') : t('strategy_send_video')}
                 </Button>
               </DialogFooter>
             </form>
@@ -549,9 +549,9 @@ const Strategy = () => {
       <Dialog open={openEmailDialog} onOpenChange={(open) => { setOpenEmailDialog(open); if (!open) { setResult({ type: null, message: "" }); setEmail(""); } }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Get DRIVE Strategy Checklist</DialogTitle>
+            <DialogTitle>{t('strategy_dialog_checklist_title')}</DialogTitle>
             <DialogDescription>
-              Enter your email and we&apos;ll send you a download link.
+              {t('strategy_dialog_checklist_desc')}
             </DialogDescription>
           </DialogHeader>
 
@@ -559,7 +559,7 @@ const Strategy = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-green-700 dark:text-green-300">
                 <CheckCircle className="h-5 w-5" />
-                <span>Download link sent to {email}.</span>
+                <span>{t('strategy_success_download_sent')}</span>
               </div>
             </div>
           ) : (
@@ -571,22 +571,22 @@ const Strategy = () => {
                 </div>
               )}
               <div className="space-y-2">
-                <Label htmlFor="email">Email address</Label>
+                <Label htmlFor="email">{t('email_address')}</Label>
                 <Input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder={t('strategy_email_placeholder')}
                   required
                 />
               </div>
               <DialogFooter>
                 <Button type="button" variant="outline" onClick={() => setOpenEmailDialog(false)}>
-                  Cancel
+                  {t('cancel')}
                 </Button>
                 <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending…' : 'Send download link'}
+                  {isSubmitting ? t('sending') : t('strategy_send_download')}
                 </Button>
               </DialogFooter>
             </form>
