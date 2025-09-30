@@ -169,7 +169,7 @@ export default function Resources() {
             )
           ) : (
             <Link to={`/courses/${item.slug || 'coming-soon'}`}>
-              Preview Course
+              {t('resources_preview_course')}
               <ExternalLink className="h-4 w-4 ml-2" />
             </Link>
           )}
