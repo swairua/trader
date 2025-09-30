@@ -152,7 +152,7 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required 
-                          placeholder="Your full name"
+                          placeholder={t('contact_full_name_placeholder')}
                           className="mt-1"
                         />
                       </div>
