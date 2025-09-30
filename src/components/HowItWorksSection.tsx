@@ -3,6 +3,7 @@ import { CheckCircle, ArrowDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import happyForexTrader from "@/assets/happy-forex-trader.jpg";
 import { LINKS, getExternalLinkProps } from "@/constants/links";
+import { useSiteContent } from "@/hooks/useSiteContent";
 
 export function HowItWorksSection() {
   const { content } = useSiteContent();
