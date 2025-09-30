@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/Navigation";
+import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SectionDivider } from "@/components/SectionDivider";
@@ -7,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import forexBlogHero from "@/assets/forex-blog-hero.jpg";
+import { useI18n } from '@/i18n';
 
 const blogPosts = [
   {
@@ -68,6 +70,7 @@ const blogPosts = [
 const categories = ["All", "Education", "Risk Management", "Psychology"];
 
 const Blog = () => {
+  const { t } = useI18n();
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -92,16 +95,10 @@ const Blog = () => {
           <div className="absolute inset-0 bg-gradient-hero-premium grain-texture"></div>
           <div className="container px-4 relative z-20 on-hero">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="fluid-h1 text-white mb-6">
-                <span>Trading</span> <span>Education</span> <span>Blog</span>
-              </h1>
-              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
-                Educational insights, market analysis, and practical trading knowledge to help you develop disciplined trading habits.
-              </p>
+              <h1 className="fluid-h1 text-white mb-6">{t('blog_hero_title')}</h1>
+              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">{t('blog_hero_subtitle')}</p>
               <div className="p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 max-w-2xl mx-auto">
-                <p className="text-sm text-white/90">
-                  <strong>Educational Content Only:</strong> All articles are for educational purposes. Not financial advice. Trading involves risk of loss.
-                </p>
+                <p className="text-sm text-white/90"><strong>{t('blog_educational_note')}</strong> {t('blog_educational_note_desc')}</p>
               </div>
             </div>
           </div>
@@ -126,7 +123,7 @@ const Blog = () => {
 
               {/* Featured Posts */}
               <div className="mb-16">
-                <h2 className="text-2xl font-bold text-foreground mb-8">Featured Articles</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-8">{t('blog_featured_title')}</h2>
                 <div className="grid md:grid-cols-2 gap-8">
                   {blogPosts.filter(post => post.featured).map((post, index) => (
                     <Card key={index} className="p-8 border border-border hover:shadow-elevation hover:-translate-y-1 transition-all duration-300 cursor-pointer">
@@ -155,7 +152,7 @@ const Blog = () => {
                       </div>
 
                       <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer">
-                        <span className="font-medium">Read Full Article</span>
+                        <span className="font-medium">{t('blog_read_full')}</span>
                         <ArrowRight className="h-4 w-4 ml-2" />
                       </div>
                     </Card>
@@ -165,7 +162,7 @@ const Blog = () => {
 
               {/* All Posts */}
               <div>
-                <h2 className="text-2xl font-bold text-foreground mb-8">All Articles</h2>
+                <h2 className="text-2xl font-bold text-foreground mb-8">{t('blog_all_title')}</h2>
                 <div className="grid md:grid-cols-3 gap-8">
                   {blogPosts.map((post, index) => (
                     <Card key={index} className="p-6 border border-border hover:shadow-elevation hover:-translate-y-1 transition-all duration-300 cursor-pointer">
@@ -188,7 +185,7 @@ const Blog = () => {
                       </div>
 
                       <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer text-sm">
-                        <span className="font-medium">Read More</span>
+                        <span className="font-medium">{t('blog_read_more')}</span>
                         <ArrowRight className="h-3 w-3 ml-1" />
                       </div>
                     </Card>
