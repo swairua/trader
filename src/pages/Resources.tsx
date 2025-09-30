@@ -367,18 +367,16 @@ export default function Resources() {
             <TabsContent value={activeTab} className="space-y-8">
               {filteredResources.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-lg text-muted-foreground mb-4">
-                    No resources found matching your criteria.
-                  </p>
-                  <Button 
-                    variant="outline" 
+                  <p className="text-lg text-muted-foreground mb-4">{t('resources_none_found')}</p>
+                  <Button
+                    variant="outline"
                     onClick={() => {
                       setSearchTerm('');
                       setLevelFilter('all');
                       setTypeFilter('all');
                     }}
                   >
-                    Clear Filters
+                    {t('resources_clear_filters')}
                   </Button>
                 </div>
               ) : (
