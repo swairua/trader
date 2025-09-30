@@ -213,7 +213,7 @@ const Contact = () => {
 
                     <Button type="submit" variant="hero" size="lg" className="w-full" disabled={isSubmitting}>
                       <Send className="h-4 w-4 mr-2" />
-                      {isSubmitting ? "Sending..." : "Send Message"}
+                      {isSubmitting ? t('contact_sending') : t('contact_send')}
                     </Button>
 
                     {showWhatsAppSuccess && (
