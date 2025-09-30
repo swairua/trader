@@ -1,26 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Shield, Target } from "lucide-react";
 import { LINKS, getInternalLinkProps } from "@/constants/links";
-
-const benefits = [
-  {
-    icon: TrendingUp,
-    title: "Systematic Approach",
-    description: "Learn a structured framework that removes emotion from trading decisions"
-  },
-  {
-    icon: Shield,
-    title: "Risk Management",
-    description: "Master precise entry and exit strategies to protect your capital"
-  },
-  {
-    icon: Target,
-    title: "Consistent Framework",
-    description: "Build sustainable trading habits with our proven methodology"
-  }
-];
+import { useI18n } from '@/i18n';
 
 export function DriveCallToActionSection() {
+  const { t } = useI18n();
+
+  const benefits = [
+    {
+      icon: TrendingUp,
+      title: t('drive_cta_benefit_systematic_title'),
+      description: t('drive_cta_benefit_systematic_desc')
+    },
+    {
+      icon: Shield,
+      title: t('drive_cta_benefit_risk_title'),
+      description: t('drive_cta_benefit_risk_desc')
+    },
+    {
+      icon: Target,
+      title: t('drive_cta_benefit_consistent_title'),
+      description: t('drive_cta_benefit_consistent_desc')
+    }
+  ];
+
   return (
     <section className="py-16 lg:py-20 bg-muted/20 relative overflow-hidden" aria-labelledby="drive-cta-heading">
       <div className="absolute inset-0 bg-gradient-hero opacity-15"></div>
@@ -28,11 +31,11 @@ export function DriveCallToActionSection() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <h2 id="drive-cta-heading" className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6">
-              Ready to Learn the{" "}
-              <span className="text-primary">DRIVE Framework?</span>
+              {t('drive_cta_heading_prefix')} {" "}
+              <span className="text-primary">{t('drive_cta_heading_accent')}</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Start building systematic trading skills with our structured educational approach.
+              {t('drive_cta_subtitle')}
             </p>
           </div>
 
@@ -55,7 +58,7 @@ export function DriveCallToActionSection() {
           <div className="text-center">
             <Button size="lg" variant="hero" className="hover:scale-105 transition-transform duration-300" asChild>
               <a {...getInternalLinkProps(LINKS.internal.learn)}>
-                Start Learning
+                {t('drive_cta_button')}
               </a>
             </Button>
           </div>
