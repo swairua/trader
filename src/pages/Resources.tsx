@@ -234,8 +234,8 @@ export default function Resources() {
             } else {
               // Fallback: show material info or coming soon message
               toast({
-                title: "Material Preview",
-                description: `${item.title} will be available for download soon. Check back later!`,
+                title: t('resources_preview_material'),
+                description: `${item.title} ${t('resources_preview_available')}`,
               });
             }
           }}
