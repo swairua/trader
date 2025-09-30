@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Send, ChevronDown, ChevronRight, Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText } from "lucide-react";
@@ -15,7 +15,6 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const { content } = useSiteContent();
   const location = useLocation();
-  const navigate = useNavigate();
   const { language, setLanguage, t } = useI18n();
   const toggleLanguage = () => {
     const next = language === 'en' ? 'fr' : 'en';
@@ -24,13 +23,6 @@ export function Navigation() {
     } catch (e) {
       // fallback to context setLanguage
       setLanguage(next);
-    }
-
-    // Navigate to Learn page after switching language
-    try {
-      navigate(LINKS.internal.learn);
-    } catch (e) {
-      // ignore navigation errors
     }
   };
 
