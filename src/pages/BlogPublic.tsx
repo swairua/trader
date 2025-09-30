@@ -226,6 +226,8 @@ export default function BlogPublic() {
     }
   };
 
+  const { t } = useI18n();
+
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
