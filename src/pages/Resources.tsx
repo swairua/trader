@@ -296,12 +296,8 @@ export default function Resources() {
         
         <div className="container px-4 relative z-20 on-hero">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="fluid-h1 text-white mb-6">
-              <span className="text-primary-glow">Learning</span> Resources
-            </h1>
-            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Access our comprehensive library of courses, e-books, and materials to accelerate your trading education
-            </p>
+            <h1 className="fluid-h1 text-white mb-6">{t('resources_hero_title')}</h1>
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">{t('resources_hero_subtitle')}</p>
             
             {/* Quick Filters */}
             <div className="flex flex-wrap justify-center gap-3 mb-8">
