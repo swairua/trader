@@ -112,6 +112,9 @@ const whyChooseData = [
 ];
 
 const Strategy = () => {
+  const { t } = useI18n();
+  const { content } = useSiteContent();
+  const page = content.pages.driveStrategy;
   const [openEmailDialog, setOpenEmailDialog] = useState(false);
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
