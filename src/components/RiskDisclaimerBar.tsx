@@ -101,7 +101,7 @@ export function RiskDisclaimerBar() {
                 onClick={handleDismiss}
                 className="flex-1 text-xs"
               >
-                Dismiss
+                {t('dismiss')}
               </Button>
             </div>
           </CardContent>
