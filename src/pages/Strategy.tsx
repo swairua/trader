@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { supabase } from "@/integrations/supabase/client";
 import { 
-  Download, 
   TrendingUp, 
   Search, 
   Target, 
@@ -228,7 +227,6 @@ const Strategy = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button variant="hero" size="lg" asChild>
                   <a {...getExternalLinkProps(LINKS.telegram.community)} aria-label="Join on Telegram">
-                    <Download className="h-4 w-4 mr-2" />
                     {">> Get started"}
                   </a>
                 </Button>
