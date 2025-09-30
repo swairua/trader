@@ -141,7 +141,7 @@ const Contact = () => {
               <div className="grid lg:grid-cols-2 gap-12">
                 {/* Contact Form */}
                 <Card className="p-8 border border-border">
-                  <h2 className="text-2xl font-bold text-foreground mb-6">Send us a Message</h2>
+                  <h2 className="text-2xl font-bold text-foreground mb-6">{t('contact_send_message_title')}</h2>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
