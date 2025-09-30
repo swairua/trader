@@ -44,7 +44,6 @@ export function DriveStrategySection() {
                 preload="metadata"
                 className="w-full rounded-lg shadow-lg"
                 src="https://cdn.builder.io/o/assets%2Fa0a8da52b13a46b692f489902ea746ed%2Fec3d5fddc4794034b8378f4ee3b85840?alt=media&token=2bcbb705-9fa8-4ee5-9ed2-7e1b4357c026&apiKey=a0a8da52b13a46b692f489902ea746ed"
-                poster="https://cdn.builder.io/api/v1/image/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2F0bebcc7fcc8e46e686b4faa7ede09650?format=webp&width=1200"
                 aria-label="DRIVE strategy overview video"
               />
             </div>
