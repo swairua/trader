@@ -325,7 +325,7 @@ export default function BlogPublic() {
                 onValueChange={(value) => updateSearchParams({ author: value === 'all' ? null : value })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="All authors" />
+                  <SelectValue placeholder={t('resources_tab_all')} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Authors</SelectItem>
