@@ -31,6 +31,8 @@ import tradingProcessFlow from "@/assets/trading-process-flow.jpg";
 import tradingWorkspace from "@/assets/trading-workspace.jpg";
 import { driveSteps } from "@/content/drive";
 import { useState } from "react";
+import { useI18n } from '@/i18n';
+import { useSiteContent } from '@/hooks/useSiteContent';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
