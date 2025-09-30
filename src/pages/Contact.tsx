@@ -205,7 +205,7 @@ const Contact = () => {
                         value={formData.message}
                         onChange={handleChange}
                         required 
-                        placeholder="Tell us how we can help you..."
+                        placeholder={t('contact_message_placeholder')}
                         rows={6}
                         className="mt-1"
                       />
