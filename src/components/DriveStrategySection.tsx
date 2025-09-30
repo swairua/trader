@@ -40,6 +40,9 @@ export function DriveStrategySection() {
           <div className="relative">
             <div className="mx-auto max-w-3xl mb-6">
               <video
+                autoPlay
+                muted
+                playsInline
                 controls
                 preload="metadata"
                 className="w-full rounded-lg shadow-lg"
