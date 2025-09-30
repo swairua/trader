@@ -158,7 +158,7 @@ export default function Resources() {
             // Check if it's an external URL or internal course
             hasUrl.startsWith('http') ? (
               <a href={hasUrl} target="_blank" rel="noopener noreferrer">
-                View Course
+                {t('resources_view_course')}
                 <ExternalLink className="h-4 w-4 ml-2" />
               </a>
             ) : (
