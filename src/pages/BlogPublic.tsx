@@ -13,6 +13,7 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { SectionDivider } from '@/components/SectionDivider';
+import { useI18n } from '@/i18n';
 import { format } from 'date-fns';
 import forexBlogHero from '@/assets/forex-blog-hero.jpg';
 
