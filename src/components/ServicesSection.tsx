@@ -89,7 +89,7 @@ export function ServicesSection() {
           <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <Card key={index} className="group overflow-hidden bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/80 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
-                <Link to={service.link} className="flex-1 flex flex-col" aria-label={`View details: ${service.title}`}>
+                <Link to={service.link} className="flex-1 flex flex-col" aria-label={`${t('view_details')}: ${service.title}`}>
                   <div className="relative h-48 overflow-hidden">
                     <img 
                       src={service.image} 
