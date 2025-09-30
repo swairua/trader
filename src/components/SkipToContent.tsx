@@ -1,5 +1,7 @@
 import { useI18n } from '@/i18n';
 
+import { useI18n } from '@/i18n';
+
 export function SkipToContent() {
   const { t } = useI18n();
   const label = t('skip_to_main_content');
