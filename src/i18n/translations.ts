@@ -107,6 +107,18 @@ export const translations: Record<Locale, Record<string, string>> = {
     why_exness_bullet_no_fees: 'No Hidden Fees',
     why_exness_bullet_instant_setup: 'Instant Setup',
     why_exness_bullet_premium_support: 'Premium Support',
+
+    // DriveCallToActionSection
+    drive_cta_heading_prefix: 'Ready to Learn the',
+    drive_cta_heading_accent: 'DRIVE Framework?',
+    drive_cta_subtitle: 'Start building systematic trading skills with our structured educational approach.',
+    drive_cta_benefit_systematic_title: 'Systematic Approach',
+    drive_cta_benefit_systematic_desc: 'Learn a structured framework that removes emotion from trading decisions',
+    drive_cta_benefit_risk_title: 'Risk Management',
+    drive_cta_benefit_risk_desc: 'Master precise entry and exit strategies to protect your capital',
+    drive_cta_benefit_consistent_title: 'Consistent Framework',
+    drive_cta_benefit_consistent_desc: 'Build sustainable trading habits with our proven methodology',
+    drive_cta_button: 'Start Learning',
   },
   fr: {
     // Accessibility / generic
@@ -163,7 +175,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_value_of_risk_title: 'Valeur du risque',
     drive_value_of_risk_desc: 'Apprenez à appliquer des ratios risque/rendement structurés.',
     drive_entry_title: 'Entrée',
-    drive_entry_desc: 'Apprenez à suivre des règles d’entrée structurées.',
+    drive_entry_desc: 'Apprenez �� suivre des règles d’entrée structurées.',
 
     // How it Works extras
     create_exness_account: 'Créez votre compte Exness',
@@ -214,5 +226,17 @@ export const translations: Record<Locale, Record<string, string>> = {
     why_exness_bullet_no_fees: 'Aucun frais caché',
     why_exness_bullet_instant_setup: 'Configuration instantanée',
     why_exness_bullet_premium_support: 'Support premium',
+
+    // DriveCallToActionSection
+    drive_cta_heading_prefix: 'Prêt à apprendre le',
+    drive_cta_heading_accent: 'cadre DRIVE ?',
+    drive_cta_subtitle: 'Commencez à développer des compétences de trading systématiques grâce à notre approche éducative structurée.',
+    drive_cta_benefit_systematic_title: 'Approche systématique',
+    drive_cta_benefit_systematic_desc: 'Apprenez un cadre structuré qui supprime l’émotion des décisions de trading',
+    drive_cta_benefit_risk_title: 'Gestion du risque',
+    drive_cta_benefit_risk_desc: 'Maîtrisez des stratégies d’entrée et de sortie précises pour protéger votre capital',
+    drive_cta_benefit_consistent_title: 'Cadre cohérent',
+    drive_cta_benefit_consistent_desc: 'Développez des habitudes de trading durables grâce à notre méthodologie éprouvée',
+    drive_cta_button: 'Commencer l’apprentissage',
   },
 };
