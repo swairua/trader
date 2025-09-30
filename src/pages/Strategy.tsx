@@ -289,10 +289,10 @@ const Strategy = () => {
                           <step.icon className="h-6 w-6 text-primary" />
                         </div>
                         <h3 className="text-lg font-display font-semibold text-foreground mb-2 text-center group-hover:text-primary transition-colors duration-300">
-                          {step.title}
+                          {t(['drive_direction_title','drive_range_title','drive_poi_title','drive_value_of_risk_title','drive_entry_title'][index] || 'drive_direction_title')}
                         </h3>
                         <p className="text-sm text-muted-foreground text-center mb-4">
-                          {step.description}
+                          {t(['drive_direction_desc','drive_range_desc','drive_poi_desc','drive_value_of_risk_desc','drive_entry_desc'][index] || 'drive_direction_desc')}
                         </p>
                         <ul className="space-y-2 list-none pl-0">
                           {step.details.map((detail, detailIndex) => (
@@ -318,7 +318,7 @@ const Strategy = () => {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-lg font-display font-semibold text-foreground mb-1">
-                          {step.title}
+                          {t(['drive_direction_title','drive_range_title','drive_poi_title','drive_value_of_risk_title','drive_entry_title'][index] || 'drive_direction_title')}
                         </h3>
                         <p className="text-sm text-muted-foreground">
                           {t('step')} {index + 1} {t('of')} 5
