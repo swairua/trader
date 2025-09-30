@@ -534,6 +534,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     faqs_loading: 'Chargement des FAQ…',
     faqs_error: 'Erreur de chargement des FAQ',
     faqs_title: 'Foire aux questions',
+    faqs_hero_subtitle: "Obtenez des réponses claires sur notre approche éducative, notre méthodologie de trading et nos services d'assistance.",
     faqs_search_placeholder: 'Rechercher dans les FAQ…',
     faqs_no_results_title: 'Aucune FAQ trouvée',
     faqs_no_results_desc_empty: 'Aucune FAQ disponible pour cette catégorie.',
