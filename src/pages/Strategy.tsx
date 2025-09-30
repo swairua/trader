@@ -199,8 +199,8 @@ const Strategy = () => {
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 hero-image">
             <img 
-              src={traderWorkspaceHero} 
-              alt="Professional trader analyzing charts on multiple monitors" 
+              src={traderWorkspaceHero}
+              alt={t('strategy_hero_alt')}
               className="w-full h-full object-cover"
               loading="eager"
               width={1920}
@@ -233,11 +233,7 @@ const Strategy = () => {
                   variant="glass"
                   size="lg"
                   className="border-white/30 text-white hover:bg-white/10"
-                  onClick={() => {
-                    setResultVideo({ type: null, message: "" });
-                    setVideoEmail("");
-                    setOpenVideoDialog(true);
-                  }}
+                  onClick={() => setOpenVideoDialog(true)}
                 >
                   <Play className="h-4 w-4 mr-2" />
                   {t('strategy_watch_video_btn')}
@@ -259,17 +255,6 @@ const Strategy = () => {
                 </a>
               </div>
 
-              {/* Embedded Strategy Video (inline on Strategy page) */}
-              <div className="mt-8 max-w-4xl mx-auto">
-                <video
-                  controls
-                  preload="metadata"
-                  className="w-full rounded-lg shadow-lg"
-                  src="https://cdn.builder.io/o/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2F09296fea41b446e9b7766d04a5882ffb?alt=media&token=fbe80ad2-fe5e-44ae-a7ea-61d49edbd50a&apiKey=929a94a73a3e4246bd07aab61b8a8dc4"
-                  poster="https://cdn.builder.io/api/v1/image/assets%2F929a94a73a3e4246bd07aab61b8a8dc4%2Fffbc7d93a7c548ed8df7d1e69e1c3eea?format=webp&width=1200"
-                  aria-label="DRIVE strategy overview video"
-                />
-              </div>
 
             </div>
           </div>
@@ -378,12 +363,12 @@ const Strategy = () => {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="font-semibold">Feature/Approach</TableHead>
-                        <TableHead className="font-semibold text-primary">DRIVE Strategy</TableHead>
-                        <TableHead className="font-semibold">Indicators</TableHead>
-                        <TableHead className="font-semibold">Price Action Only</TableHead>
-                        <TableHead className="font-semibold">ICT</TableHead>
-                        <TableHead className="font-semibold">Supply & Demand</TableHead>
+                        <TableHead className="font-semibold">{t('comparison_feature')}</TableHead>
+                        <TableHead className="font-semibold text-primary">{t('comparison_drive')}</TableHead>
+                        <TableHead className="font-semibold">{t('comparison_indicators')}</TableHead>
+                        <TableHead className="font-semibold">{t('comparison_price_action')}</TableHead>
+                        <TableHead className="font-semibold">{t('comparison_ict')}</TableHead>
+                        <TableHead className="font-semibold">{t('comparison_supply_demand')}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -417,19 +402,19 @@ const Strategy = () => {
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-xs">
                         <div>
-                          <div className="font-medium text-muted-foreground mb-1">Indicators</div>
+                          <div className="font-medium text-muted-foreground mb-1">{t('comparison_indicators')}</div>
                           <div className="text-foreground">{row.indicators}</div>
                         </div>
                         <div>
-                          <div className="font-medium text-muted-foreground mb-1">Price Action</div>
+                          <div className="font-medium text-muted-foreground mb-1">{t('comparison_price_action')}</div>
                           <div className="text-foreground">{row.priceAction}</div>
                         </div>
                         <div>
-                          <div className="font-medium text-muted-foreground mb-1">ICT</div>
+                          <div className="font-medium text-muted-foreground mb-1">{t('comparison_ict')}</div>
                           <div className="text-foreground">{row.ict}</div>
                         </div>
                         <div>
-                          <div className="font-medium text-muted-foreground mb-1">Supply & Demand</div>
+                          <div className="font-medium text-muted-foreground mb-1">{t('comparison_supply_demand')}</div>
                           <div className="text-foreground">{row.supplyDemand}</div>
                         </div>
                       </div>
@@ -499,51 +484,24 @@ const Strategy = () => {
       <Footer />
       <WhatsAppButton />
 
-      <Dialog open={openVideoDialog} onOpenChange={(open) => { setOpenVideoDialog(open); if (!open) { setResultVideo({ type: null, message: "" }); setVideoEmail(""); } }}>
-        <DialogContent>
+      <Dialog open={openVideoDialog} onOpenChange={setOpenVideoDialog}>
+        <DialogContent className="max-w-3xl">
           <DialogHeader>
-            <DialogTitle>{t('strategy_dialog_video_title')}</DialogTitle>
-            <DialogDescription>
-              {t('strategy_dialog_video_desc')}
-            </DialogDescription>
+            <DialogTitle>{t('strategy_watch_video_btn')}</DialogTitle>
           </DialogHeader>
-
-          {resultVideo.type === 'success' ? (
-            <div className="space-y-3">
-              <div className="flex items-center gap-2 text-green-700 dark:text-green-300">
-                <CheckCircle className="h-5 w-5" />
-                <span>{t('strategy_success_video_sent')}</span>
-              </div>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmitVideo} className="space-y-4">
-              {resultVideo.type === 'error' && (
-                <div className="flex items-start gap-2 rounded-md border border-red-200 bg-red-50 p-3 text-red-700 dark:border-red-900/50 dark:bg-red-900/20 dark:text-red-300">
-                  <AlertTriangle className="h-5 w-5 mt-0.5" />
-                  <p className="text-sm">{resultVideo.message}</p>
-                </div>
-              )}
-              <div className="space-y-2">
-                <Label htmlFor="videoEmail">{t('email_address')}</Label>
-                <Input
-                  id="videoEmail"
-                  type="email"
-                  value={videoEmail}
-                  onChange={(e) => setVideoEmail(e.target.value)}
-                  placeholder={t('strategy_email_placeholder')}
-                  required
-                />
-              </div>
-              <DialogFooter>
-                <Button type="button" variant="outline" onClick={() => setOpenVideoDialog(false)}>
-                  {t('cancel')}
-                </Button>
-                <Button type="submit" disabled={isSubmittingVideo}>
-                  {isSubmittingVideo ? t('sending') : t('strategy_send_video')}
-                </Button>
-              </DialogFooter>
-            </form>
-          )}
+          <div className="relative w-full aspect-video">
+            <video
+              controls
+              preload="metadata"
+              className="w-full h-full rounded-lg"
+              src="https://cdn.builder.io/o/assets%2Ff677abe3095d4432a56cc618b51eadf0%2Feb78258f0c05499db2e428b277404842?alt=media&token=28d911b4-3bf9-4435-9a57-b9f0b7c5abb4&apiKey=f677abe3095d4432a56cc618b51eadf0"
+            />
+          </div>
+          <div className="flex justify-end gap-2 pt-4">
+            <Button variant="outline" onClick={() => setOpenVideoDialog(false)}>
+              {t('cancel')}
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
 
