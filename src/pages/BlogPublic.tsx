@@ -259,12 +259,8 @@ export default function BlogPublic() {
           <div className="absolute inset-0 bg-gradient-hero-premium grain-texture"></div>
           <div className="container px-4 relative z-20 on-hero">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="fluid-h1 text-white mb-6">
-                <span>Trading</span> <span>Education</span> <span>Blog</span>
-              </h1>
-              <p className="text-hero-body mb-8 max-w-3xl mx-auto">
-                Educational insights, market analysis, and practical trading knowledge to help you develop disciplined trading habits.
-              </p>
+              <h1 className="fluid-h1 text-white mb-6">{t('blog_hero_title')}</h1>
+              <p className="text-hero-body mb-8 max-w-3xl mx-auto">{t('blog_hero_subtitle')}</p>
               <div className="p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 max-w-2xl mx-auto">
                 <p className="text-sm">
                   <strong>Educational Content Only:</strong> All articles are for educational purposes. Not financial advice. Trading involves risk of loss.
