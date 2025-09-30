@@ -97,4 +97,4 @@ export const WHATSAPP_MESSAGES = {
 /**
  * Default phone number (can be overridden by site settings)
  */
-export const DEFAULT_WHATSAPP_PHONE = "254101316169";
+export const DEFAULT_WHATSAPP_PHONE = "254726529166";
