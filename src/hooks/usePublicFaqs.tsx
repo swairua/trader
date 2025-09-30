@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { useI18n } from '@/i18n';
+import { useState, useEffect } from 'react';
 
 interface FAQ {
   id: string;
@@ -24,8 +24,7 @@ interface UsePublicFaqsReturn {
   error: string | null;
 }
 
-export const usePublicFaqs = (): UsePublicFaqsReturn => {
-  const { language } = useI18n();
+export const usePublicFaqs = (language?: string): UsePublicFaqsReturn => {
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [categories, setCategories] = useState<FAQCategory[]>([]);
   const [loading, setLoading] = useState(true);
