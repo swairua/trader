@@ -396,15 +396,24 @@ export const VideoEmbed: React.FC<VideoEmbedProps> = ({
   thumbnail,
   duration
 }) => {
-  const [isPlaying, setIsPlaying] = React.useState(false);
+  // autoplay videos on page load (muted to satisfy browser autoplay policies)
+  const [isPlaying, setIsPlaying] = React.useState(true);
+
+  const makeAutoplaySrc = (url: string) => {
+    if (!url) return url;
+    // if already has autoplay param, leave it
+    if (url.includes('autoplay=1')) return url;
+    const append = 'autoplay=1&mute=1';
+    return url.includes('?') ? `${url}&${append}` : `${url}?${append}`;
+  };
 
   return (
     <div className="my-8">
       <div className="relative rounded-lg overflow-hidden bg-black aspect-video">
         {!isPlaying && thumbnail ? (
           <div className="relative w-full h-full cursor-pointer" onClick={() => setIsPlaying(true)}>
-            <img 
-              src={thumbnail} 
+            <img
+              src={thumbnail}
               alt={title}
               className="w-full h-full object-cover"
             />
@@ -421,7 +430,7 @@ export const VideoEmbed: React.FC<VideoEmbedProps> = ({
           </div>
         ) : (
           <iframe
-            src={src}
+            src={makeAutoplaySrc(src)}
             title={title}
             className="w-full h-full"
             allowFullScreen
