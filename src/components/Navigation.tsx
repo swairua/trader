@@ -85,13 +85,13 @@ export function Navigation() {
                   }}
                 >
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="group px-3 py-2 min-h-[44px] font-medium hover:text-purple-600">
-                      {t('nav_more')} <ChevronDown className={`ml-1 h-5 w-5 transition-transform duration-150 ${moreOpen ? 'rotate-180 scale-x-125' : 'rotate-0 scale-x-110'} group-hover:rotate-180`} />
+                    <Button variant="ghost" size="sm" className="group px-3 py-2 min-h-[44px] font-medium text-foreground">
+                      {t('nav_more')} <ChevronDown className="ml-1 h-5 w-5" />
                     </Button>
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent
-                    className="min-w-[14rem]"
+                    className="min-w-[24rem] grid grid-cols-2 gap-2 p-2"
                     align="start"
                     onMouseEnter={() => {
                       if (hoverTimeoutRef.current) {
@@ -108,7 +108,7 @@ export function Navigation() {
                       const Icon = nestedIcons[idx % nestedIcons.length];
                       return (
                         <DropdownMenuItem key={item.name} asChild>
-                          <Link to={item.href} className="flex items-center hover:text-purple-600">
+                          <Link to={item.href} className="flex items-center text-foreground">
                             <Icon className="mr-2 h-4 w-4 opacity-80" />
                             {item.name}
                           </Link>
