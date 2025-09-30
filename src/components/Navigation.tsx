@@ -219,7 +219,7 @@ export function Navigation() {
                 <div className="pt-4 border-t border-border/40" />
                 <div className="flex items-center justify-between">
                   <a {...getExternalLinkProps(LINKS.telegram.kenneDynespot)} className="text-foreground hover:text-primary">
-                    <Send className="h-5 w-5 inline-block mr-2" /> Telegram
+                    <Send className="h-5 w-5 inline-block mr-2" /> {t('nav_telegram')}
                   </a>
                   <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)}>Close</Button>
                 </div>
