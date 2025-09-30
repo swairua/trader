@@ -337,16 +337,16 @@ export default function BlogPublic() {
                 </SelectContent>
               </Select>
               
-              <Button 
+              <Button
                 variant="outline"
-                onClick={() => updateSearchParams({ 
-                  search: null, 
-                  category: null, 
-                  tag: null, 
-                  author: null 
+                onClick={() => updateSearchParams({
+                  search: null,
+                  category: null,
+                  tag: null,
+                  author: null
                 })}
               >
-                Clear Filters
+                {t('resources_clear_filters')}
               </Button>
             </div>
           </CardContent>
