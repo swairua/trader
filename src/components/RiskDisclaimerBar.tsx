@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 import { AlertTriangle, X, ExternalLink } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
