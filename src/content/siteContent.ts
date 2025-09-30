@@ -440,13 +440,13 @@ export const defaultContent: SiteContent = {
         "DRIVE Strategy Training"
       ]
     },
-    phone: "+254 101 316 169",
+    phone: "+254 726 529 166",
     email: "info@institutionaltrader.ke",
     whatsappText: "Get Support",
     socials: [
       { name: "Telegram (KenneDyne spot)", href: "https://t.me/KenneDynespot", type: "telegram" },
       { name: "WhatsApp Channel", href: "https://whatsapp.com/channel/0029Va5oaai3WHTR1PyrOI1n", type: "whatsapp" },
-      { name: "WhatsApp (Chat)", href: "https://wa.me/254101316169?text=Hi%21%20I%20am%20interested%20in%20learning%20more%20about%20your%20trading%20education%20programs.", type: "whatsapp" },
+      { name: "WhatsApp (Chat)", href: "https://wa.me/254726529166?text=Hi%21%20I%20am%20interested%20in%20learning%20more%20about%20your%20trading%20education%20programs.", type: "whatsapp" },
       { name: "YouTube", href: "https://www.youtube.com/@InstitutionalTraderKE", type: "youtube" },
       { name: "X", href: "https://x.com/InstitutionalKE", type: "x" },
       { name: "Instagram", href: "https://www.instagram.com/kennedyne_spot?igsh=NnVoeXJoZ2dmemF5", type: "instagram" }
@@ -576,7 +576,7 @@ export const defaultContent: SiteContent = {
     contact: {
       title: "Contact Us",
       subtitle: "Get in touch for educational inquiries and mentorship opportunities",
-      phone: "+254 101 316 169",
+      phone: "+254 726 529 166",
       email: "info@institutionaltrader.ke",
       whatsapp: "https://whatsapp.com/channel/0029Va5oaai3WHTR1PyrOI1n",
       address: "Nairobi, Kenya",
