@@ -100,12 +100,8 @@ const Contact = () => {
           <div className="absolute inset-0 bg-gradient-hero-premium grain-texture" />
           <div className="container px-4 relative z-20 on-hero">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="fluid-h1 text-white mb-6">
-                <span>Get</span> in <span>Touch</span>
-              </h1>
-              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
-                Have questions about our educational programs? Need support? We're here to help you on your trading education journey.
-              </p>
+              <h1 className="fluid-h1 text-white mb-6">{t('contact_hero_title')}</h1>
+              <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">{t('contact_hero_subtitle')}</p>
               <div className="flex flex-wrap justify-center gap-3 mt-4">
                 <Button variant="hero" size="lg" onClick={() => {
                   const subject = 'Contact from website';
@@ -126,11 +122,11 @@ const Contact = () => {
                     }
                   }, 1200);
                 }}>
-                  <Mail className="h-4 w-4 mr-2" /> Email Us
+                  <Mail className="h-4 w-4 mr-2" /> {t('contact_email_us')}
                 </Button>
                 <Button asChild variant="glass" size="lg" className="border-white/30 text-white hover:bg-white/10">
                   <a {...getExternalLinkProps(whatsappUrl)}>
-                    <MessageCircle className="h-4 w-4 mr-2" /> WhatsApp
+                    <MessageCircle className="h-4 w-4 mr-2" /> {t('contact_whatsapp')}
                   </a>
                 </Button>
               </div>
