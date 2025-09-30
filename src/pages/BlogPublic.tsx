@@ -263,7 +263,7 @@ export default function BlogPublic() {
               <p className="text-hero-body mb-8 max-w-3xl mx-auto">{t('blog_hero_subtitle')}</p>
               <div className="p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 max-w-2xl mx-auto">
                 <p className="text-sm">
-                  <strong>Educational Content Only:</strong> All articles are for educational purposes. Not financial advice. Trading involves risk of loss.
+                  <strong>{t('blog_educational_note')}</strong> {t('blog_educational_note_desc')}
                 </p>
               </div>
             </div>
