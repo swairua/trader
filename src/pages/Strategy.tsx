@@ -218,15 +218,15 @@ const Strategy = () => {
                 {t('strategy_badge')}
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tighter text-white mb-6 leading-tight">
-                The <span className="text-primary">D.R.I.V.E</span> Strategy
+                {page.title}
               </h1>
               <p className="text-hero-body text-white/90 mb-4 leading-relaxed max-w-3xl mx-auto">
-                Our structured DRIVE Strategy offers rules and a clear learning path designed to help traders build stronger analysis skills and make more informed decisions in the market.
+                {page.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button variant="hero" size="lg" onClick={handleDownload}>
                   <Download className="h-4 w-4 mr-2" />
-                  Download DRIVE Checklist
+                  {t('strategy_download_btn')}
                 </Button>
                 <Button
                   variant="glass"
@@ -239,22 +239,22 @@ const Strategy = () => {
                   }}
                 >
                   <Play className="h-4 w-4 mr-2" />
-                  Watch Strategy Video
+                  {t('strategy_watch_video_btn')}
                 </Button>
               </div>
               
               {/* Quick Navigation */}
               <div className="flex flex-wrap justify-center gap-2 text-sm">
                 <a href="#drive-steps" className="text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1">
-                  5 Steps
+                  {t('strategy_nav_steps')}
                 </a>
                 <span className="text-white/40">•</span>
                 <a href="#comparison" className="text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1">
-                  Comparison
+                  {t('strategy_nav_comparison')}
                 </a>
                 <span className="text-white/40">•</span>
                 <a href="#why-choose" className="text-white/70 hover:text-white transition-colors border-b border-white/30 hover:border-white pb-1">
-                  Why Choose DRIVE
+                  {t('strategy_nav_why_choose')}
                 </a>
               </div>
 
