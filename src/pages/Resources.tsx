@@ -315,15 +315,15 @@ export default function Resources() {
               
               <Select value={typeFilter} onValueChange={setTypeFilter}>
                 <SelectTrigger className="w-40 bg-white/10 border-white/20 text-white">
-                  <SelectValue placeholder="All Types" />
+                  <SelectValue placeholder={t('resources_filter_all_types')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Types</SelectItem>
-                  <SelectItem value="course">Courses</SelectItem>
-                  <SelectItem value="ebook">E-books</SelectItem>
-                  <SelectItem value="pdf">PDFs</SelectItem>
-                  <SelectItem value="video">Videos</SelectItem>
-                  <SelectItem value="sheet">Cheat Sheets</SelectItem>
+                  <SelectItem value="all">{t('resources_filter_all_types')}</SelectItem>
+                  <SelectItem value="course">{t('resources_filter_courses')}</SelectItem>
+                  <SelectItem value="ebook">{t('resources_filter_ebooks')}</SelectItem>
+                  <SelectItem value="pdf">{t('resources_filter_pdfs')}</SelectItem>
+                  <SelectItem value="video">{t('resources_filter_videos')}</SelectItem>
+                  <SelectItem value="sheet">{t('resources_filter_sheets')}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
