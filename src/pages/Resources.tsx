@@ -192,8 +192,8 @@ export default function Resources() {
             } else {
               // Fallback: show preview or coming soon page
               toast({
-                title: "E-book Preview",
-                description: `${item.title} will be available for download soon. You can read the description for now.`,
+                title: t('resources_preview_ebook'),
+                description: `${item.title} ${t('resources_download_failed_desc')}`,
               });
             }
           }}
@@ -202,17 +202,17 @@ export default function Resources() {
           {isDownloading ? (
             <>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              Downloading...
+              {t('resources_downloading') }
             </>
           ) : hasFile ? (
             <>
               <Download className="h-4 w-4 mr-2" />
-              Download PDF
+              {t('resources_download_pdf') }
             </>
           ) : (
             <>
               <BookOpen className="h-4 w-4 mr-2" />
-              Preview E-book
+              {t('resources_preview_ebook') }
             </>
           )}
         </Button>
@@ -244,7 +244,7 @@ export default function Resources() {
           {isDownloading ? (
             <>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              Preparing...
+              {t('resources_preparing') }
             </>
           ) : hasFile ? (
             <>
@@ -258,7 +258,7 @@ export default function Resources() {
           ) : (
             <>
               <FileText className="h-4 w-4 mr-2" />
-              Preview Material
+              {t('resources_preview_material') }
             </>
           )}
         </Button>
@@ -448,9 +448,7 @@ export default function Resources() {
                                const itemUrl = item.url || item.course_url || item.download_url || item.downloadUrl || item.material_url;
                                if (!itemUrl && item.resourceType !== 'course') {
                                  return (
-                                   <Badge variant="secondary" className="text-xs">
-                                     Preview Available
-                                   </Badge>
+                                   <Badge variant="secondary" className="text-xs">{t('resources_preview_available')}</Badge>
                                  );
                                }
                                return null;
