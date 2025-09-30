@@ -24,6 +24,7 @@ import { trackEvent } from "@/components/GTMProvider";
 import { useState, useEffect } from "react";
 import { useMentorshipForm } from "@/hooks/useMentorshipForm";
 import { Link } from "react-router-dom";
+import { Navigation } from "@/components/Navigation";
 import { useToast } from "@/hooks/use-toast";
 import forexMentorshipHero from "@/assets/forex-mentorship-hero.jpg";
 
