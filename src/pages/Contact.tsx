@@ -184,7 +184,7 @@ const Contact = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="subject">Subject</Label>
+                        <Label htmlFor="subject">{t('contact_subject')}</Label>
                         <Input 
                           id="subject" 
                           name="subject" 
