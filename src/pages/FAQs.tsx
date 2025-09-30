@@ -4,6 +4,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { SectionDivider } from "@/components/SectionDivider";
+import { useI18n } from '@/i18n';
 
 import {
   Accordion,
@@ -21,6 +22,7 @@ import { toast } from "sonner";
 import forexFaqHero from "@/assets/forex-faq-hero.jpg";
 
 const FAQs = () => {
+  const { t } = useI18n();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [copiedFaqId, setCopiedFaqId] = useState<string | null>(null);
@@ -66,10 +68,10 @@ const FAQs = () => {
       await navigator.clipboard.writeText(url);
       setCopiedFaqId(faqId);
       setTimeout(() => setCopiedFaqId(null), 2000);
-      toast.success("Link copied to clipboard!");
+      toast.success(t('faqs_copy_link'));
     } catch (err) {
       console.error('Failed to copy: ', err);
-      toast.error("Failed to copy link");
+      toast.error(t('faqs_error'));
     }
   };
 
@@ -78,11 +80,11 @@ const FAQs = () => {
       <Card className="border border-border/50 bg-card/30 backdrop-blur-sm">
         <CardContent className="p-12 text-center">
           <HelpCircle className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-lg font-semibold mb-2">No FAQs found</h3>
+          <h3 className="text-lg font-semibold mb-2">{t('faqs_no_results_title')}</h3>
           <p className="text-muted-foreground">
-            {searchQuery ? 
-              `No FAQs match "${searchQuery}". Try a different search term.` :
-              "No FAQs available for this category."
+            {searchQuery ?
+              t('faqs_no_results_desc_query').replace('{{query}}', searchQuery) :
+              t('faqs_no_results_desc_empty')
             }
           </p>
           {searchQuery && (
@@ -92,7 +94,7 @@ const FAQs = () => {
               onClick={() => setSearchQuery("")}
               className="mt-4"
             >
-              Clear search
+              {t('resources_clear_filters')}
             </Button>
           )}
         </CardContent>
@@ -118,7 +120,7 @@ const FAQs = () => {
                         copyFaqLink(faq.id);
                       }}
                       className="opacity-0 group-hover:opacity-100 transition-opacity p-2 h-8 w-8 hover:bg-primary/10"
-                      title="Copy link to this FAQ"
+                      title={t('faqs_copy_link')}
                     >
                       {copiedFaqId === faq.id ? (
                         <Check className="h-3 w-3 text-green-500" />
@@ -165,7 +167,7 @@ const FAQs = () => {
               <div className="max-w-4xl mx-auto text-center">
                 <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
                 <h1 className="fluid-h1 font-bold font-display tracking-tighter text-white mb-6 text-shadow-hero">
-                  Loading FAQs...
+                  {t('faqs_loading')}
                 </h1>
               </div>
             </div>
@@ -208,7 +210,7 @@ const FAQs = () => {
               <div className="max-w-4xl mx-auto text-center">
                 <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
                 <h1 className="fluid-h1 font-bold font-display tracking-tighter text-white mb-6 text-shadow-hero">
-                  Error Loading FAQs
+                  {t('faqs_error')}
                 </h1>
                 <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
                   {error}
@@ -249,7 +251,7 @@ const FAQs = () => {
             <div className="max-w-4xl mx-auto text-center">
               <HelpCircle className="h-16 w-16 mx-auto mb-6 text-primary" />
               <h1 className="fluid-h1 font-bold font-display tracking-tighter text-white mb-6 text-shadow-hero">
-                Frequently Asked Questions
+                {t('faqs_title')}
               </h1>
               <p className="text-hero-body text-white/90 mb-8 max-w-3xl mx-auto">
                 Get clear answers about our educational approach, trading methodology, and support services.
@@ -296,14 +298,14 @@ const FAQs = () => {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="text"
-                      placeholder="Search FAQs..."
+                      placeholder={t('faqs_search_placeholder')}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="pl-10 pr-4 py-2 w-full bg-background/50 border-border/50 focus:border-primary/50 transition-colors"
                     />
                     {searchQuery && (
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-muted-foreground">
-                        {filteredFAQs.length} result{filteredFAQs.length !== 1 ? 's' : ''}
+                        {filteredFAQs.length} {t('faqs_results_count')}{filteredFAQs.length !== 1 ? 's' : ''}
                       </div>
                     )}
                   </div>
@@ -372,7 +374,7 @@ const FAQs = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="default" size="lg" asChild>
                   <Link to="/contact">
-                    Contact Us
+                    {t('faqs_contact_us')}
                     <MessageCircle className="h-4 w-4" />
                   </Link>
                 </Button>
