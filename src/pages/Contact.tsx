@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import contactHero from "@/assets/contact-hero.jpg";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { useI18n } from '@/i18n';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
