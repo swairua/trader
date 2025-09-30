@@ -173,7 +173,7 @@ const Contact = () => {
                     
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="phone">Phone (Optional)</Label>
+                        <Label htmlFor="phone">{t('contact_phone_optional')}</Label>
                         <Input 
                           id="phone" 
                           name="phone" 
