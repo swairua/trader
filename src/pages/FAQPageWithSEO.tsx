@@ -1,10 +1,9 @@
-import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { SEOHead } from "@/components/SEOHead";
 import { generateFAQSchema } from "@/content/faqs";
 import { driveFullName } from "@/content/drive";
 import { supabase } from "@/integrations/supabase/client";
-import { useLocation } from "react-router-dom";
 import { useI18n } from '@/i18n';
 import FAQs from "./FAQs";
 
