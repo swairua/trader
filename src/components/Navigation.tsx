@@ -15,6 +15,7 @@ export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const { content } = useSiteContent();
   const location = useLocation();
+  const navigate = useNavigate();
   const { language, setLanguage, t } = useI18n();
   const toggleLanguage = () => {
     const next = language === 'en' ? 'fr' : 'en';
@@ -23,6 +24,13 @@ export function Navigation() {
     } catch (e) {
       // fallback to context setLanguage
       setLanguage(next);
+    }
+
+    // Navigate to Learn page after switching language
+    try {
+      navigate(LINKS.internal.learn);
+    } catch (e) {
+      // ignore navigation errors
     }
   };
 
