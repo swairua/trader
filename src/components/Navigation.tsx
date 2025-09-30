@@ -143,7 +143,7 @@ export function Navigation() {
           </Button>
           <Button variant="hero" size="sm" className="font-semibold" asChild>
             <a {...getExternalLinkProps(LINKS.exness.signup)}>
-              Start Trading
+              {t('nav_start_trading')}
             </a>
           </Button>
         </div>
@@ -213,7 +213,7 @@ export function Navigation() {
                   asChild
                 >
                    <a {...getExternalLinkProps(LINKS.exness.signup)}>
-                     Start Trading
+                     {t('nav_start_trading')}
                    </a>
                 </Button>
                 <div className="pt-4 border-t border-border/40" />
