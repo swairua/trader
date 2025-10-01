@@ -231,6 +231,50 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
       phone: "+254 101 316 169",
       email: "info@institutionaltrader.ke",
       whatsappText: "Obtenir de l'aide",
+      services: {
+        title: "Services",
+        items: [
+          "Signaux premium quotidiens",
+          "Mentorat individuel",
+          "Formation à la stratégie DRIVE"
+        ]
+      },
+      sections: [
+        {
+          title: "Éducation",
+          links: [
+            { name: "Stratégie DRIVE", href: "/strategy" },
+            { name: "Gestion des risques", href: "/blog" },
+            { name: "Psychologie du trading", href: "/blog" },
+            { name: "Analyse de marché", href: "/blog" }
+          ]
+        },
+        {
+          title: "Support",
+          links: [
+            { name: "FAQ", href: "/faqs" },
+            { name: "Contactez-nous", href: "/contact" },
+            { name: "Mentorat", href: "/contact" },
+            { name: "Communauté", href: "/contact" }
+          ]
+        },
+        {
+          title: "Entreprise",
+          links: [
+            { name: "À propos", href: "/about" },
+            { name: "Notre approche", href: "/strategy" },
+            { name: "Témoignages", href: "/#testimonials" },
+            { name: "Blog", href: "/blog" }
+          ]
+        }
+      ],
+      legalLinks: [
+        { name: "Politique de confidentialité", href: "/privacy-policy" },
+        { name: "Conditions d'utilisation", href: "/terms-of-use" },
+        { name: "Avertissement sur les risques", href: "/risk-disclaimer" },
+        { name: "Divulgation d'affiliation", href: "/affiliate-disclosure" }
+      ],
+      designCredit: { text: "Conception : Zira Technologies", url: "https://www.zira-tech.com" },
       copyright: "© 2025 KenneDyne spot. Tous droits réservés.",
       riskDisclaimer: "Le trading comporte des risques importants et n'est pas adapté à tous les investisseurs."
     },
