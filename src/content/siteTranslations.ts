@@ -69,6 +69,53 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
         "Support de mentorat continu"
       ]
     },
+    resources: {
+      courses: [
+        {
+          id: "1",
+          title: "Fondamentaux du trading DRIVE",
+          description: "Maîtrisez les principes fondamentaux de la stratégie DRIVE avec notre cours d'initiation complet.",
+          level: "Beginner" as const,
+          tags: ["DRIVE", "Trading", "Fondamentaux"],
+          coverImage: "/lovable-uploads/trading-strategy.jpg",
+          url: "/courses/drive-fundamentals",
+          slug: "drive-fundamentals",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ],
+      ebooks: [
+        {
+          id: "1",
+          title: "Essentiels de la gestion des risques",
+          description: "Guide complet pour protéger votre capital et gérer le risque dans le trading forex.",
+          author: "KenneDyne spot",
+          pages: 45,
+          tags: ["Gestion des risques", "Protection du capital"],
+          coverImage: "/lovable-uploads/risk-management.jpg",
+          downloadUrl: "/downloads/risk-management-essentials.pdf",
+          slug: "risk-management-essentials",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ],
+      materials: [
+        {
+          id: "1",
+          title: "Aide-mémoire Psychologie du marché",
+          description: "Guide de référence rapide pour comprendre la psychologie du marché et les comportements des traders.",
+          type: "sheet" as const,
+          topic: "Psychologie",
+          level: "Intermediate" as const,
+          tags: ["Psychologie", "Référence", "Guide rapide"],
+          coverImage: "/lovable-uploads/market-psychology.jpg",
+          url: "/materials/market-psychology-sheet.pdf",
+          slug: "market-psychology-cheat-sheet",
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        }
+      ]
+    },
     testimonials: {
       title: "Ce que disent les apprenants",
       subtitle: "Retours de notre communauté d'apprenants dévoués",
@@ -173,7 +220,7 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
         },
         {
           number: "4",
-          title: "Débloquez tout gratuitement",
+          title: "D��bloquez tout gratuitement",
           description: "Recevez instantanément l'accès aux signaux premium, au mentorat 1-à-1 et à la formation complète sur la stratégie DRIVE."
         }
       ]
