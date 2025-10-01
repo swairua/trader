@@ -202,7 +202,7 @@ export default function BlogPublic() {
     e.preventDefault();
     const email = newsletterEmail.trim();
     if (!email || !email.includes('@')) {
-      setNewsletterResult({ type: 'error', message: 'Please enter a valid email address.' });
+      setNewsletterResult({ type: 'error', message: t('strategy_error_invalid_email') });
       return;
     }
     setNewsletterSubmitting(true);
@@ -213,14 +213,14 @@ export default function BlogPublic() {
       });
       if (error) throw error;
       if (data?.success) {
-        setNewsletterResult({ type: 'success', message: 'Thanks! Please check your inbox to confirm your subscription.' });
+        setNewsletterResult({ type: 'success', message: t('newsletter_success') });
         setNewsletterEmail('');
       } else {
-        setNewsletterResult({ type: 'error', message: 'Unexpected response. Please try again.' });
+        setNewsletterResult({ type: 'error', message: t('newsletter_unexpected') });
       }
     } catch (err) {
       console.error('Newsletter subscription failed:', err);
-      setNewsletterResult({ type: 'error', message: 'Subscription failed. Please try again later.' });
+      setNewsletterResult({ type: 'error', message: t('newsletter_failed') });
     } finally {
       setNewsletterSubmitting(false);
     }
@@ -294,7 +294,7 @@ export default function BlogPublic() {
                   <SelectValue placeholder={t('resources_filter_all_levels')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
+                  <SelectItem value="all">{t('blog_all_categories')}</SelectItem>
                   {categories.map(category => (
                     <SelectItem key={category.id} value={category.slug}>
                       {category.name}
@@ -311,7 +311,7 @@ export default function BlogPublic() {
                   <SelectValue placeholder={t('resources_tab_all')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Tags</SelectItem>
+                  <SelectItem value="all">{t('blog_all_tags')}</SelectItem>
                   {tags.map(tag => (
                     <SelectItem key={tag.id} value={tag.slug}>
                       {tag.name}
@@ -328,7 +328,7 @@ export default function BlogPublic() {
                   <SelectValue placeholder={t('resources_tab_all')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Authors</SelectItem>
+                  <SelectItem value="all">{t('blog_all_authors')}</SelectItem>
                   {authors.map(author => (
                     <SelectItem key={author.id} value={author.slug}>
                       {author.name}
@@ -435,10 +435,10 @@ export default function BlogPublic() {
             <div className="space-y-8">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-bold">
-                  {featuredPosts.length > 0 && page === 1 ? 'Latest Posts' : 'All Posts'}
+                  {featuredPosts.length > 0 && page === 1 ? t('blog_latest_posts') : t('blog_all_posts')}
                 </h2>
                 <p className="text-muted-foreground">
-                  {totalPosts} post{totalPosts !== 1 ? 's' : ''} found
+                  {totalPosts} {t('blog_posts_found')}
                 </p>
               </div>
 
@@ -504,7 +504,7 @@ export default function BlogPublic() {
               ) : (
                 <div className="text-center py-12">
                   <p className="text-muted-foreground text-lg">
-                    No posts found matching your criteria.
+                    {t('blog_no_posts')}
                   </p>
                   <Button 
                     variant="outline" 
@@ -516,7 +516,7 @@ export default function BlogPublic() {
                       author: null 
                     })}
                   >
-                    Clear all filters
+                    {t('blog_clear_all_filters')}
                   </Button>
                 </div>
               )}
@@ -530,7 +530,7 @@ export default function BlogPublic() {
                     onClick={() => updateSearchParams({ page: (page - 1).toString() })}
                   >
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Previous
+                    {t('blog_previous')}
                   </Button>
                   
                   <div className="flex items-center gap-1">
@@ -554,7 +554,7 @@ export default function BlogPublic() {
                     disabled={page >= totalPages}
                     onClick={() => updateSearchParams({ page: (page + 1).toString() })}
                   >
-                    Next
+                    {t('blog_next')}
                     <ArrowRight className="h-4 w-4 ml-2" />
                   </Button>
                 </div>
@@ -571,22 +571,22 @@ export default function BlogPublic() {
           <div className="container px-4 relative z-10 pointer-events-auto">
             <div className="max-w-4xl mx-auto text-center pointer-events-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Stay Updated with Our Newsletter
+                {t('newsletter_title')}
               </h2>
               <p className="text-xl text-muted-foreground mb-8">
-                Get weekly market insights, educational content, and trading tips delivered to your inbox.
+                {t('newsletter_subtitle')}
               </p>
               <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto pointer-events-auto">
                 <Input
                   type="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Enter your email"
+                  placeholder={t('newsletter_email_placeholder')}
                   className="flex-1 pointer-events-auto"
                   required
                 />
                 <Button type="submit" variant="hero" className="px-6 py-2 pointer-events-auto" disabled={newsletterSubmitting}>
-                  {newsletterSubmitting ? 'Subscribing…' : 'Subscribe'}
+                  {newsletterSubmitting ? t('newsletter_subscribing') : t('newsletter_subscribe')}
                 </Button>
               </form>
               {newsletterResult.type && (
@@ -595,7 +595,7 @@ export default function BlogPublic() {
                 </p>
               )}
               <p className="text-sm text-muted-foreground mt-2">
-                No spam. Educational content only. Unsubscribe anytime.
+                {t('newsletter_note')}
               </p>
             </div>
           </div>
