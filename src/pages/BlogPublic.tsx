@@ -403,7 +403,7 @@ export default function BlogPublic() {
                           
                           {post.excerpt && (
                             <p className="text-muted-foreground line-clamp-3">
-                              {post.excerpt}
+                              {translatedMap[post.id]?.excerpt ?? post.excerpt}
                             </p>
                           )}
                           
@@ -477,7 +477,7 @@ export default function BlogPublic() {
                           
                           {post.excerpt && (
                             <p className="text-muted-foreground line-clamp-2 text-sm">
-                              {post.excerpt}
+                              {translatedMap[post.id]?.excerpt ?? post.excerpt}
                             </p>
                           )}
                           
