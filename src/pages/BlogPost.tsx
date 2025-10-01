@@ -11,6 +11,7 @@ import {
   MessageCircle
 } from 'lucide-react';
 import { SEOHead } from '@/components/SEOHead';
+import { SectionDivider } from '@/components/SectionDivider';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
