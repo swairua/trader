@@ -446,7 +446,7 @@ export default function BlogPost() {
                   <div className="aspect-video mb-8 rounded-lg overflow-hidden">
                     <img
                       src={post.featured_image_url}
-                      alt={`${t('blog_article_image_alt')}: ${post.title}` }
+                      alt={`${t('blog_article_image_alt')}: ${translated?.title ?? post.title}` }
                       className="w-full h-full object-cover"
                       loading="eager"
                     />
