@@ -200,22 +200,17 @@ export default function BlogPost() {
       }
 
       // Apply localization if available
-      try {
-        const { language } = useI18n();
-        if (language === 'fr') {
-          if ((transformedPost as any).title_fr) transformedPost.title = (transformedPost as any).title_fr;
-          if ((transformedPost as any).content_fr) transformedPost.content = (transformedPost as any).content_fr;
-          if ((transformedPost as any).excerpt_fr) transformedPost.excerpt = (transformedPost as any).excerpt_fr;
+      if (language === 'fr') {
+        if ((transformedPost as any).title_fr) transformedPost.title = (transformedPost as any).title_fr;
+        if ((transformedPost as any).content_fr) transformedPost.content = (transformedPost as any).content_fr;
+        if ((transformedPost as any).excerpt_fr) transformedPost.excerpt = (transformedPost as any).excerpt_fr;
 
-          // Localize related posts
-          transformedPost.related_posts = (transformedPost.related_posts || []).map((rp: any) => ({
-            ...rp,
-            title: rp.title_fr || rp.title,
-            excerpt: rp.excerpt_fr || rp.excerpt
-          }));
-        }
-      } catch (e) {
-        // If i18n hook unavailable here for some reason, ignore
+        // Localize related posts
+        transformedPost.related_posts = (transformedPost.related_posts || []).map((rp: any) => ({
+          ...rp,
+          title: rp.title_fr || rp.title,
+          excerpt: rp.excerpt_fr || rp.excerpt
+        }));
       }
 
       setPost(transformedPost);
