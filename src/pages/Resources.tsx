@@ -139,43 +139,56 @@ export default function Resources() {
     });
   }, [content.resources, searchTerm, levelFilter, typeFilter, activeTab, dbCourses, dbEbooks, dbMaterials]);
 
-  // Auto-translate DB-driven resources on the fly (cache in localStorage)
-  useEffect(() => {
+  // Translation progress & retry state
+  const [totalToTranslate, setTotalToTranslate] = useState(0);
+  const [translatedCount, setTranslatedCount] = useState(0);
+  const [translationError, setTranslationError] = useState<string | null>(null);
+
+  // Translate visible items helper (used by effect and retry button)
+  async function translateVisible(items: any[]) {
     let mounted = true;
-    async function run() {
-      try {
-        setIsTranslating(true);
-        if (!language || language === 'en') {
-          setTranslatedResources({});
-          setIsTranslating(false);
-          return;
+    try {
+      setTranslationError(null);
+      setIsTranslating(true);
+      setTranslatedCount(0);
+      setTranslatedResources({});
+
+      if (!language || language === 'en') {
+        setTotalToTranslate(0);
+        setIsTranslating(false);
+        return;
+      }
+
+      const itemsToTranslate = items || [];
+      setTotalToTranslate(itemsToTranslate.length);
+
+      const next: Record<string, { title?: string; description?: string; tags?: string[]; topic?: string }> = {};
+
+      for (const item of itemsToTranslate) {
+        const id = (item as any).id || (item as any).slug || (item as any).title;
+        const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+        const cacheKey = `translations:resource:${key}`;
+        const cached = localStorage.getItem(cacheKey);
+        if (cached) {
+          try { next[key] = JSON.parse(cached); } catch { /* ignore */ }
+          setTranslatedCount(c => c + 1);
+          continue;
         }
 
-        const itemsToTranslate = filteredResources || [];
-        const next: Record<string, { title?: string; description?: string; tags?: string[]; topic?: string }> = {};
+        // Prefer server-provided localized fields
+        if (((item as any).title_fr || (item as any).description_fr || (item as any).tags_fr) && language === 'fr') {
+          next[key] = {
+            title: (item as any).title_fr || (item as any).title,
+            description: (item as any).description_fr || (item as any).description,
+            tags: Array.isArray((item as any).tags_fr) ? (item as any).tags_fr : (item as any).tags,
+            topic: (item as any).topic_fr || (item as any).topic,
+          };
+          try { localStorage.setItem(cacheKey, JSON.stringify(next[key])); } catch {}
+          setTranslatedCount(c => c + 1);
+          continue;
+        }
 
-        for (const item of itemsToTranslate) {
-          const id = (item as any).id || (item as any).slug || (item as any).title;
-          const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-          const cacheKey = `translations:resource:${key}`;
-          const cached = localStorage.getItem(cacheKey);
-          if (cached) {
-            try { next[key] = JSON.parse(cached); } catch { /* ignore */ }
-            continue;
-          }
-
-          // Skip if server provides localized fields
-          if (((item as any).title_fr || (item as any).description_fr) && language === 'fr') {
-            next[key] = {
-              title: (item as any).title_fr || (item as any).title,
-              description: (item as any).description_fr || (item as any).description,
-              tags: Array.isArray((item as any).tags_fr) ? (item as any).tags_fr : (item as any).tags,
-              topic: (item as any).topic_fr || (item as any).topic,
-            };
-            try { localStorage.setItem(cacheKey, JSON.stringify(next[key])); } catch {}
-            continue;
-          }
-
+        try {
           const title = (item as any).title || '';
           const description = (item as any).description || '';
           const tags = Array.isArray((item as any).tags) ? (item as any).tags : [];
@@ -190,22 +203,38 @@ export default function Resources() {
 
           next[key] = { title: tTitle || title, description: tDesc || description, tags: (tTags as string[])?.length ? (tTags as string[]) : tags, topic: tTopic || topic };
           try { localStorage.setItem(cacheKey, JSON.stringify(next[key])); } catch {}
-
-          // Small delay to reduce rate pressure
-          await new Promise(res => setTimeout(res, 120));
+        } catch (e: any) {
+          // translation attempt for this item failed — record error and continue
+          console.warn('Translation failed for item', id, e?.message || e);
+          setTranslationError(e?.message || 'translation_failed');
         }
 
-        if (mounted) setTranslatedResources(next);
-      } catch (e) {
-        console.warn('Resource translation unavailable; showing original content.');
-      } finally {
-        try { setIsTranslating(false); } catch {}
+        setTranslatedCount(c => c + 1);
+
+        // Small delay to reduce rate pressure
+        await new Promise(res => setTimeout(res, 120));
       }
+
+      if (mounted) setTranslatedResources(next);
+    } catch (e: any) {
+      console.warn('Resource translation unavailable; showing original content.', e?.message || e);
+      setTranslationError(e?.message || String(e));
+    } finally {
+      setIsTranslating(false);
     }
 
-    run();
     return () => { mounted = false; };
+  }
+
+  // Auto-translate when filteredResources or language changes
+  useEffect(() => {
+    translateVisible(filteredResources as any[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filteredResources, language]);
+
+  const handleRetryTranslations = () => {
+    translateVisible(filteredResources as any[]);
+  };
 
   const getDisplayTitle = (item: any) => {
     const id = (item as any).id || (item as any).slug || (item as any).title;
