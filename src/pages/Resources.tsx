@@ -119,9 +119,25 @@ export default function Resources() {
     ];
 
     return allResources.filter(item => {
-      const matchesSearch = item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      const id = (item as any).id || (item as any).slug || (item as any).title;
+      const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+      const displayTitle = (() => {
+        if (language === 'fr' && ((item as any).title_fr || (item as any).title_fr === '')) return (item as any).title_fr || item.title;
+        return translatedResources[key]?.title ?? item.title;
+      })();
+      const displayDescription = (() => {
+        if (language === 'fr' && ((item as any).description_fr || (item as any).description_fr === '')) return (item as any).description_fr || item.description || '';
+        return translatedResources[key]?.description ?? item.description ?? '';
+      })();
+      const displayTags = (() => {
+        if (language === 'fr' && Array.isArray((item as any).tags_fr)) return (item as any).tags_fr;
+        return translatedResources[key]?.tags ?? (Array.isArray(item.tags) ? item.tags : []);
+      })();
+
+      const lower = searchTerm.toLowerCase();
+      const matchesSearch = (displayTitle || '').toLowerCase().includes(lower) ||
+                           (displayDescription || '').toLowerCase().includes(lower) ||
+                           displayTags.some((tag: string) => (tag || '').toLowerCase().includes(lower));
 
       const matchesLevel = levelFilter === 'all' || 
                           ('level' in item && (item as any).level === levelFilter);
