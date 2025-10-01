@@ -34,7 +34,7 @@ export function Navigation() {
   const overflowLinks = links.slice(3);
 
   // Hover-controlled More menu state
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = React.useState(false);
   const hoverTimeoutRef = useRef<number | null>(null);
 
   const nestedIcons = [Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText];
