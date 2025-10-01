@@ -19,7 +19,7 @@ function getRouteLabel(path: string, content: any) {
   const pages = content?.pages || {};
   switch (path) {
     case '/':
-      return 'Home';
+      return content?.navigation?.links?.find((l: any) => l.href === '/')?.name ?? pages.home?.title ?? 'Home';
     case '/about':
       return pages.about?.title ?? 'About';
     case '/strategy':
@@ -27,19 +27,19 @@ function getRouteLabel(path: string, content: any) {
     case '/services':
       return content?.services?.title ?? 'Services';
     case '/services/learn':
-      return 'Learn';
+      return content?.services?.title ? `${content?.services?.title} - Learn` : 'Learn';
     case '/mentorship':
       return pages.contact?.title ?? 'Mentorship';
     case '/placement-quiz':
       return 'Placement Quiz';
     case '/blog':
-      return pages.blog?.title ?? 'Blog';
+      return pages.blog?.title ?? content?.blogPreview?.title ?? 'Blog';
     case '/faqs':
       return pages.faqs?.title ?? 'FAQs';
     case '/contact':
       return pages.contact?.title ?? 'Contact';
     case '/resources':
-      return 'Resources';
+      return content?.resources?.title ?? 'Resources';
     case '/lp/drive-education':
       return 'Drive Education';
     case '/privacy-policy':
