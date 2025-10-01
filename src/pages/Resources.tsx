@@ -547,24 +547,29 @@ export default function Resources() {
                         </div>
                         
                         {/* Tags */}
-                        {item.tags.length > 0 && (
+                        {(Array.isArray(item.tags) && item.tags.length > 0) || (language !== 'en' && isTranslating) ? (
                           <div className="flex flex-wrap gap-1">
                              {(() => {
                                 const id = (item as any).id || (item as any).slug || (item as any).title;
                                 const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                                const tags = translatedResources[key]?.tags || (language === 'fr' && Array.isArray((item as any).tags_fr) ? (item as any).tags_fr : item.tags);
+                                const tags = translatedResources[key]?.tags || (language === 'fr' && Array.isArray((item as any).tags_fr) ? (item as any).tags_fr : (Array.isArray(item.tags) ? item.tags : []));
+                                if ((!tags || tags.length === 0) && language !== 'en' && isTranslating) {
+                                  return (
+                                    <Badge key="translating" variant="outline" className="text-xs">{t('resources_translating')}</Badge>
+                                  );
+                                }
                                 return tags.slice(0, 3).map((tag) => (
                                   <Badge key={tag} variant="outline" className="text-xs">
                                     {tag}
                                   </Badge>
                                 ));
                               })()}
-                             {item.tags.length > 3 && (
+                             {(Array.isArray(item.tags) && item.tags.length > 3) && (
                                <span className="text-xs text-muted-foreground">
                                  +{item.tags.length - 3} {t('resources_more')}
                                </span>
                              )}
-                             
+
                              {/* Status indicators */}
                              {(() => {
                                const itemUrl = item.url || item.course_url || item.download_url || item.downloadUrl || item.material_url;
@@ -576,7 +581,7 @@ export default function Resources() {
                                return null;
                              })()}
                           </div>
-                        )}
+                        ) : null}
                         
                         {/* Action */}
                         <div className="pt-2">
