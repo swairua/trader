@@ -15,6 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { format } from 'date-fns';
+import { fr as frLocale, enUS } from 'date-fns/locale';
 import { useI18n } from '@/i18n';
 import { trackEvent } from '@/components/GTMProvider';
 import { createWhatsAppLink, WHATSAPP_MESSAGES } from '@/utils/whatsapp';
@@ -57,7 +58,7 @@ interface SiteSettings {
 }
 
 export default function BlogPost() {
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
   const [post, setPost] = useState<BlogPost | null>(null);
@@ -267,14 +268,14 @@ export default function BlogPost() {
     try {
       await navigator.clipboard.writeText(window.location.href);
       toast({
-        title: 'Link copied!',
-        description: 'The post URL has been copied to your clipboard.',
+        title: t('link_copied_title'),
+        description: t('link_copied_desc'),
       });
       trackEvent('copy_link', { post_slug: post?.slug });
     } catch (error) {
       toast({
-        title: 'Failed to copy link',
-        description: 'Please copy the URL manually from your browser.',
+        title: t('copy_failed_title'),
+        description: t('copy_failed_desc'),
         variant: 'destructive',
       });
     }
@@ -379,9 +380,9 @@ export default function BlogPost() {
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-muted-foreground mb-8">
-          <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
+          <Link to="/" className="hover:text-foreground transition-colors">{t('breadcrumb_home')}</Link>
           <span>/</span>
-          <Link to="/blog" className="hover:text-foreground transition-colors">Blog</Link>
+          <Link to="/blog" className="hover:text-foreground transition-colors">{t('breadcrumb_blog')}</Link>
           <span>/</span>
           <span className="text-foreground">{post.title}</span>
         </nav>
@@ -461,13 +462,13 @@ export default function BlogPost() {
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4" />
                       <time dateTime={post.published_at}>
-                        {format(new Date(post.published_at), 'MMMM d, yyyy')}
+                        {format(new Date(post.published_at), 'PPP', { locale: language === 'fr' ? frLocale : enUS })}
                       </time>
                     </div>
                     
                     <div className="flex items-center gap-2">
                       <Clock className="h-4 w-4" />
-                      <span>{post.reading_time_mins} min read</span>
+                      <span>{post.reading_time_mins} {t('reading_time_read')}</span>
                     </div>
 
                     {post.authors.length > 0 && (
