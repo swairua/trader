@@ -74,11 +74,12 @@ async function translateChunk(text: string, target: string, source = 'en') {
       let attempt = 0;
       while (attempt < MAX_ATTEMPTS) {
         let controller: AbortController | null = null;
+        let timeoutId: ReturnType<typeof setTimeout> | undefined;
         try {
           // Prefer AbortController for reliable timeout and to avoid uncaught rejections
           controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-          const ctrl = controller; // capture for timeout closure
-          const timeoutId = ctrl ? setTimeout(() => ctrl.abort(), DEFAULT_TIMEOUT_MS) : undefined;
+          const ctrl = controller;
+          timeoutId = ctrl ? setTimeout(() => { try { ctrl?.abort(); } catch (_) {} }, DEFAULT_TIMEOUT_MS) : undefined;
 
           const resp = await fetch(url, {
             method: 'POST',
@@ -122,7 +123,7 @@ async function translateChunk(text: string, target: string, source = 'en') {
         } finally {
           // Ensure abort timer cleared
           try {
-            if (typeof timeoutId !== 'undefined' && timeoutId) clearTimeout(timeoutId);
+            if (timeoutId) clearTimeout(timeoutId as any);
           } catch (_) {}
         }
       }
