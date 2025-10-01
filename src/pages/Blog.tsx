@@ -69,7 +69,7 @@ const Blog = () => {
               <div className="mb-16">
                 <h2 className="text-2xl font-bold text-foreground mb-8">{t('blog_featured_title')}</h2>
                 <div className="grid md:grid-cols-2 gap-8">
-                  {blogPosts.filter(post => post.featured).map((post, index) => (
+                  {(content.blogPreview.posts || []).filter((p: any) => p.featured).map((post: any, index: number) => (
                     <Card key={index} className="p-8 border border-border hover:shadow-elevation hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                       <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary border-primary/20">
                         {post.category}
@@ -80,19 +80,19 @@ const Blog = () => {
                       <p className="text-muted-foreground mb-6">
                         {post.excerpt}
                       </p>
-                      
+
                       <div className="flex items-center justify-between text-sm text-muted-foreground mb-6">
                         <div className="flex items-center space-x-4">
                           <div className="flex items-center">
                             <Calendar className="h-4 w-4 mr-2" />
-                            {post.date}
+                            {post.date || post.readTime}
                           </div>
                           <div className="flex items-center">
                             <User className="h-4 w-4 mr-2" />
-                            {post.author}
+                            {post.author || 'KenneDyne spot Team'}
                           </div>
                         </div>
-                        <span>{post.readTime}</span>
+                        <span>{post.readTime || post.readTime}</span>
                       </div>
 
                       <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer">
