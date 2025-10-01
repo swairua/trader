@@ -361,18 +361,28 @@ const FAQs = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 text-foreground/80">
+                  <div className="flex items-center justify-end mb-2">
+                    <Button size="sm" variant="outline" onClick={translateRisk} disabled={language === 'en' || isRiskTranslating}>
+                      {isRiskTranslating ? t('translating') : t('translate')}
+                    </Button>
+                  </div>
                   <p>
-                    <strong>{t('faqs_risk_p1_title')}</strong> {t('faqs_risk_p1_desc')}
+                    <strong>{t('faqs_risk_p1_title')}</strong> {riskTranslated?.p1 ?? t('faqs_risk_p1_desc')}
                   </p>
                   <p>
-                    <strong>{t('faqs_risk_p2_title')}</strong> {t('faqs_risk_p2_desc')}
+                    <strong>{t('faqs_risk_p2_title')}</strong> {riskTranslated?.p2 ?? t('faqs_risk_p2_desc')}
                   </p>
                   <p>
-                    <strong>{t('faqs_risk_p3_title')}</strong> {t('faqs_risk_p3_desc')}
+                    <strong>{t('faqs_risk_p3_title')}</strong> {riskTranslated?.p3 ?? t('faqs_risk_p3_desc')}
                   </p>
                   <p>
-                    <strong>{t('faqs_risk_p4_title')}</strong> {t('faqs_risk_p4_desc')}
+                    <strong>{t('faqs_risk_p4_title')}</strong> {riskTranslated?.p4 ?? t('faqs_risk_p4_desc')}
                   </p>
+                  {riskTranslated === null && language !== 'en' && !isRiskTranslating && (
+                    <div className="text-sm text-destructive/80 mt-2">
+                      <Button size="sm" variant="ghost" onClick={translateRisk}>{t('translate_retry')}</Button>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
