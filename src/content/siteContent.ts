@@ -330,14 +330,7 @@ export const defaultContent: SiteContent = {
         title: "Sign up with Exness",
         description: "Click our button below to create your free Exness account through our affiliate link. It only takes 2 minutes. Also, complete identity and residential verification.",
         features: [
-          "5 Retail Investor a/c (Std, Std cent, Zero & Pro)",
-          "10 USD Min Deposit",
-          "200 Max Lot",
-          "1000 Max positions",
-          "Islamic account",
-          "1: Unlimited Leverage",
-          "ZERO Withdrawal fee amount",
-          "Instant withdrawal & a variety of Payment Options."
+          "Multiple retail account types, low $10 minimum deposit, flexible high leverage, instant fee-free withdrawals, and various payment options."
         ]
       },
       {
