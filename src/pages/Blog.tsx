@@ -16,6 +16,7 @@ const categories = ["All", "Education", "Risk Management", "Psychology"];
 
 const Blog = () => {
   const { t } = useI18n();
+  const { content } = useSiteContent();
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
