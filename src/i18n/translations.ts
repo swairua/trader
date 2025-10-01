@@ -220,6 +220,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // SEO/Breadcrumbs
     breadcrumb_home: 'Home',
+    breadcrumb_resources: 'Resources',
     breadcrumb_strategy: 'DRIVE Strategy',
     strategy_seo_title: 'DRIVE Strategy - Institutional Trading Framework | KenneDyne spot',
     strategy_seo_description: 'Master our proven DRIVE trading strategy framework: Define, Read, Identify, Validate, Execute. Learn systematic institutional trading concepts and risk management.',
@@ -285,6 +286,14 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_type_ebook: 'E-book',
     resources_type_material: 'Material',
     resources_hero_image_alt: 'Learning resources and education materials hero image',
+
+    resources_seo_title: 'Resources — Courses, E‑books & Learning Materials | KenneDyne spot',
+    resources_seo_description: 'Access comprehensive forex trading courses, e-books, and educational materials. Learn the DRIVE strategy, risk management, market psychology, and professional trading techniques.',
+    resources_seo_keywords: 'forex courses, trading education, e-books, learning materials, DRIVE strategy, risk management, market psychology, trading resources, institutional trading',
+    resources_og_title: 'Trading Education Resources | KenneDyne spot',
+    resources_og_description: 'Comprehensive library of forex trading courses, e-books, and educational materials to accelerate your trading journey.',
+    resources_twitter_title: 'Trading Education Resources | KenneDyne spot',
+    resources_twitter_description: 'Access courses, e-books, and materials for forex trading education',
 
     // Blog page
     blog_hero_title: 'Trading Education Blog',
@@ -577,6 +586,14 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_hero_title: "Ressources d'apprentissage",
     resources_hero_subtitle: "Accédez à notre bibliothèque complète de cours, e‑books et supports pour accélérer votre formation au trading",
     resources_hero_image_alt: "Ressources d'apprentissage et supports éducatifs (image héro)",
+
+    resources_seo_title: 'Ressources — Cours, E‑books et Supports | KenneDyne spot',
+    resources_seo_description: 'Accédez à des cours de trading forex, des e‑books et des supports pédagogiques. Découvrez la stratégie DRIVE, la gestion du risque, la psychologie du marché et des techniques professionnelles.',
+    resources_seo_keywords: 'cours forex, éducation au trading, e‑books, supports d’apprentissage, stratégie DRIVE, gestion du risque, psychologie du marché, ressources de trading, trading institutionnel',
+    resources_og_title: 'Ressources d’éducation au trading | KenneDyne spot',
+    resources_og_description: 'Bibliothèque complète de cours, e‑books et supports pédagogiques pour accélérer votre progression.',
+    resources_twitter_title: 'Ressources d’éducation au trading | KenneDyne spot',
+    resources_twitter_description: 'Accédez à des cours, e‑books et supports pour l’éducation au trading',
     resources_filter_all_levels: 'Tous niveaux',
     resources_filter_all_types: 'Tous types',
     resources_filter_courses: 'Cours',
@@ -836,6 +853,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // SEO/Breadcrumbs
     breadcrumb_home: 'Accueil',
+    breadcrumb_resources: 'Ressources',
     breadcrumb_strategy: 'Stratégie DRIVE',
     strategy_seo_title: 'Stratégie DRIVE - Cadre de trading institutionnel | KenneDyne spot',
     strategy_seo_description: 'Maîtrisez notre cadre de stratégie DRIVE : Définir, Lire, Identifier, Valider, Exécuter. Apprenez un trading institutionnel systématique et la gestion du risque.',
