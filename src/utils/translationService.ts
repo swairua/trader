@@ -73,42 +73,34 @@ async function translateChunk(text: string, target: string, source = 'en') {
     for (const url of API_ENDPOINTS) {
       let attempt = 0;
       while (attempt < MAX_ATTEMPTS) {
-        let controller: AbortController | null = null;
-        let timeoutId: ReturnType<typeof setTimeout> | undefined;
         try {
-          // Prefer AbortController for reliable timeout and to avoid uncaught rejections
-          controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-          const ctrl = controller;
-          timeoutId = ctrl ? setTimeout(() => { try { ctrl?.abort(); } catch (_) {} }, DEFAULT_TIMEOUT_MS) : undefined;
-
-          const resp = await fetch(url, {
+          // Use Promise.race between fetch and a timeout promise to avoid AbortController issues
+          const fetchPromise = fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ q: text, source, target, format: 'text' }),
-            signal: ctrl ? ctrl.signal : undefined,
+          }).then(async (resp) => {
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            try { return await resp.json(); } catch { return null; }
+          }).catch(() => null);
+
+          const timeoutPromise = new Promise<null>((resolve) => {
+            setTimeout(() => resolve(null), DEFAULT_TIMEOUT_MS);
           });
 
-          if (timeoutId) clearTimeout(timeoutId);
-
-          if (!resp.ok) {
-            // Try next attempt/endpoint silently
-            throw new Error(`HTTP ${resp.status}`);
+          const data = await Promise.race([fetchPromise, timeoutPromise]);
+          if (!data) {
+            // no data from this endpoint (timeout or network error), try next
+            break;
           }
 
-          let data: any = null;
-          try {
-            data = await resp.json();
-          } catch (_jsonErr) {
-            data = null;
-          }
-
-          const translated = data?.translatedText || data?.translated || '';
+          const translated = (data as any)?.translatedText || (data as any)?.translated || '';
           if (translated) {
             saveToCache(hash, target, translated);
             return translated;
           }
 
-          // If response didn't contain translation, break to try next endpoint
+          // If response didn't contain translation, try next endpoint
           break;
         } catch (_err: any) {
           // Silence network-level errors (CORS, network down, aborted) and retry/backoff
