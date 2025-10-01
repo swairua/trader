@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useSiteContent } from "@/hooks/useSiteContent";
+import { useI18n } from '@/i18n';
 import { Link } from "react-router-dom";
 import { ArrowRight, Clock, User } from "lucide-react";
 import { useState, useEffect } from "react";
