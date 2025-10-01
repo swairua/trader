@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu, Send, ChevronDown, ChevronRight, Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText } from "lucide-react";
