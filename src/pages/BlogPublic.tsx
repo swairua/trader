@@ -229,7 +229,7 @@ export default function BlogPublic() {
   };
 
   const { t, language } = useI18n();
-  import.meta;
+  const { translatedMap, isTranslating: blogIsTranslating, totalToTranslate: blogTotal, translatedCount: blogTranslatedCount, translationError: blogTranslationError, retry: retryBlogTranslations } = useAutoTranslate(posts, ['title','excerpt']);
 
   return (
     <div className="min-h-screen bg-background">
