@@ -228,6 +228,7 @@ export default function BlogPublic() {
   };
 
   const { t, language } = useI18n();
+  import.meta;
 
   return (
     <div className="min-h-screen bg-background">
