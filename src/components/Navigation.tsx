@@ -168,7 +168,7 @@ export function Navigation() {
               <div className="flex items-center justify-between">
                 <BrandLogo
                   size="md"
-                  className="h-16"
+                  className="h-12 md:h-16"
                   useDarkVariantInDarkMode
                   darkSrc="https://cdn.builder.io/api/v1/image/assets%2Fd70b5c32436e40df8a1857905f23cae8%2F97e09281a0ad46bda113d0fd0850162f?format=webp&width=800"
                 />
