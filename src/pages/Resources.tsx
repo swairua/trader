@@ -307,9 +307,9 @@ export default function Resources() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('resources_filter_all_levels')}</SelectItem>
-                  <SelectItem value="Beginner">Beginner</SelectItem>
-                  <SelectItem value="Intermediate">Intermediate</SelectItem>
-                  <SelectItem value="Advanced">Advanced</SelectItem>
+                  <SelectItem value="Beginner">{t('resources_level_beginner')}</SelectItem>
+                  <SelectItem value="Intermediate">{t('resources_level_intermediate')}</SelectItem>
+                  <SelectItem value="Advanced">{t('resources_level_advanced')}</SelectItem>
                 </SelectContent>
               </Select>
               
