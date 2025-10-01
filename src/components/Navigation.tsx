@@ -57,7 +57,7 @@ export function Navigation() {
             <Link
               key={item.name}
               to={item.href}
-              className={`text-sm font-medium transition-all duration-300 hover:text-primary relative tracking-wide px-3 py-2 min-h-[44px] flex items-center ${
+              className={`text-sm font-medium hover:text-primary relative tracking-wide px-3 py-2 min-h-[44px] flex items-center ${
                 isActive(item.href)
                   ? "text-primary"
                   : "text-foreground"
