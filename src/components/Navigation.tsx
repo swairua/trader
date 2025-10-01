@@ -45,7 +45,7 @@ export function Navigation() {
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
           <BrandLogo
             size="md"
-            className="h-12 lg:h-28"
+            className="h-8 md:h-10 lg:h-20 xl:h-28"
             useDarkVariantInDarkMode
             darkSrc="https://cdn.builder.io/api/v1/image/assets%2Fd70b5c32436e40df8a1857905f23cae8%2F97e09281a0ad46bda113d0fd0850162f?format=webp&width=800"
           />
