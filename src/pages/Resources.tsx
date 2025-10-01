@@ -1,4 +1,3 @@
-import { useState, useMemo, useEffect } from 'react';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navigation } from '@/components/Navigation';
@@ -34,7 +33,7 @@ export default function Resources() {
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [activeTab, setActiveTab] = useState('all');
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
-  const [translatedResources, setTranslatedResources] = useState<Record<string, { title?: string; description?: string }>>({});
+  const [translatedResources, setTranslatedResources] = useState<Record<string, { title?: string; description?: string; tags?: string[]; topic?: string }>>({});
 
   // Handle URL hash for auto-selecting tabs
   useEffect(() => {
@@ -83,7 +82,7 @@ export default function Resources() {
       console.error('Download error:', error);
       toast({
         title: t('resources_download_failed'),
-        description: error.message || t('resources_download_failed_desc'),
+        description: t('resources_download_failed_desc'),
         variant: "destructive",
       });
     } finally {
@@ -150,7 +149,7 @@ export default function Resources() {
         }
 
         const itemsToTranslate = filteredResources || [];
-        const next: Record<string, { title?: string; description?: string }> = {};
+        const next: Record<string, { title?: string; description?: string; tags?: string[]; topic?: string }> = {};
 
         for (const item of itemsToTranslate) {
           const id = (item as any).id || (item as any).slug || (item as any).title;
@@ -167,6 +166,8 @@ export default function Resources() {
             next[key] = {
               title: (item as any).title_fr || (item as any).title,
               description: (item as any).description_fr || (item as any).description,
+              tags: Array.isArray((item as any).tags_fr) ? (item as any).tags_fr : (item as any).tags,
+              topic: (item as any).topic_fr || (item as any).topic,
             };
             try { localStorage.setItem(cacheKey, JSON.stringify(next[key])); } catch {}
             continue;
@@ -174,13 +175,17 @@ export default function Resources() {
 
           const title = (item as any).title || '';
           const description = (item as any).description || '';
+          const tags = Array.isArray((item as any).tags) ? (item as any).tags : [];
+          const topic = (item as any).topic || '';
 
-          const [tTitle, tDesc] = await Promise.all([
+          const [tTitle, tDesc, tTags, tTopic] = await Promise.all([
             title ? translateText(title, language) : Promise.resolve(''),
             description ? translateText(description, language) : Promise.resolve(''),
+            tags.length ? Promise.all(tags.map((tg: string) => translateText(tg, language))) : Promise.resolve([]),
+            topic ? translateText(topic, language) : Promise.resolve(''),
           ]);
 
-          next[key] = { title: tTitle || title, description: tDesc || description };
+          next[key] = { title: tTitle || title, description: tDesc || description, tags: (tTags as string[])?.length ? (tTags as string[]) : tags, topic: tTopic || topic };
           try { localStorage.setItem(cacheKey, JSON.stringify(next[key])); } catch {}
 
           // Small delay to reduce rate pressure
@@ -449,7 +454,11 @@ export default function Resources() {
                           <div className="aspect-video rounded-lg overflow-hidden mb-4">
                             <img 
                               src={item.coverImageUrl || item.cover_image_url || item.coverImage} 
-                              alt={item.title}
+                              alt={(() => {
+                              const id = (item as any).id || (item as any).slug || (item as any).title;
+                              const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+                              return translatedResources[key]?.title ?? item.title;
+                            })()}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               onError={(e) => {
                                 e.currentTarget.style.display = 'none';
@@ -506,18 +515,27 @@ export default function Resources() {
                             <span>{(item as any).pages} {t('resources_pages')}</span>
                           )}
                           {'topic' in item && (
-                            <Badge variant="secondary">{(item as any).topic}</Badge>
+                            <Badge variant="secondary">{(() => {
+                              const id = (item as any).id || (item as any).slug || (item as any).title;
+                              const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+                              return translatedResources[key]?.topic ?? (item as any).topic;
+                            })()}</Badge>
                           )}
                         </div>
                         
                         {/* Tags */}
                         {item.tags.length > 0 && (
                           <div className="flex flex-wrap gap-1">
-                             {item.tags.slice(0, 3).map((tag) => (
-                               <Badge key={tag} variant="outline" className="text-xs">
-                                 {tag}
-                               </Badge>
-                             ))}
+                             {(() => {
+                                const id = (item as any).id || (item as any).slug || (item as any).title;
+                                const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+                                const tags = translatedResources[key]?.tags || item.tags;
+                                return tags.slice(0, 3).map((tag) => (
+                                  <Badge key={tag} variant="outline" className="text-xs">
+                                    {tag}
+                                  </Badge>
+                                ));
+                              })()}
                              {item.tags.length > 3 && (
                                <span className="text-xs text-muted-foreground">
                                  +{item.tags.length - 3} {t('resources_more')}
