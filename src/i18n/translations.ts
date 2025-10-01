@@ -287,6 +287,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_type_material: 'Material',
     resources_hero_image_alt: 'Learning resources and education materials hero image',
     resources_translating: 'Translating...',
+    retry: 'Retry',
+    translation_error_occurred: 'Translation error occurred',
 
     resources_seo_title: 'Resources — Courses, E‑books & Learning Materials | KenneDyne spot',
     resources_seo_description: 'Access comprehensive forex trading courses, e-books, and educational materials. Learn the DRIVE strategy, risk management, market psychology, and professional trading techniques.',
@@ -518,7 +520,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_send: 'Envoyer le message',
     contact_success_whatsapp_cta: 'WhatsApp-nous maintenant',
     contact_success_text: 'Message envoyé avec succès ! Pour une réponse plus rapide, vous pouvez également nous contacter directement via WhatsApp :',
-    contact_response_time_note: 'Nous répondons généralement sous 24 à 48 heures durant les jours ouvrables.',
+    contact_response_time_note: 'Nous répondons g��néralement sous 24 à 48 heures durant les jours ouvrables.',
     contact_info_title: 'Informations de contact',
     contact_info_email: 'E-mail',
     contact_info_whatsapp: 'WhatsApp',
@@ -751,7 +753,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     why_exness_benefit2_highlight: 'Retraits instantan��s',
     why_exness_benefit3_title: 'Conditions de marché leader',
     why_exness_benefit3_desc:
-      "Spreads ultra-serrés à partir de 0,0 pip, tarification transparente et accès �� plus de 200 instruments (Forex, Métaux, Indices, Crypto).",
+      "Spreads ultra-serrés à partir de 0,0 pip, tarification transparente et accès à plus de 200 instruments (Forex, Métaux, Indices, Crypto).",
     why_exness_benefit3_highlight: 'À partir de 0,0 pip',
     why_exness_see_comparison: 'Voir la comparaison détaillée',
     why_exness_hide_comparison: 'Masquer la comparaison détaillée',
