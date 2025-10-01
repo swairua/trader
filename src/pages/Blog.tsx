@@ -12,12 +12,12 @@ import { useI18n } from '@/i18n';
 
 import { useSiteContent } from '@/hooks/useSiteContent';
 
-const { content } = useSiteContent();
-const blogPosts = content.blogPreview.posts || [];
-const categories = content.blogPreview.categories || [];
-
 const Blog = () => {
   const { t } = useI18n();
+  const { content } = useSiteContent();
+  const blogPosts = content.blogPreview.posts || [];
+  const categories = content.blogPreview.categories || [];
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
