@@ -9,63 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import forexBlogHero from "@/assets/forex-blog-hero.jpg";
 import { useI18n } from '@/i18n';
-
-const blogPosts = [
-  {
-    title: "Understanding Market Structure: A Beginner's Guide",
-    excerpt: "Learn the fundamentals of market structure and how institutional traders view price movements. This comprehensive guide covers the basics of support and resistance, trend analysis, and key levels that drive market behavior.",
-    category: "Education",
-    date: "March 15, 2024",
-    author: "KenneDyne spot Team",
-    readTime: "5 min read",
-    featured: true
-  },
-  {
-    title: "Risk Management: The Foundation of Successful Trading",
-    excerpt: "Why proper risk management is more important than finding the perfect setup. Discover how to calculate position sizes, set stop losses, and manage your trading capital effectively.",
-    category: "Risk Management", 
-    date: "March 10, 2024",
-    author: "KenneDyne spot Team",
-    readTime: "7 min read",
-    featured: true
-  },
-  {
-    title: "The Psychology of Trading: Overcoming Common Mental Traps",
-    excerpt: "How to develop the discipline and mindset needed for consistent trading performance. Learn about FOMO, overconfidence, and other psychological barriers that affect traders.",
-    category: "Psychology",
-    date: "March 5, 2024", 
-    author: "KenneDyne spot Team",
-    readTime: "6 min read",
-    featured: false
-  },
-  {
-    title: "Smart Money Concepts: Following Institutional Flow",
-    excerpt: "Understanding how banks and institutions move the market and how retail traders can align with these movements through proper analysis.",
-    category: "Education",
-    date: "February 28, 2024",
-    author: "KenneDyne spot Team", 
-    readTime: "8 min read",
-    featured: false
-  },
-  {
-    title: "Building Your Trading Journal: Track Progress Not Just Profits",
-    excerpt: "Why keeping a detailed trading journal is crucial for improvement and how to structure it effectively for maximum learning benefit.",
-    category: "Education",
-    date: "February 20, 2024",
-    author: "KenneDyne spot Team",
-    readTime: "4 min read", 
-    featured: false
-  },
-  {
-    title: "Common Trading Mistakes and How to Avoid Them",
-    excerpt: "Learn from the most frequent errors that derail trading accounts and develop habits that promote long-term success.",
-    category: "Education",
-    date: "February 15, 2024",
-    author: "KenneDyne spot Team",
-    readTime: "6 min read",
-    featured: false
-  }
-];
+import { useSiteContent } from '@/hooks/useSiteContent';
 
 const categories = ["All", "Education", "Risk Management", "Psychology"];
 
