@@ -139,20 +139,37 @@ export function Footer() {
             )}
 
             {/* Section Groups (Education, Support) */}
-            {(footer.sections || []).slice(0, 2).map((section, index) => (
-              <nav key={index} aria-label={section?.title || `section-${index}`} className={`space-y-4 ${index === 1 ? 'hidden xl:block' : ''}`}>
-                <h3 className="text-base font-semibold text-foreground">{section?.title}</h3>
+            {sectionGroups.map((section, index) => (
+              <nav
+                key={`${section?.title ?? "section"}-${index}`}
+                aria-label={section?.title || `section-${index}`}
+                className={`space-y-4 ${index > 0 ? "hidden xl:block" : ""}`}
+              >
+                {section?.title && (
+                  <h3 className="text-base font-semibold text-foreground">{section.title}</h3>
+                )}
                 <ul className="space-y-3 list-none pl-0">
-                  {(section?.links || []).map((link, linkIndex) => (
-                    <li key={linkIndex}>
-                      <Link
-                        to={link.href}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200"
-                      >
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
+                  {(section?.links || []).map((link, linkIndex) => {
+                    if (!link?.name) return null;
+                    const href = link.href || "#";
+                    const linkClasses = "text-sm text-muted-foreground hover:text-primary transition-colors hover:translate-x-px transform duration-200";
+                    if (href.startsWith("http")) {
+                      return (
+                        <li key={`${href}-${linkIndex}`}>
+                          <a {...getExternalLinkProps(href)} className={linkClasses}>
+                            {link.name}
+                          </a>
+                        </li>
+                      );
+                    }
+                    return (
+                      <li key={`${href}-${linkIndex}`}>
+                        <Link to={href} className={linkClasses}>
+                          {link.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </nav>
             ))}
