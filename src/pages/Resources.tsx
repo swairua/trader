@@ -342,11 +342,11 @@ export default function Resources() {
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 hero-image">
-          <img 
-            src="/src/assets/education-hero.jpg" 
-            alt="Learning resources and education materials"
+          <img
+            src="/src/assets/education-hero.jpg"
+            alt={t('resources_hero_image_alt')}
             className="w-full h-full object-cover"
-            
+
             onError={(e) => {
               e.currentTarget.style.display = 'none';
             }}
@@ -467,7 +467,13 @@ export default function Resources() {
                             })()}
                           </CardTitle>
                           <Badge variant="outline" className="shrink-0 capitalize">
-                            {item.resourceType}
+                            {(() => {
+                              const rt = item.resourceType;
+                              if (rt === 'course') return t('resources_type_course');
+                              if (rt === 'ebook') return t('resources_type_ebook');
+                              if (rt === 'material') return t('resources_type_material');
+                              return rt;
+                            })()}
                           </Badge>
                         </div>
                         
@@ -484,13 +490,19 @@ export default function Resources() {
                         {/* Metadata */}
                         <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
                           {'level' in item && (
-                            <Badge variant="secondary">{(item as any).level}</Badge>
+                            <Badge variant="secondary">{(() => {
+                              const lvl = String((item as any).level || '').toLowerCase();
+                              if (lvl === 'beginner') return t('resources_level_beginner');
+                              if (lvl === 'intermediate') return t('resources_level_intermediate');
+                              if (lvl === 'advanced') return t('resources_level_advanced');
+                              return (item as any).level;
+                            })()}</Badge>
                           )}
                           {'author' in item && (
-                            <span>By {(item as any).author}</span>
+                            <span>{t('resources_by')} {(item as any).author}</span>
                           )}
                           {'pages' in item && (item as any).pages && (
-                            <span>{(item as any).pages} pages</span>
+                            <span>{(item as any).pages} {t('resources_pages')}</span>
                           )}
                           {'topic' in item && (
                             <Badge variant="secondary">{(item as any).topic}</Badge>
@@ -507,7 +519,7 @@ export default function Resources() {
                              ))}
                              {item.tags.length > 3 && (
                                <span className="text-xs text-muted-foreground">
-                                 +{item.tags.length - 3} more
+                                 +{item.tags.length - 3} {t('resources_more')}
                                </span>
                              )}
                              
