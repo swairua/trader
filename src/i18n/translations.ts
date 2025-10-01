@@ -211,10 +211,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Blog page
     blog_hero_title: 'Trading Education Blog',
     blog_hero_subtitle: 'Educational insights, market analysis, and practical trading knowledge to help you develop disciplined trading habits.',
-
-    // Blog (French)
-    blog_hero_title_fr: 'Blog d\'éducation au trading',
-    blog_hero_subtitle_fr: 'Aperçus pédagogiques, analyses de marché et connaissances pratiques pour vous aider à développer des habitudes de trading disciplinées.',
+    blog_hero_image_alt: 'Professional forex trading analysis workspace with multiple monitors displaying trading charts',
+    blog_article_image_alt: 'Professional trading education article image',
     blog_educational_note: 'Educational Content Only:',
     blog_educational_note_desc: 'All articles are for educational purposes. Not financial advice. Trading involves risk of loss.',
     blog_category_all: 'All',
@@ -453,6 +451,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Blog page
     blog_hero_title: 'Blog d\'éducation au trading',
     blog_hero_subtitle: 'Aperçus pédagogiques, analyses de marché et connaissances pratiques pour vous aider à développer des habitudes de trading disciplinées.',
+    blog_hero_image_alt: 'Espace de travail d’analyse de trading forex avec plusieurs écrans affichant des graphiques',
+    blog_article_image_alt: "Image d'article d'éducation au trading professionnel",
     blog_read_more: 'Lire la suite',
 
     // Blog listing helpers
