@@ -375,6 +375,24 @@ export const translations: Record<Locale, Record<string, string>> = {
     services_cta_start_journey: 'Start Your Trading Journey',
     services_cta_explore_learning: 'Explore Learning Resources',
 
+    // Blog educational notice (list hero)
+    blog_educational_note: 'Educational Content Only:',
+    blog_educational_note_desc: 'All articles are for educational purposes. Not financial advice. Trading involves risk of loss.',
+
+    // Breadcrumbs
+    breadcrumb_home: 'Home',
+    breadcrumb_blog: 'Blog',
+
+    // Reading time
+    reading_time_read: 'min read',
+    reading_time_min: 'min',
+
+    // Toasts for link copy
+    link_copied_title: 'Link copied!',
+    link_copied_desc: 'The post URL has been copied to your clipboard.',
+    copy_failed_title: 'Failed to copy link',
+    copy_failed_desc: 'Please copy the URL manually from your browser.',
+
     // Misc
     step: 'Step',
     of: 'of',
@@ -694,6 +712,24 @@ export const translations: Record<Locale, Record<string, string>> = {
     services_step3: 'Développez vos connaissances avec les bons outils et conseils.',
     services_cta_start_journey: 'Commencer votre parcours de trading',
     services_cta_explore_learning: 'Explorer les ressources d’apprentissage',
+
+    // Blog educational notice (list hero)
+    blog_educational_note: 'Contenu éducatif uniquement :',
+    blog_educational_note_desc: "Tous les articles sont à des fins éducatives. Pas de conseil financier. Le trading comporte un risque de perte.",
+
+    // Breadcrumbs
+    breadcrumb_home: 'Accueil',
+    breadcrumb_blog: 'Blog',
+
+    // Reading time
+    reading_time_read: 'min de lecture',
+    reading_time_min: 'min',
+
+    // Toasts for link copy
+    link_copied_title: 'Lien copié !',
+    link_copied_desc: "L’URL de l’article a été copiée dans votre presse‑papier.",
+    copy_failed_title: 'Échec de la copie du lien',
+    copy_failed_desc: "Veuillez copier l’URL manuellement depuis votre navigateur.",
 
     // Misc
     step: 'Étape',
