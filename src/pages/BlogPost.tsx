@@ -59,6 +59,7 @@ interface SiteSettings {
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
+  const { language } = useI18n();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [siteSettings, setSiteSettings] = useState<SiteSettings>({});
   const [loading, setLoading] = useState(true);
