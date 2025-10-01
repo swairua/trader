@@ -120,8 +120,10 @@ async function translateChunk(text: string, target: string, source = 'en') {
           // Move to next endpoint after exhausting attempts for this one
           break;
         } finally {
-          // Ensure abort timer cleared even when controller isn't used
-          try { if (controller) controller = null; } catch (_) {}
+          // Ensure abort timer cleared
+          try {
+            if (typeof timeoutId !== 'undefined' && timeoutId) clearTimeout(timeoutId);
+          } catch (_) {}
         }
       }
     }
