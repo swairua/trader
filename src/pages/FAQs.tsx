@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -154,7 +155,7 @@ const FAQs = () => {
             <div className="absolute inset-0 hero-image opacity-20">
               <img 
                 src={forexFaqHero} 
-                alt="Professional forex trading education support center with trading charts in background" 
+                alt={t('faqs_hero_image_alt')} 
                 className="w-full h-full object-cover"
                 loading="eager"
                 width={1920}
@@ -197,7 +198,7 @@ const FAQs = () => {
             <div className="absolute inset-0 hero-image opacity-20">
               <img 
                 src={forexFaqHero} 
-                alt="Professional forex trading education support center with trading charts in background" 
+                alt={t('faqs_hero_image_alt')} 
                 className="w-full h-full object-cover"
                 loading="eager"
                 width={1920}
@@ -234,7 +235,7 @@ const FAQs = () => {
           <div className="absolute inset-0 hero-image opacity-20">
             <img 
               src={forexFaqHero} 
-              alt="Professional forex trading education support center with trading charts in background" 
+              alt={t('faqs_hero_image_alt')} 
               className="w-full h-full object-cover"
               loading="eager"
               width={1920}
@@ -271,7 +272,7 @@ const FAQs = () => {
                         value="all" 
                         className="text-sm font-medium px-4 py-2.5 rounded-md whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all hover:bg-background/50"
                       >
-                        📋 All FAQs
+                        📋 {t('faqs_tab_all')}
                       </TabsTrigger>
                       {categories.map((category) => {
                         const IconComponent = getIconComponent(category.icon);
@@ -303,7 +304,7 @@ const FAQs = () => {
                     />
                     {searchQuery && (
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-muted-foreground">
-                        {filteredFAQs.length} {t('faqs_results_count')}{filteredFAQs.length !== 1 ? 's' : ''}
+                        {filteredFAQs.length} {filteredFAQs.length === 1 ? t('faqs_results_count_singular') : t('faqs_results_count_plural')}
                       </div>
                     )}
                   </div>
@@ -332,21 +333,21 @@ const FAQs = () => {
               <Card className="border-2 border-destructive/30 bg-gradient-to-r from-destructive/5 to-destructive/10 backdrop-blur-sm shadow-lg">
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold text-foreground flex items-center gap-3">
-                    ⚠️ Important Risk Warning
+                    {"⚠️ "}{t('faqs_risk_title')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4 text-foreground/80">
                   <p>
-                    <strong>Trading involves significant risk:</strong> You can lose some or all of your invested capital. Never trade with money you cannot afford to lose completely.
+                    <strong>{t('faqs_risk_p1_title')}</strong> {t('faqs_risk_p1_desc')}
                   </p>
                   <p>
-                    <strong>No guarantees:</strong> Past performance is not indicative of future results. No trading strategy or educational program guarantees profits.
+                    <strong>{t('faqs_risk_p2_title')}</strong> {t('faqs_risk_p2_desc')}
                   </p>
                   <p>
-                    <strong>Educational purposes only:</strong> All content is for educational purposes and should not be considered personalized investment advice.
+                    <strong>{t('faqs_risk_p3_title')}</strong> {t('faqs_risk_p3_desc')}
                   </p>
                   <p>
-                    <strong>Seek professional advice:</strong> Consider consulting with a qualified financial advisor before making any investment decisions.
+                    <strong>{t('faqs_risk_p4_title')}</strong> {t('faqs_risk_p4_desc')}
                   </p>
                 </CardContent>
               </Card>
@@ -364,10 +365,10 @@ const FAQs = () => {
                 <MessageCircle className="h-8 w-8 text-primary" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Still Have Questions?
+                {t('faqs_still_have_questions')}
               </h2>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Our educational support team is here to help you on your trading journey.
+                {t('faqs_support_text')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="default" size="lg" asChild>
@@ -377,7 +378,7 @@ const FAQs = () => {
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg">
-                  WhatsApp Support
+                  {t('faqs_whatsapp_support')}
                   <MessageCircle className="h-4 w-4" />
                 </Button>
               </div>
