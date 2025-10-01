@@ -68,7 +68,15 @@ if (typeof window !== 'undefined') {
   // Intercept noisy third-party fetch failures and stabilize Vite HMR ping in dev
   const originalFetch = window.fetch.bind(window);
   window.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
-    const urlStr = typeof input === 'string' ? input : (input as URL).toString();
+    let urlStr = '';
+    try {
+      if (typeof input === 'string') urlStr = input;
+      else if (input instanceof Request) urlStr = input.url;
+      else if (input instanceof URL) urlStr = input.toString();
+      else urlStr = String(input);
+    } catch (e) {
+      urlStr = '';
+    }
 
     // Short-circuit Vite DEV pings/HMR fetches to avoid noisy errors in constrained envs
     if (import.meta.env.DEV) {
@@ -90,13 +98,28 @@ if (typeof window !== 'undefined') {
     try {
       return await originalFetch(input as any, init);
     } catch (err: any) {
-      const msg = err?.message || '';
-      // Silence fetch noise from analytics SDKs (e.g., FullStory) without breaking app flow
-      if (typeof msg === 'string' && msg.includes('Failed to fetch')) {
-        if (/edge\.fullstory\.com|\/s\/fs\.js/.test(urlStr)) {
+      const msg = err && (err.message || String(err)) || '';
+
+      // Parse hostname/path safely to decide whether to silence
+      let host = '';
+      let path = '';
+      try {
+        const u = new URL(urlStr, typeof location !== 'undefined' ? location.origin : 'http://localhost');
+        host = u.hostname || '';
+        path = u.pathname || '';
+      } catch (e) {
+        host = '';
+        path = urlStr || '';
+      }
+
+      // Silence fetch noise from analytics SDKs (e.g., FullStory) and HMR-related assets
+      if (typeof msg === 'string' && msg.toLowerCase().includes('failed to fetch')) {
+        if (/fullstory|edge\.fullstory\.com/.test(host) || /\/s\/fs\.js/.test(path) || /@vite|hot-update|__open-in-editor/.test(urlStr)) {
           return new Response('', { status: 204 });
         }
       }
+
+      // For other networks errors, rethrow so application logic can handle them
       throw err;
     }
   };
