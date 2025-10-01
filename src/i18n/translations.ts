@@ -286,6 +286,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_type_ebook: 'E-book',
     resources_type_material: 'Material',
     resources_hero_image_alt: 'Learning resources and education materials hero image',
+    resources_translating: 'Translating...',
 
     resources_seo_title: 'Resources — Courses, E‑books & Learning Materials | KenneDyne spot',
     resources_seo_description: 'Access comprehensive forex trading courses, e-books, and educational materials. Learn the DRIVE strategy, risk management, market psychology, and professional trading techniques.',
