@@ -86,7 +86,7 @@ const Contact = () => {
           <div className="absolute inset-0 hero-image">
             <img 
               src={contactHero} 
-              alt="Professional customer support center" 
+              alt={t('contact_hero_image_alt') || 'Professional customer support center'} 
               className="w-full h-full object-cover"
               loading="eager"
               
@@ -292,7 +292,7 @@ const Contact = () => {
                       <Button variant="outline" className="w-full justify-between" asChild>
                         <Link to="/strategy">
                           <span className="flex items-center">
-                            <LineChart className="h-4 w-4 mr-2" /> Learn About DRIVE Strategy
+                            <LineChart className="h-4 w-4 mr-2" /> {t('contact_quick_strategy')}
                           </span>
                           <ArrowRight className="h-4 w-4" />
                         </Link>
@@ -301,7 +301,7 @@ const Contact = () => {
                       <Button variant="outline" className="w-full justify-between" asChild>
                         <Link to="/faqs">
                           <span className="flex items-center">
-                            <HelpCircle className="h-4 w-4 mr-2" /> View FAQs
+                            <HelpCircle className="h-4 w-4 mr-2" /> {t('contact_quick_faq')}
                           </span>
                           <ArrowRight className="h-4 w-4" />
                         </Link>
@@ -310,7 +310,7 @@ const Contact = () => {
                       <Button variant="outline" className="w-full justify-between" asChild>
                         <Link to="/blog">
                           <span className="flex items-center">
-                            <BookOpen className="h-4 w-4 mr-2" /> Read Our Blog
+                            <BookOpen className="h-4 w-4 mr-2" /> {t('contact_quick_blog')}
                           </span>
                           <ArrowRight className="h-4 w-4" />
                         </Link>
@@ -319,16 +319,16 @@ const Contact = () => {
                   </Card>
 
                   <Card className="p-6 border border-border bg-accent/50">
-                    <h3 className="text-lg font-semibold text-foreground mb-4">Important Notice</h3>
+                    <h3 className="text-lg font-semibold text-foreground mb-4">{t('contact_notice_title')}</h3>
                     <div className="space-y-2 text-sm text-muted-foreground">
                       <p>
-                        <strong>Educational Support Only:</strong> We provide educational support and answer questions about our learning materials.
+                        <strong>{t('contact_notice_edu_only')}</strong> {t('contact_notice_edu_only_desc')}
                       </p>
                       <p>
-                        <strong>Not Financial Advice:</strong> We do not provide personalized investment advice or trading recommendations.
+                        <strong>{t('contact_notice_not_advice')}</strong> {t('contact_notice_not_advice_desc')}
                       </p>
                       <p>
-                        <strong>No Trading Support:</strong> We cannot help with broker issues, platform problems, or trade execution support.
+                        <strong>{t('contact_notice_no_trading_support')}</strong> {t('contact_notice_no_trading_support_desc')}
                       </p>
                     </div>
                   </Card>
@@ -377,14 +377,14 @@ const Contact = () => {
       <Dialog open={isEmailModalOpen} onOpenChange={(open) => { setIsEmailModalOpen(open); if (!open) setEmailCopied(false); }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Contact us by email</DialogTitle>
+            <DialogTitle>{t('contact_dialog_title')}</DialogTitle>
             <DialogDescription>
-              If your email app didn’t open, you can copy our address or try again.
+              {t('contact_dialog_desc')}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
             <div className="rounded-md bg-muted/40 p-3 text-sm">
-              <span className="font-medium">Email:</span> <a href={`mailto:${supportEmail}`} className="text-primary hover:underline">{supportEmail}</a>
+              <span className="font-medium">{t('contact_dialog_email_label')}</span> <a href={`mailto:${supportEmail}`} className="text-primary hover:underline">{supportEmail}</a>
             </div>
             {emailCopied ? (
               <p className="text-sm text-green-600 dark:text-green-400">Copied to clipboard.</p>
@@ -399,7 +399,7 @@ const Contact = () => {
                 setEmailCopied(false);
               }
             }}>
-              Copy email
+              {t('contact_dialog_copy_email')}
             </Button>
             <Button onClick={() => {
               const subject = 'Contact from website';
@@ -407,7 +407,7 @@ const Contact = () => {
               const mailto = `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
               window.location.href = mailto;
             }}>
-              <Mail className="h-4 w-4 mr-2" /> Open mail app
+              <Mail className="h-4 w-4 mr-2" /> {t('contact_dialog_open_app')}
             </Button>
           </DialogFooter>
         </DialogContent>
