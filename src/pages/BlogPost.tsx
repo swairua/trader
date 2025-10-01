@@ -546,12 +546,21 @@ export default function BlogPost() {
                     >
                       <MessageCircle className="h-4 w-4" />
                     </Button>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
+                    <Button
+                      variant="outline"
+                      size="sm"
                       onClick={handleCopyLink}
                     >
                       <Copy className="h-4 w-4" />
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleTranslatePost}
+                      disabled={language === 'en' || isTranslatingPost}
+                    >
+                      {isTranslatingPost ? t('translating') : t('translate')}
                     </Button>
                   </div>
                 </div>
