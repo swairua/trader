@@ -146,12 +146,7 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
       phone: "+254 101 316 169",
       email: "info@institutionaltrader.ke",
       whatsappText: "Obtenir de l'aide",
-      sections: undefined as any,
-      services: undefined as any,
-      socials: undefined as any,
-      legalLinks: undefined as any,
       copyright: "© 2025 KenneDyne spot. Tous droits réservés.",
-      designCredit: undefined as any,
       riskDisclaimer: "Le trading comporte des risques importants et n'est pas adapté à tous les investisseurs."
     },
     pages: {
