@@ -17,6 +17,7 @@ import remarkGfm from 'remark-gfm';
 import { format } from 'date-fns';
 import { trackEvent } from '@/components/GTMProvider';
 import { createWhatsAppLink, WHATSAPP_MESSAGES } from '@/utils/whatsapp';
+import { useI18n } from '@/i18n';
 
 interface BlogPost {
   id: string;
