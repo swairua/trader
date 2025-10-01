@@ -66,37 +66,52 @@ async function translateChunk(text: string, target: string, source = 'en') {
       return text;
     }
 
+    // Retry/backoff per endpoint to increase resilience against transient network errors
+    const MAX_ATTEMPTS = 3;
+    const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
+
     for (const url of API_ENDPOINTS) {
-      try {
-        // Use Promise.race to implement a timeout without relying on AbortController, which
-        // avoids certain AbortError behaviors in some runtimes. If the request times out
-        // we reject and move to the next endpoint.
-        const fetchPromise = fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ q: text, source, target, format: 'text' }),
-        }).then(async (resp) => {
-          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-          return resp.json().catch(() => ({} as any));
-        });
+      let attempt = 0;
+      while (attempt < MAX_ATTEMPTS) {
+        try {
+          // Use Promise.race to implement a timeout without relying on AbortController
+          const fetchPromise = fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ q: text, source, target, format: 'text' }),
+          }).then(async (resp) => {
+            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+            return resp.json().catch(() => ({} as any));
+          });
 
-        const timeoutPromise = new Promise((_, reject) => {
-          const id = setTimeout(() => {
-            clearTimeout(id);
-            reject(new Error('timeout'));
-          }, DEFAULT_TIMEOUT_MS);
-        });
+          const timeoutPromise = new Promise((_, reject) => {
+            const id = setTimeout(() => {
+              clearTimeout(id);
+              reject(new Error('timeout'));
+            }, DEFAULT_TIMEOUT_MS);
+          });
 
-        const data = await Promise.race([fetchPromise, timeoutPromise]).catch(() => null);
-        if (!data) continue;
-        const translated = (data as any)?.translatedText || '';
-        if (translated) {
-          saveToCache(hash, target, translated);
-          return translated;
+          const data = await Promise.race([fetchPromise, timeoutPromise]).catch(() => null);
+          if (!data) throw new Error('no-data');
+          const translated = (data as any)?.translatedText || '';
+          if (translated) {
+            saveToCache(hash, target, translated);
+            return translated;
+          }
+
+          // If response didn't contain translation, break to try next endpoint
+          break;
+        } catch (_err) {
+          attempt += 1;
+          // exponential backoff before retrying the same endpoint
+          if (attempt < MAX_ATTEMPTS) {
+            const delay = 200 * Math.pow(2, attempt - 1); // 200ms, 400ms, 800ms
+            await sleep(delay);
+            continue;
+          }
+          // otherwise move on to the next endpoint
+          break;
         }
-      } catch (_err) {
-        // try next endpoint
-        continue;
       }
     }
 
