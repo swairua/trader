@@ -472,6 +472,31 @@ export default function Resources() {
               </TabsTrigger>
             </TabsList>
 
+            {/* Translation progress & retry UI */}
+            {language !== 'en' && (isTranslating || translationError) && (
+              <div className="flex items-center justify-between p-3 mb-4 rounded-md bg-muted/10">
+                <div className="flex items-center gap-3">
+                  <Loader2 className={`h-4 w-4 ${isTranslating ? 'animate-spin' : ''}`} />
+                  <div className="text-sm">
+                    {isTranslating ? (
+                      <>
+                        {t('resources_translating')} — {translatedCount}/{totalToTranslate || 0}
+                      </>
+                    ) : (
+                      <>
+                        <span className="flex items-center gap-2 text-sm text-destructive"><AlertCircle className="h-4 w-4" /> {t('translation_error_occurred')}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <Button variant="ghost" size="sm" onClick={handleRetryTranslations}>
+                    {t('retry')}
+                  </Button>
+                </div>
+              </div>
+            )}
+
             <TabsContent value={activeTab} className="space-y-8">
               {filteredResources.length === 0 ? (
                 <div className="text-center py-12">
