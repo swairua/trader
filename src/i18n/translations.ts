@@ -520,7 +520,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_send: 'Envoyer le message',
     contact_success_whatsapp_cta: 'WhatsApp-nous maintenant',
     contact_success_text: 'Message envoyé avec succès ! Pour une réponse plus rapide, vous pouvez également nous contacter directement via WhatsApp :',
-    contact_response_time_note: 'Nous répondons g��néralement sous 24 à 48 heures durant les jours ouvrables.',
+    contact_response_time_note: 'Nous répondons généralement sous 24 à 48 heures durant les jours ouvrables.',
     contact_info_title: 'Informations de contact',
     contact_info_email: 'E-mail',
     contact_info_whatsapp: 'WhatsApp',
@@ -590,6 +590,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_hero_subtitle: "Accédez à notre bibliothèque complète de cours, e‑books et supports pour accélérer votre formation au trading",
     resources_hero_image_alt: "Ressources d'apprentissage et supports éducatifs (image héro)",
     resources_translating: 'Traduction en cours...',
+    retry: 'Réessayer',
+    translation_error_occurred: 'Une erreur de traduction est survenue',
 
     resources_seo_title: 'Ressources — Cours, E‑books et Supports | KenneDyne spot',
     resources_seo_description: 'Accédez à des cours de trading forex, des e‑books et des supports pédagogiques. Découvrez la stratégie DRIVE, la gestion du risque, la psychologie du marché et des techniques professionnelles.',
