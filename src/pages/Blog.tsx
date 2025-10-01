@@ -95,7 +95,7 @@ const Blog = () => {
                             {post.author}
                           </div>
                         </div>
-                        <span>{post.readTime}</span>
+                        <span>{post.readTime} {t('reading_time_min')}</span>
                       </div>
 
                       <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer">
@@ -128,7 +128,7 @@ const Blog = () => {
                           <Calendar className="h-4 w-4 mr-1" />
                           {post.date}
                         </div>
-                        <span>{post.readTime}</span>
+                        <span>{post.readTime} {t('reading_time_min')}</span>
                       </div>
 
                       <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer text-sm">
