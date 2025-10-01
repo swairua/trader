@@ -207,6 +207,14 @@ export default function Resources() {
     return () => { mounted = false; };
   }, [filteredResources, language]);
 
+  const getDisplayTitle = (item: any) => {
+    const id = (item as any).id || (item as any).slug || (item as any).title;
+    const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+    if (language === 'fr' && ((item as any).title_fr || (item as any).title_fr === '')) return (item as any).title_fr || item.title;
+    if (translatedResources[key]?.title) return translatedResources[key].title;
+    return item.title;
+  };
+
   const getResourceIcon = (resourceType: string, materialType?: string) => {
     if (resourceType === 'course') return <GraduationCap className="h-5 w-5" />;
     if (resourceType === 'ebook') return <BookOpen className="h-5 w-5" />;
