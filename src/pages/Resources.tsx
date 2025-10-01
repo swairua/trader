@@ -14,7 +14,7 @@ import { useSiteContent } from '@/hooks/useSiteContent';
 import { useCourses, useEbooks, useMaterials } from '@/hooks/useResources';
 import { useToast } from '@/hooks/use-toast';
 import { translateText } from '@/utils/translationService';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Search, BookOpen, GraduationCap, FileText, Download, ExternalLink, Filter, Loader2, AlertCircle } from 'lucide-react';
 import { useI18n } from '@/i18n';
