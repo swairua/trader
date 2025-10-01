@@ -441,6 +441,11 @@ export const translations: Record<Locale, Record<string, string>> = {
     faqs_support_text: 'Our educational support team is here to help you on your trading journey.',
     faqs_whatsapp_support: 'WhatsApp Support',
 
+    // Inline translation controls
+    translate: 'Translate',
+    translating: 'Translating...',
+    translate_retry: 'Retry translation',
+
     // FAQs SEO
     faqs_seo_title: 'FAQs - KenneDyne spot | Trading Education Questions',
     faqs_seo_description: 'Get answers to frequently asked questions about our forex trading education, Direction, Range, Interest Point, Value of Risk, Entry (DRIVE) strategy, risk management, and mentorship programs. Learn about our educational approach.',
@@ -818,7 +823,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Strategy page
     strategy_badge: 'Cadre pédagogique',
     strategy_why_item1_title: 'Focalisation claire',
-    strategy_why_item1_desc: 'Une approche structurée et basée sur des règles qui met l���accent sur le contexte du marché et les configurations à haute probabilité.',
+    strategy_why_item1_desc: 'Une approche structurée et basée sur des règles qui met l’accent sur le contexte du marché et les configurations à haute probabilité.',
     strategy_why_item2_title: 'Régulé et sécurisé',
     strategy_why_item2_desc: 'Principes adaptés des pratiques institutionnelles avec une forte attention à la gestion des risques et à la discipline.',
     strategy_why_item3_title: 'Basé sur la recherche',
@@ -943,6 +948,11 @@ export const translations: Record<Locale, Record<string, string>> = {
     faqs_still_have_questions: 'Vous avez encore des questions ?',
     faqs_support_text: 'Notre équipe de support éducatif est là pour vous accompagner dans votre parcours de trading.',
     faqs_whatsapp_support: 'Support WhatsApp',
+
+    // Inline translation controls
+    translate: 'Traduire',
+    translating: 'Traduction en cours...',
+    translate_retry: 'Réessayer la traduction',
 
     // FAQs SEO
     faqs_seo_title: 'FAQ - KenneDyne spot | Questions sur la formation au trading',
