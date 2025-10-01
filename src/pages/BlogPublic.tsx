@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Search, Calendar, Clock, User, Tag, ArrowLeft, ArrowRight, Star } from 'lucide-react';
+import { Search, Calendar, Clock, User, Tag, ArrowLeft, ArrowRight, Star, Loader2, AlertCircle } from 'lucide-react';
 import { SEOHead } from '@/components/SEOHead';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
