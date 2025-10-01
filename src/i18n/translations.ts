@@ -58,6 +58,23 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_entry_title: 'Entry',
     drive_entry_desc: 'Learn how to follow structured entry rules.',
 
+    // DRIVE step details
+    drive_direction_detail1: 'Align with broader institutional market trends',
+    drive_direction_detail2: 'Explore methods for analyzing potential trend shifts',
+    drive_direction_detail3: 'Master higher timeframe confluence',
+    drive_range_detail1: 'Map the weekly range for structured setups',
+    drive_range_detail2: 'Learn to recognize areas of imbalance and liquidity',
+    drive_range_detail3: 'Identify key support and resistance zones',
+    drive_poi_detail1: 'Identify higher-timeframe tradable order blocks',
+    drive_poi_detail2: 'Confirm setups using multiple confluence factors',
+    drive_poi_detail3: 'Master institutional Points of Interest',
+    drive_value_of_risk_detail1: 'Practice disciplined position sizing',
+    drive_value_of_risk_detail2: 'Build habits that encourage consistency over time',
+    drive_value_of_risk_detail3: 'Master risk management fundamentals',
+    drive_entry_detail1: 'Explore ways to scale into winning positions',
+    drive_entry_detail2: 'Learn systematic trade management techniques',
+    drive_entry_detail3: 'Execute with institutional precision',
+
     // How it Works extras
     create_exness_account: 'Create your Exness account',
     key_benefits: 'Key Benefits',
@@ -147,6 +164,50 @@ export const translations: Record<Locale, Record<string, string>> = {
     comparison_price_action: 'Price Action Only',
     comparison_ict: 'ICT',
     comparison_supply_demand: 'Supply & Demand',
+
+    // Comparison rows (features and values)
+    comparison_focus: 'Focus',
+    comparison_direction: 'Direction',
+    comparison_consistency: 'Consistency',
+    comparison_risk_management: 'Risk Management',
+    comparison_learning_curve: 'Learning Curve',
+    comparison_best_for: 'Best For',
+
+    comparison_row_focus_drive: 'Structured, rule-based framework',
+    comparison_row_focus_indicators: 'Signals from tools',
+    comparison_row_focus_price_action: 'Candlestick patterns',
+    comparison_row_focus_ict: 'Institutional order flow',
+    comparison_row_focus_supply_action: 'Supply & demand zones',
+
+    comparison_row_direction_drive: 'Clear, rule-based guidelines',
+    comparison_row_direction_indicators: 'May lag behind price',
+    comparison_row_direction_price_action: 'Often subjective',
+    comparison_row_direction_ict: 'Strong but complex',
+    comparison_row_direction_supply_action: 'Useful but may vary',
+
+    comparison_row_consistency_drive: 'Designed as a repeatable framework',
+    comparison_row_consistency_indicators: 'Can be inconsistent if signals repaint',
+    comparison_row_consistency_price_action: 'Skill dependent',
+    comparison_row_consistency_ict: 'Consistent if mastered',
+    comparison_row_consistency_supply_action: 'Market dependent',
+
+    comparison_row_risk_management_drive: 'Built into the framework',
+    comparison_row_risk_management_indicators: 'Rarely emphasized',
+    comparison_row_risk_management_price_action: 'Trader dependent',
+    comparison_row_risk_management_ict: 'Strong',
+    comparison_row_risk_management_supply_action: 'Varies',
+
+    comparison_row_learning_curve_drive: 'Moderate – step by step',
+    comparison_row_learning_curve_indicators: 'Easy to start',
+    comparison_row_learning_curve_price_action: 'Requires practice',
+    comparison_row_learning_curve_ict: 'Steep',
+    comparison_row_learning_curve_supply_action: 'Moderate',
+
+    comparison_row_best_for_drive: 'Scalper, Day trader, Swing traders seeking structured learning',
+    comparison_row_best_for_indicators: 'Beginners wanting simple tools',
+    comparison_row_best_for_price_action: 'Experienced discretionary traders',
+    comparison_row_best_for_ict: 'Advanced learners',
+    comparison_row_best_for_supply_action: 'Swing traders',
     strategy_nav_steps: '5 Steps',
     strategy_nav_comparison: 'Comparison',
     strategy_nav_why_choose: 'Why Choose DRIVE',
@@ -156,6 +217,13 @@ export const translations: Record<Locale, Record<string, string>> = {
     strategy_why_subtitle: 'Discover the key advantages that make DRIVE the preferred choice for serious traders.',
     strategy_disclaimer_title: 'Educational Framework Disclaimer',
     strategy_disclaimer_text: 'The DRIVE Strategy is designed for educational purposes to help you develop a structured approach to market analysis. It is not personalized investment advice. Always conduct your own research and consider your risk tolerance before making any trading decisions.',
+
+    // SEO/Breadcrumbs
+    breadcrumb_home: 'Home',
+    breadcrumb_strategy: 'DRIVE Strategy',
+    strategy_seo_title: 'DRIVE Strategy - Institutional Trading Framework | KenneDyne spot',
+    strategy_seo_description: 'Master our proven DRIVE trading strategy framework: Define, Read, Identify, Validate, Execute. Learn systematic institutional trading concepts and risk management.',
+    strategy_seo_keywords: 'DRIVE trading strategy, institutional trading framework, forex strategy, trading system, market analysis strategy, risk management framework',
 
     // Dialogs & forms
     strategy_dialog_video_title: 'Request Strategy Video',
@@ -565,6 +633,23 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_entry_title: 'Entrée',
     drive_entry_desc: 'Apprenez à suivre des règles d’entrée structurées.',
 
+    // DRIVE step details
+    drive_direction_detail1: 'Alignez-vous sur les tendances institutionnelles plus larges',
+    drive_direction_detail2: 'Explorez des méthodes pour analyser les changements de tendance potentiels',
+    drive_direction_detail3: 'Maîtrisez la confluence des horizons de temps supérieurs',
+    drive_range_detail1: 'Cartographier le range hebdomadaire pour des configurations structurées',
+    drive_range_detail2: 'Reconnaître les zones de déséquilibre et de liquidité',
+    drive_range_detail3: 'Identifier les principaux supports et résistances',
+    drive_poi_detail1: 'Identifier les blocs d’ordres négociables en HTF',
+    drive_poi_detail2: 'Confirmer les setups avec des facteurs de confluence multiples',
+    drive_poi_detail3: 'Maîtriser les Points d’Intérêt institutionnels',
+    drive_value_of_risk_detail1: 'Pratiquer une taille de position disciplinée',
+    drive_value_of_risk_detail2: 'Construire des habitudes favorisant la constance dans le temps',
+    drive_value_of_risk_detail3: 'Maîtriser les fondamentaux de la gestion du risque',
+    drive_entry_detail1: 'Explorer des moyens d’échelonner les positions gagnantes',
+    drive_entry_detail2: 'Apprendre des techniques systématiques de gestion de trade',
+    drive_entry_detail3: 'Exécuter avec une précision institutionnelle',
+
     // How it Works extras
     create_exness_account: 'Créez votre compte Exness',
     key_benefits: 'Avantages clés :',
@@ -638,6 +723,50 @@ export const translations: Record<Locale, Record<string, string>> = {
     comparison_price_action: 'Price Action uniquement',
     comparison_ict: 'ICT',
     comparison_supply_demand: 'Offre et Demande',
+
+    // Comparison rows (features and values)
+    comparison_focus: 'Focalisation',
+    comparison_direction: 'Direction',
+    comparison_consistency: 'Constance',
+    comparison_risk_management: 'Gestion du risque',
+    comparison_learning_curve: 'Courbe d’apprentissage',
+    comparison_best_for: 'Idéal pour',
+
+    comparison_row_focus_drive: 'Cadre structuré et basé sur des règles',
+    comparison_row_focus_indicators: 'Signaux provenant d’outils',
+    comparison_row_focus_price_action: 'Figures de chandeliers',
+    comparison_row_focus_ict: 'Flux d’ordres institutionnel',
+    comparison_row_focus_supply_action: 'Zones d’offre et de demande',
+
+    comparison_row_direction_drive: 'Directives claires et basées sur des règles',
+    comparison_row_direction_indicators: 'Peut retarder par rapport au prix',
+    comparison_row_direction_price_action: 'Souvent subjectif',
+    comparison_row_direction_ict: 'Solide mais complexe',
+    comparison_row_direction_supply_action: 'Utile mais variable',
+
+    comparison_row_consistency_drive: 'Conçu comme un cadre reproductible',
+    comparison_row_consistency_indicators: 'Peut être incohérent si les signaux repaint',
+    comparison_row_consistency_price_action: 'Dépend des compétences',
+    comparison_row_consistency_ict: 'Constant si maîtrisé',
+    comparison_row_consistency_supply_action: 'Dépend du marché',
+
+    comparison_row_risk_management_drive: 'Intégré au cadre',
+    comparison_row_risk_management_indicators: 'Rarement mis en avant',
+    comparison_row_risk_management_price_action: 'Dépend du trader',
+    comparison_row_risk_management_ict: 'Solide',
+    comparison_row_risk_management_supply_action: 'Variable',
+
+    comparison_row_learning_curve_drive: 'Modérée – étape par étape',
+    comparison_row_learning_curve_indicators: 'Facile pour commencer',
+    comparison_row_learning_curve_price_action: 'Nécessite de la pratique',
+    comparison_row_learning_curve_ict: 'Abrupte',
+    comparison_row_learning_curve_supply_action: 'Modérée',
+
+    comparison_row_best_for_drive: 'Scalpers, day traders, swing traders recherchant un apprentissage structuré',
+    comparison_row_best_for_indicators: 'Débutants souhaitant des outils simples',
+    comparison_row_best_for_price_action: 'Traders discrétionnaires expérimentés',
+    comparison_row_best_for_ict: 'Apprenants avancés',
+    comparison_row_best_for_supply_action: 'Swing traders',
     strategy_nav_steps: '5 étapes',
     strategy_nav_comparison: 'Comparaison',
     strategy_nav_why_choose: 'Pourquoi choisir DRIVE',
@@ -647,6 +776,13 @@ export const translations: Record<Locale, Record<string, string>> = {
     strategy_why_subtitle: 'Découvrez les principaux avantages qui font de DRIVE le choix des traders sérieux.',
     strategy_disclaimer_title: "Avertissement — Cadre pédagogique",
     strategy_disclaimer_text: "La stratégie DRIVE est destinée à des fins éducatives pour vous aider à développer une approche structurée de l'analyse du marché. Ce n'est pas un conseil en investissement personnalisé. Faites toujours vos propres recherches et tenez compte de votre tolérance au risque avant toute décision.",
+
+    // SEO/Breadcrumbs
+    breadcrumb_home: 'Accueil',
+    breadcrumb_strategy: 'Stratégie DRIVE',
+    strategy_seo_title: 'Stratégie DRIVE - Cadre de trading institutionnel | KenneDyne spot',
+    strategy_seo_description: 'Maîtrisez notre cadre de stratégie DRIVE : Définir, Lire, Identifier, Valider, Exécuter. Apprenez un trading institutionnel systématique et la gestion du risque.',
+    strategy_seo_keywords: 'stratégie DRIVE, cadre de trading institutionnel, stratégie forex, système de trading, analyse de marché, gestion du risque',
 
     // Dialogs & forms
     strategy_dialog_video_title: 'Demander la vidéo de stratégie',
