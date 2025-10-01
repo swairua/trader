@@ -52,36 +52,24 @@ export function Footer() {
               </p>
               
               {/* Social Links */}
-              {footer.socials && footer.socials.length > 0 && (
+              {socialLinks.length > 0 && (
                 <div className="flex items-center gap-4 pt-2">
-                  <a
-                    {...getExternalLinkProps(createWhatsAppLink(DEFAULT_WHATSAPP_PHONE, WHATSAPP_MESSAGES.contact))}
-                    aria-label="Contact us on WhatsApp"
-                    className="text-muted-foreground hover:text-primary transition-colors hover:scale-105 transform duration-200"
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                  </a>
-                  <a
-                    {...getExternalLinkProps(LINKS.telegram.community)}
-                    aria-label="Join our Telegram community"
-                    className="text-muted-foreground hover:text-primary transition-colors hover:scale-105 transform duration-200"
-                  >
-                    <Send className="h-5 w-5" />
-                  </a>
-                  <a
-                    {...getExternalLinkProps(LINKS.whatsapp.channel)}
-                    aria-label="Join our WhatsApp channel"
-                    className="text-muted-foreground hover:text-primary transition-colors hover:scale-105 transform duration-200"
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                  </a>
-                  <a
-                    {...getExternalLinkProps(LINKS.instagram)}
-                    aria-label="Visit our Instagram"
-                    className="text-muted-foreground hover:text-primary transition-colors hover:scale-105 transform duration-200"
-                  >
-                    <Instagram className="h-5 w-5" />
-                  </a>
+                  {socialLinks.map((social) => {
+                    const Icon = getSocialIcon(social.type);
+                    const label = social.name || "Social link";
+                    return (
+                      <a
+                        key={social.href}
+                        {...getExternalLinkProps(social.href)}
+                        aria-label={label}
+                        title={label}
+                        className="text-muted-foreground hover:text-primary transition-colors hover:scale-105 transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded-full p-1"
+                      >
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                        <span className="sr-only">{label}</span>
+                      </a>
+                    );
+                  })}
                 </div>
               )}
             </div>
