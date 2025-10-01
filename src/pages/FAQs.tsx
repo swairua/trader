@@ -30,6 +30,8 @@ const FAQs = () => {
   const [copiedFaqId, setCopiedFaqId] = useState<string | null>(null);
   const { faqs, categories, loading, error } = usePublicFaqs(language);
 
+  const { translatedMap: faqsTranslatedMap, isTranslating: faqsIsTranslating, totalToTranslate: faqsTotalToTranslate, translatedCount: faqsTranslatedCount, translationError: faqsTranslationError, retry: faqsRetry } = useAutoTranslate(faqs, ['question','answer']);
+
   const [isRiskTranslating, setIsRiskTranslating] = useState(false);
   const [riskTranslated, setRiskTranslated] = useState<{ p1?: string; p2?: string; p3?: string; p4?: string } | null>(null);
 
