@@ -144,8 +144,10 @@ export default function Resources() {
     let mounted = true;
     async function run() {
       try {
+        setIsTranslating(true);
         if (!language || language === 'en') {
           setTranslatedResources({});
+          setIsTranslating(false);
           return;
         }
 
