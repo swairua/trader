@@ -15,6 +15,7 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { SectionDivider } from '@/components/SectionDivider';
 import { useI18n } from '@/i18n';
 import { format } from 'date-fns';
+import { fr as frLocale, enUS } from 'date-fns/locale';
 import forexBlogHero from '@/assets/forex-blog-hero.jpg';
 
 interface BlogPost {
@@ -226,7 +227,7 @@ export default function BlogPublic() {
     }
   };
 
-  const { t } = useI18n();
+  const { t, language } = useI18n();
 
   return (
     <div className="min-h-screen bg-background">
@@ -407,11 +408,11 @@ export default function BlogPublic() {
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
                             <div className="flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
-                              {format(new Date(post.published_at), 'MMM d, yyyy')}
+                              {format(new Date(post.published_at), 'PPP', { locale: language === 'fr' ? frLocale : enUS })}
                             </div>
                             <div className="flex items-center gap-1">
                               <Clock className="h-3 w-3" />
-                              {post.reading_time_mins} min read
+                              {post.reading_time_mins} {t('reading_time_read')}
                             </div>
                           </div>
                           
@@ -481,11 +482,11 @@ export default function BlogPublic() {
                           <div className="flex items-center gap-3 text-xs text-muted-foreground">
                             <div className="flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
-                              {format(new Date(post.published_at), 'MMM d')}
+                              {format(new Date(post.published_at), 'PP', { locale: language === 'fr' ? frLocale : enUS })}
                             </div>
                             <div className="flex items-center gap-1">
                               <Clock className="h-3 w-3" />
-                              {post.reading_time_mins} min
+                              {post.reading_time_mins} {t('reading_time_min')}
                             </div>
                           </div>
                           
