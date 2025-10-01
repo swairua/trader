@@ -316,6 +316,10 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_dialog_copied: 'Copied to clipboard.',
     contact_dialog_copy_email: 'Copy email',
     contact_dialog_open_app: 'Open mail app',
+    // Resource levels (French)
+    resources_level_beginner: 'Débutant',
+    resources_level_intermediate: 'Intermédiaire',
+    resources_level_advanced: 'Avancé',
     // FAQs page
     faqs_loading: 'Loading FAQs...',
     faqs_error: 'Error Loading FAQs',
