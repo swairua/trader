@@ -317,8 +317,8 @@ const FAQs = () => {
                 </div>
 
                 {/* Search Bar */}
-                <div className="mb-8">
-                  <div className="relative max-w-md">
+                <div className="mb-8 flex items-center justify-between">
+                  <div className="relative max-w-md w-full">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="text"
@@ -331,6 +331,16 @@ const FAQs = () => {
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-muted-foreground">
                         {filteredFAQs.length} {filteredFAQs.length === 1 ? t('faqs_results_count_singular') : t('faqs_results_count_plural')}
                       </div>
+                    )}
+                  </div>
+
+                  <div className="ml-4 flex items-center gap-2">
+                    {faqsIsTranslating ? (
+                      <div className="text-sm text-muted-foreground">{t('translating')} — {faqsTranslatedCount}/{faqsTotalToTranslate || 0}</div>
+                    ) : (
+                      <Button size="sm" variant="outline" onClick={faqsRetry} disabled={language === 'en' || faqsTotalToTranslate === 0}>
+                        {t('translate')}
+                      </Button>
                     )}
                   </div>
                 </div>
