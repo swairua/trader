@@ -156,11 +156,11 @@ const FAQs = () => {
                     </Button>
                   }
                 >
-                  <span className="pr-4">{faq.question}</span>
+                  <span className="pr-4">{faqsTranslatedMap[faq.id]?.question ?? faq.question}</span>
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground leading-relaxed px-6 pb-6 pt-2 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0">
                   <div className="prose prose-sm max-w-none dark:prose-invert border-l-2 border-primary/20 pl-4 ml-2">
-                    {faq.answer}
+                    {faqsTranslatedMap[faq.id]?.answer ?? faq.answer}
                   </div>
                 </AccordionContent>
               </AccordionItem>
