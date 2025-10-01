@@ -109,7 +109,7 @@ export function Navigation() {
                       const Icon = nestedIcons[idx % nestedIcons.length];
                       return (
                         <DropdownMenuItem key={item.name} asChild>
-                          <Link to={item.href} className="flex items-center text-foreground">
+                          <Link to={item.href} className="flex items-center text-foreground hover:text-primary transition-none">
                             <Icon className="mr-2 h-4 w-4 opacity-80" />
                             {item.name}
                           </Link>
