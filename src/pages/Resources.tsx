@@ -253,7 +253,7 @@ export default function Resources() {
               ) : (
                 <ExternalLink className="h-4 w-4 mr-2" />
               )}
-              {item.type === 'sheet' || item.type === 'pdf' ? 'Download' : 'Open'}
+              {item.type === 'sheet' || item.type === 'pdf' ? t('resources_download') : t('resources_open')}
             </>
           ) : (
             <>
