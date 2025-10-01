@@ -108,7 +108,7 @@ const Blog = () => {
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-8">{t('blog_all_title')}</h2>
                 <div className="grid md:grid-cols-3 gap-8">
-                  {blogPosts.map((post, index) => (
+                  {(content.blogPreview.posts || []).map((post: any, index: number) => (
                     <Card key={index} className="p-6 border border-border hover:shadow-elevation hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                       <Badge variant="secondary" className="mb-3 bg-primary/10 text-primary border-primary/20">
                         {post.category}
@@ -119,13 +119,13 @@ const Blog = () => {
                       <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                         {post.excerpt}
                       </p>
-                      
+
                       <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                         <div className="flex items-center">
                           <Calendar className="h-4 w-4 mr-1" />
-                          {post.date}
+                          {post.date || post.readTime}
                         </div>
-                        <span>{post.readTime}</span>
+                        <span>{post.readTime || ''}</span>
                       </div>
 
                       <div className="flex items-center text-primary hover:text-primary-hover cursor-pointer text-sm">
