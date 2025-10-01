@@ -205,27 +205,23 @@ export function Footer() {
               
               <div className="flex flex-wrap gap-6 justify-center md:justify-end items-center">
                 <nav aria-label="Legal" className="flex flex-wrap gap-6">
-                  {(footer.legalLinks || []).map((link, index) => (
-                    link.href && link.href.startsWith("http") ? (
-                      <a
-                        key={index}
-                        href={link.href}
-                        target="_blank"
-                        rel="nofollow noopener noreferrer"
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {link.name}
-                      </a>
-                    ) : (
-                      <Link
-                        key={index}
-                        to={link.href || '#'}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                      >
+                  {legalLinks.map((link, index) => {
+                    if (!link?.name) return null;
+                    const href = link.href || "#";
+                    const classes = "text-sm text-muted-foreground hover:text-primary transition-colors";
+                    if (href.startsWith("http")) {
+                      return (
+                        <a key={`${href}-${index}`} {...getExternalLinkProps(href)} className={classes}>
+                          {link.name}
+                        </a>
+                      );
+                    }
+                    return (
+                      <Link key={`${href}-${index}`} to={href} className={classes}>
                         {link.name}
                       </Link>
-                    )
-                  ))}
+                    );
+                  })}
                   
                   {/* Admin link for authenticated admins */}
                   {isAdmin && (
