@@ -139,6 +139,64 @@ export default function Resources() {
     });
   }, [content.resources, searchTerm, levelFilter, typeFilter, activeTab, dbCourses, dbEbooks, dbMaterials]);
 
+  // Auto-translate DB-driven resources on the fly (cache in localStorage)
+  useEffect(() => {
+    let mounted = true;
+    async function run() {
+      try {
+        if (!language || language === 'en') {
+          setTranslatedResources({});
+          return;
+        }
+
+        const itemsToTranslate = filteredResources || [];
+        const next: Record<string, { title?: string; description?: string }> = {};
+
+        for (const item of itemsToTranslate) {
+          const id = (item as any).id || (item as any).slug || (item as any).title;
+          const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+          const cacheKey = `translations:resource:${key}`;
+          const cached = localStorage.getItem(cacheKey);
+          if (cached) {
+            try { next[key] = JSON.parse(cached); } catch { /* ignore */ }
+            continue;
+          }
+
+          // Skip if server provides localized fields
+          if (((item as any).title_fr || (item as any).description_fr) && language === 'fr') {
+            next[key] = {
+              title: (item as any).title_fr || (item as any).title,
+              description: (item as any).description_fr || (item as any).description,
+            };
+            try { localStorage.setItem(cacheKey, JSON.stringify(next[key])); } catch {}
+            continue;
+          }
+
+          const title = (item as any).title || '';
+          const description = (item as any).description || '';
+
+          const [tTitle, tDesc] = await Promise.all([
+            title ? translateText(title, language) : Promise.resolve(''),
+            description ? translateText(description, language) : Promise.resolve(''),
+          ]);
+
+          next[key] = { title: tTitle || title, description: tDesc || description };
+          try { localStorage.setItem(cacheKey, JSON.stringify(next[key])); } catch {}
+
+          // Small delay to reduce rate pressure
+          await new Promise(res => setTimeout(res, 120));
+        }
+
+        if (mounted) setTranslatedResources(next);
+      } catch (e) {
+        console.error('Resource translation error', e);
+      }
+    }
+
+    run();
+    return () => { mounted = false; };
+  }, [filteredResources, language]);
+
   const getResourceIcon = (resourceType: string, materialType?: string) => {
     if (resourceType === 'course') return <GraduationCap className="h-5 w-5" />;
     if (resourceType === 'ebook') return <BookOpen className="h-5 w-5" />;
