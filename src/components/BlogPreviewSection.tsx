@@ -119,7 +119,7 @@ export function BlogPreviewSection() {
                      <div className="aspect-video relative overflow-hidden">
                        <img 
                          src={post.featured_image_url || post.image || '/lovable-uploads/trading-strategy.jpg'} 
-                         alt={post.imageAlt || `Professional trading education article: ${post.title}`}
+                         alt={post.imageAlt || `${t('blog_article_image_alt')}: ${post.title}`}
                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                          loading="lazy"
                          decoding="async"
