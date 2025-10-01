@@ -24,11 +24,9 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
-        return Promise.all(
-          cacheNames
-            .filter((cacheName) => cacheName !== CACHE_NAME)
-            .map((cacheName) => caches.delete(cacheName))
-        );
+        // Remove only old caches that match our prefix but have a different version
+        const oldCaches = cacheNames.filter((cacheName) => cacheName.startsWith(CACHE_PREFIX) && cacheName !== CACHE_NAME);
+        return Promise.all(oldCaches.map((cacheName) => caches.delete(cacheName)));
       })
       .then(() => self.clients.claim())
   );
