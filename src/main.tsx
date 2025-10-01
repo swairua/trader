@@ -12,12 +12,38 @@ if (!rootElement) throw new Error('Root element not found');
 
 // Suppress noisy "Failed to fetch" errors from third-party scripts (FullStory, vite client ping, etc.)
 if (typeof window !== 'undefined') {
+  const handleDynamicImportFailure = async (reasonMsg?: string) => {
+    try {
+      // Unregister any service workers and clear caches, then reload to fetch fresh bundles
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map(r => r.unregister()));
+      }
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        await Promise.all(keys.map(k => caches.delete(k)));
+      }
+    } catch (e) {
+      console.warn('Failed to clean service worker/caches', e);
+    } finally {
+      // Force reload to pick up latest assets from the network
+      try { window.location.reload(); } catch (e) { /* ignore */ }
+    }
+  };
+
   window.addEventListener('error', (evt: ErrorEvent) => {
     try {
       const message = (evt && (evt as any).message) || '';
-      if (typeof message === 'string' && message.includes('Failed to fetch')) {
-        evt.preventDefault();
-        return;
+      if (typeof message === 'string') {
+        if (message.includes('Failed to fetch dynamically imported module') || message.includes('Failed to fetch')) {
+          evt.preventDefault();
+          // If a dynamically imported module failed, attempt to recover by clearing SW & caches
+          if (message.includes('Failed to fetch dynamically imported module')) {
+            handleDynamicImportFailure(message);
+            return;
+          }
+          return;
+        }
       }
     } catch (e) {}
   });
@@ -26,9 +52,15 @@ if (typeof window !== 'undefined') {
     try {
       const reason = (evt && (evt as any).reason) || {};
       const msg = reason && reason.message ? reason.message : String(reason);
-      if (typeof msg === 'string' && msg.includes('Failed to fetch')) {
-        evt.preventDefault();
-        return;
+      if (typeof msg === 'string') {
+        if (msg.includes('Failed to fetch dynamically imported module') || msg.includes('Failed to fetch')) {
+          evt.preventDefault();
+          if (msg.includes('Failed to fetch dynamically imported module')) {
+            handleDynamicImportFailure(msg);
+            return;
+          }
+          return;
+        }
       }
     } catch (e) {}
   });
