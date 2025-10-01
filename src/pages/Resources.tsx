@@ -314,7 +314,7 @@ export default function Resources() {
               // Fallback: show material info or coming soon message
               toast({
                 title: t('resources_preview_material'),
-                description: `${item.title} ${t('resources_preview_available')}`,
+                description: `${getDisplayTitle(item)} ${t('resources_preview_available')}`,
               });
             }
           }}
