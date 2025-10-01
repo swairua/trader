@@ -9,6 +9,20 @@ import { LINKS, getExternalLinkProps } from "@/constants/links";
 import { createWhatsAppLink, WHATSAPP_MESSAGES, DEFAULT_WHATSAPP_PHONE } from "@/utils/whatsapp";
 import { useSiteContent } from "@/hooks/useSiteContent";
 
+const SOCIAL_ICON_MAP: Record<string, LucideIcon> = {
+  whatsapp: MessageCircle,
+  telegram: Send,
+  youtube: Youtube,
+  x: Twitter,
+  instagram: Instagram,
+};
+
+const getSocialIcon = (type?: string): LucideIcon => {
+  if (!type) return MessageCircle;
+  const key = type.toLowerCase();
+  return SOCIAL_ICON_MAP[key] ?? MessageCircle;
+};
+
 export function Footer() {
   const { content } = useSiteContent();
   const { isAdmin } = useUserRoles();
