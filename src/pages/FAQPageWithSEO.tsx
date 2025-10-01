@@ -14,7 +14,7 @@ const FAQPageWithSEO = () => {
   const location = useLocation();
   const canonical = `https://institutional-trader.com${location.pathname}`;
   const [faqSchema, setFaqSchema] = useState(fallbackFaqSchema);
-  const { language } = useI18n();
+  const { language, t } = useI18n();
 
   useEffect(() => {
     const buildSchemaFromDB = async () => {
@@ -83,9 +83,9 @@ const FAQPageWithSEO = () => {
   return (
     <>
       <SEOHead
-        title="FAQs - KenneDyne spot | Trading Education Questions"
-        description={`Get answers to frequently asked questions about our forex trading education, ${driveFullName} strategy, risk management, and mentorship programs. Learn about our educational approach.`}
-        keywords="trading education FAQ, forex education questions, DRIVE strategy FAQ, Direction Range Interest Point Value Risk Entry, trading mentorship questions, risk management education"
+        title={t('faqs_seo_title')}
+        description={t('faqs_seo_description')}
+        keywords={t('faqs_seo_keywords')}
         canonical={canonical}
         schema={faqSchema}
       />
