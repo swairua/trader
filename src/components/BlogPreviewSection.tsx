@@ -132,7 +132,7 @@ export function BlogPreviewSection() {
                          {(post.reading_time_mins || post.readTime) && (
                            <div className="glass-card px-3 py-1 text-sm text-white/90 flex items-center gap-1" aria-hidden="true">
                              <Clock className="w-3 h-3" />
-                             {post.reading_time_mins ? `${post.reading_time_mins} min read` : post.readTime}
+                             {post.reading_time_mins ? `${post.reading_time_mins} ${t('reading_time_read')}` : post.readTime}
                            </div>
                          )}
                          {(post.categories?.[0]?.name || post.level) && (
