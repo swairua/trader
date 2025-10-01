@@ -25,7 +25,8 @@ interface BlogPost {
 
 export function BlogPreviewSection() {
   const { content } = useSiteContent();
-  const { title, subtitle } = content.blogPreview;
+  const { t } = useI18n();
+  const { title: contentTitle, subtitle: contentSubtitle } = content.blogPreview;
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
