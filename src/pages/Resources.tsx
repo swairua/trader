@@ -188,7 +188,7 @@ export default function Resources() {
 
         if (mounted) setTranslatedResources(next);
       } catch (e) {
-        console.error('Resource translation error', e);
+        console.warn('Resource translation unavailable; showing original content.');
       }
     }
 
