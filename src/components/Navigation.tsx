@@ -13,7 +13,7 @@ import { useI18n, switchLanguage } from '@/i18n';
 
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
   const { content } = useSiteContent();
   const location = useLocation();
   const { language, setLanguage, t } = useI18n();
