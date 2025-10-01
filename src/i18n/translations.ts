@@ -60,7 +60,7 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // How it Works extras
     create_exness_account: 'Create your Exness account',
-    key_benefits: 'Key Benefits: 5 retail investor accounts (Standard, Standard Cent, Zero & Pro), $10 USD minimum deposit, 200 max lot, 1000 max positions, Islamic account available, unlimited leverage, zero withdrawal fees, instant withdrawals, and a variety of payment options.',
+    key_benefits: 'Key Benefits',
     your_success_story: 'Your Success Story Starts Here',
     success_story_paragraph:
       'Join thousands of successful traders who transformed their financial future with our proven methodology.',
