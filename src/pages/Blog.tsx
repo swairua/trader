@@ -25,14 +25,14 @@ const Blog = () => {
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
           <div className="absolute inset-0 hero-image">
-            <img 
-              src={forexBlogHero} 
-              alt="Professional forex trading analysis workspace with multiple monitors displaying trading charts" 
+            <img
+              src={forexBlogHero}
+              alt={t('blog_hero_image_alt')}
               className="w-full h-full object-cover"
               loading="eager"
               width={1920}
               height={1080}
-              
+
               onError={(e) => {
                 console.warn('Hero image failed to load');
                 (e.target as HTMLImageElement).style.display = 'none';
