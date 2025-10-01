@@ -122,6 +122,14 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Strategy page
     strategy_badge: 'Education Framework',
+    strategy_why_item1_title: 'Clear Focus',
+    strategy_why_item1_desc: 'A structured, rule-based approach that emphasizes market context and high-probability setups.',
+    strategy_why_item2_title: 'Regulated & Secure',
+    strategy_why_item2_desc: 'Principles adapted from institutional practices with strong emphasis on risk management and discipline.',
+    strategy_why_item3_title: 'Research-Driven',
+    strategy_why_item3_desc: 'Evidence-based teaching using real market examples and trade rationale.',
+    strategy_why_item4_title: 'Community & Mentorship',
+    strategy_why_item4_desc: 'Active community support with mentorship to help you implement and refine your process.',
     strategy_download_btn: 'Download DRIVE Checklist',
     strategy_watch_video_btn: 'Watch Strategy Video',
     strategy_hero_alt: 'Professional trader analyzing charts on multiple monitors',
