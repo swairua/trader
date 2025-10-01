@@ -471,9 +471,9 @@ export default function BlogPost() {
                     {translated?.title ?? post.title}
                   </h1>
 
-                  {post.excerpt && (
+                  {(translated?.excerpt ?? post.excerpt) && (
                     <p className="text-xl text-muted-foreground">
-                      {post.excerpt}
+                      {translated?.excerpt ?? post.excerpt}
                     </p>
                   )}
 
