@@ -587,6 +587,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_hero_title: "Ressources d'apprentissage",
     resources_hero_subtitle: "Accédez à notre bibliothèque complète de cours, e‑books et supports pour accélérer votre formation au trading",
     resources_hero_image_alt: "Ressources d'apprentissage et supports éducatifs (image héro)",
+    resources_translating: 'Traduction en cours...',
 
     resources_seo_title: 'Ressources — Cours, E‑books et Supports | KenneDyne spot',
     resources_seo_description: 'Accédez à des cours de trading forex, des e‑books et des supports pédagogiques. Découvrez la stratégie DRIVE, la gestion du risque, la psychologie du marché et des techniques professionnelles.',
@@ -750,7 +751,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     why_exness_benefit2_highlight: 'Retraits instantan��s',
     why_exness_benefit3_title: 'Conditions de marché leader',
     why_exness_benefit3_desc:
-      "Spreads ultra-serrés à partir de 0,0 pip, tarification transparente et accès à plus de 200 instruments (Forex, Métaux, Indices, Crypto).",
+      "Spreads ultra-serrés à partir de 0,0 pip, tarification transparente et accès �� plus de 200 instruments (Forex, Métaux, Indices, Crypto).",
     why_exness_benefit3_highlight: 'À partir de 0,0 pip',
     why_exness_see_comparison: 'Voir la comparaison détaillée',
     why_exness_hide_comparison: 'Masquer la comparaison détaillée',
