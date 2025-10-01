@@ -238,7 +238,7 @@ const Contact = () => {
                     )}
 
                     <p className="text-sm text-muted-foreground">
-                      We typically respond within 24-48 hours during business days.
+                      {t('contact_response_time_note')}
                     </p>
                   </form>
                 </Card>
