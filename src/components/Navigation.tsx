@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Send, ChevronDown, ChevronRight, Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText } from "lucide-react";
+import { Menu, Send, Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LINKS, getExternalLinkProps, getInternalLinkProps } from "@/constants/links";
