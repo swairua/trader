@@ -223,6 +223,43 @@ export const translations: Record<Locale, Record<string, string>> = {
     blog_read_full: 'Read Full Article',
     blog_read_more: 'Read More',
 
+    // Blog listing helpers
+    blog_latest_posts: 'Latest Posts',
+    blog_all_posts: 'All Posts',
+    blog_posts_found: 'posts found',
+    blog_no_posts: 'No posts found matching your criteria.',
+    blog_clear_all_filters: 'Clear all filters',
+    blog_previous: 'Previous',
+    blog_next: 'Next',
+    blog_all_categories: 'All Categories',
+    blog_all_tags: 'All Tags',
+    blog_all_authors: 'All Authors',
+
+    // Newsletter
+    newsletter_title: 'Stay Updated with Our Newsletter',
+    newsletter_subtitle: 'Get weekly market insights, educational content, and trading tips delivered to your inbox.',
+    newsletter_email_placeholder: 'Enter your email',
+    newsletter_subscribing: 'Subscribing…',
+    newsletter_subscribe: 'Subscribe',
+    newsletter_success: 'Thanks! Please check your inbox to confirm your subscription.',
+    newsletter_unexpected: 'Unexpected response. Please try again.',
+    newsletter_failed: 'Subscription failed. Please try again later.',
+    newsletter_note: 'No spam. Educational content only. Unsubscribe anytime.',
+
+    // Post page helpers
+    toc_title: 'Table of Contents',
+    share_label: 'Share:',
+    tags_label: 'Tags:',
+    about_author: 'About the Author',
+    about_authors: 'About the Authors',
+    related_posts: 'Related Posts',
+    back_to_blog: 'Back to Blog',
+    post_not_found_title: 'Post Not Found',
+    post_not_found_desc: "The blog post you're looking for doesn't exist or has been moved.",
+    contact_on_whatsapp: 'Contact Us on WhatsApp',
+    ready_to_start_trading: 'Ready to Start Trading?',
+    ready_to_start_trading_desc: 'Get personalized guidance from our expert traders. Start your journey to profitable trading today.',
+
     // Contact page
     contact_hero_title: 'Get in Touch',
     contact_hero_subtitle: "Have questions about our educational programs? Need support? We're here to help you on your trading education journey.",
@@ -397,6 +434,44 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Blog page
     blog_hero_title: 'Blog d\'éducation au trading',
     blog_hero_subtitle: 'Aperçus pédagogiques, analyses de marché et connaissances pratiques pour vous aider à développer des habitudes de trading disciplinées.',
+    blog_read_more: 'Lire la suite',
+
+    // Blog listing helpers
+    blog_latest_posts: 'Derniers articles',
+    blog_all_posts: 'Tous les articles',
+    blog_posts_found: 'articles trouvés',
+    blog_no_posts: 'Aucun article ne correspond à vos critères.',
+    blog_clear_all_filters: 'Réinitialiser tous les filtres',
+    blog_previous: 'Précédent',
+    blog_next: 'Suivant',
+    blog_all_categories: 'Toutes les catégories',
+    blog_all_tags: 'Tous les tags',
+    blog_all_authors: 'Tous les auteurs',
+
+    // Newsletter
+    newsletter_title: 'Restez informé avec notre newsletter',
+    newsletter_subtitle: 'Recevez chaque semaine des analyses de marché, du contenu éducatif et des conseils de trading.',
+    newsletter_email_placeholder: 'Entrez votre e‑mail',
+    newsletter_subscribing: 'Abonnement…',
+    newsletter_subscribe: "S'abonner",
+    newsletter_success: 'Merci ! Veuillez vérifier votre boîte de réception pour confirmer votre abonnement.',
+    newsletter_unexpected: 'Réponse inattendue. Veuillez réessayer.',
+    newsletter_failed: "Échec de l'abonnement. Veuillez réessayer plus tard.",
+    newsletter_note: 'Pas de spam. Contenu éducatif uniquement. Désinscription à tout moment.',
+
+    // Post page helpers
+    toc_title: 'Table des matières',
+    share_label: 'Partager :',
+    tags_label: 'Tags :',
+    about_author: 'À propos de l’auteur',
+    about_authors: 'À propos des auteurs',
+    related_posts: 'Articles connexes',
+    back_to_blog: 'Retour au blog',
+    post_not_found_title: 'Article introuvable',
+    post_not_found_desc: "L’article que vous recherchez n’existe pas ou a été déplacé.",
+    contact_on_whatsapp: 'Nous contacter sur WhatsApp',
+    ready_to_start_trading: 'Prêt à commencer à trader ?',
+    ready_to_start_trading_desc: 'Obtenez des conseils personnalisés de nos traders experts. Commencez votre parcours vers un trading rentable dès aujourd’hui.',
 
     // Cookie banner
     cookie_preferences: 'Préférences des cookies',
