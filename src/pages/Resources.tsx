@@ -309,7 +309,7 @@ export default function Resources() {
           size="sm"
           onClick={() => {
             if (hasFile) {
-              handleDownload(materialUrl, `${item.title}.${item.type === 'sheet' ? 'pdf' : 'file'}`);
+              handleDownload(materialUrl, `${getDisplayTitle(item)}.${item.type === 'sheet' ? 'pdf' : 'file'}`);
             } else {
               // Fallback: show material info or coming soon message
               toast({
