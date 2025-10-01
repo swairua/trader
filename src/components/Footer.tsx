@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BrandLogo } from "@/components/BrandLogo";
 import { SectionDivider } from "./SectionDivider";
 import { AlertTriangle, MessageCircle, Send, Youtube, Twitter, Phone, Mail, Shield, Instagram } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { AuthButton } from "@/components/AuthButton";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { LINKS, getExternalLinkProps } from "@/constants/links";
