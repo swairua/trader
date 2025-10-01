@@ -309,7 +309,7 @@ export default function BlogPublic() {
                 onValueChange={(value) => updateSearchParams({ tag: value === 'all' ? null : value })}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder={t('resources_tab_all')} />
+                  <SelectValue placeholder={t('blog_all_tags')} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('blog_all_tags')}</SelectItem>
