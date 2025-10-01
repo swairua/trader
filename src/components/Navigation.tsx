@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { LINKS, getExternalLinkProps, getInternalLinkProps } from "@/constants/links";
 import { BrandLogo } from "@/components/BrandLogo";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { LanguageSwitch } from "@/components/LanguageSwitch";
 import { useI18n, switchLanguage } from '@/i18n';
 
 
@@ -125,9 +126,7 @@ export function Navigation() {
         {/* Desktop CTAs */}
         <div className="hidden lg:flex items-center space-x-4">
           <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" onClick={toggleLanguage} aria-label="Switch language" className="min-w-[58px]">
-              {language.toUpperCase()}
-            </Button>
+            <LanguageSwitch size="sm" />
             <ThemeToggle />
           </div>
           <a
@@ -151,9 +150,7 @@ export function Navigation() {
 
         {/* Mobile Navigation */}
         <div className="flex items-center space-x-2 lg:hidden">
-          <Button variant="outline" size="icon" onClick={toggleLanguage} aria-label="Switch language" className="text-sm font-medium">
-            {language.toUpperCase()}
-          </Button>
+          <LanguageSwitch size="sm" />
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -172,9 +169,7 @@ export function Navigation() {
                   darkSrc="https://cdn.builder.io/api/v1/image/assets%2Fd70b5c32436e40df8a1857905f23cae8%2F97e09281a0ad46bda113d0fd0850162f?format=webp&width=800"
                 />
                 <div className="flex items-center space-x-2">
-                  <Button variant="outline" size="sm" onClick={toggleLanguage} aria-label="Switch language">
-                    {language.toUpperCase()}
-                  </Button>
+                  <LanguageSwitch size="sm" />
                   <ThemeToggle />
                 </div>
               </div>
