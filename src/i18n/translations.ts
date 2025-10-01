@@ -316,13 +316,6 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_dialog_copied: 'Copied to clipboard.',
     contact_dialog_copy_email: 'Copy email',
     contact_dialog_open_app: 'Open mail app',
-    // New social/image keys (English fallbacks)
-    contact_hero_image_alt: 'Professional customer support center',
-    social_telegram: 'Telegram Channel',
-    social_youtube: 'YouTube',
-    social_twitter: 'Twitter/X',
-    social_instagram: 'Instagram',
-
     // FAQs page
     faqs_loading: 'Loading FAQs...',
     faqs_error: 'Error Loading FAQs',
