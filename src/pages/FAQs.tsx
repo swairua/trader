@@ -29,6 +29,30 @@ const FAQs = () => {
   const [copiedFaqId, setCopiedFaqId] = useState<string | null>(null);
   const { faqs, categories, loading, error } = usePublicFaqs(language);
 
+  const [isRiskTranslating, setIsRiskTranslating] = useState(false);
+  const [riskTranslated, setRiskTranslated] = useState<{ p1?: string; p2?: string; p3?: string; p4?: string } | null>(null);
+
+  const translateRisk = async () => {
+    if (!language || language === 'en') return;
+    setIsRiskTranslating(true);
+    try {
+      const p1 = await translateText(t('faqs_risk_p1_desc'), language);
+      const p2 = await translateText(t('faqs_risk_p2_desc'), language);
+      const p3 = await translateText(t('faqs_risk_p3_desc'), language);
+      const p4 = await translateText(t('faqs_risk_p4_desc'), language);
+      setRiskTranslated({ p1, p2, p3, p4 });
+    } catch (err) {
+      console.warn('Risk translation failed', err);
+      setRiskTranslated(null);
+    } finally {
+      setIsRiskTranslating(false);
+    }
+  };
+
+  useEffect(() => {
+    if (language === 'en') setRiskTranslated(null);
+  }, [language]);
+
   // Get icon component by name
   const getIconComponent = (iconName: string) => {
     const iconMap: Record<string, React.ComponentType<any>> = {
