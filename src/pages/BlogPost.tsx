@@ -11,6 +11,9 @@ import {
   MessageCircle
 } from 'lucide-react';
 import { SEOHead } from '@/components/SEOHead';
+import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { useToast } from '@/hooks/use-toast';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -168,9 +171,12 @@ export default function BlogPost() {
         .select('whatsapp_number')
         .maybeSingle();
 
-      // Transform relationships
+      // Transform relationships and prefer localized fields when available
       const transformedPost = {
         ...post,
+        title: language === 'fr' && post.title_fr ? post.title_fr : post.title,
+        content: language === 'fr' && post.content_fr ? post.content_fr : post.content,
+        excerpt: language === 'fr' && post.excerpt_fr ? post.excerpt_fr : post.excerpt,
         authors: post.post_authors?.map((pa: any) => pa.authors) || [],
         categories: post.post_categories?.map((pc: any) => pc.categories) || [],
         tags: post.post_tags?.map((pt: any) => pt.tags) || [],
@@ -185,8 +191,10 @@ export default function BlogPost() {
             related_posts:blog_posts (
               id,
               title,
+              title_fr,
               slug,
               excerpt,
+              excerpt_fr,
               featured_image_url,
               reading_time_mins,
               published_at
@@ -194,8 +202,15 @@ export default function BlogPost() {
           `)
           .eq('post_id', post.id)
           .limit(3);
-        
-        transformedPost.related_posts = relatedData?.map((pr: any) => pr.related_posts) || [];
+
+        transformedPost.related_posts = (relatedData || []).map((pr: any) => {
+          const rp = pr.related_posts || {};
+          return {
+            ...rp,
+            title: language === 'fr' && rp.title_fr ? rp.title_fr : rp.title,
+            excerpt: language === 'fr' && rp.excerpt_fr ? rp.excerpt_fr : rp.excerpt,
+          };
+        });
       }
 
       setPost(transformedPost);
@@ -355,6 +370,8 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
+
       <SEOHead
         title={post.meta_title || `${post.title} | KenneDyne spot`}
         description={post.meta_description || post.excerpt}
@@ -694,6 +711,10 @@ export default function BlogPost() {
           </main>
         </div>
       </div>
+
+      <SectionDivider variant="wave" className="text-muted" />
+      <Footer />
+      <WhatsAppButton />
     </div>
   );
 }
