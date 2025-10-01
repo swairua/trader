@@ -57,7 +57,23 @@ export const I18nProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
 
 export function useI18n() {
   const ctx = useContext(I18nContext);
-  if (!ctx) throw new Error('useI18n must be used within I18nProvider');
+  if (!ctx) {
+    // Return a safe fallback so components can render even if provider is missing
+    // This avoids crashing in edge cases (e.g., previews, tests) where the provider
+    // may not be mounted yet. Prefer to surface content in English as a graceful fallback.
+    const fallback = {
+      language: 'en' as Locale,
+      setLanguage: () => {},
+      t: (key: string) => {
+        try {
+          return translations.en[key] ?? key;
+        } catch {
+          return key;
+        }
+      },
+    };
+    return fallback;
+  }
   return ctx;
 }
 
