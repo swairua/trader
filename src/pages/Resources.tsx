@@ -545,16 +545,7 @@ export default function Resources() {
                           <div className="aspect-video rounded-lg overflow-hidden mb-4">
                             <img 
                               src={item.coverImageUrl || item.cover_image_url || item.coverImage} 
-                              alt={(() => {
-                              const id = (item as any).id || (item as any).slug || (item as any).title;
-                              const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                              if (language === 'fr' && ((item as any).title_fr || (item as any).title_fr === '')) {
-                                return (item as any).title_fr || (item as any).title;
-                              }
-                              if (translatedResources[key]?.title) return translatedResources[key].title;
-                              if (language !== 'en' && isTranslating) return t('resources_translating');
-                              return item.title;
-                            })()}
+                              alt={getDisplayTitle(item)}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               onError={(e) => {
                                 e.currentTarget.style.display = 'none';
@@ -566,16 +557,7 @@ export default function Resources() {
                         <div className="flex items-start justify-between gap-2">
                           <CardTitle className="flex items-center gap-2 text-lg">
                             {getResourceIcon(item.resourceType, 'type' in item ? (item as any).type : undefined)}
-                            {(() => {
-                              const id = (item as any).id || (item as any).slug || (item as any).title;
-                              const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                              if (language === 'fr' && ((item as any).title_fr || (item as any).title_fr === '')) {
-                                return (item as any).title_fr || (item as any).title;
-                              }
-                              if (translatedResources[key]?.title) return translatedResources[key].title;
-                              if (language !== 'en' && isTranslating) return t('resources_translating');
-                              return item.title;
-                            })()}
+                            {getDisplayTitle(item)}
                           </CardTitle>
                           <Badge variant="outline" className="shrink-0 capitalize">
                             {(() => {
@@ -589,16 +571,7 @@ export default function Resources() {
                         </div>
                         
                         <CardDescription className="line-clamp-2">
-                          {(() => {
-                            const id = (item as any).id || (item as any).slug || (item as any).title;
-                            const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                            if (language === 'fr' && ((item as any).description_fr || (item as any).description_fr === '')) {
-                              return (item as any).description_fr || (item as any).description;
-                            }
-                            if (translatedResources[key]?.description) return translatedResources[key].description;
-                            if (language !== 'en' && isTranslating) return t('resources_translating');
-                            return item.description;
-                          })()}
+                          {getDisplayDescription(item)}
                         </CardDescription>
                       </CardHeader>
                       
