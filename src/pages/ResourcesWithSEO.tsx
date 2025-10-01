@@ -1,40 +1,38 @@
 import { Helmet } from 'react-helmet-async';
 import Resources from './Resources';
-import { StructuredData } from '@/components/StructuredData';
-import { createBreadcrumbSchema } from '@/utils/seoHelpers';
+import { useI18n } from '@/i18n';
+import { createBreadcrumbSchema, getSiteUrl, createCanonicalUrl } from '@/utils/seoHelpers';
 
 export default function ResourcesWithSEO() {
+  const { t } = useI18n();
+  const siteUrl = getSiteUrl();
+  const canonical = createCanonicalUrl('/resources');
+
   const breadcrumbSchema = createBreadcrumbSchema([
-    { name: "Home", url: "https://institutional-trader.com/" },
-    { name: "Resources", url: "https://institutional-trader.com/resources" }
+    { name: t('breadcrumb_home'), url: `${siteUrl}/` },
+    { name: t('breadcrumb_resources'), url: canonical }
   ]);
 
   return (
     <>
       <Helmet>
-        <title>Resources — Courses, E‑books & Learning Materials | KenneDyne spot</title>
-        <meta 
-          name="description" 
-          content="Access comprehensive forex trading courses, e-books, and educational materials. Learn the DRIVE strategy, risk management, market psychology, and professional trading techniques."
-        />
-        <meta 
-          name="keywords" 
-          content="forex courses, trading education, e-books, learning materials, DRIVE strategy, risk management, market psychology, trading resources, institutional trading"
-        />
-        <link rel="canonical" href="https://institutional-trader.com/resources" />
+        <title>{t('resources_seo_title')}</title>
+        <meta name="description" content={t('resources_seo_description')} />
+        <meta name="keywords" content={t('resources_seo_keywords')} />
+        <link rel="canonical" href={canonical} />
         
         {/* Open Graph */}
-        <meta property="og:title" content="Trading Education Resources | KenneDyne spot" />
-        <meta property="og:description" content="Comprehensive library of forex trading courses, e-books, and educational materials to accelerate your trading journey." />
-        <meta property="og:url" content="https://institutional-trader.com/resources" />
+        <meta property="og:title" content={t('resources_og_title')} />
+        <meta property="og:description" content={t('resources_og_description')} />
+        <meta property="og:url" content={canonical} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://institutional-trader.com/og/og-default.jpg" />
+        <meta property="og:image" content={`${siteUrl}/og/og-default.jpg`} />
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Trading Education Resources | KenneDyne spot" />
-        <meta name="twitter:description" content="Access courses, e-books, and materials for forex trading education." />
-        <meta name="twitter:image" content="https://institutional-trader.com/og/og-default.jpg" />
+        <meta name="twitter:title" content={t('resources_twitter_title')} />
+        <meta name="twitter:description" content={t('resources_twitter_description')} />
+        <meta name="twitter:image" content={`${siteUrl}/og/og-default.jpg`} />
       </Helmet>
       
       <script type="application/ld+json">
