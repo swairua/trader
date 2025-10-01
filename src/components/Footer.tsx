@@ -26,7 +26,11 @@ const getSocialIcon = (type?: string): LucideIcon => {
 export function Footer() {
   const { content } = useSiteContent();
   const { isAdmin } = useUserRoles();
-  const { navigation, footer } = content;
+  const { footer } = content;
+  const socialLinks = footer.socials ?? [];
+  const serviceItems = footer.services?.items ?? [];
+  const sectionGroups = footer.sections ?? [];
+  const legalLinks = footer.legalLinks ?? [];
 
   return (
     <footer role="contentinfo" aria-labelledby="footer-heading" className="relative bg-background/80 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60 border-t border-border/30">
