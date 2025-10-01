@@ -41,15 +41,12 @@ export function Navigation() {
   const primaryLinks = links.slice(0, 3);
   const overflowLinks = links.slice(3);
 
-  // Hover-controlled More menu state
-  const [moreOpen, setMoreOpen] = React.useState(false);
-  const hoverTimeoutRef = useRef<number | null>(null);
-
+  // Icons for nested items
   const nestedIcons = [Star, BookOpen, Briefcase, BarChart2, Sparkles, MapPin, Calendar, FileText];
 
   return (
-    <nav aria-label="Main" className="sticky top-0 z-50 w-full border-b border-border/30 bg-background/90 dark:bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 lg:h-28 items-center justify-between px-4">
+    <nav aria-label="Main" className="sticky top-0 z-50 w-full bg-gradient-glass/50 backdrop-blur-glass border-b border-border/20 shadow-glass">
+      <div className="container flex h-16 lg:h-20 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
           <BrandLogo
             size="md"
@@ -60,75 +57,49 @@ export function Navigation() {
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center space-x-12">
-          {primaryLinks.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              className={`text-sm font-medium hover:text-primary relative tracking-wide px-3 py-2 min-h-[44px] flex items-center ${
-                isActive(item.href)
-                  ? "text-primary"
-                  : "text-foreground"
-              }`}
-              aria-current={isActive(item.href) ? "page" : undefined}
-            >
-              {item.name}
-              {isActive(item.href) && (
-                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-primary rounded-full"></div>
-              )}
-            </Link>
-          ))}
+        <div className="hidden lg:flex items-center space-x-8">
+          <NavigationMenu className="mx-0">
+            <NavigationMenuList className="space-x-2">
+              {primaryLinks.map((item) => (
+                <NavigationMenuItem key={item.name}>
+                  <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                    <Link
+                      to={item.href}
+                      className={`bg-transparent px-3 py-2 ${isActive(item.href) ? 'text-primary' : 'text-foreground hover:text-primary'}`}
+                      aria-current={isActive(item.href) ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
 
-          {overflowLinks.length > 0 && (
-              <DropdownMenu open={moreOpen} onOpenChange={(open) => setMoreOpen(open)}>
-                <div
-                  onMouseEnter={() => {
-                    if (hoverTimeoutRef.current) {
-                      window.clearTimeout(hoverTimeoutRef.current);
-                      hoverTimeoutRef.current = null;
-                    }
-                    setMoreOpen(true);
-                  }}
-                  onMouseLeave={() => {
-                    hoverTimeoutRef.current = window.setTimeout(() => setMoreOpen(false), 150);
-                  }}
-                >
-                  <DropdownMenuTrigger asChild>
-                    <button aria-haspopup="menu" className="text-sm font-medium px-3 py-2 min-h-[44px] flex items-center text-foreground pr-8 focus:outline-none focus:ring-0 hover:bg-transparent" aria-expanded={moreOpen}>
-                      <span className="block">{t('nav_more')}</span>
-                      <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-5 w-5 pointer-events-none" />
-                    </button>
-                  </DropdownMenuTrigger>
-
-                  <DropdownMenuContent
-                    className="min-w-[20rem] grid grid-cols-2 gap-2 p-0 bg-transparent"
-                    align="start"
-                    onMouseEnter={() => {
-                      if (hoverTimeoutRef.current) {
-                        window.clearTimeout(hoverTimeoutRef.current);
-                        hoverTimeoutRef.current = null;
-                      }
-                      setMoreOpen(true);
-                    }}
-                    onMouseLeave={() => {
-                      hoverTimeoutRef.current = window.setTimeout(() => setMoreOpen(false), 150);
-                    }}
-                  >
-                    {overflowLinks.map((item, idx) => {
-                      const Icon = nestedIcons[idx % nestedIcons.length];
-                      return (
-                        <DropdownMenuItem key={item.name} asChild>
-                          <Link to={item.href} className="flex items-center text-foreground">
+              {overflowLinks.length > 0 && (
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent px-3 py-2 text-foreground hover:text-primary">
+                    {t('nav_more')}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="p-4">
+                    <div className="grid grid-cols-2 gap-2 min-w-[22rem]">
+                      {overflowLinks.map((item, idx) => {
+                        const Icon = nestedIcons[idx % nestedIcons.length];
+                        return (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className="flex items-center rounded-md px-3 py-2 hover:bg-accent hover:text-accent-foreground text-sm"
+                          >
                             <Icon className="mr-2 h-4 w-4 opacity-80" />
                             {item.name}
                           </Link>
-                        </DropdownMenuItem>
-                      );
-                    })}
-                  </DropdownMenuContent>
-                </div>
-              </DropdownMenu>
-          )}
+                        );
+                      })}
+                    </div>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              )}
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
 
         {/* Desktop CTAs */}
