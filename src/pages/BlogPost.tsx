@@ -167,7 +167,7 @@ export default function BlogPost() {
         .maybeSingle();
 
       // Transform relationships
-      const transformedPost = {
+      let transformedPost: any = {
         ...post,
         authors: post.post_authors?.map((pa: any) => pa.authors) || [],
         categories: post.post_categories?.map((pc: any) => pc.categories) || [],
@@ -187,13 +187,34 @@ export default function BlogPost() {
               excerpt,
               featured_image_url,
               reading_time_mins,
-              published_at
+              published_at,
+              title_fr,
+              excerpt_fr
             )
           `)
           .eq('post_id', post.id)
           .limit(3);
-        
+
         transformedPost.related_posts = relatedData?.map((pr: any) => pr.related_posts) || [];
+      }
+
+      // Apply localization if available
+      try {
+        const { language } = useI18n();
+        if (language === 'fr') {
+          if ((transformedPost as any).title_fr) transformedPost.title = (transformedPost as any).title_fr;
+          if ((transformedPost as any).content_fr) transformedPost.content = (transformedPost as any).content_fr;
+          if ((transformedPost as any).excerpt_fr) transformedPost.excerpt = (transformedPost as any).excerpt_fr;
+
+          // Localize related posts
+          transformedPost.related_posts = (transformedPost.related_posts || []).map((rp: any) => ({
+            ...rp,
+            title: rp.title_fr || rp.title,
+            excerpt: rp.excerpt_fr || rp.excerpt
+          }));
+        }
+      } catch (e) {
+        // If i18n hook unavailable here for some reason, ignore
       }
 
       setPost(transformedPost);
