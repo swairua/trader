@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight, TrendingUp } from "lucide-react";
+import { ArrowRight, TrendingUp } from "lucide-react";
 import { useSiteContent } from "@/hooks/useSiteContent";
 import { trackEvent } from "@/components/GTMProvider";
 import React, { useEffect, useState } from "react";
@@ -71,8 +71,7 @@ export function HeroSection() {
         <div className="space-y-8">
           {/* Trust Badge with Premium Animation */}
           <div className="hero-badge-enter inline-flex items-center glass-card rounded-full px-6 py-3 text-sm shadow-glass border border-white/20 backdrop-blur-md">
-            <CheckCircle className="w-4 h-4 mr-2 text-primary" />
-            {hero.badge}
+                        {hero.badge}
           </div>
           
           {/* Main Headline */}
