@@ -351,18 +351,10 @@ const Contact = () => {
                 Stay updated with our latest educational content and market insights
               </p>
               <div className="flex flex-wrap justify-center gap-4">
-                <Button variant="outline" size="lg">
-                  Telegram Channel
-                </Button>
-                <Button variant="outline" size="lg">
-                  YouTube
-                </Button>
-                <Button variant="outline" size="lg">
-                  Twitter/X
-                </Button>
-                <Button variant="outline" size="lg">
-                  Instagram
-                </Button>
+                <Button variant="outline" size="lg">{t('social_telegram')}</Button>
+                <Button variant="outline" size="lg">{t('social_youtube')}</Button>
+                <Button variant="outline" size="lg">{t('social_twitter')}</Button>
+                <Button variant="outline" size="lg">{t('social_instagram')}</Button>
               </div>
               <p className="text-sm text-muted-foreground mt-6">
                 All social content is educational only. Trading involves risk.
