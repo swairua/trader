@@ -85,9 +85,9 @@ export function Navigation() {
                   }}
                 >
                   <DropdownMenuTrigger asChild>
-                    <button aria-haspopup="menu" className="relative px-3 py-2 min-h-[44px] font-medium text-foreground bg-transparent border-0 cursor-pointer pr-8">
+                    <button aria-haspopup="menu" className="text-sm font-medium px-3 py-2 min-h-[44px] flex items-center text-foreground pr-8 focus:outline-none focus:ring-0 hover:bg-transparent" aria-expanded={moreOpen}>
                       <span className="block">{t('nav_more')}</span>
-                      <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-5 w-5" />
+                      <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 h-5 w-5 pointer-events-none" />
                     </button>
                   </DropdownMenuTrigger>
 
