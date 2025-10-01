@@ -92,7 +92,7 @@ export function Navigation() {
                   </DropdownMenuTrigger>
 
                   <DropdownMenuContent
-                    className="min-w-[20rem] grid grid-cols-2 gap-2 p-0 bg-transparent"
+                    className="min-w-[20rem] grid grid-cols-2 gap-2 p-0 bg-transparent animate-none"
                     align="start"
                     onMouseEnter={() => {
                       if (hoverTimeoutRef.current) {
