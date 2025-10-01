@@ -71,6 +71,7 @@ export default function BlogPost() {
   const [loading, setLoading] = useState(true);
   const [readingProgress, setReadingProgress] = useState(0);
   const [tocItems, setTocItems] = useState<{ id: string; text: string; level: number }[]>([]);
+  const [translated, setTranslated] = useState<{ title?: string; excerpt?: string; content?: string } | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
