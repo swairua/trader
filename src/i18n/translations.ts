@@ -122,6 +122,14 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Strategy page
     strategy_badge: 'Education Framework',
+    strategy_why_item1_title: 'Focalisation claire',
+    strategy_why_item1_desc: 'Une approche structurée et basée sur des règles qui met l’accent sur le contexte du marché et les configurations à haute probabilité.',
+    strategy_why_item2_title: 'Régulé et sécurisé',
+    strategy_why_item2_desc: 'Principes adaptés des pratiques institutionnelles avec une forte attention à la gestion des risques et à la discipline.',
+    strategy_why_item3_title: 'Basé sur la recherche',
+    strategy_why_item3_desc: 'Enseignement fondé sur des preuves en utilisant des exemples réels de marché et une logique de trading.',
+    strategy_why_item4_title: 'Communauté et mentorat',
+    strategy_why_item4_desc: 'Support communautaire actif avec mentorat pour vous aider à mettre en œuvre et affiner votre processus.',
     strategy_why_item1_title: 'Clear Focus',
     strategy_why_item1_desc: 'A structured, rule-based approach that emphasizes market context and high-probability setups.',
     strategy_why_item2_title: 'Regulated & Secure',
@@ -376,7 +384,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_follow_subtitle: 'Restez informé de nos derniers contenus éducatifs et des analyses de marché',
     contact_follow_disclaimer: 'Tout le contenu social est uniquement éducatif. Le trading comporte des risques.',
     contact_dialog_title: 'Nous contacter par e‑mail',
-    contact_dialog_desc: 'Si votre application e‑mail ne s’est pas ouverte, vous pouvez copier notre adresse ou réessayer.',
+    contact_dialog_desc: 'Si votre application e���mail ne s’est pas ouverte, vous pouvez copier notre adresse ou réessayer.',
     contact_dialog_email_label: 'E‑mail :',
     contact_dialog_copied: 'Copié dans le presse‑papier.',
     contact_dialog_copy_email: 'Copier l’e‑mail',
