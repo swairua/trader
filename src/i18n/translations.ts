@@ -250,6 +250,13 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Post page helpers
     toc_title: 'Table of Contents',
+    // Contact image alt
+    contact_hero_image_alt: 'Professional customer support center',
+    // Social labels
+    social_telegram: 'Telegram Channel',
+    social_youtube: 'YouTube',
+    social_twitter: 'Twitter/X',
+    social_instagram: 'Instagram',
     share_label: 'Share:',
     tags_label: 'Tags:',
     about_author: 'About the Author',
@@ -604,7 +611,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_cta_heading_accent: 'cadre DRIVE ?',
     drive_cta_subtitle: 'Commencez à développer des compétences de trading systématiques grâce à notre approche éducative structurée.',
     drive_cta_benefit_systematic_title: 'Approche systématique',
-    drive_cta_benefit_systematic_desc: 'Apprenez un cadre structuré qui supprime l’émotion des d��cisions de trading',
+    drive_cta_benefit_systematic_desc: 'Apprenez un cadre structuré qui supprime l’émotion des décisions de trading',
     drive_cta_benefit_risk_title: 'Gestion du risque',
     drive_cta_benefit_risk_desc: 'Maîtrisez des stratégies d’entrée et de sortie précises pour protéger votre capital',
     drive_cta_benefit_consistent_title: 'Cadre cohérent',
@@ -682,7 +689,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     services_card2_title: 'Mentorat individuel',
     services_card2_subtitle: 'Construisez vos connaissances pas à pas',
     services_card2_f1: 'Coaching adapté à votre niveau de connaissances',
-    services_card2_f2: 'Stratégies inspir��es de l’institutionnel (DRIVE & plus)',
+    services_card2_f2: 'Stratégies inspirées de l’institutionnel (DRIVE & plus)',
     services_card2_f3: 'Psychologie et discipline de trading',
     services_card2_cta: 'Réserver votre session de mentorat',
     services_card2_alt: 'Mentorat individuel pour une formation au trading personnalisée',
