@@ -34,6 +34,7 @@ export default function Resources() {
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [activeTab, setActiveTab] = useState('all');
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
+  const [translatedResources, setTranslatedResources] = useState<Record<string, { title?: string; description?: string }>>({});
 
   // Handle URL hash for auto-selecting tabs
   useEffect(() => {
