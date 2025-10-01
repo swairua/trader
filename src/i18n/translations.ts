@@ -289,6 +289,11 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_translating: 'Translating...',
     retry: 'Retry',
     translation_error_occurred: 'Translation error occurred',
+    resources_status_server: 'Server',
+    resources_status_translated: 'Translated',
+    resources_status_translating_short: 'Translating...',
+    resources_status_failed: 'Failed',
+    resources_status_missing: 'Missing',
 
     resources_seo_title: 'Resources — Courses, E‑books & Learning Materials | KenneDyne spot',
     resources_seo_description: 'Access comprehensive forex trading courses, e-books, and educational materials. Learn the DRIVE strategy, risk management, market psychology, and professional trading techniques.',
