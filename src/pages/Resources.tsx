@@ -273,6 +273,14 @@ export default function Resources() {
     return <FileText className="h-5 w-5" />;
   };
 
+  const getDisplayDescription = (item: any) => {
+    const id = (item as any).id || (item as any).slug || (item as any).title;
+    const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+    if (language === 'fr' && ((item as any).description_fr || (item as any).description_fr === '')) return (item as any).description_fr || item.description;
+    if (translatedResources[key]?.description) return translatedResources[key].description;
+    return item.description;
+  };
+
   const getResourceAction = (item: any) => {
     if (item.resourceType === 'course') {
       const hasUrl = item.url || item.course_url;
