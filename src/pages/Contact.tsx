@@ -124,7 +124,7 @@ const Contact = () => {
                 }}>
                   <Mail className="h-4 w-4 mr-2" /> {t('contact_email_us')}
                 </Button>
-                <Button asChild variant="glass" size="lg" className="border-white/30 text-white hover:bg-white/10">
+                <Button asChild variant="outline" size="lg">
                   <a {...getExternalLinkProps(whatsappUrl)}>
                     <MessageCircle className="h-4 w-4 mr-2" /> {t('contact_whatsapp')}
                   </a>

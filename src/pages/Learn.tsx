@@ -228,7 +228,7 @@ export default function Learn() {
                       </Button>
 
                       {path.priceValue && path.priceValue > 0 && (
-                        <Button variant="white" className="w-full" size="lg" onClick={() => openPayment(path.priceValue, path.title)}>
+                        <Button variant="default" className="w-full" size="lg" onClick={() => openPayment(path.priceValue, path.title)}>
                           Pay {path.price}
                         </Button>
                       )}
