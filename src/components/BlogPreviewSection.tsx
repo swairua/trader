@@ -155,7 +155,7 @@ export function BlogPreviewSection() {
                         {post.excerpt}
                       </p>
                       <div className="inline-flex items-center justify-center gap-2 text-primary font-medium group-hover:text-primary-hover transition-colors">
-                        <span className="sr-only">Read full article: {post.title}</span>
+                        <span className="sr-only">{`${t('blog_read_full')}: ${post.title}`}</span>
                         <span aria-hidden="true">{t('blog_read_more') || 'Read Article'}</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                       </div>
