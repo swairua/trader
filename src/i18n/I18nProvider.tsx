@@ -42,48 +42,12 @@ export const I18nProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
     return () => window.removeEventListener(EVENT_NAME, handler as EventListener);
   }, [setLanguage]);
 
-  const [alternateOnHome, setAlternateOnHome] = useState(false);
-
-  useEffect(() => {
-    try {
-      const path = typeof window !== 'undefined' ? window.location.pathname : '/';
-      setAlternateOnHome(path === '/' || path === '');
-    } catch {
-      setAlternateOnHome(false);
-    }
-  }, []);
-
   const t = useCallback(
     (key: string) => {
       const dict = translations[language] ?? translations.en;
-      const en = translations.en[key] ?? key;
-      const fr = translations.fr[key] ?? key;
-
-      if (!alternateOnHome) return dict[key] ?? translations.en[key] ?? key;
-
-      // Split into sentences (simple split on punctuation). Keep fallback to full strings if split fails.
-      const splitSentences = (s: string) => s
-        .split(/(?<=[.!?])\s+/u)
-        .map(part => part.trim())
-        .filter(Boolean);
-
-      const enParts = splitSentences(en);
-      const frParts = splitSentences(fr);
-
-      const max = Math.max(enParts.length, frParts.length);
-      const outParts: string[] = [];
-
-      for (let i = 0; i < max; i++) {
-        if (enParts[i]) outParts.push(enParts[i]);
-        if (frParts[i]) outParts.push(frParts[i]);
-      }
-
-      // If no splitting occurred, fallback to simple interleave
-      if (outParts.length === 0) return `${en} ${fr}`;
-
-      return outParts.join(' ');
+      return dict[key] ?? translations.en[key] ?? key;
     },
-    [language, alternateOnHome]
+    [language]
   );
 
   const value = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
