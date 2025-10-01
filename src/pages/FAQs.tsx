@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MessageCircle, HelpCircle, Search, Link as LinkIcon, Copy, Check, Target, BookOpen, Shield, TrendingUp, User, Settings } from "lucide-react";
+import { translateText } from '@/utils/translationService';
 import { usePublicFaqs } from "@/hooks/usePublicFaqs";
 import { toast } from "sonner";
 import forexFaqHero from "@/assets/forex-faq-hero.jpg";
