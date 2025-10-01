@@ -245,7 +245,7 @@ export default function BlogPublic() {
           <div className="absolute inset-0 hero-image">
             <img 
               src={forexBlogHero} 
-              alt="Professional forex trading analysis workspace with multiple monitors displaying trading charts" 
+              alt={t('blog_hero_image_alt')} 
               className="w-full h-full object-cover"
               loading="eager"
               width={1920}
