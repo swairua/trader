@@ -10,6 +10,7 @@ import { Calendar, User, ArrowRight } from "lucide-react";
 import forexBlogHero from "@/assets/forex-blog-hero.jpg";
 import { useI18n } from '@/i18n';
 import { useSiteContent } from '@/hooks/useSiteContent';
+import { useSiteContent } from '@/hooks/useSiteContent';
 
 const categories = ["All", "Education", "Risk Management", "Psychology"];
 
