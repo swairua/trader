@@ -473,7 +473,11 @@ export default function Resources() {
                         </div>
                         
                         <CardDescription className="line-clamp-2">
-                          {item.description}
+                          {(() => {
+                            const id = (item as any).id || (item as any).slug || (item as any).title;
+                            const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+                            return translatedResources[key]?.description ?? item.description;
+                          })()}
                         </CardDescription>
                       </CardHeader>
                       
