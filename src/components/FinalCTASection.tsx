@@ -30,7 +30,6 @@ export function FinalCTASection() {
               <a
                 {...getExternalLinkProps(LINKS.exness.signup)}
                 aria-label={button.text}
-                className="px-8 py-3 rounded-full bg-gradient-primary text-white font-semibold shadow-button"
               >
                 {button.text}
               </a>

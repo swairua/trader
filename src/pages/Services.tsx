@@ -84,18 +84,17 @@ export function Services() {
             <p className="text-lg max-w-4xl mx-auto mb-8">{t('services_hero_paragraph')}</p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button 
+              <Button
                 asChild
                 size="lg"
-                className="bg-white text-primary hover:bg-white/90 font-semibold px-8"
+                variant="default"
               >
                 <Link to="#services" className="flex items-center gap-2">{t('services_cta_explore')}<ArrowDown className="h-4 w-4" /></Link>
               </Button>
-              <Button 
+              <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8"
               >
                 <Link to="/mentorship" className="flex items-center gap-2"><MessageCircle className="h-4 w-4" />{t('services_cta_talk_mentor')}</Link>
               </Button>
