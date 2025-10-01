@@ -21,6 +21,7 @@ import remarkGfm from 'remark-gfm';
 import { format } from 'date-fns';
 import { fr as frLocale, enUS } from 'date-fns/locale';
 import { useI18n } from '@/i18n';
+import { translatePostFields } from '@/utils/translationService';
 import { trackEvent } from '@/components/GTMProvider';
 import { createWhatsAppLink, WHATSAPP_MESSAGES } from '@/utils/whatsapp';
 
