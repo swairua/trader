@@ -7,9 +7,17 @@ import { useSiteContent } from "@/hooks/useSiteContent";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LINKS, getExternalLinkProps, getInternalLinkProps } from "@/constants/links";
 import { BrandLogo } from "@/components/BrandLogo";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { LanguageSwitch } from "@/components/LanguageSwitch";
 import { useI18n, switchLanguage } from '@/i18n';
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
 
 
 export function Navigation() {
