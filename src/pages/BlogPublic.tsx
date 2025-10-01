@@ -393,11 +393,11 @@ export default function BlogPublic() {
                       <CardContent className="p-6">
                         <div className="space-y-3">
                           <h3 className="text-xl font-semibold line-clamp-2">
-                            <Link 
+                            <Link
                               to={`/blog/${post.slug}`}
                               className="hover:text-primary transition-colors"
                             >
-                              {post.title}
+                              {translatedMap[post.id]?.title ?? post.title}
                             </Link>
                           </h3>
                           
@@ -467,11 +467,11 @@ export default function BlogPublic() {
                       <CardContent className="p-6">
                         <div className="space-y-3">
                           <h3 className="text-lg font-semibold line-clamp-2">
-                            <Link 
+                            <Link
                               to={`/blog/${post.slug}`}
                               className="hover:text-primary transition-colors"
                             >
-                              {post.title}
+                              {translatedMap[post.id]?.title ?? post.title}
                             </Link>
                           </h3>
                           
