@@ -468,7 +468,7 @@ export default function BlogPost() {
                   )}
 
                   <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                    {post.title}
+                    {translated?.title ?? post.title}
                   </h1>
 
                   {post.excerpt && (
