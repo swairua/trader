@@ -267,7 +267,7 @@ export default function Resources() {
           size="sm"
           onClick={() => {
             if (hasFile) {
-              handleDownload(downloadUrl, `${item.title}.pdf`);
+              handleDownload(downloadUrl, `${getDisplayTitle(item)}.pdf`);
             } else {
               // Fallback: show preview or coming soon page
               toast({
