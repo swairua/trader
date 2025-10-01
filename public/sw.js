@@ -32,6 +32,14 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Listen for messages from the page to trigger immediate activation (useful during deploys)
+self.addEventListener('message', (event) => {
+  if (!event.data) return;
+  if (event.data.type === 'SKIP_WAITING' || event.data === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
   // Only handle GET requests
