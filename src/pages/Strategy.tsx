@@ -37,56 +37,56 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const comparisonData = [
+const getComparisonData = (t: (k: string) => string) => ([
   {
-    feature: "Focus",
-    drive: "Structured, rule-based framework",
-    indicators: "Signals from tools",
-    priceAction: "Candlestick patterns",
-    ict: "Institutional order flow",
-    supplyDemand: "Supply & demand zones"
+    feature: t('comparison_focus'),
+    drive: t('comparison_row_focus_drive'),
+    indicators: t('comparison_row_focus_indicators'),
+    priceAction: t('comparison_row_focus_price_action'),
+    ict: t('comparison_row_focus_ict'),
+    supplyDemand: t('comparison_row_focus_supply_action')
   },
   {
-    feature: "Direction",
-    drive: "Clear, rule-based guidelines",
-    indicators: "May lag behind price",
-    priceAction: "Often subjective",
-    ict: "Strong but complex",
-    supplyDemand: "Useful but may vary"
+    feature: t('comparison_direction'),
+    drive: t('comparison_row_direction_drive'),
+    indicators: t('comparison_row_direction_indicators'),
+    priceAction: t('comparison_row_direction_price_action'),
+    ict: t('comparison_row_direction_ict'),
+    supplyDemand: t('comparison_row_direction_supply_action')
   },
   {
-    feature: "Consistency",
-    drive: "Designed as a repeatable framework",
-    indicators: "Can be inconsistent if signals repaint",
-    priceAction: "Skill dependent",
-    ict: "Consistent if mastered",
-    supplyDemand: "Market dependent"
+    feature: t('comparison_consistency'),
+    drive: t('comparison_row_consistency_drive'),
+    indicators: t('comparison_row_consistency_indicators'),
+    priceAction: t('comparison_row_consistency_price_action'),
+    ict: t('comparison_row_consistency_ict'),
+    supplyDemand: t('comparison_row_consistency_supply_action')
   },
   {
-    feature: "Risk Management",
-    drive: "Built into the framework",
-    indicators: "Rarely emphasized",
-    priceAction: "Trader dependent",
-    ict: "Strong",
-    supplyDemand: "Varies"
+    feature: t('comparison_risk_management'),
+    drive: t('comparison_row_risk_management_drive'),
+    indicators: t('comparison_row_risk_management_indicators'),
+    priceAction: t('comparison_row_risk_management_price_action'),
+    ict: t('comparison_row_risk_management_ict'),
+    supplyDemand: t('comparison_row_risk_management_supply_action')
   },
   {
-    feature: "Learning Curve",
-    drive: "Moderate – step by step",
-    indicators: "Easy to start",
-    priceAction: "Requires practice",
-    ict: "Steep",
-    supplyDemand: "Moderate"
+    feature: t('comparison_learning_curve'),
+    drive: t('comparison_row_learning_curve_drive'),
+    indicators: t('comparison_row_learning_curve_indicators'),
+    priceAction: t('comparison_row_learning_curve_price_action'),
+    ict: t('comparison_row_learning_curve_ict'),
+    supplyDemand: t('comparison_row_learning_curve_supply_action')
   },
   {
-    feature: "Best For",
-    drive: "Scalper, Day trader, Swing traders seeking structured learning",
-    indicators: "Beginners wanting simple tools",
-    priceAction: "Experienced discretionary traders",
-    ict: "Advanced learners",
-    supplyDemand: "Swing traders"
+    feature: t('comparison_best_for'),
+    drive: t('comparison_row_best_for_drive'),
+    indicators: t('comparison_row_best_for_indicators'),
+    priceAction: t('comparison_row_best_for_price_action'),
+    ict: t('comparison_row_best_for_ict'),
+    supplyDemand: t('comparison_row_best_for_supply_action')
   }
-];
+]);
 
 // Localized at render time
 const whyChooseData = (t: (k: string) => string) => ([
@@ -191,6 +191,16 @@ const Strategy = () => {
     }
   };
 
+  const detailKeys: string[][] = [
+    ['drive_direction_detail1','drive_direction_detail2','drive_direction_detail3'],
+    ['drive_range_detail1','drive_range_detail2','drive_range_detail3'],
+    ['drive_poi_detail1','drive_poi_detail2','drive_poi_detail3'],
+    ['drive_value_of_risk_detail1','drive_value_of_risk_detail2','drive_value_of_risk_detail3'],
+    ['drive_entry_detail1','drive_entry_detail2','drive_entry_detail3'],
+  ];
+
+  const comparisonData = getComparisonData(t);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -226,8 +236,8 @@ const Strategy = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button variant="hero" size="lg" asChild>
-                  <a {...getExternalLinkProps(LINKS.telegram.community)} aria-label="Join on Telegram">
-                    {">> Get started"}
+                  <a {...getExternalLinkProps(LINKS.telegram.community)} aria-label={t('join_on_telegram')}>
+                    {t('join_on_telegram')}
                   </a>
                 </Button>
                 <Button
@@ -296,10 +306,10 @@ const Strategy = () => {
                           {t(['drive_direction_desc','drive_range_desc','drive_poi_desc','drive_value_of_risk_desc','drive_entry_desc'][index] || 'drive_direction_desc')}
                         </p>
                         <ul className="space-y-2 list-none pl-0">
-                          {step.details.map((detail, detailIndex) => (
+                          {detailKeys[index].map((k, detailIndex) => (
                             <li key={detailIndex} className="flex items-start text-xs text-muted-foreground">
                               <CheckCircle className="h-3 w-3 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                              {detail}
+                              {t(k)}
                             </li>
                           ))}
                         </ul>
@@ -328,13 +338,13 @@ const Strategy = () => {
                       <step.icon className="h-6 w-6 text-primary" />
                     </div>
                     <p className="text-sm text-muted-foreground mb-4">
-                      {step.description}
+                      {t(['drive_direction_desc','drive_range_desc','drive_poi_desc','drive_value_of_risk_desc','drive_entry_desc'][index] || 'drive_direction_desc')}
                     </p>
                     <ul className="space-y-2 list-none pl-0">
-                      {step.details.map((detail, detailIndex) => (
+                      {detailKeys[index].map((k, detailIndex) => (
                         <li key={detailIndex} className="flex items-start text-sm text-muted-foreground">
                           <CheckCircle className="h-4 w-4 text-primary mr-2 mt-0.5 flex-shrink-0" />
-                          {detail}
+                          {t(k)}
                         </li>
                       ))}
                     </ul>
@@ -398,7 +408,7 @@ const Strategy = () => {
                     </h3>
                     <div className="space-y-3">
                       <div className="p-3 bg-primary/5 rounded-lg border border-primary/20">
-                        <div className="font-medium text-primary text-sm mb-1">DRIVE Strategy</div>
+                        <div className="font-medium text-primary text-sm mb-1">{t('comparison_drive')}</div>
                         <div className="text-sm text-foreground">{row.drive}</div>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-xs">
