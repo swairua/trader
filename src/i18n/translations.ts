@@ -597,6 +597,11 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_translating: 'Traduction en cours...',
     retry: 'Réessayer',
     translation_error_occurred: 'Une erreur de traduction est survenue',
+    resources_status_server: 'Serveur',
+    resources_status_translated: 'Traduit',
+    resources_status_translating_short: 'En cours',
+    resources_status_failed: 'Échec',
+    resources_status_missing: 'Manquant',
 
     resources_seo_title: 'Ressources — Cours, E‑books et Supports | KenneDyne spot',
     resources_seo_description: 'Accédez à des cours de trading forex, des e‑books et des supports pédagogiques. Découvrez la stratégie DRIVE, la gestion du risque, la psychologie du marché et des techniques professionnelles.',
