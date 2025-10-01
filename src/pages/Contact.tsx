@@ -379,7 +379,7 @@ const Contact = () => {
               <span className="font-medium">{t('contact_dialog_email_label')}</span> <a href={`mailto:${supportEmail}`} className="text-primary hover:underline">{supportEmail}</a>
             </div>
             {emailCopied ? (
-              <p className="text-sm text-green-600 dark:text-green-400">Copied to clipboard.</p>
+              <p className="text-sm text-green-600 dark:text-green-400">{t('contact_dialog_copied')}</p>
             ) : null}
           </div>
           <DialogFooter>
