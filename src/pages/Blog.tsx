@@ -150,23 +150,23 @@ const Blog = () => {
           <div className="container px-4">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Stay Updated with Our Newsletter
+                {t('newsletter_title')}
               </h2>
               <p className="text-xl text-muted-foreground mb-8">
-                Get weekly market insights, educational content, and trading tips delivered to your inbox.
+                {t('newsletter_subtitle')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email" 
+                <input
+                  type="email"
+                  placeholder={t('newsletter_email_placeholder')}
                   className="flex-1 px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-background/80 backdrop-blur-sm"
                 />
                 <Button variant="hero" className="px-6 py-2">
-                  Subscribe
+                  {t('newsletter_subscribe')}
                 </Button>
               </div>
               <p className="text-sm text-muted-foreground mt-4">
-                No spam. Educational content only. Unsubscribe anytime.
+                {t('newsletter_note')}
               </p>
             </div>
           </div>
