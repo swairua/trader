@@ -272,7 +272,7 @@ export default function Resources() {
               // Fallback: show preview or coming soon page
               toast({
                 title: t('resources_preview_ebook'),
-                description: `${item.title} ${t('resources_download_failed_desc')}`,
+                description: `${getDisplayTitle(item)} ${t('resources_download_failed_desc')}`,
               });
             }
           }}
