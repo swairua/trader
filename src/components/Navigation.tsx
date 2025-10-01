@@ -1,4 +1,3 @@
-import { useState, useRef } from 'react';
 import React, { useRef } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
