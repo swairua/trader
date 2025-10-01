@@ -346,7 +346,7 @@ export default function BlogPost() {
         <Button asChild>
           <Link to="/blog">
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Blog
+            {t('back_to_blog')}
           </Link>
         </Button>
       </div>
@@ -602,9 +602,7 @@ export default function BlogPost() {
                   <CardContent className="pt-6">
                     <div className="text-center">
                       <h3 className="text-xl font-semibold mb-2">{t('ready_to_start_trading')}</h3>
-                      <p className="text-muted-foreground mb-4">{t('ready_to_start_trading_desc')}
-                        Get personalized guidance from our expert traders. Start your journey to profitable trading today.
-                      </p>
+                      <p className="text-muted-foreground mb-4">{t('ready_to_start_trading_desc')}</p>
                       <Button 
                         className="bg-green-600 hover:bg-green-700 text-white"
                         onClick={() => {
@@ -669,11 +667,11 @@ export default function BlogPost() {
                           <div className="flex items-center gap-3 text-xs text-muted-foreground">
                             <div className="flex items-center gap-1">
                               <Calendar className="h-3 w-3" />
-                              {format(new Date(relatedPost.published_at), 'MMM d')}
+                              {format(new Date(relatedPost.published_at), 'MMM d', { locale: language === 'fr' ? frLocale : enUS })}
                             </div>
                             <div className="flex items-center gap-1">
                               <Clock className="h-3 w-3" />
-                              {relatedPost.reading_time_mins} min
+                              {relatedPost.reading_time_mins} {t('reading_time_min')}
                             </div>
                           </div>
                         </div>
