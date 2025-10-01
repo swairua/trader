@@ -441,6 +441,11 @@ export const translations: Record<Locale, Record<string, string>> = {
     faqs_support_text: 'Our educational support team is here to help you on your trading journey.',
     faqs_whatsapp_support: 'WhatsApp Support',
 
+    // FAQs SEO
+    faqs_seo_title: 'FAQs - KenneDyne spot | Trading Education Questions',
+    faqs_seo_description: 'Get answers to frequently asked questions about our forex trading education, Direction, Range, Interest Point, Value of Risk, Entry (DRIVE) strategy, risk management, and mentorship programs. Learn about our educational approach.',
+    faqs_seo_keywords: 'trading education FAQ, forex education questions, DRIVE strategy FAQ, Direction Range Interest Point Value Risk Entry, trading mentorship questions, risk management education',
+
     // Services page
     services_badge: 'Education Services',
     services_hero_title: 'Our Services',
@@ -805,7 +810,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     drive_cta_benefit_systematic_title: 'Approche systématique',
     drive_cta_benefit_systematic_desc: 'Apprenez un cadre structuré qui supprime l’émotion des décisions de trading',
     drive_cta_benefit_risk_title: 'Gestion du risque',
-    drive_cta_benefit_risk_desc: 'Maîtrisez des stratégies d’entr��e et de sortie précises pour protéger votre capital',
+    drive_cta_benefit_risk_desc: 'Maîtrisez des stratégies d’entrée et de sortie précises pour protéger votre capital',
     drive_cta_benefit_consistent_title: 'Cadre cohérent',
     drive_cta_benefit_consistent_desc: 'Développez des habitudes de trading durables grâce à notre méthodologie éprouvée',
     drive_cta_button: 'Commencer l’apprentissage',
@@ -813,7 +818,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Strategy page
     strategy_badge: 'Cadre pédagogique',
     strategy_why_item1_title: 'Focalisation claire',
-    strategy_why_item1_desc: 'Une approche structurée et basée sur des règles qui met l’accent sur le contexte du marché et les configurations à haute probabilité.',
+    strategy_why_item1_desc: 'Une approche structurée et basée sur des règles qui met l���accent sur le contexte du marché et les configurations à haute probabilité.',
     strategy_why_item2_title: 'Régulé et sécurisé',
     strategy_why_item2_desc: 'Principes adaptés des pratiques institutionnelles avec une forte attention à la gestion des risques et à la discipline.',
     strategy_why_item3_title: 'Basé sur la recherche',
@@ -938,6 +943,11 @@ export const translations: Record<Locale, Record<string, string>> = {
     faqs_still_have_questions: 'Vous avez encore des questions ?',
     faqs_support_text: 'Notre équipe de support éducatif est là pour vous accompagner dans votre parcours de trading.',
     faqs_whatsapp_support: 'Support WhatsApp',
+
+    // FAQs SEO
+    faqs_seo_title: 'FAQ - KenneDyne spot | Questions sur la formation au trading',
+    faqs_seo_description: 'Trouvez des réponses aux questions fréquentes sur notre formation au trading forex, la stratégie DRIVE (Direction, Range, Point d’intérêt, Valeur du risque, Entrée), la gestion du risque et nos programmes de mentorat. Découvrez notre approche éducative.',
+    faqs_seo_keywords: 'FAQ éducation trading, questions formation forex, FAQ stratégie DRIVE, Direction Range Point d’intérêt Valeur du risque Entrée, questions mentorat trading, éducation gestion du risque',
 
     // Services page
     services_badge: 'Services éducatifs',
