@@ -147,7 +147,7 @@ export function Services() {
                     
                     <CardContent className="pt-0">
                       <div className="mb-6">
-                        <p className="text-sm font-medium text-primary mb-3 flex items-center">✨ {t('services_card_features_heading')}</p>
+                        <p className="text-sm font-medium text-primary mb-3 flex items-center">{t('services_card_features_heading')}</p>
                         <ul className="space-y-3 list-none pl-0">
                           {service.features.map((feature, featureIndex) => (
                             <li key={featureIndex} className="flex items-start gap-2 text-sm text-muted-foreground">

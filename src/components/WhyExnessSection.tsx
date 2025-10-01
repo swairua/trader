@@ -66,7 +66,7 @@ const WhyExnessSection = () => {
           {/* Enhanced Header */}
           <div className="text-center mb-16 lg:mb-20 animate-fade-in-up">
             <Badge className="mb-6 px-6 py-3 text-sm font-semibold bg-primary/10 border-primary/20 text-primary shadow-sm">
-              ✨ {t('why_exness_badge')}
+              {t('why_exness_badge')}
             </Badge>
             <h2 className="fluid-h2 mb-8 text-balance font-display">
               {t('why_exness_heading_prefix')}{" "}
@@ -137,7 +137,7 @@ const WhyExnessSection = () => {
                       <thead>
                         <tr className="border-b border-border/40 bg-muted/40">
                           <th className="text-left p-6 font-bold text-foreground text-base">{t('why_exness_table_feature')}</th>
-                          <th className="text-left p-6 font-bold text-primary text-base">✨ Exness</th>
+                          <th className="text-left p-6 font-bold text-primary text-base">Exness</th>
                           <th className="text-left p-6 font-semibold text-muted-foreground text-base">{t('why_exness_table_others')}</th>
                         </tr>
                       </thead>
