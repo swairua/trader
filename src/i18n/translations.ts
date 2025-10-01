@@ -463,6 +463,12 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_dialog_copied: 'Copié dans le presse‑papier.',
     contact_dialog_copy_email: 'Copier l’e‑mail',
     contact_dialog_open_app: 'Ouvrir l’application e‑mail',
+    // New social/image keys
+    contact_hero_image_alt: 'Centre de support client professionnel',
+    social_telegram: 'Chaîne Telegram',
+    social_youtube: 'YouTube',
+    social_twitter: 'Twitter/X',
+    social_instagram: 'Instagram',
 
     // Blog page
     blog_hero_title: 'Blog d\'éducation au trading',
@@ -650,7 +656,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     strategy_dialog_video_desc: 'Entrez votre e‑mail pour recevoir l’accès à la vidéo.',
     strategy_dialog_checklist_title: 'Obtenir la checklist de la stratégie DRIVE',
     strategy_dialog_checklist_desc: "Entrez votre e‑mail et nous vous enverrons un lien de téléchargement.",
-    email_address: 'Adresse e���mail',
+    email_address: 'Adresse e‑mail',
     strategy_email_placeholder: 'vous@exemple.com',
     cancel: 'Annuler',
     sending: 'Envoi…',
