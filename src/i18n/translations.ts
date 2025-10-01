@@ -211,6 +211,10 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Blog page
     blog_hero_title: 'Trading Education Blog',
     blog_hero_subtitle: 'Educational insights, market analysis, and practical trading knowledge to help you develop disciplined trading habits.',
+
+    // Blog (French)
+    blog_hero_title_fr: 'Blog d\'éducation au trading',
+    blog_hero_subtitle_fr: 'Aperçus pédagogiques, analyses de marché et connaissances pratiques pour vous aider à développer des habitudes de trading disciplinées.',
     blog_educational_note: 'Educational Content Only:',
     blog_educational_note_desc: 'All articles are for educational purposes. Not financial advice. Trading involves risk of loss.',
     blog_category_all: 'All',
@@ -384,7 +388,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_follow_subtitle: 'Restez informé de nos derniers contenus éducatifs et des analyses de marché',
     contact_follow_disclaimer: 'Tout le contenu social est uniquement éducatif. Le trading comporte des risques.',
     contact_dialog_title: 'Nous contacter par e‑mail',
-    contact_dialog_desc: 'Si votre application e���mail ne s’est pas ouverte, vous pouvez copier notre adresse ou réessayer.',
+    contact_dialog_desc: 'Si votre application e‑mail ne s’est pas ouverte, vous pouvez copier notre adresse ou réessayer.',
     contact_dialog_email_label: 'E‑mail :',
     contact_dialog_copied: 'Copié dans le presse‑papier.',
     contact_dialog_copy_email: 'Copier l’e‑mail',
@@ -474,7 +478,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     why_exness_benefit2_title: 'Transferts ultra-rapides',
     why_exness_benefit2_desc:
       "Dépôts et retraits instantanés, multiples méthodes de paiement et aucuns frais de retrait.",
-    why_exness_benefit2_highlight: 'Retraits instantanés',
+    why_exness_benefit2_highlight: 'Retraits instantan��s',
     why_exness_benefit3_title: 'Conditions de marché leader',
     why_exness_benefit3_desc:
       "Spreads ultra-serrés à partir de 0,0 pip, tarification transparente et accès à plus de 200 instruments (Forex, Métaux, Indices, Crypto).",
