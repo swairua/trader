@@ -226,6 +226,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Blog listing helpers
     blog_latest_posts: 'Latest Posts',
     blog_all_posts: 'All Posts',
+    blog_search_placeholder: 'Search articles...',
     blog_posts_found: 'posts found',
     blog_no_posts: 'No posts found matching your criteria.',
     blog_clear_all_filters: 'Clear all filters',
@@ -457,6 +458,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     // Blog listing helpers
     blog_latest_posts: 'Derniers articles',
     blog_all_posts: 'Tous les articles',
+    blog_search_placeholder: 'Rechercher des articles…',
     blog_posts_found: 'articles trouvés',
     blog_no_posts: 'Aucun article ne correspond à vos critères.',
     blog_clear_all_filters: 'Réinitialiser tous les filtres',
