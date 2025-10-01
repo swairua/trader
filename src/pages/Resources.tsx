@@ -198,6 +198,8 @@ export default function Resources() {
         if (mounted) setTranslatedResources(next);
       } catch (e) {
         console.warn('Resource translation unavailable; showing original content.');
+      } finally {
+        try { setIsTranslating(false); } catch {}
       }
     }
 
