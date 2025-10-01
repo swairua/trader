@@ -68,17 +68,27 @@ async function translateChunk(text: string, target: string, source = 'en') {
 
     for (const url of API_ENDPOINTS) {
       try {
-        const controller = new AbortController();
-        const t = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
-        const resp = await fetch(url, {
+        // Use Promise.race to implement a timeout without relying on AbortController, which
+        // avoids certain AbortError behaviors in some runtimes. If the request times out
+        // we reject and move to the next endpoint.
+        const fetchPromise = fetch(url, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ q: text, source, target, format: 'text' }),
-          signal: controller.signal,
+        }).then(async (resp) => {
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          return resp.json().catch(() => ({} as any));
         });
-        clearTimeout(t);
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        const data = await resp.json().catch(() => ({} as any));
+
+        const timeoutPromise = new Promise((_, reject) => {
+          const id = setTimeout(() => {
+            clearTimeout(id);
+            reject(new Error('timeout'));
+          }, DEFAULT_TIMEOUT_MS);
+        });
+
+        const data = await Promise.race([fetchPromise, timeoutPromise]).catch(() => null);
+        if (!data) continue;
         const translated = (data as any)?.translatedText || '';
         if (translated) {
           saveToCache(hash, target, translated);
