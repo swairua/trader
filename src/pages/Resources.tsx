@@ -461,7 +461,11 @@ export default function Resources() {
                         <div className="flex items-start justify-between gap-2">
                           <CardTitle className="flex items-center gap-2 text-lg">
                             {getResourceIcon(item.resourceType, 'type' in item ? (item as any).type : undefined)}
-                            {item.title}
+                            {(() => {
+                              const id = (item as any).id || (item as any).slug || (item as any).title;
+                              const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+                              return translatedResources[key]?.title ?? item.title;
+                            })()}
                           </CardTitle>
                           <Badge variant="outline" className="shrink-0 capitalize">
                             {item.resourceType}
