@@ -458,7 +458,12 @@ export default function Resources() {
                               alt={(() => {
                               const id = (item as any).id || (item as any).slug || (item as any).title;
                               const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                              return translatedResources[key]?.title ?? item.title;
+                              if (language === 'fr' && ((item as any).title_fr || (item as any).title_fr === '')) {
+                                return (item as any).title_fr || (item as any).title;
+                              }
+                              if (translatedResources[key]?.title) return translatedResources[key].title;
+                              if (language !== 'en' && isTranslating) return t('resources_translating');
+                              return item.title;
                             })()}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                               onError={(e) => {
@@ -474,7 +479,12 @@ export default function Resources() {
                             {(() => {
                               const id = (item as any).id || (item as any).slug || (item as any).title;
                               const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                              return translatedResources[key]?.title ?? item.title;
+                              if (language === 'fr' && ((item as any).title_fr || (item as any).title_fr === '')) {
+                                return (item as any).title_fr || (item as any).title;
+                              }
+                              if (translatedResources[key]?.title) return translatedResources[key].title;
+                              if (language !== 'en' && isTranslating) return t('resources_translating');
+                              return item.title;
                             })()}
                           </CardTitle>
                           <Badge variant="outline" className="shrink-0 capitalize">
@@ -492,7 +502,12 @@ export default function Resources() {
                           {(() => {
                             const id = (item as any).id || (item as any).slug || (item as any).title;
                             const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                            return translatedResources[key]?.description ?? item.description;
+                            if (language === 'fr' && ((item as any).description_fr || (item as any).description_fr === '')) {
+                              return (item as any).description_fr || (item as any).description;
+                            }
+                            if (translatedResources[key]?.description) return translatedResources[key].description;
+                            if (language !== 'en' && isTranslating) return t('resources_translating');
+                            return item.description;
                           })()}
                         </CardDescription>
                       </CardHeader>
@@ -519,7 +534,10 @@ export default function Resources() {
                             <Badge variant="secondary">{(() => {
                               const id = (item as any).id || (item as any).slug || (item as any).title;
                               const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                              return translatedResources[key]?.topic ?? (item as any).topic;
+                              if (language === 'fr' && ((item as any).topic_fr || (item as any).topic_fr === '')) {
+                              return (item as any).topic_fr || (item as any).topic;
+                            }
+                            return translatedResources[key]?.topic ?? (item as any).topic;
                             })()}</Badge>
                           )}
                         </div>
@@ -530,7 +548,7 @@ export default function Resources() {
                              {(() => {
                                 const id = (item as any).id || (item as any).slug || (item as any).title;
                                 const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
-                                const tags = translatedResources[key]?.tags || item.tags;
+                                const tags = translatedResources[key]?.tags || (language === 'fr' && Array.isArray((item as any).tags_fr) ? (item as any).tags_fr : item.tags);
                                 return tags.slice(0, 3).map((tag) => (
                                   <Badge key={tag} variant="outline" className="text-xs">
                                     {tag}
