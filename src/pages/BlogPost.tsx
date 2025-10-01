@@ -15,6 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { format } from 'date-fns';
+import { useI18n } from '@/i18n';
 import { trackEvent } from '@/components/GTMProvider';
 import { createWhatsAppLink, WHATSAPP_MESSAGES } from '@/utils/whatsapp';
 
@@ -56,6 +57,7 @@ interface SiteSettings {
 }
 
 export default function BlogPost() {
+  const { t } = useI18n();
   const { slug } = useParams<{ slug: string }>();
   const { toast } = useToast();
   const [post, setPost] = useState<BlogPost | null>(null);
@@ -336,9 +338,9 @@ export default function BlogPost() {
   if (!post) {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
+        <h1 className="text-4xl font-bold mb-4">{t('post_not_found_title')}</h1>
         <p className="text-muted-foreground mb-8">
-          The blog post you're looking for doesn't exist or has been moved.
+          {t('post_not_found_desc')}
         </p>
         <Button asChild>
           <Link to="/blog">
@@ -371,7 +373,7 @@ export default function BlogPost() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
       >
-        Skip to main content
+        {t('skip_to_main_content')}
       </a>
 
       <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -391,7 +393,7 @@ export default function BlogPost() {
               <div className="sticky top-8">
                 <Card>
                   <CardContent className="pt-6">
-                    <h3 className="font-semibold mb-4">Table of Contents</h3>
+                    <h3 className="font-semibold mb-4">{t('toc_title')}</h3>
                     <nav className="space-y-2">
                       {tocItems.map((item) => (
                         <button
@@ -480,7 +482,7 @@ export default function BlogPost() {
 
                   {/* Share Buttons */}
                   <div className="flex items-center gap-2 pt-4">
-                    <span className="text-sm font-medium mr-2">Share:</span>
+                    <span className="text-sm font-medium mr-2">{t('share_label')}</span>
                     <Button 
                       variant="outline" 
                       size="sm" 
@@ -551,7 +553,7 @@ export default function BlogPost() {
                 <div className="mt-8 pt-8 border-t">
                   <div className="flex items-center gap-2 mb-4">
                     <Tag className="h-4 w-4" />
-                    <span className="font-semibold">Tags:</span>
+                    <span className="font-semibold">{t('tags_label')}</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
@@ -569,7 +571,7 @@ export default function BlogPost() {
               {post.authors.length > 0 && (
                 <div className="mt-8 pt-8 border-t">
                   <h3 className="text-xl font-semibold mb-4">
-                    About the Author{post.authors.length > 1 ? 's' : ''}
+                    {t(post.authors.length > 1 ? 'about_authors' : 'about_author')}
                   </h3>
                   <div className="space-y-6">
                     {post.authors.map((author) => (
@@ -598,8 +600,8 @@ export default function BlogPost() {
                 <Card className="mt-8 bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800">
                   <CardContent className="pt-6">
                     <div className="text-center">
-                      <h3 className="text-xl font-semibold mb-2">Ready to Start Trading?</h3>
-                      <p className="text-muted-foreground mb-4">
+                      <h3 className="text-xl font-semibold mb-2">{t('ready_to_start_trading')}</h3>
+                      <p className="text-muted-foreground mb-4">{t('ready_to_start_trading_desc')}
                         Get personalized guidance from our expert traders. Start your journey to profitable trading today.
                       </p>
                       <Button 
@@ -615,7 +617,7 @@ export default function BlogPost() {
                         }}
                       >
                         <MessageCircle className="h-4 w-4 mr-2" />
-                        Contact Us on WhatsApp
+                        {t('contact_on_whatsapp')}
                       </Button>
                     </div>
                   </CardContent>
@@ -627,7 +629,7 @@ export default function BlogPost() {
             {post.related_posts && post.related_posts.length > 0 && (
               <section className="mt-12">
                 <Separator className="mb-8" />
-                <h2 className="text-2xl font-bold mb-6">Related Posts</h2>
+                <h2 className="text-2xl font-bold mb-6">{t('related_posts')}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {post.related_posts.slice(0, 3).map((relatedPost) => (
                     <Card key={relatedPost.id} className="group hover:shadow-lg transition-shadow">
@@ -686,7 +688,7 @@ export default function BlogPost() {
               <Button asChild variant="outline">
                 <Link to="/blog">
                   <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Blog
+                  {t('back_to_blog')}
                 </Link>
               </Button>
             </div>
