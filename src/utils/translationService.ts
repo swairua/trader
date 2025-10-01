@@ -103,7 +103,7 @@ async function translateChunk(text: string, target: string, source = 'en') {
           // If response didn't contain translation, try next endpoint
           break;
         } catch (_err: any) {
-          // Silence network-level errors (CORS, network down, aborted) and retry/backoff
+          // Silence network-level errors (CORS, network down) and retry/backoff
           attempt += 1;
           if (attempt < MAX_ATTEMPTS) {
             const delay = 200 * Math.pow(2, attempt - 1);
@@ -112,11 +112,6 @@ async function translateChunk(text: string, target: string, source = 'en') {
           }
           // Move to next endpoint after exhausting attempts for this one
           break;
-        } finally {
-          // Ensure abort timer cleared
-          try {
-            if (timeoutId) clearTimeout(timeoutId as any);
-          } catch (_) {}
         }
       }
     }
