@@ -394,6 +394,9 @@ export const translations: Record<Locale, Record<string, string>> = {
     contact_dialog_copy_email: 'Copier l’e‑mail',
     contact_dialog_open_app: 'Ouvrir l’application e‑mail',
 
+    // Blog page
+    blog_hero_title: 'Blog d\'éducation au trading',
+    blog_hero_subtitle: 'Aperçus pédagogiques, analyses de marché et connaissances pratiques pour vous aider à développer des habitudes de trading disciplinées.',
 
     // Cookie banner
     cookie_preferences: 'Préférences des cookies',
