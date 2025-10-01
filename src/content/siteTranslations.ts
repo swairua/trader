@@ -97,6 +97,44 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
       ],
       disclaimer: "Ces témoignages reflètent des expériences d’apprentissage individuelles. Les résultats de trading varient et les performances passées ne garantissent pas les résultats futurs."
     },
+    blogPreview: {
+      title: "Blog d'éducation au trading",
+      subtitle: "Aperçus pédagogiques, analyses de marché et connaissances pratiques pour vous aider à développer des habitudes de trading disciplinées",
+      posts: [
+        {
+          title: "Comprendre la structure du marché : Guide pour débutants",
+          excerpt: "Découvrez les fondamentaux de la structure du marché et comment les traders institutionnels perçoivent les mouvements de prix.",
+          image: "/lovable-uploads/trading-strategy.jpg",
+          imageAlt: "Trader professionnel analysant les graphiques en utilisant la stratégie DRIVE",
+          slug: "drive-strategy-framework",
+          category: "Stratégie",
+          readTime: 5,
+          level: "Débutant"
+        },
+        {
+          title: "Gestion des risques : Fondation du trading réussi",
+          excerpt: "Pourquoi la gestion des risques est plus importante que la recherche du setup parfait. Découvrez comment calculer la taille des positions.",
+          image: "/lovable-uploads/risk-management.jpg",
+          imageAlt: "Tableau de gestion des risques montrant le dimensionnement des positions",
+          slug: "risk-management-basics",
+          category: "Gestion des risques",
+          readTime: 7,
+          level: "Essentiel"
+        },
+        {
+          title: "La psychologie du trading : Surmonter les pièges mentaux courants",
+          excerpt: "Comment développer la discipline et l'état d'esprit nécessaires pour une performance de trading cohérente.",
+          image: "/lovable-uploads/market-psychology.jpg",
+          imageAlt: "Espace de travail de trading professionnel démontrant la psychologie disciplinée",
+          slug: "trading-psychology-discipline",
+          category: "Psychologie",
+          readTime: 6,
+          level: "Intermédiaire"
+        }
+      ],
+      categories: ["Tous", "Stratégie", "Gestion des risques", "Psychologie"]
+    },
+
     newsletter: {
       title: "Notes hebdomadaires du marché",
       subtitle: "Configurations, erreurs que nous apprenons et listes de contrôle livrées dans votre boîte mail chaque dimanche",
