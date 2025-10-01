@@ -72,6 +72,20 @@ export default function BlogPost() {
   const [readingProgress, setReadingProgress] = useState(0);
   const [tocItems, setTocItems] = useState<{ id: string; text: string; level: number }[]>([]);
   const [translated, setTranslated] = useState<{ title?: string; excerpt?: string; content?: string } | null>(null);
+  const [isTranslatingPost, setIsTranslatingPost] = useState(false);
+
+  const handleTranslatePost = async () => {
+    if (!post || !language || language === 'en') return;
+    setIsTranslatingPost(true);
+    try {
+      const result = await translatePostFields({ title: post.title, excerpt: post.excerpt, content: post.content }, language);
+      setTranslated(result);
+    } catch (err) {
+      console.warn('Post translation failed', err);
+    } finally {
+      setIsTranslatingPost(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
