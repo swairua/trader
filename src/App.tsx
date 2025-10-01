@@ -7,8 +7,6 @@ import { useLongTaskObserver } from "@/hooks/useLongTaskObserver";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RequireRoles } from "@/components/RequireRoles";
 import { BrowserRouter, HashRouter, Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ThemeProvider } from "next-themes";
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { GTMProvider } from "@/components/GTMProvider";
@@ -20,77 +18,39 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { BreadcrumbNavigation } from "@/components/BreadcrumbNavigation";
 import { StructuredData } from "@/components/StructuredData";
 
-// Lazy load components
-const Index = lazy(() => import("./pages/IndexWithSEO"));
-const Strategy = lazy(() => import("./pages/StrategyWithSEO"));
-const Services = lazy(() => import("./pages/ServicesWithSEO").then(module => ({ default: module.ServicesWithSEO })));
-const Blog = lazy(() => import("./pages/Blog"));
-const FAQs = lazy(() => import("./pages/FAQPageWithSEO"));
-const Contact = lazy(() => import("./pages/ContactWithSEO"));
-const About = lazy(() => import("./pages/About"));
-
-// Health check component
-const HealthCheck = () => (
-  <div>
-    <Helmet>
-      <meta name="robots" content="noindex, nofollow" />
-    </Helmet>
-    OK
-  </div>
-);
-const LearnWithSEO = lazy(() => import("./pages/LearnWithSEO"));
-const LP_MentorshipApply = lazy(() => import("./pages/LP_MentorshipApply"));
-// Prefetch mentorship for better performance
-import("./pages/LP_MentorshipApply");
-const SignalsTools = lazy(() => import("./pages/SignalsTools"));
-const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
-const TermsOfUse = lazy(() => import("./pages/TermsOfUse"));
-const RiskDisclaimer = lazy(() => import("./pages/RiskDisclaimer"));
-const AffiliateDisclosure = lazy(() => import("./pages/AffiliateDisclosure"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const AdminImport = lazy(() => import("./pages/AdminImport"));
-const AdminLeadsEnhanced = lazy(() => import("./pages/AdminLeadsEnhanced"));
-const AdminPayments = lazy(() => import("./pages/AdminPayments"));
-const Resources = lazy(() => import("./pages/ResourcesWithSEO"));
-const CourseDetail = lazy(() => import("./pages/CourseDetail"));
-const LibraryAdminEnhanced = lazy(() => import("./pages/LibraryAdminEnhanced"));
-const BlogManagerEnhanced = lazy(() => import("./pages/BlogManagerEnhanced"));
-const BlogEditor = lazy(() => import("./pages/BlogEditor"));
-const BlogPublic = lazy(() => import("./pages/BlogPublic"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
-const FAQsManager = lazy(() => import("./pages/FAQsManager"));
-const UsersRolesManager = lazy(() => import("./pages/UsersRolesManager"));
-const SiteSettings = lazy(() => import("./pages/SiteSettings"));
-const Auth = lazy(() => import("./pages/Auth"));
-const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
-const AdminLayout = lazy(() => import("./layouts/AdminLayout").then(module => ({ default: module.AdminLayout })));
-
-// Landing Pages
-const LP_DriveEducation = lazy(() => import("./pages/LP_DriveEducation"));
-const PlacementQuiz = lazy(() => import("./pages/PlacementQuiz"));
-
-// Loading component
-const PageLoader = () => (
-  <div className="min-h-screen bg-background">
-    <div className="animate-pulse">
-      {/* Navigation skeleton */}
-      <div className="h-16 bg-muted border-b" />
-      
-      {/* Content skeleton */}
-      <div className="container px-4 py-20">
-        <div className="max-w-4xl mx-auto space-y-8">
-          <Skeleton className="h-12 w-3/4 mx-auto" />
-          <Skeleton className="h-6 w-1/2 mx-auto" />
-          <div className="grid md:grid-cols-3 gap-6 mt-12">
-            {[...Array(6)].map((_, i) => (
-              <Skeleton key={i} className="h-64" />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+// Eagerly import all route components (no lazy loading)
+import Index from "./pages/IndexWithSEO";
+import Strategy from "./pages/StrategyWithSEO";
+import { ServicesWithSEO as Services } from "./pages/ServicesWithSEO";
+import FAQs from "./pages/FAQPageWithSEO";
+import Contact from "./pages/ContactWithSEO";
+import About from "./pages/About";
+import LearnWithSEO from "./pages/LearnWithSEO";
+import LP_MentorshipApply from "./pages/LP_MentorshipApply";
+import SignalsTools from "./pages/SignalsTools";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfUse from "./pages/TermsOfUse";
+import RiskDisclaimer from "./pages/RiskDisclaimer";
+import AffiliateDisclosure from "./pages/AffiliateDisclosure";
+import NotFound from "./pages/NotFound";
+import AdminImport from "./pages/AdminImport";
+import AdminLeadsEnhanced from "./pages/AdminLeadsEnhanced";
+import AdminPayments from "./pages/AdminPayments";
+import Resources from "./pages/ResourcesWithSEO";
+import CourseDetail from "./pages/CourseDetail";
+import LibraryAdminEnhanced from "./pages/LibraryAdminEnhanced";
+import BlogManagerEnhanced from "./pages/BlogManagerEnhanced";
+import BlogEditor from "./pages/BlogEditor";
+import BlogPublic from "./pages/BlogPublic";
+import BlogPost from "./pages/BlogPost";
+import FAQsManager from "./pages/FAQsManager";
+import UsersRolesManager from "./pages/UsersRolesManager";
+import SiteSettings from "./pages/SiteSettings";
+import Auth from "./pages/Auth";
+import AdminDashboard from "./pages/AdminDashboard";
+import { AdminLayout } from "./layouts/AdminLayout";
+import LP_DriveEducation from "./pages/LP_DriveEducation";
+import PlacementQuiz from "./pages/PlacementQuiz";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -103,6 +63,16 @@ const queryClient = new QueryClient({
 
 // Debug logging to see if App is rendering
 console.log('App.tsx is loading and rendering');
+
+// Health check component
+const HealthCheck = () => (
+  <div>
+    <Helmet>
+      <meta name="robots" content="noindex, nofollow" />
+    </Helmet>
+    OK
+  </div>
+);
 
 function App() {
   console.log('App component is rendering');
@@ -141,63 +111,63 @@ function App() {
                   <Toaster />
                   <Sonner />
                   <StructuredData />
-                    <Router>
-                      <AnalyticsProvider />
-                      <BreadcrumbNavigation />
-                      <Suspense fallback={<PageLoader />}>
-                        <Routes>
-                        <Route path="/_health" element={<HealthCheck />} />
-                        <Route path="/" element={<Index />} />
-                        <Route path="/about" element={<About />} />
-                         <Route path="/strategy" element={<Strategy />} />
-                        <Route path="/services" element={<Services />} />
-                         <Route path="/services/learn" element={<LearnWithSEO />} />
-                         <Route path="/learn" element={<Navigate to="/services/learn" replace />} />
-                         <Route path="/mentorship" element={<LP_MentorshipApply />} />
-                        <Route path="/signals-tools" element={<SignalsTools />} />
-                        <Route path="/blog" element={<BlogPublic />} />
-                        <Route path="/blog/:slug" element={<BlogPost />} />
-                        <Route path="/faqs" element={<FAQs />} />
-                        <Route path="/contact" element={<Contact />} />
-                         <Route path="/resources" element={<Resources />} />
-                         <Route path="/courses/:slug" element={<CourseDetail />} />
-                         <Route path="/courses" element={<Navigate to="/resources#courses" replace />} />
-                        <Route path="/lp/drive-education" element={<LP_DriveEducation />} />
-                         <Route path="/lp/mentorship-apply" element={<Navigate to="/mentorship" replace />} />
-                         <Route path="/placement-quiz" element={<PlacementQuiz />} />
-                         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                        <Route path="/terms-of-use" element={<TermsOfUse />} />
-                        <Route path="/risk-disclaimer" element={<RiskDisclaimer />} />
-                        <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
-                        <Route path="/admin" element={
-                          <RequireRoles roles={['admin', 'super_admin']}>
-                            <AdminLayout />
+                  <Router>
+                    <AnalyticsProvider />
+                    <BreadcrumbNavigation />
+                    <Routes>
+                      <Route path="/_health" element={<HealthCheck />} />
+                      <Route path="/" element={<Index />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/strategy" element={<Strategy />} />
+                      <Route path="/services" element={<Services />} />
+                      <Route path="/services/learn" element={<LearnWithSEO />} />
+                      <Route path="/learn" element={<Navigate to="/services/learn" replace />} />
+                      <Route path="/mentorship" element={<LP_MentorshipApply />} />
+                      <Route path="/signals-tools" element={<SignalsTools />} />
+                      <Route path="/blog" element={<BlogPublic />} />
+                      <Route path="/blog/:slug" element={<BlogPost />} />
+                      <Route path="/faqs" element={<FAQs />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/resources" element={<Resources />} />
+                      <Route path="/courses/:slug" element={<CourseDetail />} />
+                      <Route path="/courses" element={<Navigate to="/resources#courses" replace />} />
+                      <Route path="/lp/drive-education" element={<LP_DriveEducation />} />
+                      <Route path="/lp/mentorship-apply" element={<Navigate to="/mentorship" replace />} />
+                      <Route path="/placement-quiz" element={<PlacementQuiz />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route path="/terms-of-use" element={<TermsOfUse />} />
+                      <Route path="/risk-disclaimer" element={<RiskDisclaimer />} />
+                      <Route path="/affiliate-disclosure" element={<AffiliateDisclosure />} />
+
+                      <Route path="/admin" element={
+                        <RequireRoles roles={['admin', 'super_admin']}>
+                          <AdminLayout />
+                        </RequireRoles>
+                      }>
+                        <Route index element={<AdminDashboard />} />
+                        <Route path="blog" element={<BlogManagerEnhanced />} />
+                        <Route path="blog/:id" element={<BlogEditor />} />
+                        <Route path="faqs" element={<FAQsManager />} />
+                        <Route path="users-roles" element={
+                          <RequireRoles roles={['super_admin']}>
+                            <UsersRolesManager />
                           </RequireRoles>
-                        }>
-                          <Route index element={<AdminDashboard />} />
-                          <Route path="blog" element={<BlogManagerEnhanced />} />
-                          <Route path="blog/:id" element={<BlogEditor />} />
-                          <Route path="faqs" element={<FAQsManager />} />
-                          <Route path="users-roles" element={
-                            <RequireRoles roles={['super_admin']}>
-                              <UsersRolesManager />
-                            </RequireRoles>
-                          } />
-                          <Route path="settings" element={<SiteSettings />} />
-                          <Route path="library" element={<LibraryAdminEnhanced />} />
-                          <Route path="leads" element={<AdminLeadsEnhanced />} />
-                          <Route path="import" element={
-                            <RequireRoles roles={['super_admin']}>
-                              <AdminImport />
-                            </RequireRoles>
-                          } />
-                          <Route path="payments" element={<AdminPayments />} />
-                        </Route>
-                        <Route path="/auth" element={<Auth />} />
-                        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
-                    </Suspense>
+                        } />
+                        <Route path="settings" element={<SiteSettings />} />
+                        <Route path="library" element={<LibraryAdminEnhanced />} />
+                        <Route path="leads" element={<AdminLeadsEnhanced />} />
+                        <Route path="import" element={
+                          <RequireRoles roles={['super_admin']}>
+                            <AdminImport />
+                          </RequireRoles>
+                        } />
+                        <Route path="payments" element={<AdminPayments />} />
+                      </Route>
+
+                      <Route path="/auth" element={<Auth />} />
+                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
                   </Router>
                 </AppErrorBoundary>
               </AuthProvider>
