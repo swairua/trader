@@ -278,6 +278,13 @@ export const translations: Record<Locale, Record<string, string>> = {
     resources_level_beginner: 'Beginner',
     resources_level_intermediate: 'Intermediate',
     resources_level_advanced: 'Advanced',
+    resources_by: 'By',
+    resources_pages: 'pages',
+    resources_more: 'more',
+    resources_type_course: 'Course',
+    resources_type_ebook: 'E-book',
+    resources_type_material: 'Material',
+    resources_hero_image_alt: 'Learning resources and education materials hero image',
 
     // Blog page
     blog_hero_title: 'Trading Education Blog',
