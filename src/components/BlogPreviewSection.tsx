@@ -85,10 +85,10 @@ export function BlogPreviewSection() {
         <div className="max-w-6xl mx-auto">
           <header className="text-center mb-16">
             <h2 id="blog-section-heading" className="fluid-h2 text-foreground mb-4">
-              {title}
+              {t('blog_hero_title') || contentTitle}
             </h2>
             <p className="fluid-body text-muted-foreground max-w-2xl mx-auto">
-              {subtitle}
+              {t('blog_hero_subtitle') || contentSubtitle}
             </p>
           </header>
 
