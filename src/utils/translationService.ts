@@ -5,7 +5,13 @@ export type TranslationResult = {
 };
 
 const CACHE_PREFIX = 'translate_cache_v1';
-const API_URL = 'https://libretranslate.de/translate';
+const API_ENDPOINTS = [
+  'https://libretranslate.de/translate',
+  'https://libretranslate.com/translate',
+  'https://translate.argosopentech.com/translate',
+];
+const DEFAULT_TIMEOUT_MS = 3500;
+let loggedFailure = false;
 
 async function computeHash(text: string) {
   if (typeof crypto !== 'undefined' && (crypto as any).subtle) {
@@ -56,25 +62,41 @@ async function translateChunk(text: string, target: string, source = 'en') {
   if (cached) return cached;
 
   try {
-    const resp = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ q: text, source, target, format: 'text' }),
-    });
-
-    if (!resp.ok) {
-      throw new Error(`Translation API error ${resp.status}`);
+    if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+      return text;
     }
 
-    const data = await resp.json();
-    const translated = data?.translatedText || '';
-    saveToCache(hash, target, translated);
-    return translated;
-  } catch (e) {
-    console.error('Translation failed:', e);
-    return text; // fallback to original
+    for (const url of API_ENDPOINTS) {
+      try {
+        const controller = new AbortController();
+        const t = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
+        const resp = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ q: text, source, target, format: 'text' }),
+          signal: controller.signal,
+        });
+        clearTimeout(t);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json().catch(() => ({} as any));
+        const translated = (data as any)?.translatedText || '';
+        if (translated) {
+          saveToCache(hash, target, translated);
+          return translated;
+        }
+      } catch (_err) {
+        // try next endpoint
+        continue;
+      }
+    }
+
+    if (!loggedFailure) {
+      loggedFailure = true;
+      console.warn('Translation service unavailable. Falling back to original text.');
+    }
+    return text;
+  } catch (_e) {
+    return text;
   }
 }
 
