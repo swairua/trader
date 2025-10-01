@@ -714,6 +714,14 @@ export const translations: Record<Locale, Record<string, string>> = {
 
     // Strategy page
     strategy_badge: 'Cadre pédagogique',
+    strategy_why_item1_title: 'Focalisation claire',
+    strategy_why_item1_desc: 'Une approche structurée et basée sur des règles qui met l’accent sur le contexte du marché et les configurations à haute probabilité.',
+    strategy_why_item2_title: 'Régulé et sécurisé',
+    strategy_why_item2_desc: 'Principes adaptés des pratiques institutionnelles avec une forte attention à la gestion des risques et à la discipline.',
+    strategy_why_item3_title: 'Basé sur la recherche',
+    strategy_why_item3_desc: 'Enseignement fondé sur des preuves en utilisant des exemples réels de marché et une logique de trading.',
+    strategy_why_item4_title: 'Communauté et mentorat',
+    strategy_why_item4_desc: 'Support communautaire actif avec mentorat pour vous aider à mettre en œuvre et affiner votre processus.',
     strategy_download_btn: 'Télécharger la checklist DRIVE',
     strategy_watch_video_btn: 'Regarder la vidéo de la stratégie',
     strategy_hero_alt: 'Trader professionnel analysant des graphiques sur plusieurs écrans',
