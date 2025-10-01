@@ -559,15 +559,32 @@ export default function Resources() {
                             {getResourceIcon(item.resourceType, 'type' in item ? (item as any).type : undefined)}
                             {getDisplayTitle(item)}
                           </CardTitle>
-                          <Badge variant="outline" className="shrink-0 capitalize">
-                            {(() => {
-                              const rt = item.resourceType;
-                              if (rt === 'course') return t('resources_type_course');
-                              if (rt === 'ebook') return t('resources_type_ebook');
-                              if (rt === 'material') return t('resources_type_material');
-                              return rt;
+                          <div className="flex items-center gap-2">
+                            <Badge variant="outline" className="shrink-0 capitalize">
+                              {(() => {
+                                const rt = item.resourceType;
+                                if (rt === 'course') return t('resources_type_course');
+                                if (rt === 'ebook') return t('resources_type_ebook');
+                                if (rt === 'material') return t('resources_type_material');
+                                return rt;
+                              })()}
+                            </Badge>
+
+                            {/* Translation status badge (dev aid) */}
+                            {language !== 'en' && (() => {
+                              const id = (item as any).id || (item as any).slug || (item as any).title;
+                              const key = `${item.resourceType || (item as any).resourceType}-${id}:${language}`;
+                              const hasServer = !!((item as any).title_fr || (item as any).description_fr || (item as any).tags_fr);
+                              const hasClient = !!translatedResources[key];
+                              const status = hasServer ? 'server' : hasClient ? 'translated' : (isTranslating ? 'translating' : (translationError ? 'failed' : 'missing'));
+                              return (
+                                <Badge variant={status === 'translated' || status === 'server' ? 'secondary' : status === 'translating' ? 'outline' : 'destructive'} className="text-xs">
+                                  {status === 'server' ? t('resources_status_server') : status === 'translated' ? t('resources_status_translated') : status === 'translating' ? t('resources_status_translating_short') : status === 'failed' ? t('resources_status_failed') : t('resources_status_missing')}
+                                </Badge>
+                              );
                             })()}
-                          </Badge>
+
+                          </div>
                         </div>
                         
                         <CardDescription className="line-clamp-2">
