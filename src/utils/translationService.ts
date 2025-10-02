@@ -12,6 +12,38 @@ const API_ENDPOINTS = [
 ];
 const DEFAULT_TIMEOUT_MS = 3500;
 let loggedFailure = false;
+// Whether remote translation endpoints are reachable. null = unknown, true = reachable, false = not reachable
+let canUseRemote: boolean | null = null;
+
+async function probeTranslationService(timeout = 2000) {
+  if (canUseRemote !== null) return canUseRemote;
+  for (const url of API_ENDPOINTS) {
+    try {
+      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      const id = controller ? setTimeout(() => controller.abort(), timeout) : undefined;
+      try {
+        const resp = await fetch(url, {
+          method: 'OPTIONS',
+          mode: 'cors',
+          signal: controller ? (controller as any).signal : undefined,
+        });
+        if (id) clearTimeout(id);
+        if (resp && (resp.status === 200 || resp.status === 204 || resp.status === 204 || resp.status === 401 || resp.status === 405)) {
+          canUseRemote = true;
+          return true;
+        }
+      } catch (e) {
+        // ignore and try next
+      } finally {
+        if (id) clearTimeout(id);
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
+  canUseRemote = false;
+  return false;
+}
 
 async function computeHash(text: string) {
   if (typeof crypto !== 'undefined' && (crypto as any).subtle) {
