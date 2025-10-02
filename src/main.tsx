@@ -90,7 +90,7 @@ if (typeof window !== 'undefined') {
         try {
           return await originalFetch(input as any, init);
         } catch {
-          return new Response('', { status: 204 });
+          return new Response(null, { status: 204 });
         }
       }
     }
@@ -118,7 +118,7 @@ if (typeof window !== 'undefined') {
         const isHmr = /@vite|hot-update|__open-in-editor/.test(urlStr);
         const isTranslation = /libretranslate\.de|libretranslate\.com|translate\.argosopentech\.com/.test(host);
         if (isAnalytics || isHmr || isTranslation) {
-          return new Response('', { status: 204 });
+          return new Response(null, { status: 204 });
         }
       }
 
