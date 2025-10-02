@@ -218,3 +218,22 @@ export async function translatePostFields(fields: { title?: string; excerpt?: st
   }
   return result;
 }
+
+// Dev helper to test server-side translation endpoint
+export async function testServerTranslate() {
+  try {
+    const sample = 'Hello world';
+    const url = API_ENDPOINTS[0];
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: sample, target: 'fr', source: 'en' }),
+    }).catch(() => null);
+    const data = resp ? await resp.json().catch(() => null) : null;
+    console.info('testServerTranslate:', url, resp ? resp.status : null, data);
+    return { url, status: resp ? resp.status : null, data };
+  } catch (e) {
+    console.warn('testServerTranslate failed', e);
+    return { error: String(e) };
+  }
+}
