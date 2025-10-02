@@ -81,6 +81,21 @@ export default function BlogPublic() {
   // I18n hook must be declared before using `language` in fetch/effects
   const { t, language } = useI18n();
 
+  // Dev: test local server-side translation function and log response
+  useEffect(() => {
+    if (!import.meta.env.DEV) return;
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await testServerTranslate();
+        if (mounted) console.log('[dev] testServerTranslate result:', res);
+      } catch (e) {
+        console.warn('[dev] testServerTranslate failed', e);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
+
   const updateSearchParams = (updates: Record<string, string | null>) => {
     const newParams = new URLSearchParams(searchParams);
     
