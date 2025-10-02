@@ -70,11 +70,17 @@ const FAQs = () => {
   }, [selectedCategory]);
 
   const filteredFAQs = faqs.filter(faq => {
-    const matchesCategory = selectedCategory === "all" || 
-      categories.find(cat => cat.id === selectedCategory)?.label === faq.category;
-    const matchesSearch = searchQuery === "" || 
-      faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      faq.answer.toLowerCase().includes(searchQuery.toLowerCase());
+    const translatedCategory = faqTranslations[faq.id]?.category || faq.category;
+    const translatedQuestion = faqTranslations[faq.id]?.question || faq.question;
+    const translatedAnswer = faqTranslations[faq.id]?.answer || faq.answer;
+
+    const matchesCategory = selectedCategory === "all" ||
+      selectedCategory === normalizeToSlug(translatedCategory);
+
+    const q = searchQuery.toLowerCase();
+    const matchesSearch = q === "" ||
+      translatedQuestion.toLowerCase().includes(q) ||
+      translatedAnswer.toLowerCase().includes(q);
     return matchesCategory && matchesSearch;
   });
 
