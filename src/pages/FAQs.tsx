@@ -18,8 +18,13 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { MessageCircle, HelpCircle, Search, Link as LinkIcon, Copy, Check, Target, BookOpen, Shield, TrendingUp, User, Settings } from "lucide-react";
 import { usePublicFaqs } from "@/hooks/usePublicFaqs";
+import { useAutoTranslate } from "@/hooks/useAutoTranslate";
 import { toast } from "sonner";
 import forexFaqHero from "@/assets/forex-faq-hero.jpg";
+
+const normalizeToSlug = (val: string): string => {
+  return val.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+};
 
 const FAQs = () => {
   const { t, language } = useI18n();
@@ -27,6 +32,17 @@ const FAQs = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [copiedFaqId, setCopiedFaqId] = useState<string | null>(null);
   const { faqs, categories, loading, error } = usePublicFaqs(language);
+
+  // Auto-translate FAQ entries (question, answer, category) when language is not English
+  const { translatedMap: faqTranslations, isTranslating: faqsTranslating } = useAutoTranslate(
+    faqs,
+    ["question", "answer", "category"]
+  );
+  // Auto-translate category labels
+  const { translatedMap: categoryTranslations } = useAutoTranslate(
+    categories,
+    ["label"]
+  );
 
   // Get icon component by name
   const getIconComponent = (iconName: string) => {
