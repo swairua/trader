@@ -1,0 +1,11 @@
+[dev]
+  command = "npm run dev"
+  framework = "vite"
+  port = 8080
+  functions = "supabase/functions"
+
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
