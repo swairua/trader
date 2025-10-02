@@ -82,19 +82,32 @@ export default function BlogPublic() {
   const { t, language } = useI18n();
 
   // Dev: test local server-side translation function and log response
+  const [devDebug, setDevDebug] = useState<any>(null);
   useEffect(() => {
     if (!import.meta.env.DEV) return;
     let mounted = true;
     (async () => {
       try {
+        const startProbe = Date.now();
         const res = await testServerTranslate();
-        if (mounted) console.log('[dev] testServerTranslate result:', res);
+        const probeTime = Date.now() - startProbe;
+        if (mounted) console.log('[dev] testServerTranslate result:', res, 'took', probeTime, 'ms');
+
+        // Batch sample
+        const sampleNames = ['Education', 'Risk Management', 'Featured Articles'];
+        const startBatch = Date.now();
+        const batchRes = await translateMany(sampleNames, 'fr').catch(() => null);
+        const batchTime = Date.now() - startBatch;
+        if (mounted) console.log('[dev] translateMany result:', batchRes, 'took', batchTime, 'ms');
+
+        if (mounted) setDevDebug({ probe: res, probeTime, batch: batchRes, batchTime, sampleNames });
       } catch (e) {
         console.warn('[dev] testServerTranslate failed', e);
+        if (mounted) setDevDebug({ error: String(e) });
       }
     })();
     return () => { mounted = false; };
-  }, []);
+  }, [language]);
 
   const updateSearchParams = (updates: Record<string, string | null>) => {
     const newParams = new URLSearchParams(searchParams);
