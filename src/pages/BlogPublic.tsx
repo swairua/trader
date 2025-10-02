@@ -136,13 +136,42 @@ export default function BlogPublic() {
       
       if (error) throw error;
 
-      // Transform and filter posts
+      // Transform posts
       let filteredPosts = allPosts?.map(post => ({
         ...post,
         authors: post.post_authors?.map((pa: any) => pa.authors) || [],
         categories: post.post_categories?.map((pc: any) => pc.categories) || [],
         tags: post.post_tags?.map((pt: any) => pt.tags) || []
       })) || [];
+
+      // Translate relationship names (categories, tags, authors) on the fly
+      try {
+        if (language && language !== 'en' && filteredPosts.length > 0) {
+          // collect unique names to avoid duplicate translations
+          const uniqueCatNames = Array.from(new Set(filteredPosts.flatMap(p => (p.categories || []).map((c: any) => c.name))));
+          const uniqueTagNames = Array.from(new Set(filteredPosts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
+          const uniqueAuthorNames = Array.from(new Set(filteredPosts.flatMap(p => (p.authors || []).map((a: any) => a.name))));
+
+          const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
+            Promise.all(uniqueCatNames.map(n => translateText(n, language))).catch(() => []),
+            Promise.all(uniqueTagNames.map(n => translateText(n, language))).catch(() => []),
+            Promise.all(uniqueAuthorNames.map(n => translateText(n, language))).catch(() => []),
+          ]);
+
+          const catMap = new Map(uniqueCatNames.map((n, i) => [n, translatedCats[i] || n]));
+          const tagMap = new Map(uniqueTagNames.map((n, i) => [n, translatedTags[i] || n]));
+          const authorMap = new Map(uniqueAuthorNames.map((n, i) => [n, translatedAuthors[i] || n]));
+
+          filteredPosts = filteredPosts.map(p => ({
+            ...p,
+            categories: (p.categories || []).map((c: any) => ({ ...c, name: catMap.get(c.name) || c.name })),
+            tags: (p.tags || []).map((t: any) => ({ ...t, name: tagMap.get(t.name) || t.name })),
+            authors: (p.authors || []).map((a: any) => ({ ...a, name: authorMap.get(a.name) || a.name })),
+          }));
+        }
+      } catch (e) {
+        // ignore translation failures for posts
+      }
 
       // Client-side filtering for relationships
       if (categoryFilter) {
