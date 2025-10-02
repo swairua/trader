@@ -49,7 +49,7 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
     },
     transformCTA: {
       title: "Prêt à transformer votre trading?",
-      subtitle: "Rejoignez des centaines de traders qui développent de vraies compétences grâce à une éducation systématique et des principes de gestion des risques.",
+      subtitle: "Rejoignez des centaines de traders qui développent de vraies compétences grâce à une éducation syst��matique et des principes de gestion des risques.",
       stats: [
         { value: '500+', label: "Étudiants formés" },
         { value: '200+', label: "Leçons" },
@@ -198,14 +198,14 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
           title: "Inscrivez-vous chez Exness",
           description: "Cliquez sur notre bouton ci-dessous pour créer votre compte Exness gratuit via notre lien d'affiliation. Cela ne prend que 2 minutes. Complétez également la vérification d'identité et de résidence.",
           features: [
-            "5 comptes investisseurs de détail (Std, Std cent, Zero & Pro)",
-            "Dépôt minimum 10 USD",
-            "200 Lots max",
-            "1000 positions max",
-            "Compte islamique",
-            "1 : Levier illimité",
-            "Frais de retrait ZERO",
-            "Retrait instantané et divers moyens de paiement"
+            "5 comptes (Standard, Cent, Zero, Pro)",
+            "Dépôt min. 10 USD",
+            "Jusqu’à 200 lots",
+            "Jusqu’à 1 000 positions",
+            "Compte islamique disponible",
+            "Levier illimité",
+            "Frais de retrait zéro",
+            "Retraits instantanés, nombreux moyens de paiement"
           ]
         },
         {
