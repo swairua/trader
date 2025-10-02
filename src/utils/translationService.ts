@@ -219,6 +219,41 @@ export async function translatePostFields(fields: { title?: string; excerpt?: st
   return result;
 }
 
+// Batch translate helper
+export async function translateMany(texts: string[], target: string, source = 'en') {
+  if (!texts || texts.length === 0) return [] as string[];
+  // Try server-side batch first
+  const server = API_ENDPOINTS[0];
+  try {
+    const fetchPromise = fetch(server, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ texts, target, source }),
+    }).then((r) => r).catch(() => null);
+    const timeoutPromise = new Promise<Response | null>((resolve) => setTimeout(() => resolve(null), DEFAULT_TIMEOUT_MS));
+    const resp = await Promise.race([fetchPromise, timeoutPromise]);
+    if (resp && resp.ok) {
+      const data = await resp.json().catch(() => null);
+      const translated = (data && (data.translated || data.translatedText)) || null;
+      if (Array.isArray(translated) && translated.length === texts.length) return translated;
+    }
+  } catch (e) {
+    // ignore and fallback
+  }
+
+  // Fallback: translate individually (with caching inside translateChunk)
+  const results: string[] = [];
+  for (const t of texts) {
+    try {
+      const tr = await translateChunk(t, target, source);
+      results.push(tr);
+    } catch (e) {
+      results.push(t);
+    }
+  }
+  return results;
+}
+
 // Dev helper to test server-side translation endpoint
 export async function testServerTranslate() {
   try {
