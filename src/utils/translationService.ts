@@ -74,26 +74,55 @@ async function translateChunk(text: string, target: string, source = 'en') {
       let attempt = 0;
       while (attempt < MAX_ATTEMPTS) {
         try {
-          // Use Promise.race to implement a timeout without relying on AbortController
-          const fetchPromise = fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ q: text, source, target, format: 'text' }),
-          }).then(async (resp) => {
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            return resp.json().catch(() => ({} as any));
-          });
+          // Use AbortController to implement a timeout and avoid unhandled rejections
+          const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+          const timeoutId = controller
+            ? setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS)
+            : undefined;
 
-          const timeoutPromise = new Promise((_, reject) => {
-            const id = setTimeout(() => {
-              clearTimeout(id);
-              reject(new Error('timeout'));
-            }, DEFAULT_TIMEOUT_MS);
-          });
+          let resp: Response | null = null;
 
-          const data = await Promise.race([fetchPromise, timeoutPromise]).catch(() => null);
-          if (!data) throw new Error('no-data');
-          const translated = (data as any)?.translatedText || '';
+          try {
+            resp = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ q: text, source, target, format: 'text' }),
+              signal: controller ? (controller as any).signal : undefined,
+            });
+          } catch (fetchErr) {
+            // Treat fetch errors as transient and retry/continue to next endpoint
+            resp = null;
+          } finally {
+            if (timeoutId) clearTimeout(timeoutId);
+          }
+
+          if (!resp) {
+            attempt += 1;
+            if (attempt < MAX_ATTEMPTS) {
+              const delay = 200 * Math.pow(2, attempt - 1);
+              await sleep(delay);
+              continue;
+            }
+            break; // move to next endpoint
+          }
+
+          if (!resp.ok) {
+            // Non-2xx response; do not throw to avoid bubbling noisy errors
+            attempt += 1;
+            if (attempt < MAX_ATTEMPTS) {
+              const delay = 200 * Math.pow(2, attempt - 1);
+              await sleep(delay);
+              continue;
+            }
+            break;
+          }
+
+          const data = await resp.json().catch(() => null);
+          if (!data) {
+            break;
+          }
+
+          const translated = (data as any)?.translatedText || (data as any)?.translation || '';
           if (translated) {
             saveToCache(hash, target, translated);
             return translated;
@@ -103,7 +132,6 @@ async function translateChunk(text: string, target: string, source = 'en') {
           break;
         } catch (_err) {
           attempt += 1;
-          // exponential backoff before retrying the same endpoint
           if (attempt < MAX_ATTEMPTS) {
             const delay = 200 * Math.pow(2, attempt - 1); // 200ms, 400ms, 800ms
             await sleep(delay);
