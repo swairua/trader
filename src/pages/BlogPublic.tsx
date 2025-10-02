@@ -14,6 +14,7 @@ import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { SectionDivider } from '@/components/SectionDivider';
 import { useI18n } from '@/i18n';
+import { translateText } from '@/utils/translationService';
 import { format } from 'date-fns';
 import { fr as frLocale, enUS } from 'date-fns/locale';
 import forexBlogHero from '@/assets/forex-blog-hero.jpg';
