@@ -300,14 +300,18 @@ export default function BlogPublic() {
   useEffect(() => {
     const retranslatePosts = async () => {
       try {
-        if (!posts || posts.length === 0) return;
-        if (!language || language === 'en') return; // nothing to do
-        // Avoid re-translating if already translated for this language
-        if (posts.some(p => (p as any)._translatedForLanguage === language)) return;
+        if (!originalPosts || originalPosts.length === 0) return;
+    // If target is english, restore originals
+    if (!language || language === 'en') {
+      setPosts(originalPosts);
+      return; // nothing else to do
+    }
+    // Avoid re-translating if already translated for this language
+    if (originalPosts.some(p => (p as any)._translatedForLanguage === language)) return;
 
-        const uniqueCatNames = Array.from(new Set(posts.flatMap(p => (p.categories || []).map((c: any) => c.name))));
-        const uniqueTagNames = Array.from(new Set(posts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
-        const uniqueAuthorNames = Array.from(new Set(posts.flatMap(p => (p.authors || []).map((a: any) => a.name))));
+    const uniqueCatNames = Array.from(new Set(originalPosts.flatMap(p => (p.categories || []).map((c: any) => c.name))));
+    const uniqueTagNames = Array.from(new Set(originalPosts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
+    const uniqueAuthorNames = Array.from(new Set(originalPosts.flatMap(p => (p.authors || []).map((a: any) => a.name))));
 
         const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
           Promise.all(uniqueCatNames.map(n => translateText(n, language))).catch(() => []),
