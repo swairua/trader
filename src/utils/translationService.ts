@@ -5,7 +5,10 @@ export type TranslationResult = {
 };
 
 const CACHE_PREFIX = 'translate_cache_v1';
+// In dev, supabase functions are available at /.netlify/functions/translate_text via netlify dev proxy
+const SERVER_TRANSLATE_ENDPOINT = '/.netlify/functions/translate_text';
 const API_ENDPOINTS = [
+  SERVER_TRANSLATE_ENDPOINT,
   'https://libretranslate.de/translate',
   'https://libretranslate.com/translate',
   'https://translate.argosopentech.com/translate',
