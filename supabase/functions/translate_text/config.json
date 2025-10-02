@@ -1,0 +1,5 @@
+{
+  "name": "translate_text",
+  "runtime": "edge",
+  "path": "/translate_text"
+}
