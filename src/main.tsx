@@ -90,7 +90,7 @@ if (typeof window !== 'undefined') {
         try {
           return await originalFetch(input as any, init);
         } catch {
-          return new Response('', { status: 204 });
+          return new Response(null, { status: 204 });
         }
       }
     }
@@ -117,7 +117,7 @@ if (typeof window !== 'undefined') {
         // Try the real fetch but silently swallow failures
         return await originalFetch(input as any, init);
       } catch {
-        return new Response('', { status: 204 });
+        return new Response(null, { status: 204 });
       }
     }
 
@@ -142,7 +142,7 @@ if (typeof window !== 'undefined') {
       const isNetworkError = err instanceof TypeError || lowerMsg.includes('failed to fetch') || lowerMsg.includes('networkerror') || lowerMsg.includes('network error') || lowerMsg.includes('fetch failed');
 
       if (isNetworkError && (thirdPartyHostPattern.test(h) || thirdPartyPathPattern.test(p) || hmrPattern.test(urlStr))) {
-        return new Response('', { status: 204 });
+        return new Response(null, { status: 204 });
       }
 
       // For other network errors, rethrow so application logic can handle them
