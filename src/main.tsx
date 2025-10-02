@@ -113,13 +113,18 @@ if (typeof window !== 'undefined') {
       }
 
       // Silence fetch noise from analytics SDKs (e.g., FullStory) and HMR-related assets
-      if (typeof msg === 'string' && msg.toLowerCase().includes('failed to fetch')) {
-        if (/fullstory|edge\.fullstory\.com/.test(host) || /\/s\/fs\.js/.test(path) || /@vite|hot-update|__open-in-editor/.test(urlStr)) {
-          return new Response('', { status: 204 });
-        }
+      const lowerMsg = typeof msg === 'string' ? msg.toLowerCase() : '';
+      const isNetworkError = err instanceof TypeError || lowerMsg.includes('failed to fetch') || lowerMsg.includes('networkerror') || lowerMsg.includes('network error') || lowerMsg.includes('fetch failed');
+
+      const thirdPartyHostPattern = /fullstory|edge\.fullstory\.com|sentry|segment|hotjar|heap/;
+      const thirdPartyPathPattern = /\/s\/fs\.js|fs\.js|\/cdn-cgi\/|collect|analytics|telemetry/;
+      const hmrPattern = /@vite|hot-update|__open-in-editor/;
+
+      if (isNetworkError && (thirdPartyHostPattern.test(host) || thirdPartyPathPattern.test(path) || hmrPattern.test(urlStr))) {
+        return new Response('', { status: 204 });
       }
 
-      // For other networks errors, rethrow so application logic can handle them
+      // For other network errors, rethrow so application logic can handle them
       throw err;
     }
   };
