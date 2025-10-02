@@ -419,6 +419,22 @@ export default function BlogPublic() {
       />
       
       <Navigation />
+
+      {import.meta.env.DEV && devDebug && (
+        <div className="fixed top-20 right-4 z-60 w-96 max-w-full bg-white/95 text-black p-3 rounded shadow-lg border border-gray-200 text-sm">
+          <div className="flex items-center justify-between mb-2">
+            <strong>Dev Translation Debug</strong>
+            <button onClick={() => setDevDebug(null)} className="text-xs text-muted-foreground">Close</button>
+          </div>
+          <div className="space-y-1">
+            <div><strong>Probe:</strong> <code>{String(devDebug.probe?.status ?? devDebug.probe?.error ?? 'no-status')}</code> <em>({devDebug.probeTime} ms)</em></div>
+            <div><strong>Batch time:</strong> <code>{devDebug.batchTime} ms</code></div>
+            <div><strong>Sample names:</strong> {JSON.stringify(devDebug.sampleNames)}</div>
+            <div><strong>Translated:</strong> <pre className="whitespace-pre-wrap">{JSON.stringify(devDebug.batch)}</pre></div>
+          </div>
+        </div>
+      )}
+
       <main className="pt-20">
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">
