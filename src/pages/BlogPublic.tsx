@@ -174,13 +174,9 @@ export default function BlogPublic() {
           const uniqueTagNames = Array.from(new Set(filteredPosts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
           const uniqueAuthorNames = Array.from(new Set(filteredPosts.flatMap(p => (p.authors || []).map((a: any) => a.name))));
 
-          const catResults = await Promise.allSettled(uniqueCatNames.map(n => translateText(n, language)));
-          const tagResults = await Promise.allSettled(uniqueTagNames.map(n => translateText(n, language)));
-          const authorResults = await Promise.allSettled(uniqueAuthorNames.map(n => translateText(n, language)));
-
-          const translatedCats = catResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : uniqueCatNames[i]));
-          const translatedTags = tagResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : uniqueTagNames[i]));
-          const translatedAuthors = authorResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : uniqueAuthorNames[i]));
+          const translatedCats = await translateMany(uniqueCatNames, language).catch(() => uniqueCatNames);
+          const translatedTags = await translateMany(uniqueTagNames, language).catch(() => uniqueTagNames);
+          const translatedAuthors = await translateMany(uniqueAuthorNames, language).catch(() => uniqueAuthorNames);
 
           const catMap = new Map(uniqueCatNames.map((n, i) => [n, translatedCats[i] || n]));
           const tagMap = new Map(uniqueTagNames.map((n, i) => [n, translatedTags[i] || n]));
