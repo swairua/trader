@@ -297,14 +297,15 @@ const FAQs = () => {
                       </TabsTrigger>
                       {categories.map((category) => {
                         const IconComponent = getIconComponent(category.icon);
+                        const label = categoryTranslations[category.id]?.label || category.label;
                         return (
-                          <TabsTrigger 
-                            key={category.id} 
+                          <TabsTrigger
+                            key={category.id}
                             value={category.id}
                             className="text-sm font-medium px-4 py-2.5 rounded-md whitespace-nowrap data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm transition-all hover:bg-background/50"
                           >
                             <IconComponent className="h-4 w-4 mr-2" />
-                            {category.label}
+                            {label}
                           </TabsTrigger>
                         );
                       })}
