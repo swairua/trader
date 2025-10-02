@@ -78,6 +78,9 @@ export default function BlogPublic() {
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
+  // I18n hook must be declared before using `language` in fetch/effects
+  const { t, language } = useI18n();
+
   const updateSearchParams = (updates: Record<string, string | null>) => {
     const newParams = new URLSearchParams(searchParams);
     
