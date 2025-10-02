@@ -98,6 +98,10 @@ async function translateChunk(text: string, target: string, source = 'en') {
       return text;
     }
 
+    // Probe remote translation endpoints once; if unavailable, don't attempt further network calls
+    const remoteOk = await probeTranslationService();
+    if (!remoteOk) return text;
+
     // Retry/backoff per endpoint to increase resilience against transient network errors
     const MAX_ATTEMPTS = 3;
     const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
