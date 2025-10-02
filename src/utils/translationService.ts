@@ -125,9 +125,14 @@ async function translateChunk(text: string, target: string, source = 'en') {
               body: JSON.stringify({ q: text, source, target, format: 'text' }),
               signal: controller ? (controller as any).signal : undefined,
             });
-          } catch (fetchErr) {
-            // Treat fetch errors as transient and retry/continue to next endpoint
-            resp = null;
+          } catch (fetchErr: any) {
+            // If aborted, treat as transient timeout and continue retry/backoff
+            if (fetchErr && fetchErr.name === 'AbortError') {
+              resp = null;
+            } else {
+              // Other fetch failures are treated as transient too
+              resp = null;
+            }
           } finally {
             if (timeoutId) clearTimeout(timeoutId);
           }
