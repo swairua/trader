@@ -78,21 +78,26 @@ if (typeof window !== 'undefined') {
       urlStr = '';
     }
 
-    // Short-circuit Vite DEV pings/HMR fetches to avoid noisy errors in constrained envs
-    if (import.meta.env.DEV) {
-      const isVitePing = urlStr.includes('/__vite_ping');
-      const isViteClient = urlStr.includes('/@vite/') || urlStr.includes('/@react-refresh') || urlStr.includes('@vite/client');
-      const isHmrAsset = urlStr.includes('hot-update') || urlStr.includes('__open-in-editor');
-      if (isVitePing) {
-        return new Response('pong', { status: 200, headers: { 'Content-Type': 'text/plain' } });
+    // Short-circuit Vite pings and HMR client requests to avoid noisy errors in constrained envs
+    const isVitePing = urlStr.includes('/__vite_ping');
+    const isViteClient = urlStr.includes('/@vite/') || urlStr.includes('/@react-refresh') || urlStr.includes('@vite/client');
+    const isHmrAsset = urlStr.includes('hot-update') || urlStr.includes('__open-in-editor');
+
+    if (isVitePing) {
+      return new Response('pong', { status: 200, headers: { 'Content-Type': 'text/plain' } });
+    }
+
+    if (import.meta.env.DEV && (isViteClient || isHmrAsset)) {
+      try {
+        return await originalFetch(input as any, init);
+      } catch {
+        return new Response(null, { status: 204 });
       }
-      if (isViteClient || isHmrAsset) {
-        try {
-          return await originalFetch(input as any, init);
-        } catch {
-          return new Response(null, { status: 204 });
-        }
-      }
+    }
+
+    // If not in DEV but request looks like Vite client asset, short-circuit to avoid thrown errors
+    if (!import.meta.env.DEV && (isViteClient || isHmrAsset)) {
+      return new Response(null, { status: 204 });
     }
 
     // Parse hostname/path safely to decide whether to short-circuit third-party analytics
