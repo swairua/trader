@@ -146,11 +146,12 @@ if (typeof window !== 'undefined') {
       const lowerMsg = typeof msg === 'string' ? msg.toLowerCase() : '';
       const isNetworkError = err instanceof TypeError || lowerMsg.includes('failed to fetch') || lowerMsg.includes('networkerror') || lowerMsg.includes('network error') || lowerMsg.includes('fetch failed');
 
-      if (isNetworkError && (thirdPartyHostPattern.test(h) || thirdPartyPathPattern.test(p) || hmrPattern.test(urlStr))) {
+      if (isNetworkError) {
+        // Silence all network-level fetch failures (e.g., CORS blocked, offline, analytics SDK failures)
         return new Response(null, { status: 204 });
       }
 
-      // For other network errors, rethrow so application logic can handle them
+      // For other errors, rethrow so application logic can handle them
       throw err;
     }
   };
