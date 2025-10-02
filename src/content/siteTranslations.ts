@@ -198,11 +198,7 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
           title: "Inscrivez-vous chez Exness",
           description: "Cliquez sur notre bouton ci-dessous pour créer votre compte Exness gratuit via notre lien d'affiliation. Cela ne prend que 2 minutes. Complétez également la vérification d'identité et de résidence.",
           features: [
-            "Plusieurs types de comptes de détail",
-            "Dépôt minimum de 10 $ seulement",
-            "Effet de levier élevé et flexible",
-            "Retraits instantanés sans frais",
-            "Diverses options de paiement"
+            "Plusieurs types de comptes de détail, dépôt minimum de 10 $, effet de levier élevé et flexible, retraits instantanés sans frais et diverses options de paiement."
           ]
         },
         {
