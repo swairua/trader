@@ -323,7 +323,7 @@ export default function BlogPublic() {
         const tagMap = new Map(uniqueTagNames.map((n, i) => [n, translatedTags[i] || n]));
         const authorMap = new Map(uniqueAuthorNames.map((n, i) => [n, translatedAuthors[i] || n]));
 
-        setPosts(prev => prev.map(p => ({
+        setPosts(originalPosts.map(p => ({
           ...p,
           categories: (p.categories || []).map((c: any) => ({ ...c, name: catMap.get(c.name) || c.name })),
           tags: (p.tags || []).map((t: any) => ({ ...t, name: tagMap.get(t.name) || t.name })),
