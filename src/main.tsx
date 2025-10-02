@@ -112,9 +112,12 @@ if (typeof window !== 'undefined') {
         path = urlStr || '';
       }
 
-      // Silence fetch noise from analytics SDKs (e.g., FullStory) and HMR-related assets
+      // Silence fetch noise from analytics SDKs (e.g., FullStory), HMR-related assets, and optional translation endpoints
       if (typeof msg === 'string' && msg.toLowerCase().includes('failed to fetch')) {
-        if (/fullstory|edge\.fullstory\.com/.test(host) || /\/s\/fs\.js/.test(path) || /@vite|hot-update|__open-in-editor/.test(urlStr)) {
+        const isAnalytics = /fullstory|edge\.fullstory\.com/.test(host) || /\/s\/fs\.js/.test(path);
+        const isHmr = /@vite|hot-update|__open-in-editor/.test(urlStr);
+        const isTranslation = /libretranslate\.de|libretranslate\.com|translate\.argosopentech\.com/.test(host);
+        if (isAnalytics || isHmr || isTranslation) {
           return new Response('', { status: 204 });
         }
       }
