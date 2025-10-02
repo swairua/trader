@@ -326,6 +326,7 @@ const FAQs = () => {
                     {searchQuery && (
                       <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-muted-foreground">
                         {filteredFAQs.length} {filteredFAQs.length === 1 ? t('faqs_results_count_singular') : t('faqs_results_count_plural')}
+                        {faqsTranslating ? ` • ${t('resources_translating')}` : ''}
                       </div>
                     )}
                   </div>
