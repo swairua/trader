@@ -198,14 +198,7 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
           title: "Inscrivez-vous chez Exness",
           description: "Cliquez sur notre bouton ci-dessous pour créer votre compte Exness gratuit via notre lien d'affiliation. Cela ne prend que 2 minutes. Complétez également la vérification d'identité et de résidence.",
           features: [
-            "5 comptes investisseurs de détail (Std, Std cent, Zero & Pro)",
-            "Dépôt minimum 10 USD",
-            "200 Lots max",
-            "1000 positions max",
-            "Compte islamique",
-            "1 : Levier illimité",
-            "Frais de retrait ZERO",
-            "Retrait instantané et divers moyens de paiement"
+            "Plusieurs types de comptes de détail, dépôt minimum de 10 $, effet de levier élevé et flexible, retraits instantanés sans frais et diverses options de paiement."
           ]
         },
         {

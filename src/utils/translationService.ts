@@ -12,6 +12,27 @@ const API_ENDPOINTS = [
 ];
 const DEFAULT_TIMEOUT_MS = 3500;
 let loggedFailure = false;
+// Whether remote translation endpoints are reachable. null = unknown, true = reachable, false = not reachable
+let canUseRemote: boolean | null = null;
+
+async function probeTranslationService(timeout = 2000) {
+  if (canUseRemote !== null) return canUseRemote;
+  for (const url of API_ENDPOINTS) {
+    try {
+      const fetchPromise = fetch(url, { method: 'OPTIONS', mode: 'cors' }).then((r) => r).catch(() => null);
+      const timeoutPromise = new Promise<Response | null>((resolve) => setTimeout(() => resolve(null), timeout));
+      const resp = await Promise.race([fetchPromise, timeoutPromise]);
+      if (resp && (resp.status === 200 || resp.status === 204 || resp.status === 401 || resp.status === 405)) {
+        canUseRemote = true;
+        return true;
+      }
+    } catch (e) {
+      // ignore and try next
+    }
+  }
+  canUseRemote = false;
+  return false;
+}
 
 async function computeHash(text: string) {
   if (typeof crypto !== 'undefined' && (crypto as any).subtle) {
@@ -66,6 +87,10 @@ async function translateChunk(text: string, target: string, source = 'en') {
       return text;
     }
 
+    // Probe remote translation endpoints once; if unavailable, don't attempt further network calls
+    const remoteOk = await probeTranslationService();
+    if (!remoteOk) return text;
+
     // Retry/backoff per endpoint to increase resilience against transient network errors
     const MAX_ATTEMPTS = 3;
     const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
@@ -74,26 +99,49 @@ async function translateChunk(text: string, target: string, source = 'en') {
       let attempt = 0;
       while (attempt < MAX_ATTEMPTS) {
         try {
-          // Use Promise.race to implement a timeout without relying on AbortController
+          // Implement a timeout using Promise.race to avoid AbortController AbortError
           const fetchPromise = fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ q: text, source, target, format: 'text' }),
-          }).then(async (resp) => {
-            if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-            return resp.json().catch(() => ({} as any));
-          });
+          }).then((r) => r).catch(() => null);
 
-          const timeoutPromise = new Promise((_, reject) => {
-            const id = setTimeout(() => {
-              clearTimeout(id);
-              reject(new Error('timeout'));
-            }, DEFAULT_TIMEOUT_MS);
-          });
+          const timeoutPromise = new Promise<Response | null>((resolve) => setTimeout(() => resolve(null), DEFAULT_TIMEOUT_MS));
 
-          const data = await Promise.race([fetchPromise, timeoutPromise]).catch(() => null);
-          if (!data) throw new Error('no-data');
-          const translated = (data as any)?.translatedText || '';
+          let resp: Response | null = null;
+          try {
+            resp = await Promise.race([fetchPromise, timeoutPromise]);
+          } catch (fetchErr) {
+            resp = null;
+          }
+
+          if (!resp) {
+            attempt += 1;
+            if (attempt < MAX_ATTEMPTS) {
+              const delay = 200 * Math.pow(2, attempt - 1);
+              await sleep(delay);
+              continue;
+            }
+            break; // move to next endpoint
+          }
+
+          if (!resp.ok) {
+            // Non-2xx response; do not throw to avoid bubbling noisy errors
+            attempt += 1;
+            if (attempt < MAX_ATTEMPTS) {
+              const delay = 200 * Math.pow(2, attempt - 1);
+              await sleep(delay);
+              continue;
+            }
+            break;
+          }
+
+          const data = await resp.json().catch(() => null);
+          if (!data) {
+            break;
+          }
+
+          const translated = (data as any)?.translatedText || (data as any)?.translation || '';
           if (translated) {
             saveToCache(hash, target, translated);
             return translated;
@@ -103,7 +151,6 @@ async function translateChunk(text: string, target: string, source = 'en') {
           break;
         } catch (_err) {
           attempt += 1;
-          // exponential backoff before retrying the same endpoint
           if (attempt < MAX_ATTEMPTS) {
             const delay = 200 * Math.pow(2, attempt - 1); // 200ms, 400ms, 800ms
             await sleep(delay);

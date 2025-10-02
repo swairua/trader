@@ -14,6 +14,7 @@ import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { SectionDivider } from '@/components/SectionDivider';
 import { useI18n } from '@/i18n';
+import { translateText } from '@/utils/translationService';
 import { format } from 'date-fns';
 import { fr as frLocale, enUS } from 'date-fns/locale';
 import forexBlogHero from '@/assets/forex-blog-hero.jpg';
@@ -56,9 +57,13 @@ const POSTS_PER_PAGE = 12;
 export default function BlogPublic() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [originalPosts, setOriginalPosts] = useState<BlogPost[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
+  const [localizedCategories, setLocalizedCategories] = useState<Category[]>([]);
+  const [localizedTags, setLocalizedTags] = useState<Tag[]>([]);
+  const [localizedAuthors, setLocalizedAuthors] = useState<Author[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalPosts, setTotalPosts] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -72,6 +77,9 @@ export default function BlogPublic() {
   const authorFilter = searchParams.get('author') || '';
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+
+  // I18n hook must be declared before using `language` in fetch/effects
+  const { t, language } = useI18n();
 
   const updateSearchParams = (updates: Record<string, string | null>) => {
     const newParams = new URLSearchParams(searchParams);
@@ -132,13 +140,47 @@ export default function BlogPublic() {
       
       if (error) throw error;
 
-      // Transform and filter posts
+      // Transform posts
       let filteredPosts = allPosts?.map(post => ({
         ...post,
         authors: post.post_authors?.map((pa: any) => pa.authors) || [],
         categories: post.post_categories?.map((pc: any) => pc.categories) || [],
         tags: post.post_tags?.map((pt: any) => pt.tags) || []
       })) || [];
+
+      // Preserve original posts (untranslated) to allow reverting when language changes
+      setOriginalPosts(filteredPosts);
+
+      // Translate relationship names (categories, tags, authors) on the fly
+      try {
+        if (language && language !== 'en' && filteredPosts.length > 0) {
+          // collect unique names to avoid duplicate translations
+          const uniqueCatNames = Array.from(new Set(filteredPosts.flatMap(p => (p.categories || []).map((c: any) => c.name))));
+          const uniqueTagNames = Array.from(new Set(filteredPosts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
+          const uniqueAuthorNames = Array.from(new Set(filteredPosts.flatMap(p => (p.authors || []).map((a: any) => a.name))));
+
+          const catResults = await Promise.allSettled(uniqueCatNames.map(n => translateText(n, language)));
+          const tagResults = await Promise.allSettled(uniqueTagNames.map(n => translateText(n, language)));
+          const authorResults = await Promise.allSettled(uniqueAuthorNames.map(n => translateText(n, language)));
+
+          const translatedCats = catResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : uniqueCatNames[i]));
+          const translatedTags = tagResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : uniqueTagNames[i]));
+          const translatedAuthors = authorResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : uniqueAuthorNames[i]));
+
+          const catMap = new Map(uniqueCatNames.map((n, i) => [n, translatedCats[i] || n]));
+          const tagMap = new Map(uniqueTagNames.map((n, i) => [n, translatedTags[i] || n]));
+          const authorMap = new Map(uniqueAuthorNames.map((n, i) => [n, translatedAuthors[i] || n]));
+
+          filteredPosts = filteredPosts.map(p => ({
+            ...p,
+            categories: (p.categories || []).map((c: any) => ({ ...c, name: catMap.get(c.name) || c.name })),
+            tags: (p.tags || []).map((t: any) => ({ ...t, name: tagMap.get(t.name) || t.name })),
+            authors: (p.authors || []).map((a: any) => ({ ...a, name: authorMap.get(a.name) || a.name })),
+          }));
+        }
+      } catch (e) {
+        // ignore translation failures for posts
+      }
 
       // Client-side filtering for relationships
       if (categoryFilter) {
@@ -181,9 +223,39 @@ export default function BlogPublic() {
         supabase.from('authors').select('*').order('name')
       ]);
 
-      if (categoriesRes.data) setCategories(categoriesRes.data);
-      if (tagsRes.data) setTags(tagsRes.data);
-      if (authorsRes.data) setAuthors(authorsRes.data);
+      const cats = categoriesRes.data || [];
+      const tgs = tagsRes.data || [];
+      const auths = authorsRes.data || [];
+
+      if (cats) setCategories(cats);
+      if (tgs) setTags(tgs);
+      if (auths) setAuthors(auths);
+
+      // Translate taxonomy names on the fly if needed
+      try {
+        if (language && language !== 'en') {
+          const catResults = await Promise.allSettled((cats || []).map((c: Category) => translateText(c.name, language)));
+          const tagResults = await Promise.allSettled((tgs || []).map((tg: Tag) => translateText(tg.name, language)));
+          const authorResults = await Promise.allSettled((auths || []).map((a: Author) => translateText(a.name, language)));
+
+          const translatedCats = catResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : cats[i].name));
+          const translatedTags = tagResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : tgs[i].name));
+          const translatedAuthors = authorResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : auths[i].name));
+
+          setLocalizedCategories(cats.map((c: Category, i: number) => ({ ...c, name: translatedCats[i] || c.name })));
+          setLocalizedTags(tgs.map((tg: Tag, i: number) => ({ ...tg, name: translatedTags[i] || tg.name })));
+          setLocalizedAuthors(auths.map((a: Author, i: number) => ({ ...a, name: translatedAuthors[i] || a.name })));
+        } else {
+          setLocalizedCategories(cats);
+          setLocalizedTags(tgs);
+          setLocalizedAuthors(auths);
+        }
+      } catch (e) {
+        // Fallback to original data if translation fails
+        setLocalizedCategories(cats);
+        setLocalizedTags(tgs);
+        setLocalizedAuthors(auths);
+      }
     } catch (error) {
       console.error('Error fetching taxonomy:', error);
     }
@@ -192,6 +264,91 @@ export default function BlogPublic() {
   useEffect(() => {
     fetchTaxonomy();
   }, []);
+
+  // Re-translate taxonomy when language or original taxonomy changes
+  useEffect(() => {
+    const retranslate = async () => {
+      try {
+        if (!categories || categories.length === 0) {
+          setLocalizedCategories([]);
+        }
+        if (!tags || tags.length === 0) {
+          setLocalizedTags([]);
+        }
+        if (!authors || authors.length === 0) {
+          setLocalizedAuthors([]);
+        }
+
+        if (language && language !== 'en') {
+          const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
+            Promise.all((categories || []).map((c: Category) => translateText(c.name, language))).catch(() => []),
+            Promise.all((tags || []).map((tg: Tag) => translateText(tg.name, language))).catch(() => []),
+            Promise.all((authors || []).map((a: Author) => translateText(a.name, language))).catch(() => []),
+          ]);
+
+          setLocalizedCategories((categories || []).map((c: Category, i: number) => ({ ...c, name: translatedCats[i] || c.name })));
+          setLocalizedTags((tags || []).map((tg: Tag, i: number) => ({ ...tg, name: translatedTags[i] || tg.name })));
+          setLocalizedAuthors((authors || []).map((a: Author, i: number) => ({ ...a, name: translatedAuthors[i] || a.name })));
+        } else {
+          setLocalizedCategories(categories || []);
+          setLocalizedTags(tags || []);
+          setLocalizedAuthors(authors || []);
+        }
+      } catch (e) {
+        setLocalizedCategories(categories || []);
+        setLocalizedTags(tags || []);
+        setLocalizedAuthors(authors || []);
+      }
+    };
+    retranslate();
+  }, [language, categories, tags, authors]);
+
+  // Re-translate post relationship names when language or posts change
+  useEffect(() => {
+    const retranslatePosts = async () => {
+      try {
+        if (!originalPosts || originalPosts.length === 0) return;
+    // If target is english, restore originals
+    if (!language || language === 'en') {
+      // Restore original (untranslated) paginated posts
+      const startIndex = (page - 1) * POSTS_PER_PAGE;
+      setPosts((originalPosts || []).slice(startIndex, startIndex + POSTS_PER_PAGE));
+      return; // nothing else to do
+    }
+    // Avoid re-translating if already translated for this language
+    if (originalPosts.some(p => (p as any)._translatedForLanguage === language)) return;
+
+    const uniqueCatNames = Array.from(new Set(originalPosts.flatMap(p => (p.categories || []).map((c: any) => c.name))));
+    const uniqueTagNames = Array.from(new Set(originalPosts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
+    const uniqueAuthorNames = Array.from(new Set(originalPosts.flatMap(p => (p.authors || []).map((a: any) => a.name))));
+
+        const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
+          Promise.all(uniqueCatNames.map(n => translateText(n, language))).catch(() => []),
+          Promise.all(uniqueTagNames.map(n => translateText(n, language))).catch(() => []),
+          Promise.all(uniqueAuthorNames.map(n => translateText(n, language))).catch(() => []),
+        ]);
+
+        const catMap = new Map(uniqueCatNames.map((n, i) => [n, translatedCats[i] || n]));
+        const tagMap = new Map(uniqueTagNames.map((n, i) => [n, translatedTags[i] || n]));
+        const authorMap = new Map(uniqueAuthorNames.map((n, i) => [n, translatedAuthors[i] || n]));
+
+        const translatedFull = originalPosts.map(p => ({
+          ...p,
+          categories: (p.categories || []).map((c: any) => ({ ...c, name: catMap.get(c.name) || c.name })),
+          tags: (p.tags || []).map((t: any) => ({ ...t, name: tagMap.get(t.name) || t.name })),
+          authors: (p.authors || []).map((a: any) => ({ ...a, name: authorMap.get(a.name) || a.name })),
+          _translatedForLanguage: language,
+        }));
+
+        const startIndex = (page - 1) * POSTS_PER_PAGE;
+        const paginated = translatedFull.slice(startIndex, startIndex + POSTS_PER_PAGE);
+        setPosts(paginated);
+      } catch (e) {
+        // ignore
+      }
+    };
+    retranslatePosts();
+  }, [language, originalPosts, page]);
 
   useEffect(() => {
     fetchPosts();
@@ -228,7 +385,6 @@ export default function BlogPublic() {
     }
   };
 
-  const { t, language } = useI18n();
   const { translatedMap, isTranslating: blogIsTranslating, totalToTranslate: blogTotal, translatedCount: blogTranslatedCount, translationError: blogTranslationError, retry: retryBlogTranslations } = useAutoTranslate(posts, ['title','excerpt']);
 
   return (
@@ -298,7 +454,7 @@ export default function BlogPublic() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('blog_all_categories')}</SelectItem>
-                  {categories.map(category => (
+                  {localizedCategories.map(category => (
                     <SelectItem key={category.id} value={category.slug}>
                       {category.name}
                     </SelectItem>
@@ -315,7 +471,7 @@ export default function BlogPublic() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('blog_all_tags')}</SelectItem>
-                  {tags.map(tag => (
+                  {localizedTags.map(tag => (
                     <SelectItem key={tag.id} value={tag.slug}>
                       {tag.name}
                     </SelectItem>
@@ -332,7 +488,7 @@ export default function BlogPublic() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('blog_all_authors')}</SelectItem>
-                  {authors.map(author => (
+                  {localizedAuthors.map(author => (
                     <SelectItem key={author.id} value={author.slug}>
                       {author.name}
                     </SelectItem>

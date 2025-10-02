@@ -90,8 +90,34 @@ if (typeof window !== 'undefined') {
         try {
           return await originalFetch(input as any, init);
         } catch {
-          return new Response('', { status: 204 });
+          return new Response(null, { status: 204 });
         }
+      }
+    }
+
+    // Parse hostname/path safely to decide whether to short-circuit third-party analytics
+    let host = '';
+    let path = '';
+    try {
+      const u = new URL(urlStr, typeof location !== 'undefined' ? location.origin : 'http://localhost');
+      host = u.hostname || '';
+      path = u.pathname || '';
+    } catch (e) {
+      host = '';
+      path = urlStr || '';
+    }
+
+    const thirdPartyHostPattern = /fullstory|edge\.fullstory\.com|sentry|segment|hotjar|heap|libretranslate|translate\.argosopentech\.com/;
+    const thirdPartyPathPattern = /\/s\/fs\.js|fs\.js|\/cdn-cgi\/|collect|analytics|telemetry|\/translate/;
+    const hmrPattern = /@vite|hot-update|__open-in-editor/;
+
+    // If this looks like a third-party analytics/HMR or translation request, avoid attempting network fetch in constrained envs
+    if (thirdPartyHostPattern.test(host) || thirdPartyPathPattern.test(path) || hmrPattern.test(urlStr)) {
+      try {
+        // Try the real fetch but silently swallow failures
+        return await originalFetch(input as any, init);
+      } catch {
+        return new Response(null, { status: 204 });
       }
     }
 
@@ -101,25 +127,25 @@ if (typeof window !== 'undefined') {
       const msg = err && (err.message || String(err)) || '';
 
       // Parse hostname/path safely to decide whether to silence
-      let host = '';
-      let path = '';
+      let h = host;
+      let p = path;
       try {
         const u = new URL(urlStr, typeof location !== 'undefined' ? location.origin : 'http://localhost');
-        host = u.hostname || '';
-        path = u.pathname || '';
+        h = u.hostname || h;
+        p = u.pathname || p;
       } catch (e) {
-        host = '';
-        path = urlStr || '';
+        // keep existing
       }
 
-      // Silence fetch noise from analytics SDKs (e.g., FullStory) and HMR-related assets
-      if (typeof msg === 'string' && msg.toLowerCase().includes('failed to fetch')) {
-        if (/fullstory|edge\.fullstory\.com/.test(host) || /\/s\/fs\.js/.test(path) || /@vite|hot-update|__open-in-editor/.test(urlStr)) {
-          return new Response('', { status: 204 });
-        }
+      // Silence fetch noise from analytics SDKs (e.g., FullStory), translation endpoints and HMR-related assets
+      const lowerMsg = typeof msg === 'string' ? msg.toLowerCase() : '';
+      const isNetworkError = err instanceof TypeError || lowerMsg.includes('failed to fetch') || lowerMsg.includes('networkerror') || lowerMsg.includes('network error') || lowerMsg.includes('fetch failed');
+
+      if (isNetworkError && (thirdPartyHostPattern.test(h) || thirdPartyPathPattern.test(p) || hmrPattern.test(urlStr))) {
+        return new Response(null, { status: 204 });
       }
 
-      // For other networks errors, rethrow so application logic can handle them
+      // For other network errors, rethrow so application logic can handle them
       throw err;
     }
   };
