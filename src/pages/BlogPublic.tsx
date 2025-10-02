@@ -232,11 +232,13 @@ export default function BlogPublic() {
       // Translate taxonomy names on the fly if needed
       try {
         if (language && language !== 'en') {
-          const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
-            Promise.all(cats.map((c: Category) => translateText(c.name, language))).catch(() => []),
-            Promise.all(tgs.map((tg: Tag) => translateText(tg.name, language))).catch(() => []),
-            Promise.all(auths.map((a: Author) => translateText(a.name, language))).catch(() => []),
-          ]);
+          const catResults = await Promise.allSettled((cats || []).map((c: Category) => translateText(c.name, language)));
+          const tagResults = await Promise.allSettled((tgs || []).map((tg: Tag) => translateText(tg.name, language)));
+          const authorResults = await Promise.allSettled((auths || []).map((a: Author) => translateText(a.name, language)));
+
+          const translatedCats = catResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : cats[i].name));
+          const translatedTags = tagResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : tgs[i].name));
+          const translatedAuthors = authorResults.map((r, i) => (r.status === 'fulfilled' ? (r.value as string) : auths[i].name));
 
           setLocalizedCategories(cats.map((c: Category, i: number) => ({ ...c, name: translatedCats[i] || c.name })));
           setLocalizedTags(tgs.map((tg: Tag, i: number) => ({ ...tg, name: translatedTags[i] || tg.name })));
