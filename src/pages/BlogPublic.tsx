@@ -360,7 +360,7 @@ export default function BlogPublic() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('blog_all_categories')}</SelectItem>
-                  {categories.map(category => (
+                  {localizedCategories.map(category => (
                     <SelectItem key={category.id} value={category.slug}>
                       {category.name}
                     </SelectItem>
