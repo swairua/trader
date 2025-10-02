@@ -298,6 +298,8 @@ export default function BlogPublic() {
       try {
         if (!posts || posts.length === 0) return;
         if (!language || language === 'en') return; // nothing to do
+        // Avoid re-translating if already translated for this language
+        if (posts.some(p => (p as any)._translatedForLanguage === language)) return;
 
         const uniqueCatNames = Array.from(new Set(posts.flatMap(p => (p.categories || []).map((c: any) => c.name))));
         const uniqueTagNames = Array.from(new Set(posts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
@@ -318,6 +320,7 @@ export default function BlogPublic() {
           categories: (p.categories || []).map((c: any) => ({ ...c, name: catMap.get(c.name) || c.name })),
           tags: (p.tags || []).map((t: any) => ({ ...t, name: tagMap.get(t.name) || t.name })),
           authors: (p.authors || []).map((a: any) => ({ ...a, name: authorMap.get(a.name) || a.name })),
+          _translatedForLanguage: language,
         })));
       } catch (e) {
         // ignore
