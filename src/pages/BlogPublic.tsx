@@ -303,7 +303,9 @@ export default function BlogPublic() {
         if (!originalPosts || originalPosts.length === 0) return;
     // If target is english, restore originals
     if (!language || language === 'en') {
-      setPosts(originalPosts);
+      // Restore original (untranslated) paginated posts
+      const startIndex = (page - 1) * POSTS_PER_PAGE;
+      setPosts((originalPosts || []).slice(startIndex, startIndex + POSTS_PER_PAGE));
       return; // nothing else to do
     }
     // Avoid re-translating if already translated for this language
