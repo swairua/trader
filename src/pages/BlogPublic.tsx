@@ -323,13 +323,17 @@ export default function BlogPublic() {
         const tagMap = new Map(uniqueTagNames.map((n, i) => [n, translatedTags[i] || n]));
         const authorMap = new Map(uniqueAuthorNames.map((n, i) => [n, translatedAuthors[i] || n]));
 
-        setPosts(originalPosts.map(p => ({
+        const translatedFull = originalPosts.map(p => ({
           ...p,
           categories: (p.categories || []).map((c: any) => ({ ...c, name: catMap.get(c.name) || c.name })),
           tags: (p.tags || []).map((t: any) => ({ ...t, name: tagMap.get(t.name) || t.name })),
           authors: (p.authors || []).map((a: any) => ({ ...a, name: authorMap.get(a.name) || a.name })),
           _translatedForLanguage: language,
-        })));
+        }));
+
+        const startIndex = (page - 1) * POSTS_PER_PAGE;
+        const paginated = translatedFull.slice(startIndex, startIndex + POSTS_PER_PAGE);
+        setPosts(paginated);
       } catch (e) {
         // ignore
       }
