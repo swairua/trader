@@ -234,7 +234,13 @@ export async function translateMany(texts: string[], target: string, source = 'e
     const resp = await Promise.race([fetchPromise, timeoutPromise]);
     if (resp && resp.ok) {
       const data = await resp.json().catch(() => null);
-      const translated = (data && (data.translated || data.translatedText)) || null;
+      // server may return { translated: string[] } or { translations: [{input, translated}] }
+      let translated: string[] | null = null;
+      if (data) {
+        if (Array.isArray(data.translated)) translated = data.translated;
+        else if (Array.isArray(data.translations)) translated = data.translations.map((r: any) => r.translated || r.translation || r.translatedText || r);
+        else if (Array.isArray(data.translatedText)) translated = data.translatedText;
+      }
       if (Array.isArray(translated) && translated.length === texts.length) return translated;
     }
   } catch (e) {
