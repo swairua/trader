@@ -452,7 +452,7 @@ export default function BlogPublic() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('blog_all_tags')}</SelectItem>
-                  {tags.map(tag => (
+                  {localizedTags.map(tag => (
                     <SelectItem key={tag.id} value={tag.slug}>
                       {tag.name}
                     </SelectItem>
