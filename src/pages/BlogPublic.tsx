@@ -341,7 +341,7 @@ export default function BlogPublic() {
       }
     };
     retranslatePosts();
-  }, [language, posts]);
+  }, [language, originalPosts, page]);
 
   useEffect(() => {
     fetchPosts();
