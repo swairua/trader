@@ -469,7 +469,7 @@ export default function BlogPublic() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">{t('blog_all_authors')}</SelectItem>
-                  {authors.map(author => (
+                  {localizedAuthors.map(author => (
                     <SelectItem key={author.id} value={author.slug}>
                       {author.name}
                     </SelectItem>
