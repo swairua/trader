@@ -46,7 +46,7 @@ export function Navigation() {
 
   return (
     <nav aria-label="Main" className="sticky top-0 z-50 w-full bg-gradient-glass/50 backdrop-blur-glass border-b border-border/20 shadow-glass">
-      <div className="container flex h-16 lg:h-20 items-center justify-between px-4">
+      <div className="container flex min-h-16 md:min-h-20 xl:min-h-28 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-3" aria-label="Home">
           <BrandLogo
             size="md"
