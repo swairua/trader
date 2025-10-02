@@ -59,6 +59,9 @@ export default function BlogPublic() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [tags, setTags] = useState<Tag[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
+  const [localizedCategories, setLocalizedCategories] = useState<Category[]>([]);
+  const [localizedTags, setLocalizedTags] = useState<Tag[]>([]);
+  const [localizedAuthors, setLocalizedAuthors] = useState<Author[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalPosts, setTotalPosts] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState('');
