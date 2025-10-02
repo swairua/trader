@@ -185,9 +185,37 @@ export default function BlogPublic() {
         supabase.from('authors').select('*').order('name')
       ]);
 
-      if (categoriesRes.data) setCategories(categoriesRes.data);
-      if (tagsRes.data) setTags(tagsRes.data);
-      if (authorsRes.data) setAuthors(authorsRes.data);
+      const cats = categoriesRes.data || [];
+      const tgs = tagsRes.data || [];
+      const auths = authorsRes.data || [];
+
+      if (cats) setCategories(cats);
+      if (tgs) setTags(tgs);
+      if (auths) setAuthors(auths);
+
+      // Translate taxonomy names on the fly if needed
+      try {
+        if (language && language !== 'en') {
+          const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
+            Promise.all(cats.map((c: Category) => translateText(c.name, language))).catch(() => []),
+            Promise.all(tgs.map((tg: Tag) => translateText(tg.name, language))).catch(() => []),
+            Promise.all(auths.map((a: Author) => translateText(a.name, language))).catch(() => []),
+          ]);
+
+          setLocalizedCategories(cats.map((c: Category, i: number) => ({ ...c, name: translatedCats[i] || c.name })));
+          setLocalizedTags(tgs.map((tg: Tag, i: number) => ({ ...tg, name: translatedTags[i] || tg.name })));
+          setLocalizedAuthors(auths.map((a: Author, i: number) => ({ ...a, name: translatedAuthors[i] || a.name })));
+        } else {
+          setLocalizedCategories(cats);
+          setLocalizedTags(tgs);
+          setLocalizedAuthors(auths);
+        }
+      } catch (e) {
+        // Fallback to original data if translation fails
+        setLocalizedCategories(cats);
+        setLocalizedTags(tgs);
+        setLocalizedAuthors(auths);
+      }
     } catch (error) {
       console.error('Error fetching taxonomy:', error);
     }
