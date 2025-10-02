@@ -42,10 +42,39 @@ serve(async (req) => {
   try {
     if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
     const body = await req.json().catch(() => ({}));
-    const { text, target, source } = body || {};
-    if (!text || !target) return new Response(JSON.stringify({ error: 'invalid_payload' }), { status: 400 });
+      const { text, texts, target, source } = body || {};
+    // Validate
+    if ((!text && !Array.isArray(texts)) || !target) return new Response(JSON.stringify({ error: 'invalid_payload' }), { status: 400 });
 
-    const key = `${source}:${target}:${text.slice(0, 200)}`;
+    // If batch
+    if (Array.isArray(texts)) {
+      const results: string[] = [];
+      const jobs = texts.map((t: string) => {
+        const key = `${source}:${target}:${String(t).slice(0,200)}`;
+        const cached = cacheGet(key);
+        if (cached) {
+          results.push(cached);
+          return null;
+        }
+        return { t, key };
+      }).filter(Boolean) as { t: string; key: string }[];
+
+      // Translate missing ones sequentially to avoid rate limits
+      for (const job of jobs) {
+        try {
+          const translated = await translateViaLibre(job.t, target, source || 'en');
+          cacheSet(job.key, translated);
+          results.push(translated);
+        } catch (e) {
+          results.push(job.t); // fallback to original
+        }
+      }
+
+      return new Response(JSON.stringify({ translated: results }), { status: 200 });
+    }
+
+    // Single text
+    const key = `${source}:${target}:${String(text).slice(0, 200)}`;
     const cached = cacheGet(key);
     if (cached) return new Response(JSON.stringify({ translated: cached }), { status: 200 });
 
