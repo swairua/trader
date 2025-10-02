@@ -254,6 +254,78 @@ export default function BlogPublic() {
     fetchTaxonomy();
   }, []);
 
+  // Re-translate taxonomy when language or original taxonomy changes
+  useEffect(() => {
+    const retranslate = async () => {
+      try {
+        if (!categories || categories.length === 0) {
+          setLocalizedCategories([]);
+        }
+        if (!tags || tags.length === 0) {
+          setLocalizedTags([]);
+        }
+        if (!authors || authors.length === 0) {
+          setLocalizedAuthors([]);
+        }
+
+        if (language && language !== 'en') {
+          const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
+            Promise.all((categories || []).map((c: Category) => translateText(c.name, language))).catch(() => []),
+            Promise.all((tags || []).map((tg: Tag) => translateText(tg.name, language))).catch(() => []),
+            Promise.all((authors || []).map((a: Author) => translateText(a.name, language))).catch(() => []),
+          ]);
+
+          setLocalizedCategories((categories || []).map((c: Category, i: number) => ({ ...c, name: translatedCats[i] || c.name })));
+          setLocalizedTags((tags || []).map((tg: Tag, i: number) => ({ ...tg, name: translatedTags[i] || tg.name })));
+          setLocalizedAuthors((authors || []).map((a: Author, i: number) => ({ ...a, name: translatedAuthors[i] || a.name })));
+        } else {
+          setLocalizedCategories(categories || []);
+          setLocalizedTags(tags || []);
+          setLocalizedAuthors(authors || []);
+        }
+      } catch (e) {
+        setLocalizedCategories(categories || []);
+        setLocalizedTags(tags || []);
+        setLocalizedAuthors(authors || []);
+      }
+    };
+    retranslate();
+  }, [language, categories, tags, authors]);
+
+  // Re-translate post relationship names when language or posts change
+  useEffect(() => {
+    const retranslatePosts = async () => {
+      try {
+        if (!posts || posts.length === 0) return;
+        if (!language || language === 'en') return; // nothing to do
+
+        const uniqueCatNames = Array.from(new Set(posts.flatMap(p => (p.categories || []).map((c: any) => c.name))));
+        const uniqueTagNames = Array.from(new Set(posts.flatMap(p => (p.tags || []).map((t: any) => t.name))));
+        const uniqueAuthorNames = Array.from(new Set(posts.flatMap(p => (p.authors || []).map((a: any) => a.name))));
+
+        const [translatedCats, translatedTags, translatedAuthors] = await Promise.all([
+          Promise.all(uniqueCatNames.map(n => translateText(n, language))).catch(() => []),
+          Promise.all(uniqueTagNames.map(n => translateText(n, language))).catch(() => []),
+          Promise.all(uniqueAuthorNames.map(n => translateText(n, language))).catch(() => []),
+        ]);
+
+        const catMap = new Map(uniqueCatNames.map((n, i) => [n, translatedCats[i] || n]));
+        const tagMap = new Map(uniqueTagNames.map((n, i) => [n, translatedTags[i] || n]));
+        const authorMap = new Map(uniqueAuthorNames.map((n, i) => [n, translatedAuthors[i] || n]));
+
+        setPosts(prev => prev.map(p => ({
+          ...p,
+          categories: (p.categories || []).map((c: any) => ({ ...c, name: catMap.get(c.name) || c.name })),
+          tags: (p.tags || []).map((t: any) => ({ ...t, name: tagMap.get(t.name) || t.name })),
+          authors: (p.authors || []).map((a: any) => ({ ...a, name: authorMap.get(a.name) || a.name })),
+        })));
+      } catch (e) {
+        // ignore
+      }
+    };
+    retranslatePosts();
+  }, [language, posts]);
+
   useEffect(() => {
     fetchPosts();
   }, [page, searchTerm, categoryFilter, tagFilter, authorFilter]);
