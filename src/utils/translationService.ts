@@ -19,26 +19,15 @@ async function probeTranslationService(timeout = 2000) {
   if (canUseRemote !== null) return canUseRemote;
   for (const url of API_ENDPOINTS) {
     try {
-      const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-      const id = controller ? setTimeout(() => controller.abort(), timeout) : undefined;
-      try {
-        const resp = await fetch(url, {
-          method: 'OPTIONS',
-          mode: 'cors',
-          signal: controller ? (controller as any).signal : undefined,
-        });
-        if (id) clearTimeout(id);
-        if (resp && (resp.status === 200 || resp.status === 204 || resp.status === 204 || resp.status === 401 || resp.status === 405)) {
-          canUseRemote = true;
-          return true;
-        }
-      } catch (e) {
-        // ignore and try next
-      } finally {
-        if (id) clearTimeout(id);
+      const fetchPromise = fetch(url, { method: 'OPTIONS', mode: 'cors' }).then((r) => r).catch(() => null);
+      const timeoutPromise = new Promise<Response | null>((resolve) => setTimeout(() => resolve(null), timeout));
+      const resp = await Promise.race([fetchPromise, timeoutPromise]);
+      if (resp && (resp.status === 200 || resp.status === 204 || resp.status === 401 || resp.status === 405)) {
+        canUseRemote = true;
+        return true;
       }
     } catch (e) {
-      // ignore
+      // ignore and try next
     }
   }
   canUseRemote = false;
