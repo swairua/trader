@@ -145,6 +145,9 @@ export default function BlogPublic() {
         tags: post.post_tags?.map((pt: any) => pt.tags) || []
       })) || [];
 
+      // Preserve original posts (untranslated) to allow reverting when language changes
+      setOriginalPosts(filteredPosts);
+
       // Translate relationship names (categories, tags, authors) on the fly
       try {
         if (language && language !== 'en' && filteredPosts.length > 0) {
