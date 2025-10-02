@@ -99,31 +99,20 @@ async function translateChunk(text: string, target: string, source = 'en') {
       let attempt = 0;
       while (attempt < MAX_ATTEMPTS) {
         try {
-          // Use AbortController to implement a timeout and avoid unhandled rejections
-          const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-          const timeoutId = controller
-            ? setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS)
-            : undefined;
+          // Implement a timeout using Promise.race to avoid AbortController AbortError
+          const fetchPromise = fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ q: text, source, target, format: 'text' }),
+          }).then((r) => r).catch(() => null);
+
+          const timeoutPromise = new Promise<Response | null>((resolve) => setTimeout(() => resolve(null), DEFAULT_TIMEOUT_MS));
 
           let resp: Response | null = null;
-
           try {
-            resp = await fetch(url, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ q: text, source, target, format: 'text' }),
-              signal: controller ? (controller as any).signal : undefined,
-            });
-          } catch (fetchErr: any) {
-            // If aborted, treat as transient timeout and continue retry/backoff
-            if (fetchErr && fetchErr.name === 'AbortError') {
-              resp = null;
-            } else {
-              // Other fetch failures are treated as transient too
-              resp = null;
-            }
-          } finally {
-            if (timeoutId) clearTimeout(timeoutId);
+            resp = await Promise.race([fetchPromise, timeoutPromise]);
+          } catch (fetchErr) {
+            resp = null;
           }
 
           if (!resp) {
