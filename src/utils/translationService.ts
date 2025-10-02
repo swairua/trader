@@ -144,7 +144,7 @@ async function translateChunk(text: string, target: string, source = 'en') {
             break;
           }
 
-          const translated = (data as any)?.translatedText || (data as any)?.translation || '';
+          const translated = (data as any)?.translated || (data as any)?.translatedText || (data as any)?.translation || '';
           if (translated) {
             saveToCache(hash, target, translated);
             return translated;
