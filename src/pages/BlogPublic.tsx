@@ -289,6 +289,7 @@ export default function BlogPublic() {
     }
   };
 
+  // useI18n hook
   const { t, language } = useI18n();
   const { translatedMap, isTranslating: blogIsTranslating, totalToTranslate: blogTotal, translatedCount: blogTranslatedCount, translationError: blogTranslationError, retry: retryBlogTranslations } = useAutoTranslate(posts, ['title','excerpt']);
 
