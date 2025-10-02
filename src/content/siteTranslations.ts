@@ -24,7 +24,7 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
       disclaimer: '',
       trustStrip: 'Méthodologie éprouvée | Éducation réelle | Pas de fausses promesses',
       trustIndicators: [
-        { value: '5+', label: "Années d'expérience" },
+        { value: '5+', label: "Ann��es d'expérience" },
         { value: 'Premium', label: 'Contenu' },
         { value: '10K+', label: 'Étudiants' }
       ]
@@ -198,14 +198,7 @@ export const siteTranslations: Record<'en'|'fr', Partial<SiteContent>> = {
           title: "Inscrivez-vous chez Exness",
           description: "Cliquez sur notre bouton ci-dessous pour créer votre compte Exness gratuit via notre lien d'affiliation. Cela ne prend que 2 minutes. Complétez également la vérification d'identité et de résidence.",
           features: [
-            "5 comptes (Standard, Cent, Zero, Pro)",
-            "Dépôt min. 10 USD",
-            "Jusqu’à 200 lots",
-            "Jusqu’à 1 000 positions",
-            "Compte islamique disponible",
-            "Levier illimité",
-            "Frais de retrait zéro",
-            "Retraits instantanés, nombreux moyens de paiement"
+            "Comptes variés, 10 USD dépôt, levier illimité, retraits gratuits."
           ]
         },
         {
