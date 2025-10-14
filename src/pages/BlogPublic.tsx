@@ -335,7 +335,7 @@ export default function BlogPublic() {
         <div className="container mx-auto px-4 py-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-12">
               {/* Filters */}
               <Card className="mb-8">
                 <CardContent className="pt-6">
@@ -628,62 +628,6 @@ export default function BlogPublic() {
               )}
             </div>
 
-            {/* Sidebar */}
-            <aside className="lg:col-span-4">
-              <div className="sticky top-24 space-y-6">
-                {/* Recent Posts */}
-                <Card>
-                  <CardHeader>
-                    <h3 className="text-lg font-semibold">{t('blog_recent_posts')}</h3>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {recentPosts.length > 0 ? (
-                      recentPosts.map((post) => (
-                        <Link
-                          key={post.id}
-                          to={`/blog/${post.slug}`}
-                          className="block group"
-                        >
-                          <div className="space-y-2">
-                            <h4 className="font-medium text-sm group-hover:text-primary transition-colors line-clamp-2">
-                              {getLocalizedField(post, 'title', language)}
-                            </h4>
-                            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                              <Calendar className="h-3 w-3" />
-                              {format(new Date(post.published_at), 'PP', { locale: language === 'fr' ? frLocale : enUS })}
-                            </div>
-                          </div>
-                          <Separator className="mt-4" />
-                        </Link>
-                      ))
-                    ) : (
-                      <p className="text-sm text-muted-foreground">{t('blog_no_recent')}</p>
-                    )}
-                  </CardContent>
-                </Card>
-
-                {/* Categories Widget */}
-                {categories.length > 0 && (
-                  <Card>
-                    <CardHeader>
-                      <h3 className="text-lg font-semibold">{t('blog_categories')}</h3>
-                    </CardHeader>
-                    <CardContent className="flex flex-wrap gap-2">
-                      {categories.slice(0, 10).map((category) => (
-                        <Badge
-                          key={category.id}
-                          variant="outline"
-                          className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                          onClick={() => updateSearchParams({ category: category.slug })}
-                        >
-                          {category.name}
-                        </Badge>
-                      ))}
-                    </CardContent>
-                  </Card>
-                )}
-              </div>
-            </aside>
           </div>
         </div>
 
