@@ -29,7 +29,7 @@ const SiteSettings = () => {
 
   // Contact Information
   const [contactInfo, setContactInfo] = useState({
-    email: 'info@institutional-trader.com',
+    email: 'info@kennedynespot.com',
     phone: '+1 (555) 123-4567',
     address: '123 Trading Street, Financial District',
     whatsapp: '+1 (555) 123-4567',
