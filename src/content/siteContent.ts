@@ -431,7 +431,7 @@ export const defaultContent: SiteContent = {
       ]
     },
     phone: "+254 726 529 166",
-    email: "info@institutionaltrader.ke",
+    email: "info@kennedynespot.com",
     whatsappText: "Get Support",
     socials: [
       { name: "Telegram (KenneDyne spot)", href: "https://t.me/KenneDynespot", type: "telegram" },
@@ -567,7 +567,7 @@ export const defaultContent: SiteContent = {
       title: "Contact Us",
       subtitle: "Get in touch for educational inquiries and mentorship opportunities",
       phone: "+254 726 529 166",
-      email: "info@institutionaltrader.ke",
+      email: "info@kennedynespot.com",
       whatsapp: "https://whatsapp.com/channel/0029Va5oaai3WHTR1PyrOI1n",
       address: "Nairobi, Kenya",
       form: {
